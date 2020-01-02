@@ -53,7 +53,6 @@ title: Examples
     - [Services](repositories/services.html)
     - [Hooks](repositories/webhooks.html)
     - [Src](repositories/src.html)
-    - [Wiki](repositories/wiki.html)
     - [Build statuses](repositories/commits/build-statuses.html)
   - [Teams](teams.html)
   - [User](user.html)
