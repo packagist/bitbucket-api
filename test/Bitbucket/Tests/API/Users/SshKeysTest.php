@@ -3,7 +3,6 @@
 namespace Bitbucket\Tests\API\Users;
 
 use Bitbucket\Tests\API as Tests;
-use Bitbucket\API;
 
 class SshKeysTest extends Tests\TestCase
 {
@@ -12,13 +11,14 @@ class SshKeysTest extends Tests\TestCase
         $endpoint       = 'users/gentle/ssh-keys';
         $expectedResult = json_encode('dummy');
 
-        $keys = $this->getApiMock('Bitbucket\API\Users\SshKeys');
-        $keys->expects($this->once())
-            ->method('requestGet')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('get')
             ->with($endpoint)
-            ->will( $this->returnValue($expectedResult) );
+            ->willReturn($expectedResult);
 
         /** @var $keys \Bitbucket\API\Users\SshKeys */
+        $keys = $this->getClassMock('Bitbucket\API\Users\SshKeys', $client);
         $actual = $keys->all('gentle');
 
         $this->assertEquals($expectedResult, $actual);
@@ -33,13 +33,14 @@ class SshKeysTest extends Tests\TestCase
             'label' => 'dummy key'
         );
 
-        $keys = $this->getApiMock('Bitbucket\API\Users\SshKeys');
-        $keys->expects($this->once())
-            ->method('requestPost')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('post')
             ->with($endpoint, $params)
-            ->will( $this->returnValue($expectedResult) );
+            ->willReturn($expectedResult);
 
         /** @var $keys \Bitbucket\API\Users\SshKeys */
+        $keys = $this->getClassMock('Bitbucket\API\Users\SshKeys', $client);
         $actual = $keys->create('gentle', $params['key'], $params['label']);
 
         $this->assertEquals($expectedResult, $actual);
@@ -53,13 +54,14 @@ class SshKeysTest extends Tests\TestCase
             'key'   => 'key content'
         );
 
-        $keys = $this->getApiMock('Bitbucket\API\Users\SshKeys');
-        $keys->expects($this->once())
-            ->method('requestPut')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('put')
             ->with($endpoint, $params)
-            ->will( $this->returnValue($expectedResult) );
+            ->willReturn($expectedResult);
 
         /** @var $keys \Bitbucket\API\Users\SshKeys */
+        $keys = $this->getClassMock('Bitbucket\API\Users\SshKeys', $client);
         $actual = $keys->update('gentle', 12, $params['key']);
 
         $this->assertEquals($expectedResult, $actual);
@@ -70,13 +72,14 @@ class SshKeysTest extends Tests\TestCase
         $endpoint       = 'users/gentle/ssh-keys/2';
         $expectedResult = json_encode('dummy');
 
-        $keys = $this->getApiMock('Bitbucket\API\Users\SshKeys');
-        $keys->expects($this->once())
-            ->method('requestGet')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('get')
             ->with($endpoint)
-            ->will( $this->returnValue($expectedResult) );
+            ->willReturn($expectedResult);
 
         /** @var $keys \Bitbucket\API\Users\SshKeys */
+        $keys = $this->getClassMock('Bitbucket\API\Users\SshKeys', $client);
         $actual = $keys->get('gentle', 2);
 
         $this->assertEquals($expectedResult, $actual);
@@ -87,13 +90,14 @@ class SshKeysTest extends Tests\TestCase
         $endpoint       = 'users/gentle/ssh-keys/2';
         $expectedResult = json_encode('dummy');
 
-        $keys = $this->getApiMock('Bitbucket\API\Users\SshKeys');
-        $keys->expects($this->once())
-            ->method('requestDelete')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('delete')
             ->with($endpoint)
-            ->will( $this->returnValue($expectedResult) );
+            ->willReturn($expectedResult);
 
         /** @var $keys \Bitbucket\API\Users\SshKeys */
+        $keys = $this->getClassMock('Bitbucket\API\Users\SshKeys', $client);
         $actual = $keys->delete('gentle', 2);
 
         $this->assertEquals($expectedResult, $actual);
