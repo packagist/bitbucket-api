@@ -112,11 +112,6 @@ class UsersTest extends Tests\TestCase
         $this->assertInstanceOf('\Bitbucket\API\Users\OAuth', $this->users->oauth());
     }
 
-    public function testGetPrivilegesInstance()
-    {
-        $this->assertInstanceOf('\Bitbucket\API\Users\Privileges', $this->users->privileges());
-    }
-
     public function testGetSshKeysInstance()
     {
         $this->assertInstanceOf('\Bitbucket\API\Users\SshKeys', $this->users->sshKeys());
