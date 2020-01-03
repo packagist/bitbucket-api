@@ -24,7 +24,9 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
     protected function getBrowserMock()
     {
-        return $this->getMock('\Buzz\Client\ClientInterface', array('setTimeout', 'setVerifyPeer', 'send'));
+        return $this->getMockBuilder('\Buzz\Client\ClientInterface')
+            ->setMethods(array('setTimeout', 'setVerifyPeer', 'send'))
+            ->getMock();
     }
 
     protected function getTransportClientMock()

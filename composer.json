@@ -19,7 +19,7 @@
         "jacobkiers/oauth":     "~1.0"
     },
     "require-dev": {
-        "phpunit/phpunit":          "^4.8",
+        "phpunit/phpunit":          "^5.7",
         "squizlabs/php_codesniffer": "~2.7"
     },
     "conflict": {
@@ -32,6 +32,9 @@
     "autoload": {
         "psr-0": { "Bitbucket\\": "lib/" },
         "files": ["polyfill-55.php"]
+    },
+    "autoload-dev": {
+        "psr-0": { "Bitbucket\\":  "test/" }
     },
     "scripts": {
         "style": "php vendor/bin/phpcs --standard=psr2 lib/",
