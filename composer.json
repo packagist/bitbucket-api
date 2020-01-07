@@ -30,8 +30,7 @@
         "ext-curl": "*"
     },
     "autoload": {
-        "psr-0": { "Bitbucket\\": "lib/" },
-        "files": ["polyfill-55.php"]
+        "psr-0": { "Bitbucket\\": "lib/" }
     },
     "autoload-dev": {
         "psr-0": { "Bitbucket\\":  "test/" }
