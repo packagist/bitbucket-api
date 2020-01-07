@@ -47,7 +47,6 @@ title: Examples
     - [Refs](#)
       - [Branches](repositories/refs/branches.html)
       - [Tags](repositories/refs/tags.html)
-    - [Services](repositories/services.html)
     - [Hooks](repositories/webhooks.html)
     - [Src](repositories/src.html)
     - [Build statuses](repositories/commits/build-statuses.html)
