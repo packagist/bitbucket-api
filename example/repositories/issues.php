@@ -74,23 +74,6 @@ print_r(
     $issue->comments()->update($accountname, $repo_slug, 4, 3454384, "dummy comment [edited]")
 );*/
 
-
-# fetch all components from specified tracker
-#print_r($issue->components()->all($accountname, $repo_slug));
-
-# fetch single component
-#print_r($issue->components()->get($accountname, $repo_slug, 100332));
-
-# add a new component
-#print_r($issue->components()->create($accountname, $repo_slug, 'DummyComponent'));
-
-# update an existing component
-#print_r($issue->components()->update($accountname, $repo_slug, 100336, 'DummyComponent'));
-
-# delete an existing component
-#print_r($issue->components()->delete($accountname, $repo_slug, 100336));
-
-
 # fetch all versions
 #print_r($issue->versions()->all($accountname, $repo_slug));
 

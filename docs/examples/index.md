@@ -37,7 +37,6 @@ title: Examples
     - [Events](repositories/events.html)
     - [Issues](repositories/issues.html)
       - [Comments](repositories/issues/comments.html)
-      - [Components](repositories/issues/components.html)
       - [Milestones](repositories/issues/milestones.html)
       - [Versions](repositories/issues/versions.html)
     - [Pull requests](repositories/pull-requests.html)
