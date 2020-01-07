@@ -17,27 +17,6 @@ Manages the currently authenticated account profile.
 $profile = $user->get();
 ```
 
-### Update currently authenticated user profile:
-
-```php
-$user->update(array(
-    'first_name'    => 'John',
-    'last_name'     => 'Doe'
-));
-```
-
-### Get user privileges:
-
-```php
-$user->privileges();
-```
-
-### Get a list of repositories an account follows:
-
-```php
-$user->follows();
-```
-
 ### Retrieves the email for an authenticated user.
 
 ```php
