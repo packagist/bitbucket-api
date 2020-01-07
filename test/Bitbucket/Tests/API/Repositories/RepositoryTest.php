@@ -132,25 +132,6 @@ class RepositoryTest extends Tests\TestCase
         $repo->create('gentle', 'new-repo', array());
     }
 
-    public function testCreateRepositorySuccess()
-    {
-        $endpoint       = 'repositories';
-        $params         = array(
-            'name'          => 'secret',
-            'description'   => 'My super secret project',
-            'language'      => 'php',
-            'is_private'    => true,
-        );
-
-        $repository = $this->getApiMock('Bitbucket\API\Repositories\Repository');
-        $repository->expects($this->once())
-            ->method('requestPost')
-            ->with($endpoint, $params);
-
-        /** @var $repository \Bitbucket\API\Repositories\Repository */
-        $repository->create('secret', $params);
-    }
-
     public function testUpdateRepositorySuccess()
     {
         $endpoint       = 'repositories/gentle/eof';
@@ -161,12 +142,13 @@ class RepositoryTest extends Tests\TestCase
             'main_branch'   => 'master',
         );
 
-        $repository = $this->getApiMock('Bitbucket\API\Repositories\Repository');
-        $repository->expects($this->once())
-            ->method('requestPut')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('put')
             ->with($endpoint, $params);
 
         /** @var $repository \Bitbucket\API\Repositories\Repository */
+        $repository   = $this->getClassMock('Bitbucket\API\Repositories\Repository', $client);
         $repository->update('gentle', 'eof', $params);
     }
 
@@ -194,7 +176,7 @@ class RepositoryTest extends Tests\TestCase
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\Repository $repo */
         $repo   = $this->getClassMock('Bitbucket\API\Repositories\Repository', $client);
@@ -212,7 +194,7 @@ class RepositoryTest extends Tests\TestCase
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\Repository $repo */
         $repo   = $this->getClassMock('Bitbucket\API\Repositories\Repository', $client);
@@ -243,51 +225,18 @@ class RepositoryTest extends Tests\TestCase
 
     public function testGetBranches()
     {
-        $endpoint       = 'repositories/gentle/eof/branches';
+        $endpoint       = 'repositories/gentle/eof/refs/branches/';
         $expectedResult = json_encode('dummy');
 
-        $repository = $this->getApiMock('Bitbucket\API\Repositories\Repository');
-        $repository->expects($this->once())
-            ->method('requestGet')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var $repository \Bitbucket\API\Repositories\Repository */
+        $repository = $this->getClassMock('Bitbucket\API\Repositories\Repository', $client);
         $actual = $repository->branches('gentle', 'eof');
-
-        $this->assertEquals($expectedResult, $actual);
-    }
-
-    public function testGetMainBranch()
-    {
-        $endpoint       = 'repositories/gentle/eof/main-branch';
-        $expectedResult = json_encode('dummy');
-
-        $repository = $this->getApiMock('Bitbucket\API\Repositories\Repository');
-        $repository->expects($this->once())
-            ->method('requestGet')
-            ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
-
-        /** @var $repository \Bitbucket\API\Repositories\Repository */
-        $actual = $repository->branch('gentle', 'eof');
-
-        $this->assertEquals($expectedResult, $actual);
-    }
-
-    public function testGetManifest()
-    {
-        $endpoint       = 'repositories/gentle/eof/manifest/develop';
-        $expectedResult = json_encode('dummy');
-
-        $repository = $this->getApiMock('Bitbucket\API\Repositories\Repository');
-        $repository->expects($this->once())
-            ->method('requestGet')
-            ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
-
-        /** @var $repository \Bitbucket\API\Repositories\Repository */
-        $actual = $repository->manifest('gentle', 'eof', 'develop');
 
         $this->assertEquals($expectedResult, $actual);
     }
@@ -301,28 +250,11 @@ class RepositoryTest extends Tests\TestCase
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\Repository $repo */
         $repo   = $this->getClassMock('Bitbucket\API\Repositories\Repository', $client);
         $actual = $repo->tags('gentle', 'eof', 'tagname');
-
-        $this->assertEquals($expectedResult, $actual);
-    }
-
-    public function testGetRawSource()
-    {
-        $endpoint       = 'repositories/gentle/eof/raw/1bc8345/lib/file.php';
-        $expectedResult = json_encode('dummy');
-
-        $repository = $this->getApiMock('Bitbucket\API\Repositories\Repository');
-        $repository->expects($this->once())
-            ->method('requestGet')
-            ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
-
-        /** @var $repository \Bitbucket\API\Repositories\Repository */
-        $actual = $repository->raw('gentle', 'eof', '1bc8345', 'lib/file.php');
 
         $this->assertEquals($expectedResult, $actual);
     }
@@ -332,13 +264,14 @@ class RepositoryTest extends Tests\TestCase
         $endpoint       = 'repositories/gentle/eof/filehistory/1bc8345/lib/file.php';
         $expectedResult = json_encode('dummy');
 
-        $repository = $this->getApiMock('Bitbucket\API\Repositories\Repository');
-        $repository->expects($this->once())
-            ->method('requestGet')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var $repository \Bitbucket\API\Repositories\Repository */
+        $repository = $this->getClassMock('Bitbucket\API\Repositories\Repository', $client);
         $actual = $repository->filehistory('gentle', 'eof', '1bc8345', 'lib/file.php');
 
         $this->assertEquals($expectedResult, $actual);

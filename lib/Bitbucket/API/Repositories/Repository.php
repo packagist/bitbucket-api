@@ -54,12 +54,6 @@ class Repository extends API\Api
      */
     public function create($account, $repo, $params = array())
     {
-        // Keep BC for now.
-        // @todo[gtl]: to be removed.
-        if (is_array($repo)) {
-            return $this->createLegacy($account, $repo);
-        }
-
         $defaults = array(
             'scm'               => 'git',
             'name'              => $repo,
@@ -87,36 +81,6 @@ class Repository extends API\Api
     }
 
     /**
-     * Create a new repository
-     *
-     * Available `$params`:
-     *
-     * <example>
-     * 'description'    (string) = A description of the repository.
-     * 'scm'            (string) = A value of git or hg. The default is git if you leave this parameter unspecified.
-     * 'language'       (string) = The language used for source code in the repository.
-     * 'is_private'     (bool) = The repository is private (true) or public (false).  The default is false.
-     * </example>
-     *
-     * @access public
-     * @param  string           $name   The name of the repository
-     * @param  array            $params Additional parameters
-     * @return MessageInterface
-     *
-     * @deprecated This API 1.0 endpoint is deprecated.
-     * @see $this->create() Sintax for using API 2.0 endpoint
-     */
-    private function createLegacy($name, array $params = array())
-    {
-        $params['name'] = $name;
-
-        return $this->requestPost(
-            sprintf('repositories'),
-            $params
-        );
-    }
-
-    /**
      * Update a repository
      *
      * @access public
@@ -129,7 +93,7 @@ class Repository extends API\Api
      */
     public function update($account, $repo, array $params = array())
     {
-        return $this->requestPut(
+        return $this->getClient()->setApiVersion('2.0')->put(
             sprintf('repositories/%s/%s', $account, $repo),
             $params
         );
@@ -211,43 +175,13 @@ class Repository extends API\Api
      * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
+     * @param  string           $name    The name of the branch
      * @return MessageInterface
      */
-    public function branches($account, $repo)
+    public function branches($account, $repo, $name = '')
     {
-        return $this->requestGet(
-            sprintf('repositories/%s/%s/branches', $account, $repo)
-        );
-    }
-
-    /**
-     * Get the repository's main branch
-     *
-     * @access public
-     * @param  string           $account The team or individual account owning the repository.
-     * @param  string           $repo    The repository identifier.
-     * @return MessageInterface
-     */
-    public function branch($account, $repo)
-    {
-        return $this->requestGet(
-            sprintf('repositories/%s/%s/main-branch', $account, $repo)
-        );
-    }
-
-    /**
-     * Get the repository manifest
-     *
-     * @access public
-     * @param  string           $account  The team or individual account owning the repository.
-     * @param  string           $repo     The repository identifier.
-     * @param  string           $revision A revision to get such as default or master.
-     * @return MessageInterface
-     */
-    public function manifest($account, $repo, $revision)
-    {
-        return $this->requestGet(
-            sprintf('repositories/%s/%s/manifest/%s', $account, $repo, $revision)
+        return $this->getClient()->setApiVersion('2.0')->get(
+            sprintf('repositories/%s/%s/refs/branches/%s', $account, $repo, $name)
         );
     }
 
@@ -268,25 +202,6 @@ class Repository extends API\Api
     }
 
     /**
-     * Get the raw source
-     *
-     * Get the raw content of a file or directory.
-     *
-     * @access public
-     * @param  string           $account The team or individual account owning the repository.
-     * @param  string           $repo    The repository identifier.
-     * @param  string           $rev     A value representing the revision or branch to list.
-     * @param  string           $path    The path can be a filename or a directory path.
-     * @return MessageInterface
-     */
-    public function raw($account, $repo, $rev, $path)
-    {
-        return $this->requestGet(
-            sprintf('repositories/%s/%s/raw/%s/%s', $account, $repo, $rev, $path)
-        );
-    }
-
-    /**
      * Get the history of a file in a changeset
      *
      * Returns the history of a file starting from the provided changeset.
@@ -300,7 +215,7 @@ class Repository extends API\Api
      */
     public function filehistory($account, $repo, $node, $path)
     {
-        return $this->requestGet(
+        return $this->getClient()->setApiVersion('2.0')->get(
             sprintf('repositories/%s/%s/filehistory/%s/%s', $account, $repo, $node, $path)
         );
     }
