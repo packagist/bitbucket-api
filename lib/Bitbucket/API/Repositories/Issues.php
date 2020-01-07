@@ -35,7 +35,7 @@ class Issues extends API\Api
      */
     public function all($account, $repo, array $options = array())
     {
-        return $this->requestGet(
+        return $this->getClient()->setApiVersion('2.0')->get(
             sprintf('repositories/%s/%s/issues', $account, $repo),
             $options
         );
@@ -52,24 +52,8 @@ class Issues extends API\Api
      */
     public function get($account, $repo, $issueID)
     {
-        return $this->requestGet(
+        return $this->getClient()->setApiVersion('2.0')->get(
             sprintf('repositories/%s/%s/issues/%d', $account, $repo, $issueID)
-        );
-    }
-
-    /**
-     * GET a list of an issue's followers
-     *
-     * @access public
-     * @param  string           $account The team or individual account owning the repository.
-     * @param  string           $repo    The repository identifier.
-     * @param  int              $issueID The issue identifier.
-     * @return MessageInterface
-     */
-    public function followers($account, $repo, $issueID)
-    {
-        return $this->requestGet(
-            sprintf('repositories/%s/%s/issues/%d/followers', $account, $repo, $issueID)
         );
     }
 
@@ -94,7 +78,7 @@ class Issues extends API\Api
             );
         }
 
-        return $this->requestPost(
+        return $this->getClient()->setApiVersion('2.0')->post(
             sprintf('repositories/%s/%s/issues', $account, $repo),
             $options
         );
@@ -114,7 +98,7 @@ class Issues extends API\Api
      */
     public function update($account, $repo, $issueID, array $options)
     {
-        return $this->requestPut(
+        return $this->getClient()->setApiVersion('2.0')->put(
             sprintf('repositories/%s/%s/issues/%d', $account, $repo, $issueID),
             $options
         );
@@ -131,7 +115,7 @@ class Issues extends API\Api
      */
     public function delete($account, $repo, $issueID)
     {
-        return $this->requestDelete(
+        return $this->getClient()->setApiVersion('2.0')->delete(
             sprintf('repositories/%s/%s/issues/%d', $account, $repo, $issueID)
         );
     }
@@ -148,47 +132,5 @@ class Issues extends API\Api
     public function comments()
     {
         return $this->api('Repositories\\Issues\\Comments');
-    }
-
-    /**
-     * Get components
-     *
-     * @access public
-     * @return Repositories\Issues\Components
-     *
-     * @throws \InvalidArgumentException
-     * @codeCoverageIgnore
-     */
-    public function components()
-    {
-        return $this->api('Repositories\\Issues\\Components');
-    }
-
-    /**
-     * Get versions
-     *
-     * @access public
-     * @return Repositories\Issues\Versions
-     *
-     * @throws \InvalidArgumentException
-     * @codeCoverageIgnore
-     */
-    public function versions()
-    {
-        return $this->api('Repositories\\Issues\\Versions');
-    }
-
-    /**
-     * Get milestones
-     *
-     * @access public
-     * @return Repositories\Issues\Milestones
-     *
-     * @throws \InvalidArgumentException
-     * @codeCoverageIgnore
-     */
-    public function milestones()
-    {
-        return $this->api('Repositories\\Issues\\Milestones');
     }
 }
