@@ -30,8 +30,6 @@ title: Examples
   - [Privileges](privileges.html)
   - [Repositories](repositories.html)
     - [Branch restrictions](repositories/branch-restrictions.html)
-    - [Changesets](repositories/changesets.html)
-      - [Comments](repositories/changesets/comments.html)
     - [Commits](repositories/commits.html)
       - [Comments](repositories/commits/comments.html)
       - [Build statuses](repositories/commits/build-statuses.html)
