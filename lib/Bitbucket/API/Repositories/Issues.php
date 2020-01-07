@@ -151,20 +151,6 @@ class Issues extends API\Api
     }
 
     /**
-     * Get components
-     *
-     * @access public
-     * @return Repositories\Issues\Components
-     *
-     * @throws \InvalidArgumentException
-     * @codeCoverageIgnore
-     */
-    public function components()
-    {
-        return $this->api('Repositories\\Issues\\Components');
-    }
-
-    /**
      * Get versions
      *
      * @access public
@@ -176,19 +162,5 @@ class Issues extends API\Api
     public function versions()
     {
         return $this->api('Repositories\\Issues\\Versions');
-    }
-
-    /**
-     * Get milestones
-     *
-     * @access public
-     * @return Repositories\Issues\Milestones
-     *
-     * @throws \InvalidArgumentException
-     * @codeCoverageIgnore
-     */
-    public function milestones()
-    {
-        return $this->api('Repositories\\Issues\\Milestones');
     }
 }

@@ -88,19 +88,3 @@ print_r(
 
 # delete an existing version
 #print_r($issue->versions()->delete($accountname, $repo_slug, 53920));
-
-
-# fetch all milestones
-#print_r($issue->milestones()->all($accountname, $repo_slug));
-
-# fetch a single milestone
-#print_r($issue->milestones()->get($accountname, $repo_slug, 56735));
-
-# add a new milestone
-#print_r($issue->milestones()->create($accountname, $repo_slug, 'dummy'));
-
-# update an existing milestone
-#print_r($issue->milestones()->update($accountname, $repo_slug, 56736, 'not dummy'));
-
-# delete an existing milestone
-#print_r($issue->milestones()->delete($accountname, $repo_slug, 56736));
