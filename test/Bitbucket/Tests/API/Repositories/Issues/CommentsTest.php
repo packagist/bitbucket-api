@@ -12,13 +12,14 @@ class CommentsTest extends Tests\TestCase
         $endpoint       = 'repositories/gentle/eof/issues/3/comments/2967835';
         $expectedResult = json_encode('dummy');
 
-        $comments = $this->getApiMock('Bitbucket\API\Repositories\Issues\Comments');
-        $comments->expects($this->once())
-            ->method('requestGet')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('get')
             ->with($endpoint)
-            ->will( $this->returnValue($expectedResult) );
+            ->willReturn($expectedResult);
 
         /** @var $comments \Bitbucket\API\Repositories\Issues\Comments */
+        $comments = $this->getClassMock('Bitbucket\API\Repositories\Issues\Comments', $client);
         $actual = $comments->get('gentle', 'eof', 3, 2967835);
 
         $this->assertEquals($expectedResult, $actual);
@@ -29,13 +30,14 @@ class CommentsTest extends Tests\TestCase
         $endpoint       = 'repositories/gentle/eof/issues/3/comments';
         $expectedResult = json_encode('dummy');
 
-        $comments = $this->getApiMock('Bitbucket\API\Repositories\Issues\Comments');
-        $comments->expects($this->once())
-            ->method('requestGet')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('get')
             ->with($endpoint)
-            ->will( $this->returnValue($expectedResult) );
+            ->willReturn($expectedResult);
 
         /** @var $comments \Bitbucket\API\Repositories\Issues\Comments */
+        $comments = $this->getClassMock('Bitbucket\API\Repositories\Issues\Comments', $client);
         $actual = $comments->all('gentle', 'eof', 3);
 
         $this->assertEquals($expectedResult, $actual);
@@ -46,12 +48,13 @@ class CommentsTest extends Tests\TestCase
         $endpoint       = 'repositories/gentle/eof/issues/2/comments';
         $params         = array('content' => 'dummy');
 
-        $comments = $this->getApiMock('Bitbucket\API\Repositories\Issues\Comments');
-        $comments->expects($this->once())
-            ->method('requestPost')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('post')
             ->with($endpoint, $params);
 
         /** @var $comments \Bitbucket\API\Repositories\Issues\Comments */
+        $comments = $this->getClassMock('Bitbucket\API\Repositories\Issues\Comments', $client);
         $comments->create('gentle', 'eof', '2', 'dummy');
     }
 
@@ -60,12 +63,13 @@ class CommentsTest extends Tests\TestCase
         $endpoint       = 'repositories/gentle/eof/issues/2/comments/3';
         $params         = array('content' => 'dummy');
 
-        $comments = $this->getApiMock('Bitbucket\API\Repositories\Issues\Comments');
-        $comments->expects($this->once())
-            ->method('requestPut')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('put')
             ->with($endpoint, $params);
 
         /** @var $comments \Bitbucket\API\Repositories\Issues\Comments */
+        $comments = $this->getClassMock('Bitbucket\API\Repositories\Issues\Comments', $client);
         $comments->update('gentle', 'eof', 2, 3, 'dummy');
     }
 }
