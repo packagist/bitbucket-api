@@ -48,7 +48,6 @@ title: Examples
     - [Build statuses](repositories/commits/build-statuses.html)
   - [Teams](teams.html)
   - [User](user.html)
-    - [Repositories](user/repositories.html)
   - [Users](users.html)
     - [Account](users/account.html)
     - [Emails](users/emails.html)
