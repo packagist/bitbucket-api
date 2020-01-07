@@ -62,6 +62,5 @@ title: Examples
     - [Account](users/account.html)
     - [Emails](users/emails.html)
     - [Invitations](users/invitations.html)
-    - [OAuth](users/oauth.html)
     - [Privileges](users/privileges.html)
     - [SSH keys](users/ssh-keys.html)

@@ -117,19 +117,6 @@ class Users extends Api
     }
 
     /**
-     * Get oauth
-     *
-     * @access public
-     * @return Users\OAuth
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function oauth()
-    {
-        return $this->api('Users\\OAuth');
-    }
-
-    /**
      * Get sshKeys
      *
      * @access public
