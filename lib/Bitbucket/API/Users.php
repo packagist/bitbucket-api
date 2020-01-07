@@ -130,19 +130,6 @@ class Users extends Api
     }
 
     /**
-     * Get privileges
-     *
-     * @access public
-     * @return Users\Privileges
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function privileges()
-    {
-        return $this->api('Users\\Privileges');
-    }
-
-    /**
      * Get sshKeys
      *
      * @access public

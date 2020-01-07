@@ -42,6 +42,5 @@ $user->repositories($username);
   * [Users emails](users/emails.html)
   * [Users invitations](users/invitations.html)
   * [Users oauth](users/oauth.html)
-  * [Users privileges](users/privileges.html)
   * [Users ssh keys](users/ssh-keys.html)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/users+Endpoint)
