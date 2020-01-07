@@ -73,18 +73,3 @@ print_r(
 /*print_r(
     $issue->comments()->update($accountname, $repo_slug, 4, 3454384, "dummy comment [edited]")
 );*/
-
-# fetch all versions
-#print_r($issue->versions()->all($accountname, $repo_slug));
-
-# fetch a single version
-#print_r($issue->versions()->get($accountname, $repo_slug, 53917));
-
-# add a new version
-#print_r($issue->versions()->create($accountname, $repo_slug, '3.0'));
-
-# update an existing version
-#print_r($issue->versions()->update($accountname, $repo_slug, 53920, '3.0.1'));
-
-# delete an existing version
-#print_r($issue->versions()->delete($accountname, $repo_slug, 53920));

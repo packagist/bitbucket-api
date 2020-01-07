@@ -64,5 +64,4 @@ $issue->delete($account_name, $repo_slug, 5);
 #### Related:
   * [Authentication]({{ site.url }}/examples/authentication.html)
   * [Issues comments](issues/comments.html)
-  * [Issues versions](issues/versions.html)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/issues+Resource#issuesResource-Overview)

@@ -149,18 +149,4 @@ class Issues extends API\Api
     {
         return $this->api('Repositories\\Issues\\Comments');
     }
-
-    /**
-     * Get versions
-     *
-     * @access public
-     * @return Repositories\Issues\Versions
-     *
-     * @throws \InvalidArgumentException
-     * @codeCoverageIgnore
-     */
-    public function versions()
-    {
-        return $this->api('Repositories\\Issues\\Versions');
-    }
 }
