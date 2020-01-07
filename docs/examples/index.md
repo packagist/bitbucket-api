@@ -40,7 +40,6 @@ title: Examples
       - [Components](repositories/issues/components.html)
       - [Milestones](repositories/issues/milestones.html)
       - [Versions](repositories/issues/versions.html)
-    - [Links](repositories/links.html)
     - [Pull requests](repositories/pull-requests.html)
       - [Comments](repositories/pull-requests/comments.html)
     - [Repository](repositories/repository.html)
