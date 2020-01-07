@@ -26,5 +26,4 @@ $user->emails();
 
 #### Related:
   * [Authentication]({{ site.url }}/examples/authentication.html)
-  * [User repositories](user/repositories.html)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/user+Endpoint#userEndpoint-Overview)

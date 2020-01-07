@@ -34,20 +34,6 @@ class User extends Api
     }
 
     /**
-     * Get repositories
-     *
-     * @access public
-     * @return User\Repositories
-     *
-     * @throws \InvalidArgumentException
-     * @codeCoverageIgnore
-     */
-    public function repositories()
-    {
-        return $this->api('User\\Repositories');
-    }
-
-    /**
      * Retrieves the email for an authenticated user.
      *
      * @access public
