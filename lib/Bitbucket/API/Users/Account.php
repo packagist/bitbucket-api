@@ -31,24 +31,8 @@ class Account extends Api
      */
     public function profile($account)
     {
-        return $this->requestGet(
+        return $this->getClient()->setApiVersion('2.0')->get(
             sprintf('users/%s', $account)
-        );
-    }
-
-    /**
-     * Get the account plan
-     *
-     * Gets the number of users counted against an account's plan.
-     *
-     * @access public
-     * @param  string           $account The name of an individual or team account, or validated email address.
-     * @return MessageInterface
-     */
-    public function plan($account)
-    {
-        return $this->requestGet(
-            sprintf('users/%s/plan', $account)
         );
     }
 
@@ -63,24 +47,8 @@ class Account extends Api
      */
     public function followers($account)
     {
-        return $this->requestGet(
+        return $this->getClient()->setApiVersion('2.0')->get(
             sprintf('users/%s/followers', $account)
-        );
-    }
-
-    /**
-     * Get the events
-     *
-     * Gets a count and the list of events associated with an account.
-     *
-     * @access public
-     * @param  string           $account The name of an individual or team account, or validated email address.
-     * @return MessageInterface
-     */
-    public function events($account)
-    {
-        return $this->requestGet(
-            sprintf('users/%s/events', $account)
         );
     }
 }
