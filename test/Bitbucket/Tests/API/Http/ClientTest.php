@@ -256,7 +256,7 @@ class ClientTest extends Tests\TestCase
 
     private function getListenerMock($name = 'dummy')
     {
-        $listener = $this->getMock('Bitbucket\API\Http\Listener\ListenerInterface');
+        $listener = $this->getMockBuilder('Bitbucket\API\Http\Listener\ListenerInterface')->getMock();
 
         $listener->expects($this->any())->method('getName')->will($this->returnValue($name));
 
