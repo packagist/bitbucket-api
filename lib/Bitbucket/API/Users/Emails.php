@@ -30,7 +30,7 @@ class Emails extends Api
      */
     public function all($account)
     {
-        return $this->requestGet(
+        return $this->getClient()->setApiVersion('2.0')->get(
             sprintf('users/%s/emails', $account)
         );
     }
@@ -48,56 +48,7 @@ class Emails extends Api
      */
     public function get($account, $email)
     {
-        return $this->requestGet(
-            sprintf('users/%s/emails/%s', $account, $email)
-        );
-    }
-
-    /**
-     * Add a new email address to an account
-     *
-     * @access public
-     * @param  string           $account The name of an individual or team account.
-     * @param  string           $email   The email address to get.
-     * @return MessageInterface
-     */
-    public function create($account, $email)
-    {
-        return $this->requestPost(
-            sprintf('users/%s/emails/%s', $account, $email)
-        );
-    }
-
-    /**
-     * Update an email address
-     *
-     * Sets an individual email address associated with an account to primary.
-     *
-     * @access public
-     * @param  string           $account The name of an individual or team account.
-     * @param  string           $email   The email address to get.
-     * @param  bool             $primary Set this address as primary for this account ?
-     * @return MessageInterface
-     */
-    public function update($account, $email, $primary = false)
-    {
-        return $this->requestPut(
-            sprintf('users/%s/emails/%s', $account, $email),
-            array('primary' => (bool) $primary)
-        );
-    }
-
-    /**
-     * Delete an email address
-     *
-     * @access public
-     * @param  string           $account The name of an individual or team account.
-     * @param  string           $email   The email address to get.
-     * @return MessageInterface
-     */
-    public function delete($account, $email)
-    {
-        return $this->requestDelete(
+        return $this->getClient()->setApiVersion('2.0')->get(
             sprintf('users/%s/emails/%s', $account, $email)
         );
     }

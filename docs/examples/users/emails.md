@@ -23,27 +23,6 @@ $users->emails()->all($account_name);
 $users->emails()->get($account_name, 'dummy@example.com');
 ```
 
-### Add a new email address to an account:
-When you add an address, Bitbucket sends an activation email to the new address. After the user clicks the activation link
-in the email, the address active is set to true and the address is available for use. If you call this method again, Bitbucket
-will send a new confirmation email.
-
-```php
-$users->emails()->create($account_name, 'dummy@example.com');
-```
-
-### Set an email address as primary:
-
-```php
-$users->emails()->update($account_name, 'dummy@example.com', true);
-```
-
-### Delete an email address:
-
-```php
-$users->emails()->delete($account_name, 'dummy@example.com');
-```
-
 ----
 
 #### Related:
