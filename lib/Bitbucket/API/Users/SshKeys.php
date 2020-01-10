@@ -85,7 +85,7 @@ class SshKeys extends Api
      */
     public function get($account, $keyId)
     {
-        return $this->requestGet(
+        return $this->getClient()->setApiVersion('2.0')->get(
             sprintf('users/%s/ssh-keys/%d', $account, $keyId)
         );
     }
