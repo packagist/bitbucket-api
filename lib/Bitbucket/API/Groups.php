@@ -18,6 +18,7 @@ use Buzz\Message\MessageInterface;
  * creating new ones, updating memberships, and deleting them.
  *
  * @author  Alexandru G.    <alex@gentle.ro>
+ * @see https://confluence.atlassian.com/bitbucket/groups-endpoint-296093143.html
  */
 class Groups extends Api
 {
@@ -50,7 +51,7 @@ class Groups extends Api
             }
         }
 
-        return $this->requestGet($endpoint, $filters);
+        return $this->getClient()->setApiVersion('1.0')->get($endpoint, $filters);
     }
 
     /**
@@ -63,7 +64,7 @@ class Groups extends Api
      */
     public function create($account, $name)
     {
-        return $this->requestPost(
+        return $this->getClient()->setApiVersion('1.0')->post(
             sprintf('groups/%s/', $account),
             array('name' => $name)
         );
@@ -80,7 +81,7 @@ class Groups extends Api
      */
     public function update($account, $name, array $params)
     {
-        return $this->requestPut(
+        return $this->getClient()->setApiVersion('1.0')->put(
             sprintf('groups/%s/%s/', $account, $name),
             $params
         );
@@ -96,7 +97,7 @@ class Groups extends Api
      */
     public function delete($account, $name)
     {
-        return $this->requestDelete(
+        return $this->getClient()->setApiVersion('1.0')->delete(
             sprintf('groups/%s/%s/', $account, $name)
         );
     }

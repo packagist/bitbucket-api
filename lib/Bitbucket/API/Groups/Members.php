@@ -18,6 +18,7 @@ use Buzz\Message\MessageInterface;
  * Manage group members.
  *
  * @author  Alexandru G.    <alex@gentle.ro>
+ * @see https://confluence.atlassian.com/bitbucket/groups-endpoint-296093143.html
  */
 class Members extends API\Api
 {
@@ -31,7 +32,7 @@ class Members extends API\Api
      */
     public function all($account, $repo)
     {
-        return $this->requestGet(
+        return $this->getClient()->setApiVersion('1.0')->get(
             sprintf('groups/%s/%s/members', $account, $repo)
         );
     }
@@ -42,13 +43,13 @@ class Members extends API\Api
      * @access public
      * @param  string           $account    The team or individual account owning the repository.
      * @param  string           $groupSlug  The slug of the group.
-     * @param  string           $memberName An individual account.
+     * @param  string           $memberUuid An individual account.
      * @return MessageInterface
      */
-    public function add($account, $groupSlug, $memberName)
+    public function add($account, $groupSlug, $memberUuid)
     {
-        return $this->requestPut(
-            sprintf('groups/%s/%s/members/%s', $account, $groupSlug, $memberName)
+        return $this->getClient()->setApiVersion('1.0')->put(
+            sprintf('groups/%s/%s/members/%s', $account, $groupSlug, $memberUuid)
         );
     }
 
@@ -58,13 +59,13 @@ class Members extends API\Api
      * @access public
      * @param  string           $account    The team or individual account owning the repository.
      * @param  string           $groupSlug  The slug of the group.
-     * @param  string           $memberName An individual account.
+     * @param  string           $memberUuid An individual account.
      * @return MessageInterface
      */
-    public function delete($account, $groupSlug, $memberName)
+    public function delete($account, $groupSlug, $memberUuid)
     {
-        return $this->requestDelete(
-            sprintf('groups/%s/%s/members/%s', $account, $groupSlug, $memberName)
+        return $this->getClient()->setApiVersion('1.0')->delete(
+            sprintf('groups/%s/%s/members/%s', $account, $groupSlug, $memberUuid)
         );
     }
 }

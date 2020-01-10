@@ -3,7 +3,6 @@
 namespace Bitbucket\Tests\API\Groups;
 
 use Bitbucket\Tests\API as Tests;
-use Bitbucket\API;
 
 class MembersTest extends Tests\TestCase
 {
@@ -12,13 +11,14 @@ class MembersTest extends Tests\TestCase
         $endpoint       = 'groups/gentle/testers/members';
         $expectedResult = json_encode('dummy');
 
-        $members = $this->getApiMock('Bitbucket\API\Groups\Members');
-        $members->expects($this->once())
-            ->method('requestGet')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('get')
             ->with($endpoint)
-            ->will( $this->returnValue($expectedResult) );
+            ->willReturn($expectedResult);
 
         /** @var $members \Bitbucket\API\Groups\Members */
+        $members = $this->getClassMock('Bitbucket\API\Groups\Members', $client);
         $actual = $members->all('gentle', 'testers');
 
         $this->assertEquals($expectedResult, $actual);
@@ -28,12 +28,13 @@ class MembersTest extends Tests\TestCase
     {
         $endpoint       = 'groups/gentle/testers/members/steve';
 
-        $member = $this->getApiMock('Bitbucket\API\Groups\Members');
-        $member->expects($this->once())
-            ->method('requestPut')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('put')
             ->with($endpoint);
 
         /** @var $member \Bitbucket\API\Groups\Members */
+        $member = $this->getClassMock('Bitbucket\API\Groups\Members', $client);
         $member->add('gentle', 'testers', 'steve');
     }
 
@@ -41,12 +42,13 @@ class MembersTest extends Tests\TestCase
     {
         $endpoint       = 'groups/gentle/testers/members/steve';
 
-        $member = $this->getApiMock('Bitbucket\API\Groups\Members');
-        $member->expects($this->once())
-            ->method('requestDelete')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('delete')
             ->with($endpoint);
 
         /** @var $member \Bitbucket\API\Groups\Members */
+        $member = $this->getClassMock('Bitbucket\API\Groups\Members', $client);
         $member->delete('gentle', 'testers', 'steve');
     }
 }
