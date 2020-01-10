@@ -19,6 +19,7 @@ use Buzz\Message\MessageInterface;
  * one or more of an account's groups.
  *
  * @author  Alexandru G.    <alex@gentle.ro>
+ * @see https://confluence.atlassian.com/bitbucket/invitations-resource-296911749.html
  */
 class Invitations extends Api
 {
@@ -31,42 +32,8 @@ class Invitations extends Api
      */
     public function all($account)
     {
-        return $this->requestGet(
+        return $this->getClient()->setApiVersion('1.0')->get(
             sprintf('users/%s/invitations', $account)
-        );
-    }
-
-    /**
-     * Get pending invitations for a particular email address
-     *
-     * Gets any pending invitations on a team or individual account for a particular email address.
-     *
-     * @access public
-     * @param  string           $account The name of an individual or team account.
-     * @param  string           $email   The email address to get.
-     * @return MessageInterface
-     */
-    public function email($account, $email)
-    {
-        return $this->requestGet(
-            sprintf('users/%s/invitations/%s', $account, $email)
-        );
-    }
-
-    /**
-     * Get a pending invitation for group membership
-     *
-     * @access public
-     * @param  string           $account    The name of an individual or team account.
-     * @param  string           $groupOwner The name of an individual or team account that owns the group.
-     * @param  string           $groupSlug  An identifier for the group.
-     * @param  string           $email      Name of the email address
-     * @return MessageInterface
-     */
-    public function group($account, $groupOwner, $groupSlug, $email)
-    {
-        return $this->requestGet(
-            sprintf('users/%s/invitations/%s/%s/%s', $account, $email, $groupOwner, $groupSlug)
         );
     }
 
@@ -77,15 +44,15 @@ class Invitations extends Api
      *
      * @access public
      * @param  string           $account    The name of an individual or team account.
-     * @param  string           $groupOwner The name of an individual or team account that owns the group.
      * @param  string           $groupSlug  An identifier for the group.
      * @param  string           $email      Name of the email address
      * @return MessageInterface
      */
-    public function create($account, $groupOwner, $groupSlug, $email)
+    public function create($account, $groupSlug, $email)
     {
-        return $this->requestPut(
-            sprintf('users/%s/invitations/%s/%s/%s', $account, $email, $groupOwner, $groupSlug)
+        return $this->getClient()->setApiVersion('1.0')->put(
+            sprintf('users/%s/invitations', $account),
+            ['email' => $email, 'group_slug' => $groupSlug]
         );
     }
 
@@ -101,8 +68,9 @@ class Invitations extends Api
      */
     public function deleteByEmail($account, $email)
     {
-        return $this->requestDelete(
-            sprintf('users/%s/invitations/%s', $account, $email)
+        return $this->getClient()->setApiVersion('1.0')->delete(
+            sprintf('users/%s/invitations', $account),
+            ['email' => $email]
         );
     }
 
@@ -113,15 +81,15 @@ class Invitations extends Api
      *
      * @access public
      * @param  string           $account    The name of an individual or team account.
-     * @param  string           $groupOwner The name of an individual or team account that owns the group.
      * @param  string           $groupSlug  An identifier for the group.
      * @param  string           $email      Name of the email address to delete.
      * @return MessageInterface
      */
-    public function deleteByGroup($account, $groupOwner, $groupSlug, $email)
+    public function deleteByGroup($account, $groupSlug, $email)
     {
-        return $this->requestDelete(
-            sprintf('users/%s/invitations/%s/%s/%s', $account, $email, $groupOwner, $groupSlug)
+        return $this->getClient()->setApiVersion('1.0')->delete(
+            sprintf('users/%s/invitations', $account),
+            ['email' => $email, 'group_slug' => $groupSlug]
         );
     }
 }

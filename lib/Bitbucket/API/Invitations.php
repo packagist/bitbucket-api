@@ -18,6 +18,7 @@ use Buzz\Message\MessageInterface;
  * grant read, write, or admin privileges to a repository.
  *
  * @author  Alexandru G.    <alex@gentle.ro>
+ * @see https://confluence.atlassian.com/bitbucket/invitations-endpoint-296093147.html
  */
 class Invitations extends Api
 {
@@ -33,9 +34,9 @@ class Invitations extends Api
      */
     public function send($account, $repo, $email, $permission)
     {
-        return $this->requestPost(
-            sprintf('invitations/%s/%s/%s', $account, $repo, $email),
-            array('permission' => $permission)
+        return $this->getClient()->setApiVersion('1.0')->post(
+            sprintf('invitations/%s/%s', $account, $repo),
+            ['permission' => $permission, 'email' => $email]
         );
     }
 }
