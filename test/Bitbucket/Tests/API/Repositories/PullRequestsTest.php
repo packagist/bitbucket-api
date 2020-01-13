@@ -3,8 +3,6 @@
 namespace Bitbucket\Tests\API\Repositories;
 
 use Bitbucket\Tests\API as Tests;
-use Bitbucket\API;
-use Buzz\Message\RequestInterface;
 
 /**
  * Class PullRequestsTest
@@ -93,15 +91,23 @@ class PullRequestsTest extends Tests\TestCase
 
     /**
      * @expectedException \InvalidArgumentException
+     * @dataProvider pullRequestWrongParamsTypeProvider
      */
-    public function testCreateNewPullRequestWithWrongParamsType()
+    public function testCreateNewPullRequestWithWrongParamsType($params)
     {
         /** @var \Bitbucket\API\Repositories\PullRequests $pull */
         $pull   = $this->getApiMock('Bitbucket\API\Repositories\PullRequests');
 
-        $pull->create('gentle', 'eof', '');
-        $pull->create('gentle', 'eof', 3);
-        $pull->create('gentle', 'eof', "{ 'foo': 'bar' }");
+        $pull->create('gentle', 'eof', $params);
+    }
+
+    public function pullRequestWrongParamsTypeProvider()
+    {
+        return [
+            [''],
+            [3],
+            ["{ 'foo': 'bar' }"],
+        ];
     }
 
     public function testUpdatePullRequestFromJSON()
@@ -152,15 +158,14 @@ class PullRequestsTest extends Tests\TestCase
 
     /**
      * @expectedException \InvalidArgumentException
+     * @dataProvider pullRequestWrongParamsTypeProvider
      */
-    public function testUpdatePullRequestWithWrongParamsType()
+    public function testUpdatePullRequestWithWrongParamsType($params)
     {
         /** @var \Bitbucket\API\Repositories\PullRequests $pull */
         $pull   = $this->getApiMock('Bitbucket\API\Repositories\PullRequests');
 
-        $pull->update('gentle', 'eof', 1, '');
-        $pull->update('gentle', 'eof', 1, 3);
-        $pull->update('gentle', 'eof', 1, "{ 'foo': 'bar' }");
+        $pull->update('gentle', 'eof', 1, $params);
     }
 
     public function testGetSpecificPullRequest()

@@ -59,7 +59,6 @@ class RepositoryTest extends Tests\TestCase
 
         /** @var \Bitbucket\API\Repositories\Repository $repo */
         $repo = $this->getClassMock('Bitbucket\API\Repositories\Repository', $client);
-        $this->setExpectedException('\InvalidArgumentException');
         $repo->create('gentle', 'new-repo', $check);
     }
 
