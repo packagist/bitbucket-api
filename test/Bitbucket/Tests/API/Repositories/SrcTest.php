@@ -9,14 +9,14 @@ class SrcTest extends Tests\TestCase
 {
     public function testListRepoSrc()
     {
-        $endpoint       = 'repositories/gentle/eof/src/1e10ffe//lib';
+        $endpoint       = '/repositories/gentle/eof/src/1e10ffe//lib';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will( $this->returnValue($expectedResult) );
+            ->willReturn($expectedResult);
 
         /** @var $src \Bitbucket\API\Repositories\Src */
         $src    = $this->getClassMock('Bitbucket\API\Repositories\Src', $client);
@@ -27,14 +27,14 @@ class SrcTest extends Tests\TestCase
 
     public function testSrcGetRawContent()
     {
-        $endpoint       = 'repositories/gentle/eof/src/1e10ffe/lib/Gentle/Bitbucket/API/Repositories/Services.php';
+        $endpoint       = '/repositories/gentle/eof/src/1e10ffe/lib/Gentle/Bitbucket/API/Repositories/Services.php';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will( $this->returnValue($expectedResult) );
+            ->willReturn($expectedResult);
 
         /** @var $src \Bitbucket\API\Repositories\Src */
         $src    = $this->getClassMock('Bitbucket\API\Repositories\Src', $client);
@@ -57,7 +57,7 @@ class SrcTest extends Tests\TestCase
 
     public function testSrcCreateFile()
     {
-        $endpoint       = 'repositories/gentle/eof/src';
+        $endpoint       = '/repositories/gentle/eof/src';
         $params         = array(
             '/testfile' => 'dummy',
             'author' => 'Gentle <noreply@gentle.com>',
@@ -77,7 +77,7 @@ class SrcTest extends Tests\TestCase
 
     public function testSrcCreateBranch()
     {
-        $endpoint       = 'repositories/gentle/eof/src';
+        $endpoint       = '/repositories/gentle/eof/src';
         $params         = array(
             'branch' => 'new-branch',
             'author' => 'Gentle <noreply@gentle.com>',

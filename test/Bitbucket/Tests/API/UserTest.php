@@ -8,14 +8,14 @@ class UserTest extends Tests\TestCase
 {
     public function testGetEmails()
     {
-        $endpoint       = 'user/emails';
+        $endpoint       = '/user/emails';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->any())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\User $user */
         $user = $this->getClassMock('Bitbucket\API\User', $client);
@@ -26,14 +26,14 @@ class UserTest extends Tests\TestCase
 
     public function testGetUserProfileSuccess()
     {
-        $endpoint       = 'user/';
+        $endpoint       = '/user/';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
         $client->expects($this->any())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\User $user */
         $user = $this->getClassMock('Bitbucket\API\User', $client);

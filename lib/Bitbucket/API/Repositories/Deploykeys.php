@@ -32,7 +32,7 @@ class Deploykeys extends API\Api
     public function all($account, $repo)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/deploy-keys', $account, $repo)
+            sprintf('/repositories/%s/%s/deploy-keys', $account, $repo)
         );
     }
 
@@ -50,7 +50,7 @@ class Deploykeys extends API\Api
     public function get($account, $repo, $keyId)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/deploy-keys/%s', $account, $repo, $keyId)
+            sprintf('/repositories/%s/%s/deploy-keys/%s', $account, $repo, $keyId)
         );
     }
 
@@ -73,7 +73,7 @@ class Deploykeys extends API\Api
         }
 
         return $this->getClient()->setApiVersion('2.0')->post(
-            sprintf('repositories/%s/%s/deploy-keys', $account, $repo),
+            sprintf('/repositories/%s/%s/deploy-keys', $account, $repo),
             $options
         );
     }
@@ -98,7 +98,7 @@ class Deploykeys extends API\Api
     public function update($account, $repo, $keyId, $options = array())
     {
         return $this->getClient()->setApiVersion('2.0')->put(
-            sprintf('repositories/%s/%s/deploy-keys/%s', $account, $repo, $keyId),
+            sprintf('/repositories/%s/%s/deploy-keys/%s', $account, $repo, $keyId),
             $options
         );
     }
@@ -117,7 +117,7 @@ class Deploykeys extends API\Api
     public function delete($account, $repo, $keyId)
     {
         return $this->getClient()->setApiVersion('2.0')->delete(
-            sprintf('repositories/%s/%s/deploy-keys/%s', $account, $repo, $keyId)
+            sprintf('/repositories/%s/%s/deploy-keys/%s', $account, $repo, $keyId)
         );
     }
 }

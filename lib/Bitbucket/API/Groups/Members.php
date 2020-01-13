@@ -33,7 +33,7 @@ class Members extends API\Api
     public function all($account, $repo)
     {
         return $this->getClient()->setApiVersion('1.0')->get(
-            sprintf('groups/%s/%s/members', $account, $repo)
+            sprintf('/groups/%s/%s/members', $account, $repo)
         );
     }
 
@@ -49,7 +49,7 @@ class Members extends API\Api
     public function add($account, $groupSlug, $memberUuid)
     {
         return $this->getClient()->setApiVersion('1.0')->put(
-            sprintf('groups/%s/%s/members/%s', $account, $groupSlug, $memberUuid)
+            sprintf('/groups/%s/%s/members/%s', $account, $groupSlug, $memberUuid)
         );
     }
 
@@ -65,7 +65,7 @@ class Members extends API\Api
     public function delete($account, $groupSlug, $memberUuid)
     {
         return $this->getClient()->setApiVersion('1.0')->delete(
-            sprintf('groups/%s/%s/members/%s', $account, $groupSlug, $memberUuid)
+            sprintf('/groups/%s/%s/members/%s', $account, $groupSlug, $memberUuid)
         );
     }
 }

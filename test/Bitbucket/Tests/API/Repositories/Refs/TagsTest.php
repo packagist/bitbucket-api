@@ -8,14 +8,14 @@ class TagsTest extends Tests\TestCase
 {
     public function testAll()
     {
-        $endpoint       = 'repositories/gentle/eof/refs/tags';
+        $endpoint       = '/repositories/gentle/eof/refs/tags';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         $repository = $this->getClassMock('Bitbucket\API\Repositories\Refs\Tags', $client);
 
@@ -28,14 +28,14 @@ class TagsTest extends Tests\TestCase
     public function testAllParams()
     {
         $params         = ['pagelen'=>36];
-        $endpoint       = 'repositories/gentle/eof/refs/tags';
+        $endpoint       = '/repositories/gentle/eof/refs/tags';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint, $params)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         $repository = $this->getClassMock('Bitbucket\API\Repositories\Refs\Tags', $client);
 
@@ -47,14 +47,14 @@ class TagsTest extends Tests\TestCase
 
     public function testGet()
     {
-        $endpoint       = 'repositories/gentle/eof/refs/tags/atag';
+        $endpoint       = '/repositories/gentle/eof/refs/tags/atag';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         $repository = $this->getClassMock('Bitbucket\API\Repositories\Refs\Tags', $client);
 
@@ -66,14 +66,14 @@ class TagsTest extends Tests\TestCase
 
     public function testCreate()
     {
-        $endpoint       = 'repositories/gentle/eof/refs/tags';
+        $endpoint       = '/repositories/gentle/eof/refs/tags';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('post')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         $repository = $this->getClassMock('Bitbucket\API\Repositories\Refs\Tags', $client);
 

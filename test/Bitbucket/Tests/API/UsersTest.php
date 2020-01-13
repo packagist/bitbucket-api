@@ -22,14 +22,14 @@ class UsersTest extends Tests\TestCase
 
     public function testGetUserPublicInformation()
     {
-        $endpoint       = 'users/john-doe';
+        $endpoint       = '/users/john-doe';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Users $user */
         $user   = $this->getClassMock('Bitbucket\API\Users', $client);
@@ -40,14 +40,14 @@ class UsersTest extends Tests\TestCase
 
     public function testGetUserFollowers()
     {
-        $endpoint       = 'users/john-doe/followers';
+        $endpoint       = '/users/john-doe/followers';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Users $user */
         $user   = $this->getClassMock('Bitbucket\API\Users', $client);
@@ -58,14 +58,14 @@ class UsersTest extends Tests\TestCase
 
     public function testGetUserFollowing()
     {
-        $endpoint       = 'users/john-doe/following';
+        $endpoint       = '/users/john-doe/following';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Users $user */
         $user   = $this->getClassMock('Bitbucket\API\Users', $client);
@@ -76,14 +76,14 @@ class UsersTest extends Tests\TestCase
 
     public function testGetUserRepositories()
     {
-        $endpoint       = 'repositories/john-doe';
+        $endpoint       = '/repositories/john-doe';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Users $user */
         $user   = $this->getClassMock('Bitbucket\API\Users', $client);

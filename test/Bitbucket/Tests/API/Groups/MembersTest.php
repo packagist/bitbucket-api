@@ -8,7 +8,7 @@ class MembersTest extends Tests\TestCase
 {
     public function testGetAllGroupMembers()
     {
-        $endpoint       = 'groups/gentle/testers/members';
+        $endpoint       = '/groups/gentle/testers/members';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
@@ -26,7 +26,7 @@ class MembersTest extends Tests\TestCase
 
     public function testAddMemberToGroupSuccess()
     {
-        $endpoint       = 'groups/gentle/testers/members/steve';
+        $endpoint       = '/groups/gentle/testers/members/steve';
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
@@ -40,7 +40,7 @@ class MembersTest extends Tests\TestCase
 
     public function testDeleteMemberFromGroupSuccess()
     {
-        $endpoint       = 'groups/gentle/testers/members/steve';
+        $endpoint       = '/groups/gentle/testers/members/steve';
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())

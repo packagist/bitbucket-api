@@ -35,10 +35,10 @@ class Repositories extends Api
      */
     public function all($owner = null, array $params = array())
     {
-        $endpoint = 'repositories';
+        $endpoint = '/repositories';
 
         if (!is_null($owner)) {
-            $endpoint = sprintf('repositories/%s', $owner);
+            $endpoint = sprintf('/repositories/%s', $owner);
         }
 
         return $this->getClient()->setApiVersion('2.0')->get($endpoint, $params);

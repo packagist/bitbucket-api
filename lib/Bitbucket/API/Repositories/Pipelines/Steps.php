@@ -33,7 +33,7 @@ class Steps extends API\Api
     public function all($account, $repo, $pipelineUuid)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/pipelines/%s/steps/', $account, $repo, $pipelineUuid)
+            sprintf('/repositories/%s/%s/pipelines/%s/steps/', $account, $repo, $pipelineUuid)
         );
     }
 
@@ -50,7 +50,7 @@ class Steps extends API\Api
     public function get($account, $repo, $pipelineUuid, $stepUuid)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/pipelines/%s/steps/%s', $account, $repo, $pipelineUuid, $stepUuid)
+            sprintf('/repositories/%s/%s/pipelines/%s/steps/%s', $account, $repo, $pipelineUuid, $stepUuid)
         );
     }
 
@@ -67,7 +67,7 @@ class Steps extends API\Api
     public function log($account, $repo, $pipelineUuid, $stepUuid)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/pipelines/%s/steps/%s/log', $account, $repo, $pipelineUuid, $stepUuid)
+            sprintf('/repositories/%s/%s/pipelines/%s/steps/%s/log', $account, $repo, $pipelineUuid, $stepUuid)
         );
     }
 }

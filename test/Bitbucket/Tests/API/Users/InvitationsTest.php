@@ -8,7 +8,7 @@ class InvitationsTest extends Tests\TestCase
 {
     public function testGetAllInvitations()
     {
-        $endpoint       = 'users/gentle/invitations';
+        $endpoint       = '/users/gentle/invitations';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
@@ -26,7 +26,7 @@ class InvitationsTest extends Tests\TestCase
 
     public function testIssuesNewInvitationSuccess()
     {
-        $endpoint       = 'users/gentle/invitations';
+        $endpoint       = '/users/gentle/invitations';
         $expectedResult = json_encode('dummy');
         $params         = ['email' => 'dummy@example.com', 'group_slug' => 'testers'];
 
@@ -45,7 +45,7 @@ class InvitationsTest extends Tests\TestCase
 
     public function testDeleteInvitationByEmailSuccess()
     {
-        $endpoint       = 'users/gentle/invitations';
+        $endpoint       = '/users/gentle/invitations';
         $expectedResult = json_encode('dummy');
         $params         = ['email' => 'dummy@example.com'];
 
@@ -64,7 +64,7 @@ class InvitationsTest extends Tests\TestCase
 
     public function testDeleteInvitationByGroupSuccess()
     {
-        $endpoint       = 'users/gentle/invitations';
+        $endpoint       = '/users/gentle/invitations';
         $expectedResult = json_encode('dummy');
         $params         = ['email' => 'dummy@example.com', 'group_slug' => 'testers'];
 

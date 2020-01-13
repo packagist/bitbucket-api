@@ -41,10 +41,10 @@ class Groups extends Api
     public function get($account, array $filters = array())
     {
         // Default: fetch groups list
-        $endpoint = sprintf('groups/%s/', $account);
+        $endpoint = sprintf('/groups/%s/', $account);
 
         if (!empty($filters)) {
-            $endpoint = 'groups';
+            $endpoint = '/groups';
 
             if (isset($filters['group']) && is_array($filters['group'])) {
                 $filters['group'] = implode('&group=', $filters['group']);
@@ -65,7 +65,7 @@ class Groups extends Api
     public function create($account, $name)
     {
         return $this->getClient()->setApiVersion('1.0')->post(
-            sprintf('groups/%s/', $account),
+            sprintf('/groups/%s/', $account),
             array('name' => $name)
         );
     }
@@ -82,7 +82,7 @@ class Groups extends Api
     public function update($account, $name, array $params)
     {
         return $this->getClient()->setApiVersion('1.0')->put(
-            sprintf('groups/%s/%s/', $account, $name),
+            sprintf('/groups/%s/%s/', $account, $name),
             $params
         );
     }
@@ -98,7 +98,7 @@ class Groups extends Api
     public function delete($account, $name)
     {
         return $this->getClient()->setApiVersion('1.0')->delete(
-            sprintf('groups/%s/%s/', $account, $name)
+            sprintf('/groups/%s/%s/', $account, $name)
         );
     }
 

@@ -273,7 +273,7 @@ class Client extends ClientListener implements ClientInterface
     {
         // do not set base URL if a full one was provided
         if (false === strpos($url, $this->getApiBaseUrl())) {
-            $url = $this->getApiBaseUrl().'/'.$url;
+            $url = $this->getApiBaseUrl().$url;
         }
 
         // change the response format

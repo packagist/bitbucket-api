@@ -8,14 +8,14 @@ class BranchesTest extends Tests\TestCase
 {
     public function testAll()
     {
-        $endpoint       = 'repositories/gentle/eof/refs/branches';
+        $endpoint       = '/repositories/gentle/eof/refs/branches';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         $repository = $this->getClassMock('Bitbucket\API\Repositories\Refs\Branches', $client);
 
@@ -28,14 +28,14 @@ class BranchesTest extends Tests\TestCase
     public function testAllParams()
     {
         $params         = ['pagelen'=>36];
-        $endpoint       = 'repositories/gentle/eof/refs/branches';
+        $endpoint       = '/repositories/gentle/eof/refs/branches';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint, $params)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         $repository = $this->getClassMock('Bitbucket\API\Repositories\Refs\Branches', $client);
 
@@ -47,14 +47,14 @@ class BranchesTest extends Tests\TestCase
 
     public function testGet()
     {
-        $endpoint       = 'repositories/gentle/eof/refs/branches/abranch';
+        $endpoint       = '/repositories/gentle/eof/refs/branches/abranch';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         $repository = $this->getClassMock('Bitbucket\API\Repositories\Refs\Branches', $client);
 
@@ -66,14 +66,14 @@ class BranchesTest extends Tests\TestCase
 
     public function testDelete()
     {
-        $endpoint       = 'repositories/gentle/eof/refs/branches/abranch';
+        $endpoint       = '/repositories/gentle/eof/refs/branches/abranch';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('delete')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         $repository = $this->getClassMock('Bitbucket\API\Repositories\Refs\Branches', $client);
 

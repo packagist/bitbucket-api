@@ -9,14 +9,14 @@ class BranchRestrictionsTest extends Tests\TestCase
 {
     public function testGetAllRestrictions()
     {
-        $endpoint       = 'repositories/gentle/eof/branch-restrictions';
+        $endpoint       = '/repositories/gentle/eof/branch-restrictions';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->any())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\BranchRestrictions $restrictions */
         $restrictions   = $this->getClassMock('Bitbucket\API\Repositories\BranchRestrictions', $client);
@@ -27,7 +27,7 @@ class BranchRestrictionsTest extends Tests\TestCase
 
     public function testAddRestrictionType()
     {
-        $endpoint       = 'repositories/gentle/eof/branch-restrictions';
+        $endpoint       = '/repositories/gentle/eof/branch-restrictions';
         $params         = array(
             'kind' => 'testpermission'
         );
@@ -46,7 +46,7 @@ class BranchRestrictionsTest extends Tests\TestCase
 
     public function testCreateRestrictionFromArray()
     {
-        $endpoint       = 'repositories/gentle/eof/branch-restrictions';
+        $endpoint       = '/repositories/gentle/eof/branch-restrictions';
         $params         = array(
             'kind' => 'push'
         );
@@ -64,7 +64,7 @@ class BranchRestrictionsTest extends Tests\TestCase
 
     public function testCreateRestrictionFromJSON()
     {
-        $endpoint       = 'repositories/gentle/eof/branch-restrictions';
+        $endpoint       = '/repositories/gentle/eof/branch-restrictions';
         $params         = json_encode(array(
             'kind' => 'push'
         ));
@@ -123,14 +123,14 @@ class BranchRestrictionsTest extends Tests\TestCase
 
     public function testGetSpecificRestriction()
     {
-        $endpoint       = 'repositories/gentle/eof/branch-restrictions/1';
+        $endpoint       = '/repositories/gentle/eof/branch-restrictions/1';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\BranchRestrictions $restriction */
         $restriction    = $this->getClassMock('Bitbucket\API\Repositories\BranchRestrictions', $client);
@@ -141,7 +141,7 @@ class BranchRestrictionsTest extends Tests\TestCase
 
     public function testUpdateRestrictionFromArray()
     {
-        $endpoint       = 'repositories/gentle/eof/branch-restrictions/1';
+        $endpoint       = '/repositories/gentle/eof/branch-restrictions/1';
         $params         = array(
             'users' => array(
                 array('username' => 'vimishor'),
@@ -162,7 +162,7 @@ class BranchRestrictionsTest extends Tests\TestCase
 
     public function testUpdateRestrictionFromJSON()
     {
-        $endpoint       = 'repositories/gentle/eof/branch-restrictions/1';
+        $endpoint       = '/repositories/gentle/eof/branch-restrictions/1';
         $params         = json_encode(array(
             'dummy' => array(
                 array('username' => 'vimishor'),
@@ -210,7 +210,7 @@ class BranchRestrictionsTest extends Tests\TestCase
 
     public function testDeleteRestriction()
     {
-        $endpoint       = 'repositories/gentle/eof/branch-restrictions/1';
+        $endpoint       = '/repositories/gentle/eof/branch-restrictions/1';
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())

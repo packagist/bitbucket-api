@@ -8,7 +8,7 @@ class DeploykeysTest extends Tests\TestCase
 {
     public function testGetAllKeys()
     {
-        $endpoint       = 'repositories/gentle/eof/deploy-keys';
+        $endpoint       = '/repositories/gentle/eof/deploy-keys';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
@@ -26,7 +26,7 @@ class DeploykeysTest extends Tests\TestCase
 
     public function testGetSingleKey()
     {
-        $endpoint       = 'repositories/gentle/eof/deploy-keys/3';
+        $endpoint       = '/repositories/gentle/eof/deploy-keys/3';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
@@ -44,7 +44,7 @@ class DeploykeysTest extends Tests\TestCase
 
     public function testAddNewKeySuccess()
     {
-        $endpoint       = 'repositories/gentle/eof/deploy-keys';
+        $endpoint       = '/repositories/gentle/eof/deploy-keys';
         $params         = array(
             'key'   => 'ssh-rsa [...]',
             'label' => 'dummy key'
@@ -63,7 +63,7 @@ class DeploykeysTest extends Tests\TestCase
 
     public function testUpdateKeySuccess()
     {
-        $endpoint       = 'repositories/gentle/eof/deploy-keys/3';
+        $endpoint       = '/repositories/gentle/eof/deploy-keys/3';
         $params         = array('label' => 'test key');
 
         $client = $this->getHttpClientMock();
@@ -79,7 +79,7 @@ class DeploykeysTest extends Tests\TestCase
 
     public function testDeleteKeySuccess()
     {
-        $endpoint       = 'repositories/gentle/eof/deploy-keys/3';
+        $endpoint       = '/repositories/gentle/eof/deploy-keys/3';
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())

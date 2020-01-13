@@ -9,7 +9,7 @@ class AccountTest extends Tests\TestCase
 {
     public function testGetAccountProfile()
     {
-        $endpoint       = 'users/gentle';
+        $endpoint       = '/users/gentle';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
@@ -27,7 +27,7 @@ class AccountTest extends Tests\TestCase
 
     public function testGetAccountFollowers()
     {
-        $endpoint       = 'users/gentle/followers';
+        $endpoint       = '/users/gentle/followers';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();

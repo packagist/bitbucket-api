@@ -35,7 +35,7 @@ class Invitations extends Api
     public function send($account, $repo, $email, $permission)
     {
         return $this->getClient()->setApiVersion('1.0')->post(
-            sprintf('invitations/%s/%s', $account, $repo),
+            sprintf('/invitations/%s/%s', $account, $repo),
             ['permission' => $permission, 'email' => $email]
         );
     }

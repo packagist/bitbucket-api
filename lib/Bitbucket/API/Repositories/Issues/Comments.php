@@ -33,7 +33,7 @@ class Comments extends API\Api
     public function all($account, $repo, $issueID)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/issues/%d/comments', $account, $repo, $issueID)
+            sprintf('/repositories/%s/%s/issues/%d/comments', $account, $repo, $issueID)
         );
     }
 
@@ -50,7 +50,7 @@ class Comments extends API\Api
     public function get($account, $repo, $issueID, $commentID)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/issues/%d/comments/%d', $account, $repo, $issueID, $commentID)
+            sprintf('/repositories/%s/%s/issues/%d/comments/%d', $account, $repo, $issueID, $commentID)
         );
     }
 
@@ -67,7 +67,7 @@ class Comments extends API\Api
     public function create($account, $repo, $issueID, $content)
     {
         return $this->getClient()->setApiVersion('2.0')->post(
-            sprintf('repositories/%s/%s/issues/%d/comments', $account, $repo, $issueID),
+            sprintf('/repositories/%s/%s/issues/%d/comments', $account, $repo, $issueID),
             array('content' => $content)
         );
     }
@@ -86,7 +86,7 @@ class Comments extends API\Api
     public function update($account, $repo, $issueID, $commentID, $content)
     {
         return $this->getClient()->setApiVersion('2.0')->put(
-            sprintf('repositories/%s/%s/issues/%d/comments/%d', $account, $repo, $issueID, $commentID),
+            sprintf('/repositories/%s/%s/issues/%d/comments/%d', $account, $repo, $issueID, $commentID),
             array('content' => $content)
         );
     }

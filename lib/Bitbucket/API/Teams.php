@@ -36,7 +36,7 @@ class Teams extends Api
             throw new \InvalidArgumentException(sprintf('Unknown role %s', $role));
         }
 
-        return $this->getClient()->setApiVersion('2.0')->get('teams', array('role' => $role));
+        return $this->getClient()->setApiVersion('2.0')->get('/teams', array('role' => $role));
     }
 
     /**
@@ -49,7 +49,7 @@ class Teams extends Api
     public function profile($name)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('teams/%s', $name)
+            sprintf('/teams/%s', $name)
         );
     }
 
@@ -63,7 +63,7 @@ class Teams extends Api
     public function members($name)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('teams/%s/members', $name)
+            sprintf('/teams/%s/members', $name)
         );
     }
 
@@ -77,7 +77,7 @@ class Teams extends Api
     public function followers($name)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('teams/%s/followers', $name)
+            sprintf('/teams/%s/followers', $name)
         );
     }
 
@@ -91,7 +91,7 @@ class Teams extends Api
     public function following($name)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('teams/%s/following', $name)
+            sprintf('/teams/%s/following', $name)
         );
     }
 
@@ -105,7 +105,7 @@ class Teams extends Api
     public function repositories($name)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('teams/%s/repositories', $name)
+            sprintf('/teams/%s/repositories', $name)
         );
     }
 }

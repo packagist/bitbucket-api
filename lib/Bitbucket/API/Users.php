@@ -31,7 +31,7 @@ class Users extends Api
     public function get($username)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('users/%s', $username)
+            sprintf('/users/%s', $username)
         );
     }
 
@@ -45,7 +45,7 @@ class Users extends Api
     public function followers($username)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('users/%s/followers', $username)
+            sprintf('/users/%s/followers', $username)
         );
     }
 
@@ -59,7 +59,7 @@ class Users extends Api
     public function following($username)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('users/%s/following', $username)
+            sprintf('/users/%s/following', $username)
         );
     }
 
@@ -73,7 +73,7 @@ class Users extends Api
     public function repositories($username)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s', $username)
+            sprintf('/repositories/%s', $username)
         );
     }
 

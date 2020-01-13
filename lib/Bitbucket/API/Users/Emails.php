@@ -31,7 +31,7 @@ class Emails extends Api
     public function all($account)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('users/%s/emails', $account)
+            sprintf('/users/%s/emails', $account)
         );
     }
 
@@ -49,7 +49,7 @@ class Emails extends Api
     public function get($account, $email)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('users/%s/emails/%s', $account, $email)
+            sprintf('/users/%s/emails/%s', $account, $email)
         );
     }
 }

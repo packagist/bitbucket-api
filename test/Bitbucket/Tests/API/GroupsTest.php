@@ -8,7 +8,7 @@ class GroupsTest extends Tests\TestCase
 {
     public function testGetAllGroups()
     {
-        $endpoint       = 'groups/gentle/';
+        $endpoint       = '/groups/gentle/';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
@@ -26,7 +26,7 @@ class GroupsTest extends Tests\TestCase
 
     public function testGetAllGroupsWithFilters()
     {
-        $endpoint       = 'groups';
+        $endpoint       = '/groups';
         $params         = array('group' => 'gentle/testers&group=gentle/maintainers');
         $expectedResult = 'x';
 
@@ -45,7 +45,7 @@ class GroupsTest extends Tests\TestCase
 
     public function testCreateGroupSuccess()
     {
-        $endpoint       = 'groups/gentle/';
+        $endpoint       = '/groups/gentle/';
         $params         = array(
             'name'  => 'testers'
         );
@@ -62,7 +62,7 @@ class GroupsTest extends Tests\TestCase
 
     public function testUpdateGroupSuccess()
     {
-        $endpoint       = 'groups/gentle/dummy/';
+        $endpoint       = '/groups/gentle/dummy/';
         $params         = array(
             'accountname'   => 'gentle',
             'name'          => 'Dummy group'
@@ -80,7 +80,7 @@ class GroupsTest extends Tests\TestCase
 
     public function testDeleteGroupSuccess()
     {
-        $endpoint       = 'groups/gentle/dummy/';
+        $endpoint       = '/groups/gentle/dummy/';
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())

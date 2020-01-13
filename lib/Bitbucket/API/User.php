@@ -30,7 +30,7 @@ class User extends Api
      */
     public function get()
     {
-        return $this->getClient()->setApiVersion('2.0')->get('user/');
+        return $this->getClient()->setApiVersion('2.0')->get('/user/');
     }
 
     /**
@@ -43,6 +43,6 @@ class User extends Api
      */
     public function emails()
     {
-        return $this->getClient()->setApiVersion('2.0')->get('user/emails');
+        return $this->getClient()->setApiVersion('2.0')->get('/user/emails');
     }
 }

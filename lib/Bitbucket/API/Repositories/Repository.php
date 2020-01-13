@@ -32,7 +32,7 @@ class Repository extends API\Api
     public function get($account, $repo)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s', $account, $repo)
+            sprintf('/repositories/%s/%s', $account, $repo)
         );
     }
 
@@ -74,7 +74,7 @@ class Repository extends API\Api
         $params = json_encode(array_merge($defaults, $params));
 
         return $this->getClient()->setApiVersion('2.0')->post(
-            sprintf('repositories/%s/%s', $account, $repo),
+            sprintf('/repositories/%s/%s', $account, $repo),
             $params,
             array('Content-Type' => 'application/json')
         );
@@ -94,7 +94,7 @@ class Repository extends API\Api
     public function update($account, $repo, array $params = array())
     {
         return $this->getClient()->setApiVersion('2.0')->put(
-            sprintf('repositories/%s/%s', $account, $repo),
+            sprintf('/repositories/%s/%s', $account, $repo),
             $params
         );
     }
@@ -110,7 +110,7 @@ class Repository extends API\Api
     public function delete($account, $repo)
     {
         return $this->getClient()->setApiVersion('2.0')->delete(
-            sprintf('repositories/%s/%s', $account, $repo)
+            sprintf('/repositories/%s/%s', $account, $repo)
         );
     }
 
@@ -125,7 +125,7 @@ class Repository extends API\Api
     public function watchers($account, $repo)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/watchers', $account, $repo)
+            sprintf('/repositories/%s/%s/watchers', $account, $repo)
         );
     }
 
@@ -140,7 +140,7 @@ class Repository extends API\Api
     public function forks($account, $repo)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/forks', $account, $repo)
+            sprintf('/repositories/%s/%s/forks', $account, $repo)
         );
     }
 
@@ -163,7 +163,7 @@ class Repository extends API\Api
         $params = json_encode($params);
 
         return $this->getClient()->setApiVersion('2.0')->post(
-            sprintf('repositories/%s/%s/forks', $account, $repo),
+            sprintf('/repositories/%s/%s/forks', $account, $repo),
             $params,
             array('Content-Type' => 'application/json')
         );
@@ -181,7 +181,7 @@ class Repository extends API\Api
     public function branches($account, $repo, $name = '')
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/refs/branches/%s', $account, $repo, $name)
+            sprintf('/repositories/%s/%s/refs/branches/%s', $account, $repo, $name)
         );
     }
 
@@ -197,7 +197,7 @@ class Repository extends API\Api
     public function tags($account, $repo, $name = '')
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/refs/tags/%s', $account, $repo, $name)
+            sprintf('/repositories/%s/%s/refs/tags/%s', $account, $repo, $name)
         );
     }
 
@@ -216,7 +216,7 @@ class Repository extends API\Api
     public function filehistory($account, $repo, $node, $path)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/filehistory/%s/%s', $account, $repo, $node, $path)
+            sprintf('/repositories/%s/%s/filehistory/%s/%s', $account, $repo, $node, $path)
         );
     }
 }

@@ -8,7 +8,7 @@ class GroupPrivilegesTest extends Tests\TestCase
 {
     public function testGetGroupsPrivilegesSuccess()
     {
-        $endpoint       = 'group-privileges/gentle/';
+        $endpoint       = '/group-privileges/gentle/';
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
@@ -22,7 +22,7 @@ class GroupPrivilegesTest extends Tests\TestCase
 
     public function testGetRepositoryPrivilegesSuccess()
     {
-        $endpoint       = 'group-privileges/gentle/dummy-repo';
+        $endpoint       = '/group-privileges/gentle/dummy-repo';
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
@@ -36,7 +36,7 @@ class GroupPrivilegesTest extends Tests\TestCase
 
     public function testGetGroupPrivilegesSuccess()
     {
-        $endpoint       = 'group-privileges/gentle/dummy-repo/owner/testers';
+        $endpoint       = '/group-privileges/gentle/dummy-repo/owner/testers';
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
@@ -50,7 +50,7 @@ class GroupPrivilegesTest extends Tests\TestCase
 
     public function testGetRepositoriesPrivilegeGroupSuccess()
     {
-        $endpoint       = 'group-privileges/gentle/owner/testers';
+        $endpoint       = '/group-privileges/gentle/owner/testers';
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
@@ -76,7 +76,7 @@ class GroupPrivilegesTest extends Tests\TestCase
 
     public function testGrantGroupPrivilegesSuccess()
     {
-        $endpoint       = 'group-privileges/gentle/repo/owner/sys-admins';
+        $endpoint       = '/group-privileges/gentle/repo/owner/sys-admins';
         $params         = 'read';
 
         $client = $this->getHttpClientMock();
@@ -91,7 +91,7 @@ class GroupPrivilegesTest extends Tests\TestCase
 
     public function testRemoveGroupPrivilegesFromRepositorySuccess()
     {
-        $endpoint       = 'group-privileges/gentle/repo/owner/sys-admins';
+        $endpoint       = '/group-privileges/gentle/repo/owner/sys-admins';
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())

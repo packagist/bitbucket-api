@@ -9,14 +9,14 @@ class BuildStatusesTest extends Tests\TestCase
 {
     public function testGet()
     {
-        $endpoint = 'repositories/gentle/eof/commit/SHA1/statuses/build/KEY';
+        $endpoint = '/repositories/gentle/eof/commit/SHA1/statuses/build/KEY';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\Commits\BuildStatuses $buildStatus */
         $buildStatus = $this->getClassMock('Bitbucket\API\Repositories\Commits\BuildStatuses', $client);
@@ -27,7 +27,7 @@ class BuildStatusesTest extends Tests\TestCase
 
     public function testCreate()
     {
-        $endpoint = 'repositories/gentle/eof/commit/SHA1/statuses/build';
+        $endpoint = '/repositories/gentle/eof/commit/SHA1/statuses/build';
         $params = json_encode(array(
             'state' => 'SUCCESSFUL'
         ));
@@ -45,7 +45,7 @@ class BuildStatusesTest extends Tests\TestCase
 
     public function testUpdate()
     {
-        $endpoint = 'repositories/gentle/eof/commit/SHA1/statuses/build/KEY';
+        $endpoint = '/repositories/gentle/eof/commit/SHA1/statuses/build/KEY';
         $params = json_encode(array(
             'state' => 'SUCCESSFUL'
         ));

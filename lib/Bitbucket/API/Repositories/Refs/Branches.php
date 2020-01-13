@@ -31,7 +31,7 @@ class Branches extends API\Api
     public function all($account, $repo, $params = array())
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/refs/branches', $account, $repo),
+            sprintf('/repositories/%s/%s/refs/branches', $account, $repo),
             $params
         );
     }
@@ -50,7 +50,7 @@ class Branches extends API\Api
     public function get($account, $repo, $name)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/refs/branches/%s', $account, $repo, $name)
+            sprintf('/repositories/%s/%s/refs/branches/%s', $account, $repo, $name)
         );
     }
 
@@ -68,7 +68,7 @@ class Branches extends API\Api
     public function delete($account, $repo, $name)
     {
         return $this->getClient()->setApiVersion('2.0')->delete(
-            sprintf('repositories/%s/%s/refs/branches/%s', $account, $repo, $name)
+            sprintf('/repositories/%s/%s/refs/branches/%s', $account, $repo, $name)
         );
     }
 }

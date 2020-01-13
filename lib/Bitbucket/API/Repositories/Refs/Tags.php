@@ -31,7 +31,7 @@ class Tags extends API\Api
     public function all($account, $repo, array $params = array())
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/refs/tags', $account, $repo),
+            sprintf('/repositories/%s/%s/refs/tags', $account, $repo),
             $params
         );
     }
@@ -50,7 +50,7 @@ class Tags extends API\Api
     public function get($account, $repo, $name)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/refs/tags/%s', $account, $repo, $name)
+            sprintf('/repositories/%s/%s/refs/tags/%s', $account, $repo, $name)
         );
     }
 
@@ -78,7 +78,7 @@ class Tags extends API\Api
         $data = json_encode($params);
 
         return $this->getClient()->setApiVersion('2.0')->post(
-            sprintf('repositories/%s/%s/refs/tags', $account, $repo),
+            sprintf('/repositories/%s/%s/refs/tags', $account, $repo),
             $data,
             array('Content-Type' => 'application/json')
         );

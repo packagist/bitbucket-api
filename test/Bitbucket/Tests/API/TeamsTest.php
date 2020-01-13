@@ -34,14 +34,14 @@ class TeamsTest extends Tests\TestCase
 
     public function testGetTeamsList()
     {
-        $endpoint       = 'teams';
+        $endpoint       = '/teams';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->any())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Teams $team */
         $team = $this->getClassMock('Bitbucket\API\Teams', $client);
@@ -52,14 +52,14 @@ class TeamsTest extends Tests\TestCase
 
     public function testGetTeamProfile()
     {
-        $endpoint       = 'teams/gentle-web';
+        $endpoint       = '/teams/gentle-web';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Teams $team */
         $team   = $this->getClassMock('Bitbucket\API\Teams', $client);
@@ -70,14 +70,14 @@ class TeamsTest extends Tests\TestCase
 
     public function testGetTeamMembers()
     {
-        $endpoint       = 'teams/gentle-web/members';
+        $endpoint       = '/teams/gentle-web/members';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Teams $team */
         $team   = $this->getClassMock('Bitbucket\API\Teams', $client);
@@ -88,14 +88,14 @@ class TeamsTest extends Tests\TestCase
 
     public function testGetTeamFollowers()
     {
-        $endpoint       = 'teams/gentle-web/followers';
+        $endpoint       = '/teams/gentle-web/followers';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Teams $team */
         $team   = $this->getClassMock('Bitbucket\API\Teams', $client);
@@ -106,14 +106,14 @@ class TeamsTest extends Tests\TestCase
 
     public function testGetTeamFollowing()
     {
-        $endpoint       = 'teams/gentle-web/following';
+        $endpoint       = '/teams/gentle-web/following';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Teams $team */
         $team   = $this->getClassMock('Bitbucket\API\Teams', $client);
@@ -124,14 +124,14 @@ class TeamsTest extends Tests\TestCase
 
     public function testGetTeamRepositories()
     {
-        $endpoint       = 'teams/gentle-web/repositories';
+        $endpoint       = '/teams/gentle-web/repositories';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Teams $team */
         $team   = $this->getClassMock('Bitbucket\API\Teams', $client);

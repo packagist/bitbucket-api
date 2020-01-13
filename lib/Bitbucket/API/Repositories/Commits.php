@@ -30,7 +30,7 @@ class Commits extends Api
      */
     public function all($account, $repo, array $params = array())
     {
-        $endpoint = sprintf('repositories/%s/%s/commits', $account, $repo);
+        $endpoint = sprintf('/repositories/%s/%s/commits', $account, $repo);
 
         if (!empty($params['branch'])) {
             $endpoint .= '/'.$params['branch']; // can also be a tag
@@ -55,7 +55,7 @@ class Commits extends Api
     public function get($account, $repo, $revision)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/commit/%s', $account, $repo, $revision)
+            sprintf('/repositories/%s/%s/commit/%s', $account, $repo, $revision)
         );
     }
 
@@ -71,7 +71,7 @@ class Commits extends Api
     public function approve($account, $repo, $revision)
     {
         return $this->getClient()->setApiVersion('2.0')->post(
-            sprintf('repositories/%s/%s/commit/%s/approve', $account, $repo, $revision)
+            sprintf('/repositories/%s/%s/commit/%s/approve', $account, $repo, $revision)
         );
     }
 
@@ -89,7 +89,7 @@ class Commits extends Api
     public function deleteApproval($account, $repo, $revision)
     {
         return $this->getClient()->setApiVersion('2.0')->delete(
-            sprintf('repositories/%s/%s/commit/%s/approve', $account, $repo, $revision)
+            sprintf('/repositories/%s/%s/commit/%s/approve', $account, $repo, $revision)
         );
     }
 

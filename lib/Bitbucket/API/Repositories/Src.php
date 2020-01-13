@@ -36,7 +36,7 @@ class Src extends API\Api
     public function get($account, $repo, $revision, $path)
     {
         return $this->getClient()->setApiVersion("2.0")->get(
-            sprintf('repositories/%s/%s/src/%s/%s', $account, $repo, $revision, $path)
+            sprintf('/repositories/%s/%s/src/%s/%s', $account, $repo, $revision, $path)
         );
     }
 
@@ -65,7 +65,7 @@ class Src extends API\Api
         }
 
         return $this->getClient()->setApiVersion('2.0')->post(
-            sprintf('repositories/%s/%s/src', $account, $repo),
+            sprintf('/repositories/%s/%s/src', $account, $repo),
             $params
         );
     }
