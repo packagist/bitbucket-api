@@ -45,14 +45,22 @@ class SrcTest extends Tests\TestCase
 
     /**
      * @expectedException \InvalidArgumentException
+     * @dataProvider srcInvalidParamsProvider
      */
-    public function testSrcCreateWithInvalidParams()
+    public function testSrcCreateWithInvalidParams($params)
     {
         /** @var \Bitbucket\API\Repositories\Src $src */
         $src   = $this->getApiMock('Bitbucket\API\Repositories\Src');
 
-        $src->create('gentle', 'eof', array());
-        $src->create('gentle', 'eof', array(3));
+        $src->create('gentle', 'eof', $params);
+    }
+
+    public function srcInvalidParamsProvider()
+    {
+        return [
+            [[]],
+            [[3]]
+        ];
     }
 
     public function testSrcCreateFile()

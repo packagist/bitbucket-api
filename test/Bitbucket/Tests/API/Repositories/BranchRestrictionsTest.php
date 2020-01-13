@@ -3,7 +3,6 @@
 namespace Bitbucket\Tests\API\Repositories;
 
 use Bitbucket\Tests\API as Tests;
-use Bitbucket\API;
 
 class BranchRestrictionsTest extends Tests\TestCase
 {
@@ -82,15 +81,23 @@ class BranchRestrictionsTest extends Tests\TestCase
 
     /**
      * @expectedException \InvalidArgumentException
+     * @dataProvider restrictionsInvalidParamsProvider
      */
-    public function testCreateRestrictionWithInvalidParams()
+    public function testCreateRestrictionWithInvalidParams($params)
     {
         /** @var \Bitbucket\API\Repositories\BranchRestrictions $restrictions */
         $restrictions   = $this->getApiMock('Bitbucket\API\Repositories\BranchRestrictions');
 
-        $restrictions->create('gentle', 'eof', '');
-        $restrictions->create('gentle', 'eof', 3);
-        $restrictions->create('gentle', 'eof', "{ 'foo': 'bar' }");
+        $restrictions->create('gentle', 'eof', $params);
+    }
+
+    public function restrictionsInvalidParamsProvider()
+    {
+        return [
+            [''],
+            [3],
+            ["{ 'foo': 'bar' }"]
+        ];
     }
 
     /**
@@ -183,15 +190,16 @@ class BranchRestrictionsTest extends Tests\TestCase
 
     /**
      * @expectedException \InvalidArgumentException
+     * @dataProvider restrictionsInvalidParamsProvider
      */
-    public function testUpdateRestrictionWithInvalidParams()
+    public function testUpdateRestrictionWithInvalidParams($params)
     {
         /** @var \Bitbucket\API\Repositories\BranchRestrictions $restrictions */
         $restrictions   = $this->getApiMock('Bitbucket\API\Repositories\BranchRestrictions');
 
-        $restrictions->update('gentle', 'eof', 1, '');
-        $restrictions->update('gentle', 'eof', 1, 3);
-        $restrictions->update('gentle', 'eof', 1, "{ 'foo': 'bar' }");
+        $restrictions->update('gentle', 'eof', 1, $params);
+        $restrictions->update('gentle', 'eof', 1, $params);
+        $restrictions->update('gentle', 'eof', 1, $params);
     }
 
     /**
