@@ -17,6 +17,7 @@ use Buzz\Message\MessageInterface;
  * Manages a group's repository permissions.
  *
  * @author  Alexandru G.    <alex@gentle.ro>
+ * @see https://confluence.atlassian.com/bitbucket/group-privileges-endpoint-296093137.html
  */
 class GroupPrivileges extends Api
 {
@@ -26,13 +27,13 @@ class GroupPrivileges extends Api
      * Gets all the groups granted access to an account's repositories.
      *
      * @access public
-     * @param  string           $account The team or individual account owning the repository.
+     * @param  string           $workspaceId The team or individual account owning the repository.
      * @return MessageInterface
      */
-    public function groups($account)
+    public function groups($workspaceId)
     {
-        return $this->requestGet(
-            sprintf('group-privileges/%s/', $account)
+        return $this->getClient()->setApiVersion('1.0')->get(
+            sprintf('group-privileges/%s/', $workspaceId)
         );
     }
 
@@ -42,14 +43,14 @@ class GroupPrivileges extends Api
      * Get a list of the privilege groups for a specific repository.
      *
      * @access public
-     * @param  string           $account The team or individual account owning the repository.
-     * @param  string           $repo    A repository belonging to the account.
+     * @param  string           $workspaceId The team or individual account owning the repository.
+     * @param  string           $repo        A repository belonging to the account.
      * @return MessageInterface
      */
-    public function repository($account, $repo)
+    public function repository($workspaceId, $repo)
     {
-        return $this->requestGet(
-            sprintf('group-privileges/%s/%s', $account, $repo)
+        return $this->getClient()->setApiVersion('1.0')->get(
+            sprintf('group-privileges/%s/%s', $workspaceId, $repo)
         );
     }
 
@@ -59,16 +60,16 @@ class GroupPrivileges extends Api
      * Gets the privileges of a group on a repository.
      *
      * @access public
-     * @param  string           $account    The team or individual account owning the repository.
-     * @param  string           $repo       A repository belonging to the account.
-     * @param  string           $groupOwner The account that owns the group.
-     * @param  string           $groupSlug  The group slug.
+     * @param  string           $workspaceId The team or individual account owning the repository.
+     * @param  string           $repo        A repository belonging to the account.
+     * @param  string           $groupOwner  The account that owns the group.
+     * @param  string           $groupSlug   The group slug.
      * @return MessageInterface
      */
-    public function group($account, $repo, $groupOwner, $groupSlug)
+    public function group($workspaceId, $repo, $groupOwner, $groupSlug)
     {
-        return $this->requestGet(
-            sprintf('group-privileges/%s/%s/%s/%s', $account, $repo, $groupOwner, $groupSlug)
+        return $this->getClient()->setApiVersion('1.0')->get(
+            sprintf('group-privileges/%s/%s/%s/%s', $workspaceId, $repo, $groupOwner, $groupSlug)
         );
     }
 
@@ -78,15 +79,15 @@ class GroupPrivileges extends Api
      * Get a list of the repositories on which a particular privilege group appears.
      *
      * @access public
-     * @param  string           $account    The team or individual account owning the repository.
-     * @param  string           $groupOwner The account that owns the group.
-     * @param  string           $groupSlug  The group slug.
+     * @param  string           $workspaceId The team or individual account owning the repository.
+     * @param  string           $groupOwner  The account that owns the group.
+     * @param  string           $groupSlug   The group slug.
      * @return MessageInterface
      */
-    public function repositories($account, $groupOwner, $groupSlug)
+    public function repositories($workspaceId, $groupOwner, $groupSlug)
     {
-        return $this->requestGet(
-            sprintf('group-privileges/%s/%s/%s', $account, $groupOwner, $groupSlug)
+        return $this->getClient()->setApiVersion('1.0')->get(
+            sprintf('group-privileges/%s/%s/%s', $workspaceId, $groupOwner, $groupSlug)
         );
     }
 
@@ -95,23 +96,23 @@ class GroupPrivileges extends Api
      * Grant group privileges on a repository.
      *
      * @access public
-     * @param  string           $account    The team or individual account owning the repository.
-     * @param  string           $repo       The repository to grant privileges on.
-     * @param  string           $groupOwner The account that owns the group.
-     * @param  string           $groupSlug  The group slug.
-     * @param  string           $privilege  A privilege value
+     * @param  string           $workspaceId The team or individual account owning the repository.
+     * @param  string           $repo        The repository to grant privileges on.
+     * @param  string           $groupOwner  The account that owns the group.
+     * @param  string           $groupSlug   The group slug.
+     * @param  string           $privilege   A privilege value
      * @return MessageInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function grant($account, $repo, $groupOwner, $groupSlug, $privilege)
+    public function grant($workspaceId, $repo, $groupOwner, $groupSlug, $privilege)
     {
         if (!in_array($privilege, array('read', 'write', 'admin'))) {
             throw new \InvalidArgumentException("Invalid privilege provided.");
         }
 
-        return $this->requestPut(
-            sprintf('group-privileges/%s/%s/%s/%s', $account, $repo, $groupOwner, $groupSlug),
+        return $this->getClient()->setApiVersion('1.0')->put(
+            sprintf('group-privileges/%s/%s/%s/%s', $workspaceId, $repo, $groupOwner, $groupSlug),
             $privilege
         );
     }
@@ -120,16 +121,16 @@ class GroupPrivileges extends Api
      * Delete group privileges from a repository
      *
      * @access public
-     * @param  string           $account    The team or individual account.
-     * @param  string           $repo       The repository to remove privileges from.
-     * @param  string           $groupOwner The account that owns the group.
-     * @param  string           $groupSlug  The group slug.
+     * @param  string           $workspaceId The team or individual account.
+     * @param  string           $repo        The repository to remove privileges from.
+     * @param  string           $groupOwner  The account that owns the group.
+     * @param  string           $groupSlug   The group slug.
      * @return MessageInterface
      */
-    public function delete($account, $repo, $groupOwner, $groupSlug)
+    public function delete($workspaceId, $repo, $groupOwner, $groupSlug)
     {
-        return $this->requestDelete(
-            sprintf('group-privileges/%s/%s/%s/%s', $account, $repo, $groupOwner, $groupSlug)
+        return $this->getClient()->setApiVersion('1.0')->delete(
+            sprintf('group-privileges/%s/%s/%s/%s', $workspaceId, $repo, $groupOwner, $groupSlug)
         );
     }
 }

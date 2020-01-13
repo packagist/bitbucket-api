@@ -3,7 +3,6 @@
 namespace Bitbucket\Tests\API;
 
 use Bitbucket\Tests\API as Tests;
-use Bitbucket\API;
 
 class GroupsTest extends Tests\TestCase
 {
@@ -12,13 +11,14 @@ class GroupsTest extends Tests\TestCase
         $endpoint       = 'groups/gentle/';
         $expectedResult = json_encode('dummy');
 
-        $groups = $this->getApiMock('Bitbucket\API\Groups');
-        $groups->expects($this->once())
-            ->method('requestGet')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('get')
             ->with($endpoint)
-            ->will( $this->returnValue($expectedResult) );
+            ->willReturn($expectedResult);
 
         /** @var $groups \Bitbucket\API\Groups */
+        $groups = $this->getClassMock('Bitbucket\API\Groups', $client);
         $actual = $groups->get('gentle');
 
         $this->assertEquals($expectedResult, $actual);
@@ -30,13 +30,14 @@ class GroupsTest extends Tests\TestCase
         $params         = array('group' => 'gentle/testers&group=gentle/maintainers');
         $expectedResult = 'x';
 
-        $groups = $this->getApiMock('\Bitbucket\API\Groups');
-        $groups->expects($this->any())
-            ->method('requestGet')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('get')
             ->with($endpoint, $params)
-            ->will( $this->returnValue($expectedResult) );
+            ->willReturn($expectedResult);
 
         /** @var $groups \Bitbucket\API\Groups */
+        $groups = $this->getClassMock('Bitbucket\API\Groups', $client);
         $actual = $groups->get('gentle', array('group' => array('gentle/testers', 'gentle/maintainers')));
 
         $this->assertEquals($expectedResult, $actual);
@@ -49,12 +50,13 @@ class GroupsTest extends Tests\TestCase
             'name'  => 'testers'
         );
 
-        $groups = $this->getApiMock('Bitbucket\API\Groups');
-        $groups->expects($this->once())
-            ->method('requestPost')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('post')
             ->with($endpoint, $params);
 
         /** @var $groups \Bitbucket\API\Groups */
+        $groups = $this->getClassMock('Bitbucket\API\Groups', $client);
         $groups->create('gentle', 'testers');
     }
 
@@ -66,12 +68,13 @@ class GroupsTest extends Tests\TestCase
             'name'          => 'Dummy group'
         );
 
-        $group = $this->getApiMock('Bitbucket\API\Groups');
-        $group->expects($this->once())
-            ->method('requestPut')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('put')
             ->with($endpoint, $params);
 
         /** @var $group \Bitbucket\API\Groups */
+        $group = $this->getClassMock('Bitbucket\API\Groups', $client);
         $group->update('gentle', 'dummy', $params);
     }
 
@@ -79,12 +82,13 @@ class GroupsTest extends Tests\TestCase
     {
         $endpoint       = 'groups/gentle/dummy/';
 
-        $groups = $this->getApiMock('Bitbucket\API\Groups');
-        $groups->expects($this->once())
-            ->method('requestDelete')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('delete')
             ->with($endpoint);
 
         /** @var $groups \Bitbucket\API\Groups */
+        $groups = $this->getClassMock('Bitbucket\API\Groups', $client);
         $groups->delete('gentle', 'dummy');
     }
 }

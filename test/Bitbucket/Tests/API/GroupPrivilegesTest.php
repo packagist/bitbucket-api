@@ -3,7 +3,6 @@
 namespace Bitbucket\Tests\API;
 
 use Bitbucket\Tests\API as Tests;
-use Bitbucket\API;
 
 class GroupPrivilegesTest extends Tests\TestCase
 {
@@ -11,12 +10,13 @@ class GroupPrivilegesTest extends Tests\TestCase
     {
         $endpoint       = 'group-privileges/gentle/';
 
-        $privileges = $this->getApiMock('Bitbucket\API\GroupPrivileges');
-        $privileges->expects($this->once())
-            ->method('requestGet')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('get')
             ->with($endpoint);
 
         /** @var $privileges \Bitbucket\API\GroupPrivileges */
+        $privileges = $this->getClassMock('Bitbucket\API\GroupPrivileges', $client);
         $privileges->groups('gentle');
     }
 
@@ -24,12 +24,13 @@ class GroupPrivilegesTest extends Tests\TestCase
     {
         $endpoint       = 'group-privileges/gentle/dummy-repo';
 
-        $privileges = $this->getApiMock('Bitbucket\API\GroupPrivileges');
-        $privileges->expects($this->once())
-            ->method('requestGet')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('get')
             ->with($endpoint);
 
         /** @var $privileges \Bitbucket\API\GroupPrivileges */
+        $privileges = $this->getClassMock('Bitbucket\API\GroupPrivileges', $client);
         $privileges->repository('gentle', 'dummy-repo');
     }
 
@@ -37,12 +38,13 @@ class GroupPrivilegesTest extends Tests\TestCase
     {
         $endpoint       = 'group-privileges/gentle/dummy-repo/owner/testers';
 
-        $privileges = $this->getApiMock('Bitbucket\API\GroupPrivileges');
-        $privileges->expects($this->once())
-            ->method('requestGet')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('get')
             ->with($endpoint);
 
         /** @var $privileges \Bitbucket\API\GroupPrivileges */
+        $privileges = $this->getClassMock('Bitbucket\API\GroupPrivileges', $client);
         $privileges->group('gentle', 'dummy-repo', 'owner', 'testers');
     }
 
@@ -50,12 +52,13 @@ class GroupPrivilegesTest extends Tests\TestCase
     {
         $endpoint       = 'group-privileges/gentle/owner/testers';
 
-        $privileges = $this->getApiMock('Bitbucket\API\GroupPrivileges');
-        $privileges->expects($this->once())
-            ->method('requestGet')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('get')
             ->with($endpoint);
 
         /** @var $privileges \Bitbucket\API\GroupPrivileges */
+        $privileges = $this->getClassMock('Bitbucket\API\GroupPrivileges', $client);
         $privileges->repositories('gentle', 'owner', 'testers');
     }
 
@@ -64,9 +67,10 @@ class GroupPrivilegesTest extends Tests\TestCase
      */
     public function testGrantGroupPrivilegesInvalidPrivilege()
     {
-        $privileges = $this->getApiMock('Bitbucket\API\GroupPrivileges');
+        $client = $this->getHttpClientMock();
 
         /** @var $privileges \Bitbucket\API\GroupPrivileges */
+        $privileges = $this->getClassMock('Bitbucket\API\GroupPrivileges', $client);
         $privileges->grant('gentle', 'repo', 'owner', 'sys-admins', 'invalid');
     }
 
@@ -75,12 +79,13 @@ class GroupPrivilegesTest extends Tests\TestCase
         $endpoint       = 'group-privileges/gentle/repo/owner/sys-admins';
         $params         = 'read';
 
-        $privileges = $this->getApiMock('Bitbucket\API\GroupPrivileges');
-        $privileges->expects($this->once())
-            ->method('requestPut')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('put')
             ->with($endpoint, $params);
 
         /** @var $privileges \Bitbucket\API\GroupPrivileges */
+        $privileges = $this->getClassMock('Bitbucket\API\GroupPrivileges', $client);
         $privileges->grant('gentle', 'repo', 'owner', 'sys-admins', 'read');
     }
 
@@ -88,12 +93,13 @@ class GroupPrivilegesTest extends Tests\TestCase
     {
         $endpoint       = 'group-privileges/gentle/repo/owner/sys-admins';
 
-        $privileges = $this->getApiMock('Bitbucket\API\GroupPrivileges');
-        $privileges->expects($this->once())
-            ->method('requestDelete')
+        $client = $this->getHttpClientMock();
+        $client->expects($this->once())
+            ->method('delete')
             ->with($endpoint);
 
         /** @var $privileges \Bitbucket\API\GroupPrivileges */
+        $privileges = $this->getClassMock('Bitbucket\API\GroupPrivileges', $client);
         $privileges->delete('gentle', 'repo', 'owner', 'sys-admins');
     }
 }
