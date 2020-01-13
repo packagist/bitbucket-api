@@ -33,7 +33,7 @@ class Comments extends API\Api
     public function all($account, $repo, $id)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/pullrequests/%d/comments', $account, $repo, $id)
+            sprintf('/repositories/%s/%s/pullrequests/%d/comments', $account, $repo, $id)
         );
     }
 
@@ -50,7 +50,7 @@ class Comments extends API\Api
     public function get($account, $repo, $requestID, $commentID)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/pullrequests/%d/comments/%d', $account, $repo, $requestID, $commentID)
+            sprintf('/repositories/%s/%s/pullrequests/%d/comments/%d', $account, $repo, $requestID, $commentID)
         );
     }
 
@@ -67,7 +67,7 @@ class Comments extends API\Api
     public function create($account, $repo, $requestID, $content)
     {
         return $this->getClient()->setApiVersion('2.0')->post(
-            sprintf('repositories/%s/%s/pullrequests/%d/comments', $account, $repo, $requestID),
+            sprintf('/repositories/%s/%s/pullrequests/%d/comments', $account, $repo, $requestID),
             json_encode(array('content' => array('raw' => $content))),
             array('Content-Type' => 'application/json')
         );
@@ -87,7 +87,7 @@ class Comments extends API\Api
     public function update($account, $repo, $requestID, $commentID, $content)
     {
         return $this->getClient()->setApiVersion('2.0')->put(
-            sprintf('repositories/%s/%s/pullrequests/%d/comments/%d', $account, $repo, $requestID, $commentID),
+            sprintf('/repositories/%s/%s/pullrequests/%d/comments/%d', $account, $repo, $requestID, $commentID),
             json_encode(array('content' => array('raw' => $content))),
             array('Content-Type' => 'application/json')
         );
@@ -106,7 +106,7 @@ class Comments extends API\Api
     public function delete($account, $repo, $requestID, $commentID)
     {
         return $this->getClient()->setApiVersion('2.0')->delete(
-            sprintf('repositories/%s/%s/pullrequests/%d/comments/%d', $account, $repo, $requestID, $commentID)
+            sprintf('/repositories/%s/%s/pullrequests/%d/comments/%d', $account, $repo, $requestID, $commentID)
         );
     }
 }

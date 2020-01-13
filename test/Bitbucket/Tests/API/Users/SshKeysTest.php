@@ -8,7 +8,7 @@ class SshKeysTest extends Tests\TestCase
 {
     public function testGetAllSshKeys()
     {
-        $endpoint       = 'users/gentle/ssh-keys';
+        $endpoint       = '/users/gentle/ssh-keys';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
@@ -26,7 +26,7 @@ class SshKeysTest extends Tests\TestCase
 
     public function testCreateSshKey()
     {
-        $endpoint       = 'users/gentle/ssh-keys';
+        $endpoint       = '/users/gentle/ssh-keys';
         $expectedResult = json_encode('dummy');
         $params         = array(
             'key'   => 'key content',
@@ -48,7 +48,7 @@ class SshKeysTest extends Tests\TestCase
 
     public function testUpdateSshKey()
     {
-        $endpoint       = 'users/gentle/ssh-keys/12';
+        $endpoint       = '/users/gentle/ssh-keys/12';
         $expectedResult = json_encode('dummy');
         $params         = array(
             'key'   => 'key content'
@@ -69,7 +69,7 @@ class SshKeysTest extends Tests\TestCase
 
     public function testGetSshKeyContent()
     {
-        $endpoint       = 'users/gentle/ssh-keys/2';
+        $endpoint       = '/users/gentle/ssh-keys/2';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
@@ -87,7 +87,7 @@ class SshKeysTest extends Tests\TestCase
 
     public function testDeleteSshKey()
     {
-        $endpoint       = 'users/gentle/ssh-keys/2';
+        $endpoint       = '/users/gentle/ssh-keys/2';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();

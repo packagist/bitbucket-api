@@ -32,7 +32,7 @@ class Account extends Api
     public function profile($account)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('users/%s', $account)
+            sprintf('/users/%s', $account)
         );
     }
 
@@ -48,7 +48,7 @@ class Account extends Api
     public function followers($account)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('users/%s/followers', $account)
+            sprintf('/users/%s/followers', $account)
         );
     }
 }

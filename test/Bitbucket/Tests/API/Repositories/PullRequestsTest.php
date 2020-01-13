@@ -13,14 +13,14 @@ class PullRequestsTest extends Tests\TestCase
 {
     public function testGetAllPullRequests()
     {
-        $endpoint       = 'repositories/gentle/eof/pullrequests';
+        $endpoint       = '/repositories/gentle/eof/pullrequests';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\PullRequests $pull */
         $pull   = $this->getClassMock('Bitbucket\API\Repositories\PullRequests', $client);
@@ -31,7 +31,7 @@ class PullRequestsTest extends Tests\TestCase
 
     public function testCreateNewPullRequestFromJSON()
     {
-        $endpoint       = 'repositories/gentle/eof/pullrequests';
+        $endpoint       = '/repositories/gentle/eof/pullrequests';
         $params         = json_encode(array(
             'title'         => 'Test PR',
             'source'        => array(
@@ -62,7 +62,7 @@ class PullRequestsTest extends Tests\TestCase
 
     public function testCreateNewPullRequestFromArray()
     {
-        $endpoint       = 'repositories/gentle/eof/pullrequests';
+        $endpoint       = '/repositories/gentle/eof/pullrequests';
         $params         = array(
                 'title'         => 'Test PR',
                 'source'        => array(
@@ -106,7 +106,7 @@ class PullRequestsTest extends Tests\TestCase
 
     public function testUpdatePullRequestFromJSON()
     {
-        $endpoint       = 'repositories/gentle/eof/pullrequests/1';
+        $endpoint       = '/repositories/gentle/eof/pullrequests/1';
         $params         = json_encode(array(
                 'title'         => 'Test PR (updated)',
                 'destination'   => array(
@@ -129,7 +129,7 @@ class PullRequestsTest extends Tests\TestCase
 
     public function testUpdatePullRequestFromArray()
     {
-        $endpoint       = 'repositories/gentle/eof/pullrequests/1';
+        $endpoint       = '/repositories/gentle/eof/pullrequests/1';
         $params         = array(
             'title'         => 'Test PR (updated)',
             'destination'   => array(
@@ -165,14 +165,14 @@ class PullRequestsTest extends Tests\TestCase
 
     public function testGetSpecificPullRequest()
     {
-        $endpoint       = 'repositories/gentle/eof/pullrequests/1';
+        $endpoint       = '/repositories/gentle/eof/pullrequests/1';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\PullRequests $pull */
         $pull   = $this->getClassMock('Bitbucket\API\Repositories\PullRequests', $client);
@@ -183,14 +183,14 @@ class PullRequestsTest extends Tests\TestCase
 
     public function testGetCommitsForSpecificPullRequest()
     {
-        $endpoint       = 'repositories/gentle/eof/pullrequests/1/commits';
+        $endpoint       = '/repositories/gentle/eof/pullrequests/1/commits';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\PullRequests $pull */
         $pull   = $this->getClassMock('Bitbucket\API\Repositories\PullRequests', $client);
@@ -201,7 +201,7 @@ class PullRequestsTest extends Tests\TestCase
 
     public function testApproveAPullRequest()
     {
-        $endpoint       = 'repositories/gentle/eof/pullrequests/1/approve';
+        $endpoint       = '/repositories/gentle/eof/pullrequests/1/approve';
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
@@ -216,7 +216,7 @@ class PullRequestsTest extends Tests\TestCase
 
     public function testDeletePullRequestApproval()
     {
-        $endpoint       = 'repositories/gentle/eof/pullrequests/1/approve';
+        $endpoint       = '/repositories/gentle/eof/pullrequests/1/approve';
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
@@ -231,14 +231,14 @@ class PullRequestsTest extends Tests\TestCase
 
     public function testGetPullRequestDiff()
     {
-        $endpoint       = 'repositories/gentle/eof/pullrequests/1/diff';
+        $endpoint       = '/repositories/gentle/eof/pullrequests/1/diff';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\PullRequests $pull */
         $pull   = $this->getClassMock('Bitbucket\API\Repositories\PullRequests', $client);
@@ -249,14 +249,14 @@ class PullRequestsTest extends Tests\TestCase
 
     public function testGetPullRequestActivity()
     {
-        $endpoint       = 'repositories/gentle/eof/pullrequests/1/activity';
+        $endpoint       = '/repositories/gentle/eof/pullrequests/1/activity';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\PullRequests $pull */
         $pull   = $this->getClassMock('Bitbucket\API\Repositories\PullRequests', $client);
@@ -267,14 +267,14 @@ class PullRequestsTest extends Tests\TestCase
 
     public function testGetRepositoryPullRequestActivity()
     {
-        $endpoint       = 'repositories/gentle/eof/pullrequests/activity';
+        $endpoint       = '/repositories/gentle/eof/pullrequests/activity';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\PullRequests $pull */
         $pull   = $this->getClassMock('Bitbucket\API\Repositories\PullRequests', $client);
@@ -285,7 +285,7 @@ class PullRequestsTest extends Tests\TestCase
 
     public function testAcceptAndMergeAPullRequest()
     {
-        $endpoint   = 'repositories/gentle/eof/pullrequests/1/merge';
+        $endpoint   = '/repositories/gentle/eof/pullrequests/1/merge';
         $params     = array(
             'message'               => 'Lacks documentation.',
             'close_source_branch'   => false
@@ -304,7 +304,7 @@ class PullRequestsTest extends Tests\TestCase
 
     public function testDeclineAPullRequest()
     {
-        $endpoint   = 'repositories/gentle/eof/pullrequests/1/decline';
+        $endpoint   = '/repositories/gentle/eof/pullrequests/1/decline';
         $params     = array(
             'message' => 'Please update the test suite.',
         );
@@ -325,7 +325,7 @@ class PullRequestsTest extends Tests\TestCase
      */
     public function testDeclineAPullRequestWithoutAMessage()
     {
-        $endpoint   = 'repositories/gentle/eof/pullrequests/1/decline';
+        $endpoint   = '/repositories/gentle/eof/pullrequests/1/decline';
         $params     = array(
             'message' => ''
         );

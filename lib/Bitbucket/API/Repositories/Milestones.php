@@ -30,7 +30,7 @@ class Milestones extends API\Api
     public function all($account, $repo)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/milestones', $account, $repo)
+            sprintf('/repositories/%s/%s/milestones', $account, $repo)
         );
     }
 
@@ -46,7 +46,7 @@ class Milestones extends API\Api
     public function get($account, $repo, $milestoneID)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/milestones/%d', $account, $repo, $milestoneID)
+            sprintf('/repositories/%s/%s/milestones/%d', $account, $repo, $milestoneID)
         );
     }
 }

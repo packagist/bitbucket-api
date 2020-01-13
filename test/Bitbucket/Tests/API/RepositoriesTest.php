@@ -9,14 +9,14 @@ class RepositoriesTest extends Tests\TestCase
 {
     public function testGetAllRepositories()
     {
-        $endpoint       = 'repositories/gentle';
+        $endpoint       = '/repositories/gentle';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories $repositories */
         $repositories = $this->getClassMock('Bitbucket\API\Repositories', $client);

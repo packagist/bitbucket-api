@@ -9,7 +9,7 @@ class EmailsTest extends Tests\TestCase
 {
     public function testGetAllEmails()
     {
-        $endpoint       = 'users/gentle/emails';
+        $endpoint       = '/users/gentle/emails';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
@@ -27,7 +27,7 @@ class EmailsTest extends Tests\TestCase
 
     public function testGetSingleEmail()
     {
-        $endpoint       = 'users/gentle/emails/dummy@example.com';
+        $endpoint       = '/users/gentle/emails/dummy@example.com';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();

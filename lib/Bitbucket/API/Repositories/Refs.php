@@ -31,7 +31,7 @@ class Refs extends API\Api
     public function all($account, $repo, array $params = array())
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/refs', $account, $repo),
+            sprintf('/repositories/%s/%s/refs', $account, $repo),
             $params
         );
     }

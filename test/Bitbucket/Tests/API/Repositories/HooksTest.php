@@ -72,7 +72,7 @@ class HooksTest extends Tests\TestCase
 
     public function testCreateSuccess()
     {
-        $endpoint   = 'repositories/gentle/eof/hooks';
+        $endpoint   = '/repositories/gentle/eof/hooks';
         $params     = array(
             'description'   => 'My first webhook',
             'url'           => 'http://requestb.in/xxx',
@@ -118,7 +118,7 @@ class HooksTest extends Tests\TestCase
 
     public function testCreateSuccessWithExtraParameters()
     {
-        $endpoint   = 'repositories/gentle/eof/hooks';
+        $endpoint   = '/repositories/gentle/eof/hooks';
         $params     = array(
             'description'   => 'My first webhook',
             'url'           => 'http://requestb.in/xxx',
@@ -143,7 +143,7 @@ class HooksTest extends Tests\TestCase
 
     public function testUpdateSuccess()
     {
-        $endpoint   = 'repositories/gentle/eof/hooks/30b60aee-9cdf-407d-901c-2de106ee0c9d';
+        $endpoint   = '/repositories/gentle/eof/hooks/30b60aee-9cdf-407d-901c-2de106ee0c9d';
         $params     = array(
             'description'   => 'My first webhook',
             'url'           => 'http://requestb.in/zzz',
@@ -184,14 +184,14 @@ class HooksTest extends Tests\TestCase
 
     public function testGetAllHooks()
     {
-        $endpoint       = 'repositories/gentle/eof/hooks';
+        $endpoint       = '/repositories/gentle/eof/hooks';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->any())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult))
+            ->willReturn($expectedResult)
         ;
 
         /** @var \Bitbucket\API\Repositories\Hooks $hooks */
@@ -203,14 +203,14 @@ class HooksTest extends Tests\TestCase
 
     public function testGetSingleHook()
     {
-        $endpoint       = 'repositories/gentle/eof/hooks/30b60aee-9cdf-407d-901c-2de106ee0c9d';
+        $endpoint       = '/repositories/gentle/eof/hooks/30b60aee-9cdf-407d-901c-2de106ee0c9d';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->any())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult))
+            ->willReturn($expectedResult)
         ;
 
         /** @var \Bitbucket\API\Repositories\Hooks $hooks */
@@ -222,7 +222,7 @@ class HooksTest extends Tests\TestCase
 
     public function testDeleteSingleHook()
     {
-        $endpoint = 'repositories/gentle/eof/hooks/30b60aee-9cdf-407d-901c-2de106ee0c9d';
+        $endpoint = '/repositories/gentle/eof/hooks/30b60aee-9cdf-407d-901c-2de106ee0c9d';
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())

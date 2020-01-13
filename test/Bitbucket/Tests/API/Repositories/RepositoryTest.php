@@ -9,14 +9,14 @@ class RepositoryTest extends Tests\TestCase
 {
     public function testGetRepository()
     {
-        $endpoint       = 'repositories/gentle/eof';
+        $endpoint       = '/repositories/gentle/eof';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\Repository $repo */
         $repo   = $this->getClassMock('Bitbucket\API\Repositories\Repository', $client);
@@ -65,7 +65,7 @@ class RepositoryTest extends Tests\TestCase
 
     public function testCreateRepositoryFromJSON()
     {
-        $endpoint       = 'repositories/gentle/new-repo';
+        $endpoint       = '/repositories/gentle/new-repo';
         $params         = json_encode(array(
             'scm'               => 'git',
             'name'              => 'new-repo',
@@ -87,7 +87,7 @@ class RepositoryTest extends Tests\TestCase
 
     public function testCreateRepositoryFromArray()
     {
-        $endpoint       = 'repositories/gentle/new-repo';
+        $endpoint       = '/repositories/gentle/new-repo';
         $params         = array(
             'scm'               => 'git',
             'name'              => 'new-repo',
@@ -112,7 +112,7 @@ class RepositoryTest extends Tests\TestCase
      */
     public function testCreateRepositoryWithDefaultParams()
     {
-        $endpoint       = 'repositories/gentle/new-repo';
+        $endpoint       = '/repositories/gentle/new-repo';
         $params         = array(
             'scm'               => 'git',
             'name'              => 'new-repo',
@@ -134,7 +134,7 @@ class RepositoryTest extends Tests\TestCase
 
     public function testUpdateRepositorySuccess()
     {
-        $endpoint       = 'repositories/gentle/eof';
+        $endpoint       = '/repositories/gentle/eof';
         $params         = array(
             'description'   => 'My super secret project',
             'language'      => 'php',
@@ -154,7 +154,7 @@ class RepositoryTest extends Tests\TestCase
 
     public function testDeleteRepository()
     {
-        $endpoint       = 'repositories/gentle/eof';
+        $endpoint       = '/repositories/gentle/eof';
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
@@ -169,7 +169,7 @@ class RepositoryTest extends Tests\TestCase
 
     public function testGetRepositoryWatchers()
     {
-        $endpoint       = 'repositories/gentle/eof/watchers';
+        $endpoint       = '/repositories/gentle/eof/watchers';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
@@ -187,7 +187,7 @@ class RepositoryTest extends Tests\TestCase
 
     public function testGetRepositoryForks()
     {
-        $endpoint       = 'repositories/gentle/eof/forks';
+        $endpoint       = '/repositories/gentle/eof/forks';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
@@ -205,7 +205,7 @@ class RepositoryTest extends Tests\TestCase
 
     public function testForkRepositorySuccess()
     {
-        $endpoint       = 'repositories/gentle/eof/forks';
+        $endpoint       = '/repositories/gentle/eof/forks';
         $params         = array(
             'is_private'    => true,
             'name'          => 'my-eof',
@@ -225,7 +225,7 @@ class RepositoryTest extends Tests\TestCase
 
     public function testGetBranches()
     {
-        $endpoint       = 'repositories/gentle/eof/refs/branches/';
+        $endpoint       = '/repositories/gentle/eof/refs/branches/';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
@@ -243,7 +243,7 @@ class RepositoryTest extends Tests\TestCase
 
     public function testGetTags()
     {
-        $endpoint       = 'repositories/gentle/eof/refs/tags/tagname';
+        $endpoint       = '/repositories/gentle/eof/refs/tags/tagname';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
@@ -261,7 +261,7 @@ class RepositoryTest extends Tests\TestCase
 
     public function testGetFileHistory()
     {
-        $endpoint       = 'repositories/gentle/eof/filehistory/1bc8345/lib/file.php';
+        $endpoint       = '/repositories/gentle/eof/filehistory/1bc8345/lib/file.php';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();

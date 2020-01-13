@@ -31,7 +31,7 @@ class Comments extends Api
     public function all($account, $repo, $revision)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/commit/%s/comments', $account, $repo, $revision)
+            sprintf('/repositories/%s/%s/commit/%s/comments', $account, $repo, $revision)
         );
     }
 
@@ -48,7 +48,7 @@ class Comments extends Api
     public function get($account, $repo, $revision, $commentID)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/commit/%s/comments/%d', $account, $repo, $revision, $commentID)
+            sprintf('/repositories/%s/%s/commit/%s/comments/%d', $account, $repo, $revision, $commentID)
         );
     }
 }

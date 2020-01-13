@@ -17,7 +17,7 @@ class ApiTest extends TestCase
 
     public function testShouldDoGetRequest()
     {
-        $endpoint       = 'repositories/gentle/eof/issues/3';
+        $endpoint       = '/repositories/gentle/eof/issues/3';
         $params         = array();
         $headers        = array();
         $api            = new API\Api(array(), $this->getHttpClientMock());
@@ -27,7 +27,7 @@ class ApiTest extends TestCase
 
     public function testShouldDoPostRequest()
     {
-        $endpoint       = 'repositories/gentle/eof/issues/3';
+        $endpoint       = '/repositories/gentle/eof/issues/3';
         $params         = array();
         $headers        = array();
         $api            = new API\Api(array(), $this->getHttpClientMock());
@@ -37,7 +37,7 @@ class ApiTest extends TestCase
 
     public function testShouldDoPutRequest()
     {
-        $endpoint       = 'repositories/gentle/eof/issues/3';
+        $endpoint       = '/repositories/gentle/eof/issues/3';
         $params         = array();
         $headers        = array();
         $api            = new API\Api(array(), $this->getHttpClientMock());
@@ -47,7 +47,7 @@ class ApiTest extends TestCase
 
     public function testShouldDoDeleteRequest()
     {
-        $endpoint       = 'repositories/gentle/eof/issues/3';
+        $endpoint       = '/repositories/gentle/eof/issues/3';
         $params         = array();
         $headers        = array();
         $api            = new API\Api(array(), $this->getHttpClientMock());

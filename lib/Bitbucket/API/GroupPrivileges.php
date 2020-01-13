@@ -33,7 +33,7 @@ class GroupPrivileges extends Api
     public function groups($workspaceId)
     {
         return $this->getClient()->setApiVersion('1.0')->get(
-            sprintf('group-privileges/%s/', $workspaceId)
+            sprintf('/group-privileges/%s/', $workspaceId)
         );
     }
 
@@ -50,7 +50,7 @@ class GroupPrivileges extends Api
     public function repository($workspaceId, $repo)
     {
         return $this->getClient()->setApiVersion('1.0')->get(
-            sprintf('group-privileges/%s/%s', $workspaceId, $repo)
+            sprintf('/group-privileges/%s/%s', $workspaceId, $repo)
         );
     }
 
@@ -69,7 +69,7 @@ class GroupPrivileges extends Api
     public function group($workspaceId, $repo, $groupOwner, $groupSlug)
     {
         return $this->getClient()->setApiVersion('1.0')->get(
-            sprintf('group-privileges/%s/%s/%s/%s', $workspaceId, $repo, $groupOwner, $groupSlug)
+            sprintf('/group-privileges/%s/%s/%s/%s', $workspaceId, $repo, $groupOwner, $groupSlug)
         );
     }
 
@@ -87,7 +87,7 @@ class GroupPrivileges extends Api
     public function repositories($workspaceId, $groupOwner, $groupSlug)
     {
         return $this->getClient()->setApiVersion('1.0')->get(
-            sprintf('group-privileges/%s/%s/%s', $workspaceId, $groupOwner, $groupSlug)
+            sprintf('/group-privileges/%s/%s/%s', $workspaceId, $groupOwner, $groupSlug)
         );
     }
 
@@ -112,7 +112,7 @@ class GroupPrivileges extends Api
         }
 
         return $this->getClient()->setApiVersion('1.0')->put(
-            sprintf('group-privileges/%s/%s/%s/%s', $workspaceId, $repo, $groupOwner, $groupSlug),
+            sprintf('/group-privileges/%s/%s/%s/%s', $workspaceId, $repo, $groupOwner, $groupSlug),
             $privilege
         );
     }
@@ -130,7 +130,7 @@ class GroupPrivileges extends Api
     public function delete($workspaceId, $repo, $groupOwner, $groupSlug)
     {
         return $this->getClient()->setApiVersion('1.0')->delete(
-            sprintf('group-privileges/%s/%s/%s/%s', $workspaceId, $repo, $groupOwner, $groupSlug)
+            sprintf('/group-privileges/%s/%s/%s/%s', $workspaceId, $repo, $groupOwner, $groupSlug)
         );
     }
 }

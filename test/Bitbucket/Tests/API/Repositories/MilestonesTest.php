@@ -8,7 +8,7 @@ class MilestonesTest extends Tests\TestCase
 {
     public function testGetAllMilestonesSuccess()
     {
-        $endpoint       = 'repositories/gentle/eof/milestones';
+        $endpoint       = '/repositories/gentle/eof/milestones';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
@@ -26,7 +26,7 @@ class MilestonesTest extends Tests\TestCase
 
     public function testGetSingleMilestoneSuccess()
     {
-        $endpoint       = 'repositories/gentle/eof/milestones/2';
+        $endpoint       = '/repositories/gentle/eof/milestones/2';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();

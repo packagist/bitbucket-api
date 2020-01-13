@@ -70,7 +70,7 @@ class PullRequests extends API\Api
         );
 
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/pullrequests', $account, $repo),
+            sprintf('/repositories/%s/%s/pullrequests', $account, $repo),
             $params
         );
     }
@@ -118,7 +118,7 @@ class PullRequests extends API\Api
         }
 
         return $this->getClient()->setApiVersion('2.0')->post(
-            sprintf('repositories/%s/%s/pullrequests', $account, $repo),
+            sprintf('/repositories/%s/%s/pullrequests', $account, $repo),
             json_encode($params),
             array('Content-Type' => 'application/json')
         );
@@ -167,7 +167,7 @@ class PullRequests extends API\Api
         }
 
         return $this->getClient()->setApiVersion('2.0')->put(
-            sprintf('repositories/%s/%s/pullrequests/%d', $account, $repo, $id),
+            sprintf('/repositories/%s/%s/pullrequests/%d', $account, $repo, $id),
             json_encode($params),
             array('Content-Type' => 'application/json')
         );
@@ -185,7 +185,7 @@ class PullRequests extends API\Api
     public function get($account, $repo, $id)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/pullrequests/%d', $account, $repo, $id)
+            sprintf('/repositories/%s/%s/pullrequests/%d', $account, $repo, $id)
         );
     }
 
@@ -201,7 +201,7 @@ class PullRequests extends API\Api
     public function commits($account, $repo, $id)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/pullrequests/%d/commits', $account, $repo, $id)
+            sprintf('/repositories/%s/%s/pullrequests/%d/commits', $account, $repo, $id)
         );
     }
 
@@ -217,7 +217,7 @@ class PullRequests extends API\Api
     public function approve($account, $repo, $id)
     {
         return $this->getClient()->setApiVersion('2.0')->post(
-            sprintf('repositories/%s/%s/pullrequests/%d/approve', $account, $repo, $id)
+            sprintf('/repositories/%s/%s/pullrequests/%d/approve', $account, $repo, $id)
         );
     }
 
@@ -235,7 +235,7 @@ class PullRequests extends API\Api
     public function deleteApproval($account, $repo, $id)
     {
         return $this->getClient()->setApiVersion('2.0')->delete(
-            sprintf('repositories/%s/%s/pullrequests/%d/approve', $account, $repo, $id)
+            sprintf('/repositories/%s/%s/pullrequests/%d/approve', $account, $repo, $id)
         );
     }
 
@@ -251,7 +251,7 @@ class PullRequests extends API\Api
     public function diff($account, $repo, $id)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/pullrequests/%d/diff', $account, $repo, $id)
+            sprintf('/repositories/%s/%s/pullrequests/%d/diff', $account, $repo, $id)
         );
     }
 
@@ -269,7 +269,7 @@ class PullRequests extends API\Api
      */
     public function activity($account, $repo, $id = 0)
     {
-        $endpoint = sprintf('repositories/%s/%s/pullrequests/', $account, $repo);
+        $endpoint = sprintf('/repositories/%s/%s/pullrequests/', $account, $repo);
 
         if ($id === 0) {
             $endpoint .= 'activity';
@@ -293,7 +293,7 @@ class PullRequests extends API\Api
     public function accept($account, $repo, $id, $params = array())
     {
         return $this->getClient()->setApiVersion('2.0')->post(
-            sprintf('repositories/%s/%s/pullrequests/%d/merge', $account, $repo, $id),
+            sprintf('/repositories/%s/%s/pullrequests/%d/merge', $account, $repo, $id),
             json_encode($params),
             array('Content-Type' => 'application/json')
         );
@@ -316,7 +316,7 @@ class PullRequests extends API\Api
         }
 
         return $this->getClient()->setApiVersion('2.0')->post(
-            sprintf('repositories/%s/%s/pullrequests/%d/decline', $account, $repo, $id),
+            sprintf('/repositories/%s/%s/pullrequests/%d/decline', $account, $repo, $id),
             json_encode($params),
             array('Content-Type' => 'application/json')
         );

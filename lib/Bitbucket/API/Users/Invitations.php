@@ -33,7 +33,7 @@ class Invitations extends Api
     public function all($account)
     {
         return $this->getClient()->setApiVersion('1.0')->get(
-            sprintf('users/%s/invitations', $account)
+            sprintf('/users/%s/invitations', $account)
         );
     }
 
@@ -51,7 +51,7 @@ class Invitations extends Api
     public function create($account, $groupSlug, $email)
     {
         return $this->getClient()->setApiVersion('1.0')->put(
-            sprintf('users/%s/invitations', $account),
+            sprintf('/users/%s/invitations', $account),
             ['email' => $email, 'group_slug' => $groupSlug]
         );
     }
@@ -69,7 +69,7 @@ class Invitations extends Api
     public function deleteByEmail($account, $email)
     {
         return $this->getClient()->setApiVersion('1.0')->delete(
-            sprintf('users/%s/invitations', $account),
+            sprintf('/users/%s/invitations', $account),
             ['email' => $email]
         );
     }
@@ -88,7 +88,7 @@ class Invitations extends Api
     public function deleteByGroup($account, $groupSlug, $email)
     {
         return $this->getClient()->setApiVersion('1.0')->delete(
-            sprintf('users/%s/invitations', $account),
+            sprintf('/users/%s/invitations', $account),
             ['email' => $email, 'group_slug' => $groupSlug]
         );
     }

@@ -31,7 +31,7 @@ class SshKeys extends Api
     public function all($account)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('users/%s/ssh-keys', $account)
+            sprintf('/users/%s/ssh-keys', $account)
         );
     }
 
@@ -53,7 +53,7 @@ class SshKeys extends Api
         }
 
         return $this->getClient()->setApiVersion('2.0')->post(
-            sprintf('users/%s/ssh-keys', $account),
+            sprintf('/users/%s/ssh-keys', $account),
             $params
         );
     }
@@ -70,7 +70,7 @@ class SshKeys extends Api
     public function update($account, $keyId, $key)
     {
         return $this->getClient()->setApiVersion('2.0')->put(
-            sprintf('users/%s/ssh-keys/%d', $account, $keyId),
+            sprintf('/users/%s/ssh-keys/%d', $account, $keyId),
             array('key' => $key)
         );
     }
@@ -86,7 +86,7 @@ class SshKeys extends Api
     public function get($account, $keyId)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('users/%s/ssh-keys/%d', $account, $keyId)
+            sprintf('/users/%s/ssh-keys/%d', $account, $keyId)
         );
     }
 
@@ -101,7 +101,7 @@ class SshKeys extends Api
     public function delete($account, $keyId)
     {
         return $this->getClient()->setApiVersion('2.0')->delete(
-            sprintf('users/%s/ssh-keys/%d', $account, $keyId)
+            sprintf('/users/%s/ssh-keys/%d', $account, $keyId)
         );
     }
 }

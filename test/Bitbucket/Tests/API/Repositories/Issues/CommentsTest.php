@@ -9,7 +9,7 @@ class CommentsTest extends Tests\TestCase
 {
     public function testGetSingleCommentSuccess()
     {
-        $endpoint       = 'repositories/gentle/eof/issues/3/comments/2967835';
+        $endpoint       = '/repositories/gentle/eof/issues/3/comments/2967835';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
@@ -27,7 +27,7 @@ class CommentsTest extends Tests\TestCase
 
     public function testGetAllCommentsSuccess()
     {
-        $endpoint       = 'repositories/gentle/eof/issues/3/comments';
+        $endpoint       = '/repositories/gentle/eof/issues/3/comments';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
@@ -45,7 +45,7 @@ class CommentsTest extends Tests\TestCase
 
     public function testCreateCommentSuccess()
     {
-        $endpoint       = 'repositories/gentle/eof/issues/2/comments';
+        $endpoint       = '/repositories/gentle/eof/issues/2/comments';
         $params         = array('content' => 'dummy');
 
         $client = $this->getHttpClientMock();
@@ -60,7 +60,7 @@ class CommentsTest extends Tests\TestCase
 
     public function testUpdateCommentSuccess()
     {
-        $endpoint       = 'repositories/gentle/eof/issues/2/comments/3';
+        $endpoint       = '/repositories/gentle/eof/issues/2/comments/3';
         $params         = array('content' => 'dummy');
 
         $client = $this->getHttpClientMock();

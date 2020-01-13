@@ -49,7 +49,7 @@ class BranchRestrictions extends Api
     public function all($account, $repo)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/branch-restrictions', $account, $repo)
+            sprintf('/repositories/%s/%s/branch-restrictions', $account, $repo)
         );
     }
 
@@ -86,7 +86,7 @@ class BranchRestrictions extends Api
         }
 
         return $this->getClient()->setApiVersion('2.0')->post(
-            sprintf('repositories/%s/%s/branch-restrictions', $account, $repo),
+            sprintf('/repositories/%s/%s/branch-restrictions', $account, $repo),
             json_encode($params),
             array('Content-Type' => 'application/json')
         );
@@ -104,7 +104,7 @@ class BranchRestrictions extends Api
     public function get($account, $repo, $id)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/branch-restrictions/%d', $account, $repo, $id)
+            sprintf('/repositories/%s/%s/branch-restrictions/%d', $account, $repo, $id)
         );
     }
 
@@ -136,7 +136,7 @@ class BranchRestrictions extends Api
         }
 
         return $this->getClient()->setApiVersion('2.0')->put(
-            sprintf('repositories/%s/%s/branch-restrictions/%d', $account, $repo, $id),
+            sprintf('/repositories/%s/%s/branch-restrictions/%d', $account, $repo, $id),
             json_encode($params),
             array('Content-Type' => 'application/json')
         );
@@ -156,7 +156,7 @@ class BranchRestrictions extends Api
     public function delete($account, $repo, $id)
     {
         return $this->getClient()->setApiVersion('2.0')->delete(
-            sprintf('repositories/%s/%s/branch-restrictions/%d', $account, $repo, $id)
+            sprintf('/repositories/%s/%s/branch-restrictions/%d', $account, $repo, $id)
         );
     }
 

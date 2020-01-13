@@ -9,7 +9,7 @@ class IssueTest extends Tests\TestCase
 {
     public function testGetIssuesWithAdditionalParams()
     {
-        $endpoint       = 'repositories/gentle/eof/issues';
+        $endpoint       = '/repositories/gentle/eof/issues';
         $expectedResult = file_get_contents(__DIR__.'/../data/issue/multiple.json');
         $params         = array(
             'format'    => 'json',
@@ -32,7 +32,7 @@ class IssueTest extends Tests\TestCase
 
     public function testGet()
     {
-        $endpoint       = 'repositories/gentle/eof/issues/3';
+        $endpoint       = '/repositories/gentle/eof/issues/3';
         $expectedResult = file_get_contents(__DIR__.'/../data/issue/single.json');
         $params         = array();
 
@@ -51,7 +51,7 @@ class IssueTest extends Tests\TestCase
 
     public function testCreateIssue()
     {
-        $endpoint       = 'repositories/gentle/eof/issues';
+        $endpoint       = '/repositories/gentle/eof/issues';
         $params         = array(
             'format'    => 'json',
             'title'     => 'dummy title',
@@ -108,7 +108,7 @@ class IssueTest extends Tests\TestCase
 
     public function testUpdateIssue()
     {
-        $endpoint       = 'repositories/gentle/eof/issues/3';
+        $endpoint       = '/repositories/gentle/eof/issues/3';
         $params         = array(
             'format'    => 'json',
             'title'     => 'dummy title',
@@ -128,7 +128,7 @@ class IssueTest extends Tests\TestCase
 
     public function testDeleteIssue()
     {
-        $endpoint       = 'repositories/gentle/eof/issues/2';
+        $endpoint       = '/repositories/gentle/eof/issues/2';
         $expectedResult = array('dummyOutput');
 
         $client = $this->getHttpClientMock();

@@ -9,14 +9,14 @@ class CommitsTest extends Tests\TestCase
 {
     public function testGetAllRepositoryCommits()
     {
-        $endpoint       = 'repositories/gentle/eof/commits';
+        $endpoint       = '/repositories/gentle/eof/commits';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\Commits $commits */
         $commits    = $this->getClassMock('Bitbucket\API\Repositories\Commits', $client);
@@ -27,14 +27,14 @@ class CommitsTest extends Tests\TestCase
 
     public function testGetAllRepositoryCommitsFromSpecificBranch()
     {
-        $endpoint       = 'repositories/gentle/eof/commits/master';
+        $endpoint       = '/repositories/gentle/eof/commits/master';
         $expectedResult = $this->fakeResponse(array('dummy', 'branch' => 'master'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\Commits $commits */
         $commits    = $this->getClassMock('Bitbucket\API\Repositories\Commits', $client);
@@ -45,14 +45,14 @@ class CommitsTest extends Tests\TestCase
 
     public function testGetSingleCommitInfo()
     {
-        $endpoint       = 'repositories/gentle/eof/commit/SHA';
+        $endpoint       = '/repositories/gentle/eof/commit/SHA';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\Commits $commits */
         $commits    = $this->getClassMock('Bitbucket\API\Repositories\Commits', $client);
@@ -63,7 +63,7 @@ class CommitsTest extends Tests\TestCase
 
     public function testApproveACommit()
     {
-        $endpoint       = 'repositories/gentle/eof/commit/SHA1/approve';
+        $endpoint       = '/repositories/gentle/eof/commit/SHA1/approve';
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
@@ -78,7 +78,7 @@ class CommitsTest extends Tests\TestCase
 
     public function testDeleteCommitApproval()
     {
-        $endpoint       = 'repositories/gentle/eof/commit/SHA1/approve';
+        $endpoint       = '/repositories/gentle/eof/commit/SHA1/approve';
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())

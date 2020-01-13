@@ -8,7 +8,7 @@ class InvitationsTest extends Tests\TestCase
 {
     public function testSendInvitationSuccess()
     {
-        $endpoint       = 'invitations/gentle/eof';
+        $endpoint       = '/invitations/gentle/eof';
         $params         = array('email' => 'john_doe@example.com', 'permission' => 'read');
 
         $client = $this->getHttpClientMock();

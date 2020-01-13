@@ -8,14 +8,14 @@ class PipelinesTest extends Tests\TestCase
 {
     public function testGetAllPipelines()
     {
-        $endpoint = 'repositories/gentle/eof/pipelines/';
+        $endpoint = '/repositories/gentle/eof/pipelines/';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->any())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\Pipelines $pipelines */
         $pipelines = $this->getClassMock('Bitbucket\API\Repositories\Pipelines', $client);
@@ -26,7 +26,7 @@ class PipelinesTest extends Tests\TestCase
 
     public function testCreatePipelinesFromArray()
     {
-        $endpoint = 'repositories/gentle/eof/pipelines/';
+        $endpoint = '/repositories/gentle/eof/pipelines/';
         $params = array(
             'type' => array(
                 'ref_type' => 'branch',
@@ -48,7 +48,7 @@ class PipelinesTest extends Tests\TestCase
 
     public function testCreatePipelinesFromJson()
     {
-        $endpoint = 'repositories/gentle/eof/pipelines/';
+        $endpoint = '/repositories/gentle/eof/pipelines/';
         $params = json_encode(array(
             'type' => array(
                 'ref_type' => 'branch',
@@ -70,14 +70,14 @@ class PipelinesTest extends Tests\TestCase
 
     public function testGetSpecificPipeline()
     {
-        $endpoint = 'repositories/gentle/eof/pipelines/uuid';
+        $endpoint = '/repositories/gentle/eof/pipelines/uuid';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\Pipelines $pipelines */
         $pipelines = $this->getClassMock('Bitbucket\API\Repositories\Pipelines', $client);
@@ -89,7 +89,7 @@ class PipelinesTest extends Tests\TestCase
 
     public function testStopSpecificPipeline()
     {
-        $endpoint = 'repositories/gentle/eof/pipelines/uuid/stopPipeline';
+        $endpoint = '/repositories/gentle/eof/pipelines/uuid/stopPipeline';
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())

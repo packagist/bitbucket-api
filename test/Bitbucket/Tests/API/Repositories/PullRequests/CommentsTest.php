@@ -9,14 +9,14 @@ class CommentsTest extends Tests\TestCase
 {
     public function testGetAllComments()
     {
-        $endpoint       = 'repositories/gentle/eof/pullrequests/3/comments';
+        $endpoint       = '/repositories/gentle/eof/pullrequests/3/comments';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\PullRequests\Comments $comments */
         $comments   = $this->getClassMock('Bitbucket\API\Repositories\PullRequests\Comments', $client);
@@ -27,14 +27,14 @@ class CommentsTest extends Tests\TestCase
 
     public function testGetSingleComment()
     {
-        $endpoint       = 'repositories/gentle/eof/pullrequests/3/comments/1';
+        $endpoint       = '/repositories/gentle/eof/pullrequests/3/comments/1';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\PullRequests\Comments $comments */
         $comments   = $this->getClassMock('Bitbucket\API\Repositories\PullRequests\Comments', $client);
@@ -45,14 +45,14 @@ class CommentsTest extends Tests\TestCase
 
     public function testCreateCommentSuccess()
     {
-        $endpoint       = 'repositories/gentle/eof/pullrequests/1/comments';
+        $endpoint       = '/repositories/gentle/eof/pullrequests/1/comments';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('post')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\PullRequests\Comments $comments */
         $comments = $this->getClassMock('Bitbucket\API\Repositories\PullRequests\Comments', $client);
@@ -63,14 +63,14 @@ class CommentsTest extends Tests\TestCase
 
     public function testUpdateCommentSuccess()
     {
-        $endpoint       = 'repositories/gentle/eof/pullrequests/1/comments/3';
+        $endpoint       = '/repositories/gentle/eof/pullrequests/1/comments/3';
         $expectedResult = array('content' => 'dummy');
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('put')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\PullRequests\Comments $comments */
         $comments = $this->getClassMock('Bitbucket\API\Repositories\PullRequests\Comments', $client);
@@ -81,7 +81,7 @@ class CommentsTest extends Tests\TestCase
 
     public function testDeleteCommentSuccess()
     {
-        $endpoint = 'repositories/gentle/eof/pullrequests/1/comments/2';
+        $endpoint = '/repositories/gentle/eof/pullrequests/1/comments/2';
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())

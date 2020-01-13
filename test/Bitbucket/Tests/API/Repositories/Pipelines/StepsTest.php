@@ -9,14 +9,14 @@ class StepsTest extends Tests\TestCase
 {
     public function testGetAllSteps()
     {
-        $endpoint = 'repositories/gentle/eof/pipelines/pipeline-uuid/steps/';
+        $endpoint = '/repositories/gentle/eof/pipelines/pipeline-uuid/steps/';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\Pipelines\Steps $steps */
         $steps = $this->getClassMock('Bitbucket\API\Repositories\Pipelines\Steps', $client);
@@ -27,14 +27,14 @@ class StepsTest extends Tests\TestCase
 
     public function testGetSpecificPipelineStep()
     {
-        $endpoint = 'repositories/gentle/eof/pipelines/pipeline-uuid/steps/step-uuid';
+        $endpoint = '/repositories/gentle/eof/pipelines/pipeline-uuid/steps/step-uuid';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\Pipelines\Steps $steps */
         $steps = $this->getClassMock('Bitbucket\API\Repositories\Pipelines\Steps', $client);
@@ -45,14 +45,14 @@ class StepsTest extends Tests\TestCase
 
     public function testGetLogOfSpecificPipelineStep()
     {
-        $endpoint = 'repositories/gentle/eof/pipelines/pipeline-uuid/steps/step-uuid/log';
+        $endpoint = '/repositories/gentle/eof/pipelines/pipeline-uuid/steps/step-uuid/log';
         $expectedResult = $this->fakeResponse(array('dummy'));
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         /** @var \Bitbucket\API\Repositories\Pipelines\Steps $steps */
         $steps = $this->getClassMock('Bitbucket\API\Repositories\Pipelines\Steps', $client);

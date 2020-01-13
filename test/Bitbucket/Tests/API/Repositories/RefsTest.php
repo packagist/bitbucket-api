@@ -8,14 +8,14 @@ class RefsTest extends Tests\TestCase
 {
     public function testAll()
     {
-        $endpoint       = 'repositories/gentle/eof/refs';
+        $endpoint       = '/repositories/gentle/eof/refs';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         $refs = $this->getClassMock('Bitbucket\API\Repositories\Refs', $client);
 
@@ -28,14 +28,14 @@ class RefsTest extends Tests\TestCase
     public function testAllParams()
     {
         $params         = ['pagelen' => 36];
-        $endpoint       = 'repositories/gentle/eof/refs';
+        $endpoint       = '/repositories/gentle/eof/refs';
         $expectedResult = json_encode('dummy');
 
         $client = $this->getHttpClientMock();
         $client->expects($this->once())
             ->method('get')
             ->with($endpoint, $params)
-            ->will($this->returnValue($expectedResult));
+            ->willReturn($expectedResult);
 
         $refs = $this->getClassMock('Bitbucket\API\Repositories\Refs', $client);
 

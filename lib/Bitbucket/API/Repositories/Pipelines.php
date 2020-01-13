@@ -32,7 +32,7 @@ class Pipelines extends Api
     public function all($account, $repo)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/pipelines/', $account, $repo)
+            sprintf('/repositories/%s/%s/pipelines/', $account, $repo)
         );
     }
 
@@ -57,7 +57,7 @@ class Pipelines extends Api
         }
 
         return $this->getClient()->setApiVersion('2.0')->post(
-            sprintf('repositories/%s/%s/pipelines/', $account, $repo),
+            sprintf('/repositories/%s/%s/pipelines/', $account, $repo),
             json_encode($params),
             array('Content-Type' => 'application/json')
         );
@@ -75,7 +75,7 @@ class Pipelines extends Api
     public function get($account, $repo, $uuid)
     {
         return $this->getClient()->setApiVersion('2.0')->get(
-            sprintf('repositories/%s/%s/pipelines/%s', $account, $repo, $uuid)
+            sprintf('/repositories/%s/%s/pipelines/%s', $account, $repo, $uuid)
         );
     }
 
@@ -91,7 +91,7 @@ class Pipelines extends Api
     public function stopPipeline($account, $repo, $uuid)
     {
         return $this->getClient()->setApiVersion('2.0')->post(
-            sprintf('repositories/%s/%s/pipelines/%s/stopPipeline', $account, $repo, $uuid)
+            sprintf('/repositories/%s/%s/pipelines/%s/stopPipeline', $account, $repo, $uuid)
         );
     }
 
