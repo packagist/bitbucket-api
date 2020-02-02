@@ -108,4 +108,13 @@ class Teams extends Api
             sprintf('/teams/%s/repositories', $name)
         );
     }
+
+    /**
+     * @return Teams\Hooks
+     * @throws \InvalidArgumentException
+     */
+    public function hooks()
+    {
+        return $this->api(Teams\Hooks::class);
+    }
 }

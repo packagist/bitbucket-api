@@ -1,0 +1,133 @@
+<?php
+
+namespace Bitbucket\Tests\API\Teams;
+
+use Bitbucket\API\Teams\Hooks;
+use Bitbucket\Tests\API\TestCase;
+
+class HooksTest extends TestCase
+{
+    /** @var Hooks */
+    private $hooks;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->hooks = $this->getApiMock(Hooks::class);
+    }
+
+    public function invalidCreateProvider()
+    {
+        return [
+            [[
+                'dummy' => 'data',
+            ]],
+            [[
+                'url' => '',
+                'active' => true,
+            ]],
+            [[
+                'url' => '',
+                'active' => true,
+                'events' => [],
+            ]],
+            [[
+                'url' => '',
+                'events' => [
+                    'event1',
+                    'event2',
+                ],
+            ]],
+            [[
+                'active' => true,
+                'events' => [
+                    'event1',
+                    'event2',
+                ],
+            ]],
+        ];
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @dataProvider invalidCreateProvider
+     */
+    public function testInvalidCreate(array $check)
+    {
+        $this->hooks->create('gentle', $check);
+    }
+
+    public function testCreateSuccess()
+    {
+        $endpoint = '/2.0/teams/gentle/hooks';
+        $params = [
+            'url' => 'http://requestb.in/xxx',
+            'active' => true,
+            'events' => [
+                'repo:push',
+                'issue:created',
+            ],
+        ];
+
+        $this->hooks->create('gentle', $params);
+
+        $this->assertRequest('POST', $endpoint, json_encode($params));
+    }
+
+    public function testUpdateSuccess()
+    {
+        $endpoint = '/2.0/teams/gentle/hooks/30b60aee-9cdf-407d-901c-2de106ee0c9d';
+        $params = [
+            'url' => 'http://requestb.in/zzz',
+            'active' => true,
+            'events' => [
+                'repo:push',
+                'issue:created',
+            ],
+        ];
+
+        $this->hooks->update('gentle', '30b60aee-9cdf-407d-901c-2de106ee0c9d', $params);
+
+        $this->assertRequest('PUT', $endpoint, json_encode($params));
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @dataProvider invalidCreateProvider
+     */
+    public function testInvalidUpdate(array $check)
+    {
+        $this->hooks->update('gentle', '30b60aee-9cdf-407d-901c-2de106ee0c9d', $check);
+    }
+
+    public function testGetAllHooks()
+    {
+        $endpoint = '/2.0/teams/gentle/hooks';
+        $expectedResult = $this->fakeResponse(['dummy']);
+
+        $actual = $this->hooks->all('gentle');
+
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
+    }
+
+    public function testGetSingleHook()
+    {
+        $endpoint = '/2.0/teams/gentle/hooks/30b60aee-9cdf-407d-901c-2de106ee0c9d';
+        $expectedResult = $this->fakeResponse(['dummy']);
+
+        $actual = $this->hooks->get('gentle', '30b60aee-9cdf-407d-901c-2de106ee0c9d');
+
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
+    }
+
+    public function testDeleteSingleHook()
+    {
+        $endpoint = '/2.0/teams/gentle/hooks/30b60aee-9cdf-407d-901c-2de106ee0c9d';
+
+        $this->hooks->delete('gentle', '30b60aee-9cdf-407d-901c-2de106ee0c9d');
+
+        $this->assertRequest('DELETE', $endpoint);
+    }
+}

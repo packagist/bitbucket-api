@@ -102,4 +102,9 @@ class TeamsTest extends TestCase
         $this->assertEquals($expectedResult, $actual);
         $this->assertRequest('GET', $endpoint);
     }
+
+    public function testHooks()
+    {
+        $this->assertInstanceOf(Teams\Hooks::class, $this->teams->hooks());
+    }
 }
