@@ -45,7 +45,7 @@
         "psr-0": { "Bitbucket\\":  "test/" }
     },
     "scripts": {
-        "style": "php vendor/bin/phpcs --standard=psr2 lib/",
+        "style": "php vendor/bin/phpcs --standard=psr2 lib/ test --ignore=*/HistoryVersionBridge.php",
         "test": "php vendor/bin/phpunit"
     }
 }
