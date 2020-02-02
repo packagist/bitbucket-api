@@ -46,6 +46,7 @@ title: Examples
     - [Build statuses](repositories/commits/build-statuses.html)
   - [Teams](teams.html)
       - [Hooks](teams/webhooks.html)
+      - [Permissions](teams/permissions.html)
   - [User](user.html)
     - [Permissions](user/permissions.html)
   - [Users](users.html)

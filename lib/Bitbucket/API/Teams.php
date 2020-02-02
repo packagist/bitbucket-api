@@ -117,4 +117,13 @@ class Teams extends Api
     {
         return $this->api(Teams\Hooks::class);
     }
+
+    /**
+     * @return Teams\Permissions
+     * @throws \InvalidArgumentException
+     */
+    public function permissions()
+    {
+        return $this->api(Teams\Permissions::class);
+    }
 }

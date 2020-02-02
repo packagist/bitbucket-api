@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Create a file through API via `Src:create` (PR #40)
   - Added manage team hooks endpoints (PR #75)
   - Added user permissions endpoints (PR #76)
+  - Added team permissions endpoints (PR #77)
 
 ### Changed:
   - Updated `Api:api` in order to support class name resolution via `::class` (PR #38)

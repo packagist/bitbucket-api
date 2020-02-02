@@ -107,4 +107,9 @@ class TeamsTest extends TestCase
     {
         $this->assertInstanceOf(Teams\Hooks::class, $this->teams->hooks());
     }
+
+    public function testPermissions()
+    {
+        $this->assertInstanceOf(Teams\Permissions::class, $this->teams->permissions());
+    }
 }
