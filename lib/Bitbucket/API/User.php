@@ -45,4 +45,13 @@ class User extends Api
     {
         return $this->getClient()->setApiVersion('2.0')->get('/user/emails');
     }
+
+    /**
+     * @return User\Permissions
+     * @throws \InvalidArgumentException
+     */
+    public function permissions()
+    {
+        return $this->api(User\Permissions::class);
+    }
 }

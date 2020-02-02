@@ -36,4 +36,9 @@ class UserTest extends TestCase
         $this->assertRequest('GET', $endpoint);
         $this->assertResponse($expectedResult, $actual);
     }
+
+    public function testPermissions()
+    {
+        $this->assertInstanceOf(User\Permissions::class, $this->user->permissions());
+    }
 }
