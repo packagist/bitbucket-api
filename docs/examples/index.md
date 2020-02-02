@@ -45,6 +45,7 @@ title: Examples
     - [Src](repositories/src.html)
     - [Build statuses](repositories/commits/build-statuses.html)
   - [Teams](teams.html)
+      - [Hooks](teams/webhooks.html)
   - [User](user.html)
   - [Users](users.html)
     - [Invitations](users/invitations.html)
