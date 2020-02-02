@@ -47,6 +47,7 @@ title: Examples
   - [Teams](teams.html)
       - [Hooks](teams/webhooks.html)
   - [User](user.html)
+    - [Permissions](user/permissions.html)
   - [Users](users.html)
     - [Invitations](users/invitations.html)
     - [SSH keys](users/ssh-keys.html)
