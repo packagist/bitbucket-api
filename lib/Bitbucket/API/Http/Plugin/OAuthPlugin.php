@@ -73,7 +73,8 @@ class OAuthPlugin implements Plugin
     protected function doHandleRequest(RequestInterface $request, callable $next, callable $first)
     {
         $params = $this->getParametersToSign($request);
-        $req    = OAuth1\Request\Request::fromConsumerAndToken(
+        /** @var OAuth1\Request\Request $req */
+        $req = OAuth1\Request\Request::fromConsumerAndToken(
             $this->consumer,
             $this->token,
             $request->getMethod(),

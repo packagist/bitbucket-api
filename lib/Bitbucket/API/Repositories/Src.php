@@ -46,8 +46,8 @@ class Src extends API\Api
      *      data that will be written to the file.
      *      See https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/src#post
      *      for details on what options are available
-     * @param $account
-     * @param $repo
+     * @param string $account
+     * @param string $repo
      * @param array $params
      * @return ResponseInterface
      */

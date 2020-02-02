@@ -209,7 +209,7 @@ class Client implements ClientInterface
      * Check if specified API version is the one currently in use.
      *
      * @access public
-     * @param  float $version
+     * @param  string $version
      * @return bool
      */
     public function isApiVersion($version)

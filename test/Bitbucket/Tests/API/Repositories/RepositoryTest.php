@@ -43,7 +43,7 @@ class RepositoryTest extends TestCase
             ['{ repo: "company" }'],
             [
                 substr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", mt_rand(0, 50), 1)
-                .substr(md5(time()), 1),
+                .substr(md5((string)time()), 1),
             ],
         ];
     }

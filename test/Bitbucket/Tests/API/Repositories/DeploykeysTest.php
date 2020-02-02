@@ -32,7 +32,7 @@ class DeploykeysTest extends TestCase
         $endpoint = '/2.0/repositories/gentle/eof/deploy-keys/3';
         $expectedResult = $this->fakeResponse('dummy');
 
-        $actual = $this->deploykeys->get('gentle', 'eof', 3);
+        $actual = $this->deploykeys->get('gentle', 'eof', '3');
 
         $this->assertRequest('GET', $endpoint);
         $this->assertResponse($expectedResult, $actual);
@@ -56,7 +56,7 @@ class DeploykeysTest extends TestCase
         $endpoint = '/2.0/repositories/gentle/eof/deploy-keys/3';
         $params = ['label' => 'test key'];
 
-        $this->deploykeys->update('gentle', 'eof', 3, $params);
+        $this->deploykeys->update('gentle', 'eof', '3', $params);
 
         $this->assertRequest('PUT', $endpoint, http_build_query($params));
     }

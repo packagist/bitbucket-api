@@ -122,4 +122,9 @@ interface ClientInterface
      * @return RequestInterface
      */
     public function getLastRequest();
+
+    /**
+     * @return HttpPluginClientBuilder
+     */
+    public function getClientBuilder();
 }

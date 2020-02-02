@@ -15,6 +15,16 @@ use Psr\Http\Message\RequestInterface;
  */
 class OAuth2PluginTest extends Tests\TestCase
 {
+    /** @var ClientInterface|\PHPUnit_Framework_MockObject_MockObject */
+    private $httpClient;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->httpClient = $this->getMockBuilder(ClientInterface::class)->getMock();
+    }
+
     /**
      * @expectedException \Bitbucket\API\Exceptions\ForbiddenAccessException
      */
@@ -27,14 +37,12 @@ class OAuth2PluginTest extends Tests\TestCase
 
         $response = new Response(200, [], '{"bla": "boo}');
 
-        $httpClient = $this->getMockBuilder(ClientInterface::class)->getMock();
-
-        $httpClient
+        $this->httpClient
             ->expects($this->once())
             ->method('getLastRequest')
             ->willReturn($this->getMockBuilder(RequestInterface::class)->getMock());
 
-        $httpClient
+        $this->httpClient
             ->expects($this->once())
             ->method('post')
             ->with($this->equalTo(OAuth2Plugin::ENDPOINT_ACCESS_TOKEN), [
@@ -47,7 +55,7 @@ class OAuth2PluginTest extends Tests\TestCase
         ;
 
         $request = new Request('GET', '/');
-        $plugin = new OAuth2Plugin($oauth_params, $httpClient);
+        $plugin = new OAuth2Plugin($oauth_params, $this->httpClient);
         $plugin->handleRequest($request, function () {
         }, function () {
         });
@@ -66,8 +74,7 @@ class OAuth2PluginTest extends Tests\TestCase
             'client_secret' => 'bbb'
         ];
 
-        $httpClient = $this->getMockBuilder(ClientInterface::class)->getMock();
-        $httpClient
+        $this->httpClient
             ->expects($this->once())
             ->method('POST')
             ->with($this->equalTo(OAuth2Plugin::ENDPOINT_ACCESS_TOKEN), $this->equalTo([
@@ -80,7 +87,7 @@ class OAuth2PluginTest extends Tests\TestCase
         ;
 
         $request = new Request('GET', '/');
-        $plugin = new OAuth2Plugin($oauth_params, $httpClient);
+        $plugin = new OAuth2Plugin($oauth_params, $this->httpClient);
         $plugin->handleRequest($request, function () {
         }, function () {
         });
@@ -93,15 +100,14 @@ class OAuth2PluginTest extends Tests\TestCase
             'client_secret' => 'bbb'
         ];
 
-        $httpClient = $this->getMockBuilder(ClientInterface::class)->getMock();
-        $httpClient
+        $this->httpClient
             ->expects($this->never())
             ->method('post');
 
         $request = new Request('GET', '/', [
             'Authorization' => 'Bearer secret'
         ]);
-        $plugin = new OAuth2Plugin($oauth_params, $httpClient);
+        $plugin = new OAuth2Plugin($oauth_params, $this->httpClient);
         $plugin->handleRequest($request, function (RequestInterface $request) {
             $authHeader = $request->getHeader('Authorization')[0];
 
@@ -125,8 +131,7 @@ class OAuth2PluginTest extends Tests\TestCase
             'access_token' => 'secret'
         )));
 
-        $httpClient = $this->getMockBuilder(ClientInterface::class)->getMock();
-        $httpClient
+        $this->httpClient
             ->expects($this->once())
             ->method('post')
             ->with($this->equalTo(OAuth2Plugin::ENDPOINT_ACCESS_TOKEN), $this->equalTo([
@@ -139,7 +144,7 @@ class OAuth2PluginTest extends Tests\TestCase
         ;
 
         $request = new Request('GET', '/');
-        $plugin = new OAuth2Plugin($oauth_params, $httpClient);
+        $plugin = new OAuth2Plugin($oauth_params, $this->httpClient);
         $plugin->handleRequest($request, function (RequestInterface $request) {
             $authHeader = $request->getHeader('Authorization')[0];
 

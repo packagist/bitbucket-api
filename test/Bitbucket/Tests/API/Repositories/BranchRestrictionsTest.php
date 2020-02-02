@@ -21,7 +21,7 @@ class BranchRestrictionsTest extends TestCase
         $endpoint = '/2.0/repositories/gentle/eof/branch-restrictions';
         $expectedResult = $this->fakeResponse(['dummy']);
 
-        $actual = $this->branchRestrictions->all('gentle', 'eof', ['dummy']);
+        $actual = $this->branchRestrictions->all('gentle', 'eof');
 
         $this->assertRequest('GET', $endpoint);
         $this->assertResponse($expectedResult, $actual);

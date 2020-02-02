@@ -43,7 +43,7 @@ class CommentsTest extends TestCase
         $endpoint = '/2.0/repositories/gentle/eof/issues/2/comments';
         $params = ['content' => ['raw' => 'dummy']];
 
-        $this->comments->create('gentle', 'eof', '2', ['raw' => 'dummy']);
+        $this->comments->create('gentle', 'eof', 2, ['raw' => 'dummy']);
 
         $this->assertRequest('POST', $endpoint, json_encode($params));
     }

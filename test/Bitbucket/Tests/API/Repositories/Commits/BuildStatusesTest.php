@@ -1,6 +1,6 @@
 <?php
 
-namespace Bitbucket\Tests\API\Repositories\Commits\Statuses;
+namespace Bitbucket\Tests\API\Repositories\Commits;
 
 use Bitbucket\API\Repositories\Commits\BuildStatuses;
 use Bitbucket\Tests\API\TestCase;

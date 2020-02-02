@@ -1,6 +1,6 @@
 <?php
 
-namespace Bitbucket\Tests\API\Repositories\PullRequest;
+namespace Bitbucket\Tests\API\Repositories\PullRequests;
 
 use Bitbucket\API\Repositories\PullRequests\Comments;
 use Bitbucket\Tests\API\TestCase;

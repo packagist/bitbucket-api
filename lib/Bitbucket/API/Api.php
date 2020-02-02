@@ -205,7 +205,6 @@ class Api
         if (class_exists($name)) {
             $class = $name;
         } else {
-            /** @var Api $child */
             $class = '\\Bitbucket\\API\\'.$name;
 
             if (!class_exists($class)) {
@@ -213,6 +212,7 @@ class Api
             }
         }
 
+        /** @var Api $child */
         $child = new $class();
         $child->setClient($this->getClient());
 

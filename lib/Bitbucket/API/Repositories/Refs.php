@@ -23,7 +23,7 @@ class Refs extends API\Api
      * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
-     * @param  string|array     $params  GET parameters
+     * @param  array            $params  GET parameters
      * @return ResponseInterface
      *
      * @throws \InvalidArgumentException

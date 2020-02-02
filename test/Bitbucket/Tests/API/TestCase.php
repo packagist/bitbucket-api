@@ -27,7 +27,11 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
     private function getMockHttpClient()
     {
-        return $this->mockClient ? : $this->mockClient = new Client();
+        if (!isset($this->mockClient)) {
+            $this->mockClient = new Client();
+        }
+
+        return $this->mockClient;
     }
 
     protected function getHttpPluginClientBuilder()
