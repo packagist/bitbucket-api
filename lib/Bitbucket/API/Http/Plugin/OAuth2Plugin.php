@@ -8,22 +8,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Bitbucket\API\Http\Listener;
+namespace Bitbucket\API\Http\Plugin;
 
 use Bitbucket\API\Exceptions\ForbiddenAccessException;
 use Bitbucket\API\Exceptions\HttpResponseException;
 use Bitbucket\API\Http\Client;
 use Bitbucket\API\Http\ClientInterface;
-use Buzz\Message\MessageInterface;
-use Buzz\Message\RequestInterface;
+use Http\Client\Common\Plugin;
+use Psr\Http\Message\RequestInterface;
 
 /**
  * @author Alexandru Guzinschi <alex@gentle.ro>
  */
-class OAuth2Listener implements ListenerInterface
+class OAuth2Plugin implements Plugin
 {
-    const ENDPOINT_ACCESS_TOKEN     = 'access_token';
-    const ENDPOINT_AUTHORIZE        = 'authorize';
+    use Plugin\VersionBridgePlugin;
+
+    const ENDPOINT_ACCESS_TOKEN     = '/oauth2/access_token';
+    const ENDPOINT_AUTHORIZE        = '/oauth2/authorize';
 
     /** @var array */
     private $config = array(
@@ -41,19 +43,11 @@ class OAuth2Listener implements ListenerInterface
         $this->config       = array_merge($this->config, $config);
         $this->httpClient   = (null !== $client) ? $client : new Client(
             array(
-                'base_url'      => 'https://bitbucket.org/site',
-                'api_version'   => 'oauth2',
-                'api_versions'  => array('oauth2')
+                'base_url'      => 'https://bitbucket.org',
+                'api_version'   => 'site',
+                'api_versions'  => array('site')
             )
         );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getName()
-    {
-        return 'oauth2';
     }
 
     /**
@@ -62,12 +56,13 @@ class OAuth2Listener implements ListenerInterface
      * @throws ForbiddenAccessException
      * @throws \InvalidArgumentException
      */
-    public function preSend(RequestInterface $request)
+    protected function doHandleRequest(RequestInterface $request, callable $next, callable $first)
     {
-        if (($oauth2Header = $request->getHeader('Authorization')) &&
-            (strpos($oauth2Header, 'Bearer') !== false)
-        ) {
-            return;
+        $oauth2Header = $request->getHeader('Authorization');
+        foreach ($oauth2Header as $header) {
+            if (strpos($header, 'Bearer') !== false) {
+                return $next($request);
+            }
         }
 
         if (false === array_key_exists('access_token', $this->config)) {
@@ -80,20 +75,16 @@ class OAuth2Listener implements ListenerInterface
             }
         }
 
-        $request->addHeader(
+        $request = $request->withHeader(
+            'Authorization',
             sprintf(
-                'Authorization: %s %s',
+                '%s %s',
                 ucfirst(strtolower($this->config['token_type'])),
                 $this->config['access_token']
             )
         );
-    }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function postSend(RequestInterface $request, MessageInterface $response)
-    {
+        return $next($request);
     }
 
     /**
@@ -119,12 +110,13 @@ class OAuth2Listener implements ListenerInterface
             )
         ;
 
-        $data = json_decode($response->getContent(), true);
+        $contents = $response->getBody()->getContents();
+        $data = json_decode($contents, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
             $ex = new HttpResponseException('[access_token] Invalid JSON: '. json_last_error_msg());
             $ex
-                ->setResponse($this->httpClient->getLastResponse())
+                ->setResponse($response)
                 ->setRequest($this->httpClient->getLastRequest())
             ;
 
@@ -132,7 +124,7 @@ class OAuth2Listener implements ListenerInterface
         }
 
         if (false === array_key_exists('access_token', $data)) {
-            throw new HttpResponseException('access_token is missing from response. '. $response->getContent());
+            throw new HttpResponseException('access_token is missing from response. '. $contents);
         }
 
         return $data;

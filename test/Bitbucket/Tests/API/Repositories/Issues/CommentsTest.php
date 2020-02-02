@@ -2,74 +2,59 @@
 
 namespace Bitbucket\Tests\API\Repositories\Issues;
 
-use Bitbucket\Tests\API as Tests;
-use Bitbucket\API;
+use Bitbucket\API\Repositories\Issues\Comments;
+use Bitbucket\Tests\API\TestCase;
 
-class CommentsTest extends Tests\TestCase
+class CommentsTest extends TestCase
 {
+    /** @var Comments */
+    private $comments;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->comments = $this->getApiMock(Comments::class);
+    }
+
     public function testGetSingleCommentSuccess()
     {
-        $endpoint       = '/repositories/gentle/eof/issues/3/comments/2967835';
-        $expectedResult = json_encode('dummy');
+        $endpoint = '/2.0/repositories/gentle/eof/issues/3/comments/2967835';
+        $expectedResult = $this->fakeResponse('dummy');
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->comments->get('gentle', 'eof', 3, 2967835);
 
-        /** @var $comments \Bitbucket\API\Repositories\Issues\Comments */
-        $comments = $this->getClassMock('Bitbucket\API\Repositories\Issues\Comments', $client);
-        $actual = $comments->get('gentle', 'eof', 3, 2967835);
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testGetAllCommentsSuccess()
     {
-        $endpoint       = '/repositories/gentle/eof/issues/3/comments';
-        $expectedResult = json_encode('dummy');
+        $endpoint = '/2.0/repositories/gentle/eof/issues/3/comments';
+        $expectedResult = $this->fakeResponse('dummy');
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->comments->all('gentle', 'eof', 3);
 
-        /** @var $comments \Bitbucket\API\Repositories\Issues\Comments */
-        $comments = $this->getClassMock('Bitbucket\API\Repositories\Issues\Comments', $client);
-        $actual = $comments->all('gentle', 'eof', 3);
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testCreateCommentSuccess()
     {
-        $endpoint       = '/repositories/gentle/eof/issues/2/comments';
-        $params         = array('content' => 'dummy');
+        $endpoint = '/2.0/repositories/gentle/eof/issues/2/comments';
+        $params = ['content' => ['raw' => 'dummy']];
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('post')
-            ->with($endpoint, $params);
+        $this->comments->create('gentle', 'eof', 2, ['raw' => 'dummy']);
 
-        /** @var $comments \Bitbucket\API\Repositories\Issues\Comments */
-        $comments = $this->getClassMock('Bitbucket\API\Repositories\Issues\Comments', $client);
-        $comments->create('gentle', 'eof', '2', 'dummy');
+        $this->assertRequest('POST', $endpoint, json_encode($params));
     }
 
     public function testUpdateCommentSuccess()
     {
-        $endpoint       = '/repositories/gentle/eof/issues/2/comments/3';
-        $params         = array('content' => 'dummy');
+        $endpoint = '/2.0/repositories/gentle/eof/issues/2/comments/3';
+        $params = ['content' => ['raw' => 'dummy']];
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('put')
-            ->with($endpoint, $params);
+        $this->comments->update('gentle', 'eof', 2, 3, ['raw' => 'dummy']);
 
-        /** @var $comments \Bitbucket\API\Repositories\Issues\Comments */
-        $comments = $this->getClassMock('Bitbucket\API\Repositories\Issues\Comments', $client);
-        $comments->update('gentle', 'eof', 2, 3, 'dummy');
+        $this->assertRequest('PUT', $endpoint, json_encode($params));
     }
 }

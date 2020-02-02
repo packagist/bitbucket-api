@@ -1,114 +1,49 @@
 <?php
 
-namespace Bitbucket\Tests\API\Repositories;
+namespace Bitbucket\Tests\API;
 
-use Bitbucket\Tests\API as Tests;
-use Bitbucket\API;
+use Bitbucket\API\Users;
 
-class UsersTest extends Tests\TestCase
+class UsersTest extends TestCase
 {
-    /**
-     * @var API\Users
-     */
+    /** @var Users */
     private $users;
 
-    public function setUp()
+    protected function setUp()
     {
-        $this->users = new API\Users();
-        $this->users->setCredentials(
-            new API\Authentication\Basic('dummy', 'password')
-        );
+        parent::setUp();
+        $this->users = $this->getApiMock(Users::class);
     }
 
     public function testGetUserPublicInformation()
     {
-        $endpoint       = '/users/john-doe';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/users/john-doe';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->users->get('john-doe');
 
-        /** @var \Bitbucket\API\Users $user */
-        $user   = $this->getClassMock('Bitbucket\API\Users', $client);
-        $actual = $user->get('john-doe');
-
-        $this->assertEquals($expectedResult, $actual);
-    }
-
-    public function testGetUserFollowers()
-    {
-        $endpoint       = '/users/john-doe/followers';
-        $expectedResult = $this->fakeResponse(array('dummy'));
-
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
-
-        /** @var \Bitbucket\API\Users $user */
-        $user   = $this->getClassMock('Bitbucket\API\Users', $client);
-        $actual = $user->followers('john-doe');
-
-        $this->assertEquals($expectedResult, $actual);
-    }
-
-    public function testGetUserFollowing()
-    {
-        $endpoint       = '/users/john-doe/following';
-        $expectedResult = $this->fakeResponse(array('dummy'));
-
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
-
-        /** @var \Bitbucket\API\Users $user */
-        $user   = $this->getClassMock('Bitbucket\API\Users', $client);
-        $actual = $user->following('john-doe');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testGetUserRepositories()
     {
-        $endpoint       = '/repositories/john-doe';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/repositories/john-doe';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->users->repositories('john-doe');
 
-        /** @var \Bitbucket\API\Users $user */
-        $user   = $this->getClassMock('Bitbucket\API\Users', $client);
-        $actual = $user->repositories('john-doe');
-
-        $this->assertEquals($expectedResult, $actual);
-    }
-
-    public function testGetAccountInstance()
-    {
-        $this->assertInstanceOf('\Bitbucket\API\Users\Account', $this->users->account());
-    }
-
-    public function testGetEmailsInstance()
-    {
-        $this->assertInstanceOf('\Bitbucket\API\Users\Emails', $this->users->emails());
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testGetInvitationsInstance()
     {
-        $this->assertInstanceOf('\Bitbucket\API\Users\Invitations', $this->users->invitations());
+        $this->assertInstanceOf(Users\Invitations::class, $this->users->invitations());
     }
 
     public function testGetSshKeysInstance()
     {
-        $this->assertInstanceOf('\Bitbucket\API\Users\SshKeys', $this->users->sshKeys());
+        $this->assertInstanceOf(Users\SshKeys::class, $this->users->sshKeys());
     }
 }

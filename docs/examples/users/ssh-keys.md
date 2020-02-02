@@ -11,31 +11,31 @@ Use the ssh-keys resource to manipulate the ssh-keys on an individual or team ac
 ### Prepare:
 {% include auth.md var_name="user" class_ns="Users" %}
 
-### Get a list of the keys associated with an account:
+### Get a list of the keys associated with an account: (API 2.0)
 
 ```php
 $users->sshKeys()->all($account_name);
 ```
 
-### Creates a key on the specified account:
+### Creates a key on the specified account: (API 2.0)
 
 ```php
 $users->sshKeys()->create($account_name, 'key content', 'dummy key');
 ```
 
-### Updates a key on the specified account:
+### Updates a key on the specified account: (API 2.0)
 
 ```php
 $users->sshKeys()->update($account_name, 12, 'key content');
 ```
 
-### Get the content of the specified `key_id`:
+### Get the content of the specified `key_id`: (API 2.0)
 
 ```php
 $users->sshKeys()->get($account_name, 12);
 ```
 
-### Delete a ssh key:
+### Delete a ssh key: (API 2.0)
 
 ```php
 $users->sshKeys()->delete($account_name, 12);

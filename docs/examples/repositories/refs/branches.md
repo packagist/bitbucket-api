@@ -11,19 +11,19 @@ Allows you to get a list of branches.
 ### Prepare:
 {% include auth.md var_name="branches" class_ns="Repositories\Refs\Branches" %}
 
-### Get a list of branches:
+### Get a list of branches: (API 2.0)
 
 ```php
 $branches->all($account_name, $repo_slug);
 ```
 
-### Get an individual branch:
+### Get an individual branch: (API 2.0)
 
 ```php
 $branches->get($account_name, $repo_slug, $branch_name);
 ```
 
-### Delete an individual branch:
+### Delete an individual branch: (API 2.0)
 
 ```php
 $branches->delete($account_name, $repo_slug, $branch_name);

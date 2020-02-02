@@ -3,25 +3,26 @@
 namespace Bitbucket\Tests\API;
 
 use Bitbucket\API\Repositories;
-use Bitbucket\Tests\API as Tests;
 
-class RepositoriesTest extends Tests\TestCase
+class RepositoriesTest extends TestCase
 {
+    /** @var Repositories */
+    private $repositories;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->repositories = $this->getApiMock(Repositories::class);
+    }
+
     public function testGetAllRepositories()
     {
-        $endpoint       = '/repositories/gentle';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/repositories/gentle';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->repositories->all('gentle');
 
-        /** @var \Bitbucket\API\Repositories $repositories */
-        $repositories = $this->getClassMock('Bitbucket\API\Repositories', $client);
-        $actual         = $repositories->all('gentle');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 }

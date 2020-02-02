@@ -11,7 +11,7 @@ Manage members of a group.
 ### Prepare:
 ```php
 $group = new Bitbucket\API\Groups();
-$group->setCredentials( new Bitbucket\API\Authentication\Basic($bb_user, $bb_pass) );
+$group->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
 ```
 
 ### Get the group members:

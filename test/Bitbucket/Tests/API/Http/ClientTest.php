@@ -2,30 +2,27 @@
 
 namespace Bitbucket\Tests\API\Http;
 
-use Bitbucket\API\Http\Listener\NormalizeArrayListener;
-use Bitbucket\API\Http\Listener\OAuthListener;
 use Bitbucket\Tests\API as Tests;
 use Bitbucket\API\Http\Client;
-use Buzz\Client\Curl;
+use Http\Client\Common\HttpMethodsClient;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @author  Alexandru G.    <alex@gentle.ro>
  */
 class ClientTest extends Tests\TestCase
 {
-    /**
-     * @var Client
-     */
+    /** @var Client */
     private $client;
 
     public function setUp()
     {
-        $this->client = new Client(array(), new Curl());
+        $this->client = new Client(array(), $this->getHttpPluginClientBuilder());
     }
 
     public function testGetSelfInstance()
     {
-        $this->assertInstanceOf('\Buzz\Client\Curl', $this->client->getClient());
+        $this->assertInstanceOf(HttpMethodsClient::class, $this->client->getClient());
     }
 
     /**
@@ -56,49 +53,63 @@ class ClientTest extends Tests\TestCase
     {
         $this->client->setApiVersion('2.0');
         $this->assertEquals('2.0', $this->client->getApiVersion());
+        $this->client->setApiVersion('1.0');
+        $this->assertEquals('1.0', $this->client->getApiVersion());
     }
 
-    public function testGetApiBaseUrl()
+    /**
+     * @dataProvider apiBaseUrlProvider
+     */
+    public function testGetApiBaseUrl($apiVersion, $expected)
     {
-        $this->assertEquals('https://api.bitbucket.org/1.0', $this->client->getApiBaseUrl());
+        $this->client->setApiVersion($apiVersion);
+        $this->assertEquals($expected, $this->client->getApiBaseUrl());
+    }
 
-        $this->client->setApiVersion('2.0');
-        $this->assertEquals('https://api.bitbucket.org/2.0', $this->client->getApiBaseUrl());
+    public function apiBaseUrlProvider()
+    {
+        return [
+            ['1.0', 'https://api.bitbucket.org/1.0'],
+            ['2.0', 'https://api.bitbucket.org/2.0'],
+        ];
     }
 
     public function testShouldDoGetRequestAndReturnResponseInstance()
     {
-        $endpoint   = 'repositories/gentle/eof/issues/3';
-        $params     = array('format' => 'json');
-        $headers    = array('2' => '4');
-        $baseClient = $this->getBrowserMock();
-        $client     = new Client(array(
-                'base_url'      => '',
-                'api_version'   => ''
-            ),
+        $endpoint = '/repositories/gentle/eof/issues/3';
+        $params = ['format' => 'json'];
+        $headers = ['2' => '4'];
+        $baseClient = $this->getHttpPluginClientBuilder();
+        $client = new Client(
+            [
+                'base_url'      => 'https://example.com',
+                'api_version'   => '1.0'
+            ],
             $baseClient
         );
         $response   = $client->get($endpoint, $params, $headers);
 
-        $this->assertInstanceOf('\Buzz\Message\MessageInterface', $response);
-        $this->assertInstanceOf('\Buzz\Message\MessageInterface', $client->getLastResponse());
+        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertInstanceOf(ResponseInterface::class, $client->getLastResponse());
     }
 
     public function testShouldDoPostRequestWithContentAndReturnResponseInstance()
     {
-        $endpoint   = 'repositories/gentle/eof/issues/3';
-        $params     = array('1' => '2');
-        $headers    = array('3' => '4');
-        $baseClient = $this->getBrowserMock();
-        $client     = new Client(array('user_agent' => 'tests'), $baseClient);
+        $endpoint = '/repositories/gentle/eof/issues/3';
+        $params = ['1' => '2'];
+        $headers = ['3' => '4'];
+        $baseClient = $this->getHttpPluginClientBuilder();
+        $client = new Client(['user_agent' => 'tests'], $baseClient);
         $response   = $client->post($endpoint, $params, $headers);
 
-        $this->assertInstanceOf('\Buzz\Message\MessageInterface', $response);
-        $this->assertEquals('1=2', $client->getLastRequest()->getContent());
-        $this->assertEquals(
-            array('User-Agent: tests', '4', 'Content-Type: application/x-www-form-urlencoded'),
-            $client->getLastRequest()->getHeaders()
-        );
+        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertEquals(http_build_query($params), $client->getLastRequest()->getBody()->getContents());
+        $this->assertEquals([
+            'Content-Type' => ['application/x-www-form-urlencoded'],
+            'User-Agent' => ['tests'],
+            '3' => ['4'],
+            'Host' => ['api.bitbucket.org'],
+        ], $client->getLastRequest()->getHeaders());
     }
 
     /**
@@ -106,62 +117,63 @@ class ClientTest extends Tests\TestCase
      */
     public function testShouldDoPostRequestWithJsonContentAndReturnResponseInstance()
     {
-        $endpoint   = 'repositories/gentle/eof/pullrequests';
-        $params     = json_encode(array('1' => '2', 'name' => 'john'));
-        $headers    = array('Content-Type' => 'application/json');
-        $baseClient = $this->getBrowserMock();
-        $client     = new Client(array('user_agent' => 'tests'), $baseClient);
+        $endpoint = '/repositories/gentle/eof/pullrequests';
+        $params = json_encode(['1' => '2', 'name' => 'john']);
+        $headers = ['Content-Type' => 'application/json'];
+        $baseClient = $this->getHttpPluginClientBuilder();
+        $client = new Client(['user_agent' => 'tests'], $baseClient);
         $response   = $client->post($endpoint, $params, $headers);
 
-        $this->assertInstanceOf('\Buzz\Message\MessageInterface', $response);
-        $this->assertEquals($params, $client->getLastRequest()->getContent());
-        $this->assertEquals(
-            array('User-Agent: tests', 'Content-Type: application/json'),
-            $client->getLastRequest()->getHeaders()
-        );
+        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertEquals($params, $client->getLastRequest()->getBody()->getContents());
+        $this->assertEquals([
+            'Content-Type' => ['application/json'],
+            'User-Agent' => ['tests'],
+            'Host' => ['api.bitbucket.org'],
+        ], $client->getLastRequest()->getHeaders());
     }
 
     public function testShouldDoPutRequestAndReturnResponseInstance()
     {
-        $endpoint   = 'repositories/gentle/eof/issues/3';
-        $params     = array('1' => '2');
-        $headers    = array('3' => '4');
-        $baseClient = $this->getBrowserMock();
-        $client     = new Client(array(), $baseClient);
-        $response   = $client->put($endpoint, $params, $headers);
+        $endpoint = '/repositories/gentle/eof/issues/3';
+        $params = ['1' => '2'];
+        $headers = ['3' => '4'];
+        $baseClient = $this->getHttpPluginClientBuilder();
+        $client = new Client([], $baseClient);
+        $response = $client->put($endpoint, $params, $headers);
 
-        $this->assertInstanceOf('\Buzz\Message\MessageInterface', $response);
+        $this->assertInstanceOf(ResponseInterface::class, $response);
     }
 
     public function testShouldDoDeleteRequestAndReturnResponseInstance()
     {
-        $endpoint   = 'repositories/gentle/eof/issues/3';
-        $params     = array('1' => '2');
-        $headers    = array('3' => '4');
-        $baseClient = $this->getBrowserMock();
-        $client     = new Client(array(), $baseClient);
-        $response   = $client->delete($endpoint, $params, $headers);
+        $endpoint = '/repositories/gentle/eof/issues/3';
+        $params = ['1' => '2'];
+        $headers = ['3' => '4'];
+        $baseClient = $this->getHttpPluginClientBuilder();
+        $client = new Client([], $baseClient);
+        $response = $client->delete($endpoint, $params, $headers);
 
-        $this->assertInstanceOf('\Buzz\Message\MessageInterface', $response);
+        $this->assertInstanceOf(ResponseInterface::class, $response);
     }
 
     public function testShouldDoPatchRequestAndReturnResponseInstance()
     {
-        $endpoint   = 'repositories/gentle/eof/issues/3';
-        $params     = array('1' => '2');
-        $headers    = array('3' => '4');
-        $baseClient = $this->getBrowserMock();
-        $client     = new Client(array(), $baseClient);
-        $response   = $client->request($endpoint, $params, 'PATCH', $headers);
+        $endpoint = '/repositories/gentle/eof/issues/3';
+        $params = ['1' => '2'];
+        $headers = ['3' => '4'];
+        $baseClient = $this->getHttpPluginClientBuilder();
+        $client = new Client([], $baseClient);
+        $response = $client->request($endpoint, $params, 'PATCH', $headers);
 
-        $this->assertInstanceOf('\Buzz\Message\MessageInterface', $response);
+        $this->assertInstanceOf(ResponseInterface::class, $response);
     }
 
     public function testClientIsKeptWhenInvokingChildFactory()
     {
-        $options = array(
-            'base_url' => 'localhost'
-        );
+        $options = [
+            'base_url' => 'https://localhost'
+        ];
         $client = new Client($options);
         $pullRequest = new \Bitbucket\API\Repositories\PullRequests();
         $pullRequest->setClient($client);
@@ -169,62 +181,24 @@ class ClientTest extends Tests\TestCase
         $this->assertSame($client, $comments->getClient());
     }
 
-    public function testAddListener()
-    {
-        $listener = $this->getListenerMock();
-
-        $this->client->addListener($listener, 1);
-        $this->client->addListener($listener, 14);
-
-        $this->assertInstanceOf('Bitbucket\API\Http\Listener\ListenerInterface', $this->client->getListener('dummy'));
-    }
-
-    public function testDeleteListener()
-    {
-        $listener = $this->getListenerMock('lorem');
-
-        $this->client->addListener($listener);
-        $this->assertTrue($this->client->isListener('lorem'));
-
-        $this->client->delListener($listener);
-
-        $this->assertFalse($this->client->isListener('lorem'));
-    }
-
     /**
-     * @expectedException \InvalidArgumentException
+     * @dataProvider currentApiVersionProvider
      */
-    public function testGetAbsentListener()
+    public function testCurrentApiVersion($currentApiVersion, $apiVersion, $expected)
     {
-        $this->client->getListener('invalid');
+        $this->client->setApiVersion($currentApiVersion);
+        $this->assertSame($expected, $this->client->isApiVersion($apiVersion));
     }
 
-    public function testSetListenersWorksWithMultipleListeners()
+    public function currentApiVersionProvider()
     {
-        $listeners = array(
-            '0' => array(
-                new NormalizeArrayListener(),
-                new OAuthListener(array()),
-            )
-        );
-
-        $this->client->setListeners($listeners);
-
-        $listeners = $this->client->getListeners();
-
-        $this->assertArrayHasKey('normalize_array', $listeners[0]);
-        $this->assertArrayHasKey('oauth', $listeners[0]);
-    }
-
-    public function testCurrentApiVersion()
-    {
-        $client = new \Bitbucket\API\Http\Client();
-        $client->setApiVersion('1.0');
-        $this->assertFalse($client->isApiVersion('2.0'));
-        $client->setApiVersion('2.0');
-        $this->assertFalse($client->isApiVersion('1'));
-        $this->assertTrue($client->isApiVersion('2.0'));
-        $this->assertTrue($client->isApiVersion('2'));
+        return [
+            ['1.0', '1.0', true],
+            ['2.0', '2.0', true],
+            ['1.0', '2.0', false],
+            ['2.0', '1', false],
+            ['2.0', '2', true],
+        ];
     }
 
     /**
@@ -233,18 +207,17 @@ class ClientTest extends Tests\TestCase
     public function testIncludeFormatParamOnlyInV1()
     {
         $endpoint = sprintf(
-            'repositories/gentlero/bitbucket-api/src/%s/%s',
+            '/repositories/gentlero/bitbucket-api/src/%s/%s',
             'develop',
             'lib/Bitbucket/API/Repositories'
         );
         $params = $headers = [];
 
-        $baseClient = $this->getBrowserMock();
-        $client     = new Client(['api_version' => '2.0'], $baseClient);
+        $baseClient = $this->getHttpPluginClientBuilder();
+        $client = new Client(['api_version' => '2.0'], $baseClient);
         $client->get($endpoint, $params, $headers);
 
-        /** @noinspection PhpUndefinedMethodInspection */
-        $req    = $client->getLastRequest()->getResource();
+        $req    = $client->getLastRequest()->getUri();
         $parts  = parse_url($req);
 
         if (false === array_key_exists('query', $parts)) {
@@ -252,15 +225,6 @@ class ClientTest extends Tests\TestCase
         }
 
         $this->assertFalse(strpos($parts['query'], 'format'));
-    }
-
-    private function getListenerMock($name = 'dummy')
-    {
-        $listener = $this->getMockBuilder('Bitbucket\API\Http\Listener\ListenerInterface')->getMock();
-
-        $listener->expects($this->any())->method('getName')->will($this->returnValue($name));
-
-        return $listener;
     }
 
     public function invalidApiVersionsProvider()

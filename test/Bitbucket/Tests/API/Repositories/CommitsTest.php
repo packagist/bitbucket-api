@@ -2,92 +2,73 @@
 
 namespace Bitbucket\Tests\API\Repositories;
 
-use Bitbucket\Tests\API as Tests;
-use Bitbucket\API;
+use Bitbucket\API\Repositories\Commits;
+use Bitbucket\Tests\API\TestCase;
 
-class CommitsTest extends Tests\TestCase
+class CommitsTest extends TestCase
 {
+    /** @var Commits */
+    private $commits;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->commits = $this->getApiMock(Commits::class);
+    }
+
     public function testGetAllRepositoryCommits()
     {
-        $endpoint       = '/repositories/gentle/eof/commits';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/repositories/gentle/eof/commits';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->commits->all('gentle', 'eof', ['dummy']);
 
-        /** @var \Bitbucket\API\Repositories\Commits $commits */
-        $commits    = $this->getClassMock('Bitbucket\API\Repositories\Commits', $client);
-        $actual     = $commits->all('gentle', 'eof', array('dummy'));
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint, '', '0=dummy');
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testGetAllRepositoryCommitsFromSpecificBranch()
     {
-        $endpoint       = '/repositories/gentle/eof/commits/master';
-        $expectedResult = $this->fakeResponse(array('dummy', 'branch' => 'master'));
+        $endpoint = '/2.0/repositories/gentle/eof/commits/master';
+        $expectedResult = $this->fakeResponse(['dummy', 'branch' => 'master']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->commits->all('gentle', 'eof', ['dummy', 'branch' => 'master']);
 
-        /** @var \Bitbucket\API\Repositories\Commits $commits */
-        $commits    = $this->getClassMock('Bitbucket\API\Repositories\Commits', $client);
-        $actual     = $commits->all('gentle', 'eof', array('dummy', 'branch' => 'master'));
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint, '', '0=dummy');
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testGetSingleCommitInfo()
     {
-        $endpoint       = '/repositories/gentle/eof/commit/SHA';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/repositories/gentle/eof/commit/SHA';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->commits->get('gentle', 'eof', 'SHA');
 
-        /** @var \Bitbucket\API\Repositories\Commits $commits */
-        $commits    = $this->getClassMock('Bitbucket\API\Repositories\Commits', $client);
-        $actual     = $commits->get('gentle', 'eof', 'SHA');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testApproveACommit()
     {
-        $endpoint       = '/repositories/gentle/eof/commit/SHA1/approve';
+        $endpoint = '/2.0/repositories/gentle/eof/commit/SHA1/approve';
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('post')
-            ->with($endpoint);
+        $this->commits->approve('gentle', 'eof', 'SHA1');
 
-        /** @var \Bitbucket\API\Repositories\Commits $commit */
-        $commit   = $this->getClassMock('Bitbucket\API\Repositories\Commits', $client);
-
-        $commit->approve('gentle', 'eof', 'SHA1');
+        $this->assertRequest('POST', $endpoint);
     }
 
     public function testDeleteCommitApproval()
     {
-        $endpoint       = '/repositories/gentle/eof/commit/SHA1/approve';
+        $endpoint = '/2.0/repositories/gentle/eof/commit/SHA1/approve';
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('delete')
-            ->with($endpoint);
+        $this->commits->deleteApproval('gentle', 'eof', 'SHA1');
 
-        /** @var \Bitbucket\API\Repositories\Commits $commit */
-        $commit   = $this->getClassMock('Bitbucket\API\Repositories\Commits', $client);
+        $this->assertRequest('DELETE', $endpoint);
+    }
 
-        $commit->deleteApproval('gentle', 'eof', 'SHA1');
+    public function testGetMembers()
+    {
+        $this->assertInstanceOf(Commits\Comments::class, $this->commits->comments());
     }
 }

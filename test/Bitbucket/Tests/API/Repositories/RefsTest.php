@@ -2,46 +2,39 @@
 
 namespace Bitbucket\Tests\API\Repositories;
 
-use Bitbucket\Tests\API as Tests;
+use Bitbucket\API\Repositories\Refs;
+use Bitbucket\Tests\API\TestCase;
 
-class RefsTest extends Tests\TestCase
+class RefsTest extends TestCase
 {
+    /** @var Refs */
+    private $refs;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->refs = $this->getApiMock(Refs::class);
+    }
+
     public function testAll()
     {
-        $endpoint       = '/repositories/gentle/eof/refs';
-        $expectedResult = json_encode('dummy');
+        $endpoint= '/2.0/repositories/gentle/eof/refs';
+        $expectedResult = $this->fakeResponse('dummy');
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->refs->all('gentle', 'eof');
 
-        $refs = $this->getClassMock('Bitbucket\API\Repositories\Refs', $client);
-
-        /** @var $refs \Bitbucket\API\Repositories\Refs */
-        $actual = $refs->all('gentle', 'eof');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testAllParams()
     {
-        $params         = ['pagelen' => 36];
-        $endpoint       = '/repositories/gentle/eof/refs';
-        $expectedResult = json_encode('dummy');
+        $endpoint = '/2.0/repositories/gentle/eof/refs';
+        $expectedResult = $this->fakeResponse('dummy');
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint, $params)
-            ->willReturn($expectedResult);
+        $actual = $this->refs->all('gentle', 'eof', ['pagelen' => 36]);
 
-        $refs = $this->getClassMock('Bitbucket\API\Repositories\Refs', $client);
-
-        /** @var $refs \Bitbucket\API\Repositories\Refs */
-        $actual = $refs->all('gentle', 'eof', $params);
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint, '', 'pagelen=36');
+        $this->assertResponse($expectedResult, $actual);
     }
 }

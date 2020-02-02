@@ -10,11 +10,14 @@
 
 namespace Bitbucket\API;
 
-use Bitbucket\API\Http\Listener\ApiOneCollectionListener;
-use Bitbucket\API\Http\Listener\NormalizeArrayListener;
-use Buzz\Message\MessageInterface;
+use Bitbucket\API\Http\Plugin\ApiOneCollectionPlugin;
 use Bitbucket\API\Http\ClientInterface;
 use Bitbucket\API\Http\Client;
+use Bitbucket\API\Http\Plugin\NormalizeArrayPlugin;
+use Http\Client\Common\Plugin;
+use Http\Client\Common\Plugin\AuthenticationPlugin;
+use Http\Message\Authentication;
+use Psr\Http\Message\MessageInterface;
 
 /**
  * @author Alexandru Guzinschi <alex@gentle.ro>
@@ -38,21 +41,15 @@ class Api
     protected $httpClient;
 
     /**
-     * Authentication object
-     * @var Authentication\AuthenticationInterface
-     */
-    protected $auth;
-
-    /**
      * @param array           $options
      * @param ClientInterface $client
      */
     public function __construct(array $options = array(), ClientInterface $client = null)
     {
-        $this->httpClient = (null !== $client) ? $client : new Client($options, $client);
+        $this->httpClient = (null !== $client) ? $client : new Client($options, null);
 
-        $this->httpClient->addListener(new NormalizeArrayListener());
-        $this->httpClient->addListener(new ApiOneCollectionListener());
+        $this->addPlugin(new NormalizeArrayPlugin());
+        $this->addPlugin(new ApiOneCollectionPlugin());
     }
 
     /**
@@ -79,20 +76,18 @@ class Api
     /**
      * Set API login credentials
      *
-     * @access public
-     * @param  Authentication\AuthenticationInterface $auth
+     * @param  Authentication $authentication
      * @return void
      */
-    public function setCredentials(Authentication\AuthenticationInterface $auth)
+    public function setCredentials(Authentication $authentication)
     {
-        // keep BC
-        if ($auth instanceof Authentication\Basic) {
-            $this->getClient()->addListener(
-                new Http\Listener\BasicAuthListener($auth->getUsername(), $auth->getPassword())
-            );
-        }
+        $this->addPlugin(new AuthenticationPlugin($authentication));
+    }
 
-        $this->auth = $auth;
+    public function addPlugin(Plugin $plugin)
+    {
+        $this->httpClient->getClientBuilder()->removePlugin(get_class($plugin));
+        $this->httpClient->getClientBuilder()->addPlugin($plugin);
     }
 
     /**
@@ -210,7 +205,6 @@ class Api
         if (class_exists($name)) {
             $class = $name;
         } else {
-            /** @var Api $child */
             $class = '\\Bitbucket\\API\\'.$name;
 
             if (!class_exists($class)) {
@@ -218,12 +212,9 @@ class Api
             }
         }
 
+        /** @var Api $child */
         $child = new $class();
         $child->setClient($this->getClient());
-
-        if ($this->getClient()->hasListeners()) {
-            $child->getClient()->setListeners($this->getClient()->getListeners());
-        }
 
         return $child;
     }

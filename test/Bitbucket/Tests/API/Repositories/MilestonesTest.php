@@ -2,43 +2,39 @@
 
 namespace Bitbucket\Tests\API\Repositories;
 
-use Bitbucket\Tests\API as Tests;
+use Bitbucket\API\Repositories\Milestones;
+use Bitbucket\Tests\API\TestCase;
 
-class MilestonesTest extends Tests\TestCase
+class MilestonesTest extends TestCase
 {
+    /** @var Milestones */
+    private $milestones;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->milestones = $this->getApiMock(Milestones::class);
+    }
+
     public function testGetAllMilestonesSuccess()
     {
-        $endpoint       = '/repositories/gentle/eof/milestones';
-        $expectedResult = json_encode('dummy');
+        $endpoint = '/2.0/repositories/gentle/eof/milestones';
+        $expectedResult = $this->fakeResponse('dummy');
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->milestones->all('gentle', 'eof');
 
-        /** @var $milestones \Bitbucket\API\Repositories\Milestones */
-        $milestones = $this->getClassMock('Bitbucket\API\Repositories\Milestones', $client);
-        $actual = $milestones->all('gentle', 'eof');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testGetSingleMilestoneSuccess()
     {
-        $endpoint       = '/repositories/gentle/eof/milestones/2';
-        $expectedResult = json_encode('dummy');
+        $endpoint = '/2.0/repositories/gentle/eof/milestones/2';
+        $expectedResult = $this->fakeResponse('dummy');
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->milestones->get('gentle', 'eof', 2);
 
-        /** @var $milestone \Bitbucket\API\Repositories\Milestones */
-        $milestones = $this->getClassMock('Bitbucket\API\Repositories\Milestones', $client);
-        $actual = $milestones->get('gentle', 'eof', 2);
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 }

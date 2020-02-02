@@ -12,7 +12,7 @@
 namespace Bitbucket\API\Repositories;
 
 use Bitbucket\API;
-use Buzz\Message\MessageInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Allows you to browse directories and view files.
@@ -31,7 +31,7 @@ class Src extends API\Api
      * @param  string           $repo     The repository identifier.
      * @param  string           $revision A value representing the revision or branch to list.
      * @param  string           $path     The path can be a filename or a directory path.
-     * @return MessageInterface
+     * @return ResponseInterface
      */
     public function get($account, $repo, $revision, $path)
     {
@@ -46,10 +46,10 @@ class Src extends API\Api
      *      data that will be written to the file.
      *      See https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/src#post
      *      for details on what options are available
-     * @param $account
-     * @param $repo
+     * @param string $account
+     * @param string $repo
      * @param array $params
-     * @return MessageInterface
+     * @return ResponseInterface
      */
     public function create($account, $repo, array $params = array())
     {

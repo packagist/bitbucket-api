@@ -12,7 +12,8 @@
 namespace Bitbucket\API\Repositories;
 
 use Bitbucket\API\Api;
-use Buzz\Message\MessageInterface;
+use Bitbucket\API\Repositories\Commits\Comments;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @author  Alexandru G.    <alex@gentle.ro>
@@ -26,7 +27,7 @@ class Commits extends Api
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  array            $params  Additional parameters
-     * @return MessageInterface
+     * @return ResponseInterface
      */
     public function all($account, $repo, array $params = array())
     {
@@ -50,7 +51,7 @@ class Commits extends Api
      * @param  string           $account  The team or individual account owning the repository.
      * @param  string           $repo     The repository identifier.
      * @param  string           $revision A SHA1 value for the commit.
-     * @return MessageInterface
+     * @return ResponseInterface
      */
     public function get($account, $repo, $revision)
     {
@@ -66,7 +67,7 @@ class Commits extends Api
      * @param  string           $account  The team or individual account owning the repository.
      * @param  string           $repo     The repository identifier.
      * @param  string           $revision A SHA1 value for the commit.
-     * @return MessageInterface
+     * @return ResponseInterface
      */
     public function approve($account, $repo, $revision)
     {
@@ -84,7 +85,7 @@ class Commits extends Api
      * @param  string           $account  The team or individual account owning the repository.
      * @param  string           $repo     The repository identifier.
      * @param  string           $revision A SHA1 value for the commit.
-     * @return MessageInterface
+     * @return ResponseInterface
      */
     public function deleteApproval($account, $repo, $revision)
     {
@@ -104,6 +105,6 @@ class Commits extends Api
      */
     public function comments()
     {
-        return $this->api('Repositories\\Commits\\Comments');
+        return $this->api(Comments::class);
     }
 }

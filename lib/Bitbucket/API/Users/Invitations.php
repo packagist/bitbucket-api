@@ -12,7 +12,7 @@
 namespace Bitbucket\API\Users;
 
 use Bitbucket\API\Api;
-use Buzz\Message\MessageInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * An invitation is a request sent to an external email address to participate
@@ -28,7 +28,7 @@ class Invitations extends Api
      *
      * @access public
      * @param  string           $account The name of an individual or team account.
-     * @return MessageInterface
+     * @return ResponseInterface
      */
     public function all($account)
     {
@@ -46,7 +46,7 @@ class Invitations extends Api
      * @param  string           $account    The name of an individual or team account.
      * @param  string           $groupSlug  An identifier for the group.
      * @param  string           $email      Name of the email address
-     * @return MessageInterface
+     * @return ResponseInterface
      */
     public function create($account, $groupSlug, $email)
     {
@@ -64,7 +64,7 @@ class Invitations extends Api
      * @access public
      * @param  string           $account The name of an individual or team account.
      * @param  string           $email   Name of the email address to delete.
-     * @return MessageInterface
+     * @return ResponseInterface
      */
     public function deleteByEmail($account, $email)
     {
@@ -83,7 +83,7 @@ class Invitations extends Api
      * @param  string           $account    The name of an individual or team account.
      * @param  string           $groupSlug  An identifier for the group.
      * @param  string           $email      Name of the email address to delete.
-     * @return MessageInterface
+     * @return ResponseInterface
      */
     public function deleteByGroup($account, $groupSlug, $email)
     {

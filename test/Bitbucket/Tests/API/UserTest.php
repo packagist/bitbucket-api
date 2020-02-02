@@ -1,44 +1,39 @@
 <?php
 
-namespace Bitbucket\Tests\API\Repositories;
+namespace Bitbucket\Tests\API;
 
-use Bitbucket\Tests\API as Tests;
+use Bitbucket\API\User;
 
-class UserTest extends Tests\TestCase
+class UserTest extends TestCase
 {
+    /** @var User */
+    private $user;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->user = $this->getApiMock(User::class);
+    }
+
     public function testGetEmails()
     {
-        $endpoint       = '/user/emails';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/user/emails';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->any())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->user->emails();
 
-        /** @var \Bitbucket\API\User $user */
-        $user = $this->getClassMock('Bitbucket\API\User', $client);
-        $actual = $user->emails();
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testGetUserProfileSuccess()
     {
-        $endpoint       = '/user/';
-        $expectedResult = json_encode('dummy');
+        $endpoint = '/2.0/user/';
+        $expectedResult = $this->fakeResponse(json_encode('dumy'));
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->any())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->user->get();
 
-        /** @var \Bitbucket\API\User $user */
-        $user = $this->getClassMock('Bitbucket\API\User', $client);
-        $actual = $user->get();
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 }

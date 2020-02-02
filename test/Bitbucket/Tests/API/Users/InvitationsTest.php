@@ -2,82 +2,64 @@
 
 namespace Bitbucket\Tests\API\Users;
 
+use Bitbucket\API\Users\Invitations;
 use Bitbucket\Tests\API as Tests;
 
 class InvitationsTest extends Tests\TestCase
 {
+    /** @var Invitations */
+    private $invitations;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->invitations = $this->getApiMock(Invitations::class);
+    }
+
     public function testGetAllInvitations()
     {
-        $endpoint       = '/users/gentle/invitations';
-        $expectedResult = json_encode('dummy');
+        $endpoint = '/1.0/users/gentle/invitations';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->invitations->all('gentle');
 
-        /** @var $invitations \Bitbucket\API\Users\Invitations */
-        $invitations = $this->getClassMock('Bitbucket\API\Users\Invitations', $client);
-        $actual = $invitations->all('gentle');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint, '', 'format=json');
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testIssuesNewInvitationSuccess()
     {
-        $endpoint       = '/users/gentle/invitations';
-        $expectedResult = json_encode('dummy');
-        $params         = ['email' => 'dummy@example.com', 'group_slug' => 'testers'];
+        $endpoint = '/1.0/users/gentle/invitations';
+        $expectedResult = $this->fakeResponse(['dummy']);
+        $params = ['email' => 'dummy@example.com', 'group_slug' => 'testers'];
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('put')
-            ->with($endpoint, $params)
-            ->willReturn($expectedResult);
+        $actual = $this->invitations->create('gentle', 'testers', 'dummy@example.com');
 
-        /** @var $invitations \Bitbucket\API\Users\Invitations */
-        $invitations = $this->getClassMock('Bitbucket\API\Users\Invitations', $client);
-        $actual = $invitations->create('gentle', 'testers', 'dummy@example.com');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('PUT', $endpoint, http_build_query($params), 'format=json');
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testDeleteInvitationByEmailSuccess()
     {
-        $endpoint       = '/users/gentle/invitations';
-        $expectedResult = json_encode('dummy');
-        $params         = ['email' => 'dummy@example.com'];
+        $endpoint = '/1.0/users/gentle/invitations';
+        $expectedResult = $this->fakeResponse(['dummy']);
+        $params = ['email' => 'dummy@example.com'];
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('delete')
-            ->with($endpoint, $params)
-            ->willReturn($expectedResult);
+        $actual = $this->invitations->deleteByEmail('gentle', 'dummy@example.com');
 
-        /** @var $invitations \Bitbucket\API\Users\Invitations */
-        $invitations = $this->getClassMock('Bitbucket\API\Users\Invitations', $client);
-        $actual = $invitations->deleteByEmail('gentle', 'dummy@example.com');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('DELETE', $endpoint, http_build_query($params), 'format=json');
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testDeleteInvitationByGroupSuccess()
     {
-        $endpoint       = '/users/gentle/invitations';
-        $expectedResult = json_encode('dummy');
-        $params         = ['email' => 'dummy@example.com', 'group_slug' => 'testers'];
+        $endpoint = '/1.0/users/gentle/invitations';
+        $expectedResult = $this->fakeResponse(['dummy']);
+        $params = ['email' => 'dummy@example.com', 'group_slug' => 'testers'];
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('delete')
-            ->with($endpoint, $params)
-            ->willReturn($expectedResult);
+        $actual = $this->invitations->deleteByGroup('gentle', 'testers', 'dummy@example.com');
 
-        /** @var $invitations \Bitbucket\API\Users\Invitations */
-        $invitations = $this->getClassMock('Bitbucket\API\Users\Invitations', $client);
-        $actual = $invitations->deleteByGroup('gentle', 'testers', 'dummy@example.com');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('DELETE', $endpoint, http_build_query($params), 'format=json');
+        $this->assertResponse($expectedResult, $actual);
     }
 }

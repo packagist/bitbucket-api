@@ -11,87 +11,83 @@
 
 namespace Bitbucket\Tests\API\Repositories;
 
-use Bitbucket\Tests\API as Tests;
-use Bitbucket\API;
+use Bitbucket\API\Repositories\Hooks;
+use Bitbucket\Tests\API\TestCase;
+use Psr\Http\Message\ResponseInterface;
 
-class HooksTest extends Tests\TestCase
+class HooksTest extends TestCase
 {
+    /** @var Hooks */
+    private $hooks;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->hooks = $this->getApiMock(Hooks::class);
+    }
+
     public function invalidCreateProvider()
     {
-        return array(
-            array(array(
-                'dummy'         => 'data',
-            )),
-            array(array(
-                'description'   => 'My webhook',
-                'url'           => '',
-                'active'        => true,
-            )),
-            array(array(
-                'description'   => 'My webhook',
-                'url'           => '',
-                'active'        => true,
-                'events'        => array(),
-            )),
-            array(array(
-                'description'   => 'My webhook',
-                'url'           => '',
-                'events'        => array(
+        return [
+            [[
+                'dummy' => 'data',
+            ]],
+            [[
+                'description' => 'My webhook',
+                'url' => '',
+                'active' => true,
+            ]],
+            [[
+                'description' => 'My webhook',
+                'url' => '',
+                'active' => true,
+                'events' => [],
+            ]],
+            [[
+                'description' => 'My webhook',
+                'url' => '',
+                'events' => [
                     'event1',
                     'event2',
-                ),
-            )),
-            array(array(
-                'description'   => 'My webhook',
-                'active'        => true,
-                'events'        => array(
+                ],
+            ]],
+            [[
+                'description' => 'My webhook',
+                'active' => true,
+                'events' => [
                     'event1',
                     'event2',
-                ),
-                'extra'         => 'Allow user to specify custom data',
-            )),
-        );
+                ],
+                'extra' => 'Allow user to specify custom data',
+            ]],
+        ];
     }
 
     /**
-     * @access public
-     * @param  mixed $check
-     * @return void
-     *
      * @expectedException \InvalidArgumentException
      * @dataProvider invalidCreateProvider
      */
-    public function testInvalidCreate($check)
+    public function testInvalidCreate(array $check)
     {
-        $client = $this->getHttpClientMock();
-
-        /** @var \Bitbucket\API\Repositories\Hooks $hooks */
-        $hooks = $this->getClassMock('Bitbucket\API\Repositories\Hooks', $client);
-        $hooks->create('gentle', 'my-repo', $check);
+        $this->hooks->create('gentle', 'my-repo', $check);
     }
 
     public function testCreateSuccess()
     {
-        $endpoint   = '/repositories/gentle/eof/hooks';
-        $params     = array(
-            'description'   => 'My first webhook',
-            'url'           => 'http://requestb.in/xxx',
-            'active'        => true,
-            'events'        => array(
+        $endpoint = '/2.0/repositories/gentle/eof/hooks';
+        $params = [
+            'description' => 'My first webhook',
+            'url' => 'http://requestb.in/xxx',
+            'active' => true,
+            'events' => [
                 'repo:push',
                 'issue:created',
-            ),
-        );
+            ],
+        ];
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->any())
-            ->method('post')
-            ->with($endpoint, json_encode($params))
-        ;
+        $this->hooks->create('gentle', 'eof', $params);
 
-        /** @var \Bitbucket\API\Repositories\Hooks $hooks */
-        $hooks = $this->getClassMock('Bitbucket\API\Repositories\Hooks', $client);
-        $hooks->create('gentle', 'eof', $params);
+        $this->assertRequest('POST', $endpoint, json_encode($params));
     }
 
     /**
@@ -99,139 +95,97 @@ class HooksTest extends Tests\TestCase
      */
     public function testCreateIssue72()
     {
-        $params     = array(
-            'description'   => 'My first webhook',
-            'url'           => 'http://requestb.in/xxx',
-            'active'        => true,
-            'events'        => array(
+        $endpoint = '/2.0/repositories/gentle/eof/hooks';
+        $params = [
+            'description' => 'My first webhook',
+            'url' => 'http://requestb.in/xxx',
+            'active' => true,
+            'events' => [
                 'repo:push',
                 'issue:created',
-            )
-        );
+            ]
+        ];
 
-        /** @var \Bitbucket\API\Repositories\Hooks $hooks */
-        $hooks = $this->getClassMock('Bitbucket\API\Repositories\Hooks', $this->getHttpClient());
-        $response = $hooks->create('gentle', 'eof', $params);
+        $response = $this->hooks->create('gentle', 'eof', $params);
 
-        $this->assertInstanceOf('Buzz\Message\MessageInterface', $response);
+        $this->assertRequest('POST', $endpoint, json_encode($params));
+        $this->assertInstanceOf(ResponseInterface::class, $response);
     }
 
     public function testCreateSuccessWithExtraParameters()
     {
-        $endpoint   = '/repositories/gentle/eof/hooks';
-        $params     = array(
-            'description'   => 'My first webhook',
-            'url'           => 'http://requestb.in/xxx',
-            'active'        => true,
-            'extra'         => 'User can specify additional parameters',
-            'events'        => array(
+        $endpoint = '/2.0/repositories/gentle/eof/hooks';
+        $params = [
+            'description' => 'My first webhook',
+            'url' => 'http://requestb.in/xxx',
+            'active' => true,
+            'extra' => 'User can specify additional parameters',
+            'events' => [
                 'repo:push',
                 'issue:created',
-            ),
-        );
+            ],
+        ];
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->any())
-            ->method('post')
-            ->with($endpoint, json_encode($params))
-        ;
+        $this->hooks->create('gentle', 'eof', $params);
 
-        /** @var \Bitbucket\API\Repositories\Hooks $hooks */
-        $hooks = $this->getClassMock('Bitbucket\API\Repositories\Hooks', $client);
-        $hooks->create('gentle', 'eof', $params);
+        $this->assertRequest('POST', $endpoint, json_encode($params));
     }
 
     public function testUpdateSuccess()
     {
-        $endpoint   = '/repositories/gentle/eof/hooks/30b60aee-9cdf-407d-901c-2de106ee0c9d';
-        $params     = array(
-            'description'   => 'My first webhook',
-            'url'           => 'http://requestb.in/zzz',
-            'active'        => true,
-            'events'        => array(
+        $endpoint = '/2.0/repositories/gentle/eof/hooks/30b60aee-9cdf-407d-901c-2de106ee0c9d';
+        $params = [
+            'description' => 'My first webhook',
+            'url' => 'http://requestb.in/zzz',
+            'active' => true,
+            'events' => [
                 'repo:push',
                 'issue:created',
-            ),
-        );
+            ],
+        ];
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->any())
-            ->method('put')
-            ->with($endpoint, json_encode($params))
-        ;
+        $this->hooks->update('gentle', 'eof', '30b60aee-9cdf-407d-901c-2de106ee0c9d', $params);
 
-        /** @var \Bitbucket\API\Repositories\Hooks $hooks */
-        $hooks = $this->getClassMock('Bitbucket\API\Repositories\Hooks', $client);
-        $hooks->update('gentle', 'eof', '30b60aee-9cdf-407d-901c-2de106ee0c9d', $params);
+        $this->assertRequest('PUT', $endpoint, json_encode($params));
     }
 
     /**
-     * @access public
-     * @param  mixed $check
-     * @return void
-     *
      * @expectedException \InvalidArgumentException
      * @dataProvider invalidCreateProvider
      */
-    public function testInvalidUpdate($check)
+    public function testInvalidUpdate(array $check)
     {
-        $client = $this->getHttpClientMock();
-
-        /** @var \Bitbucket\API\Repositories\Hooks $hooks */
-        $hooks = $this->getClassMock('Bitbucket\API\Repositories\Hooks', $client);
-        $hooks->update('gentle', 'eof', '30b60aee-9cdf-407d-901c-2de106ee0c9d', $check);
+        $this->hooks->update('gentle', 'eof', '30b60aee-9cdf-407d-901c-2de106ee0c9d', $check);
     }
 
     public function testGetAllHooks()
     {
-        $endpoint       = '/repositories/gentle/eof/hooks';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/repositories/gentle/eof/hooks';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->any())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult)
-        ;
+        $actual = $this->hooks->all('gentle', 'eof');
 
-        /** @var \Bitbucket\API\Repositories\Hooks $hooks */
-        $hooks  = $this->getClassMock('Bitbucket\API\Repositories\Hooks', $client);
-        $actual = $hooks->all('gentle', 'eof');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testGetSingleHook()
     {
-        $endpoint       = '/repositories/gentle/eof/hooks/30b60aee-9cdf-407d-901c-2de106ee0c9d';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/repositories/gentle/eof/hooks/30b60aee-9cdf-407d-901c-2de106ee0c9d';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->any())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult)
-        ;
+        $actual = $this->hooks->get('gentle', 'eof', '30b60aee-9cdf-407d-901c-2de106ee0c9d');
 
-        /** @var \Bitbucket\API\Repositories\Hooks $hooks */
-        $hooks  = $this->getClassMock('Bitbucket\API\Repositories\Hooks', $client);
-        $actual = $hooks->get('gentle', 'eof', '30b60aee-9cdf-407d-901c-2de106ee0c9d');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testDeleteSingleHook()
     {
-        $endpoint = '/repositories/gentle/eof/hooks/30b60aee-9cdf-407d-901c-2de106ee0c9d';
+        $endpoint = '/2.0/repositories/gentle/eof/hooks/30b60aee-9cdf-407d-901c-2de106ee0c9d';
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('delete')
-            ->with($endpoint);
+        $this->hooks->delete('gentle', 'eof', '30b60aee-9cdf-407d-901c-2de106ee0c9d');
 
-        /** @var \Bitbucket\API\Repositories\Hooks $hooks */
-        $hooks = $this->getClassMock('Bitbucket\API\Repositories\Hooks', $client);
-
-        $hooks->delete('gentle', 'eof', '30b60aee-9cdf-407d-901c-2de106ee0c9d');
+        $this->assertRequest('DELETE', $endpoint);
     }
 }

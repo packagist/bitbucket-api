@@ -15,7 +15,7 @@ $uuid	= '30b60aee-9cdf-407d-901c-2de106ee0c9d'; // unique identifier of the webh
 ```
 {% include auth.md var_name="hooks" class_ns="Repositories\Hooks" %}
 
-### Get a webhook:
+### Get a webhook: (API 2.0)
 
 ```php
 $hooks->get($account_name, $repo_slug, $uuid);
@@ -23,13 +23,13 @@ $hooks->get($account_name, $repo_slug, $uuid);
 
 **HINT:** You can use `$hooks->all()` method to get a list of all available hooks and their unique identifiers.
 
-### Get a list of webhooks:
+### Get a list of webhooks: (API 2.0)
 
 ```php
 $hooks->all($account_name, $repo_slug);
 ```
 
-### Create a new webhook:
+### Create a new webhook: (API 2.0)
 
 ```php
 $hook->create($account_name, $repo_slug, array(
@@ -46,7 +46,7 @@ $hook->create($account_name, $repo_slug, array(
 
 **HINT:** For a full list of available events, see [Event Payloads](https://confluence.atlassian.com/display/BITBUCKET/Event+Payloads) page.
 
-### Update a webhook:
+### Update a webhook: (API 2.0)
 
 Add a new event `pullrequest:approved` to our webhook:
 
@@ -66,7 +66,7 @@ $hook->update($account_name, $repo_slug, $uuid, array(
 
 **HINT:** Bitbucket doesn't offer a patch endpoint, so you need to send the entire object represensation in order to update.
 
-### Delete a webhook:
+### Delete a webhook: (API 2.0)
 
 ```php
 $hook->delete($account_name, $repo_slug, $uuid);

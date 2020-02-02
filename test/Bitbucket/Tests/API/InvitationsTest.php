@@ -2,22 +2,26 @@
 
 namespace Bitbucket\Tests\API;
 
-use Bitbucket\Tests\API as Tests;
+use Bitbucket\API\Invitations;
 
-class InvitationsTest extends Tests\TestCase
+class InvitationsTest extends TestCase
 {
+    /** @var Invitations */
+    private $invitations;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->invitations = $this->getApiMock(Invitations::class);
+    }
+
     public function testSendInvitationSuccess()
     {
-        $endpoint       = '/invitations/gentle/eof';
-        $params         = array('email' => 'john_doe@example.com', 'permission' => 'read');
+        $endpoint = '/1.0/invitations/gentle/eof';
+        $params = http_build_query(['permission' => 'read', 'email' => 'john_doe@example.com']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('post')
-            ->with($endpoint, $params);
+        $this->invitations->send('gentle', 'eof', 'john_doe@example.com', 'read');
 
-        /** @var $invitation \Bitbucket\API\Invitations */
-        $invitation = $this->getClassMock('Bitbucket\API\Invitations', $client);
-        $invitation->send('gentle', 'eof', 'john_doe@example.com', 'read');
+        $this->assertRequest('POST', $endpoint, $params, 'format=json');
     }
 }

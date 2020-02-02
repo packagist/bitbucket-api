@@ -13,7 +13,7 @@ namespace Bitbucket\API\Repositories;
 
 use Bitbucket\API;
 use Bitbucket\API\Repositories;
-use Buzz\Message\MessageInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Provides functionality for interacting with an issue tracker.
@@ -29,7 +29,7 @@ class Issues extends API\Api
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  array            $options Filtering parameters.
-     * @return MessageInterface
+     * @return ResponseInterface
      *
      * @see https://confluence.atlassian.com/x/1w2mEQ
      */
@@ -48,7 +48,7 @@ class Issues extends API\Api
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  int              $issueID The issue identifier.
-     * @return MessageInterface
+     * @return ResponseInterface
      */
     public function get($account, $repo, $issueID)
     {
@@ -64,7 +64,7 @@ class Issues extends API\Api
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  array            $options Issue parameters
-     * @return MessageInterface
+     * @return ResponseInterface
      *
      * @throws \InvalidArgumentException
      *
@@ -80,7 +80,8 @@ class Issues extends API\Api
 
         return $this->getClient()->setApiVersion('2.0')->post(
             sprintf('/repositories/%s/%s/issues', $account, $repo),
-            $options
+            $options,
+            ['Content-Type' => 'application/json']
         );
     }
 
@@ -92,7 +93,7 @@ class Issues extends API\Api
      * @param  string           $repo    The repository identifier.
      * @param  int              $issueID The issue identifier.
      * @param  array            $options Issue parameters
-     * @return MessageInterface
+     * @return ResponseInterface
      *
      * @see https://confluence.atlassian.com/display/BITBUCKET/issues+Resource#issuesResource-Updateanexistingissue
      */
@@ -100,7 +101,8 @@ class Issues extends API\Api
     {
         return $this->getClient()->setApiVersion('2.0')->put(
             sprintf('/repositories/%s/%s/issues/%d', $account, $repo, $issueID),
-            $options
+            $options,
+            ['Content-Type' => 'application/json']
         );
     }
 
@@ -111,7 +113,7 @@ class Issues extends API\Api
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  int              $issueID The issue identifier.
-     * @return MessageInterface
+     * @return ResponseInterface
      */
     public function delete($account, $repo, $issueID)
     {
@@ -131,6 +133,6 @@ class Issues extends API\Api
      */
     public function comments()
     {
-        return $this->api('Repositories\\Issues\\Comments');
+        return $this->api(Issues\Comments::class);
     }
 }

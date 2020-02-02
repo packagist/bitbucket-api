@@ -11,7 +11,7 @@
 
 namespace Bitbucket\API;
 
-use Buzz\Message\MessageInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Manages the currently authenticated account profile.
@@ -24,7 +24,7 @@ class User extends Api
      * Get user profile
      *
      * @access public
-     * @return MessageInterface
+     * @return ResponseInterface
      *
      * @throws \InvalidArgumentException
      */
@@ -37,7 +37,7 @@ class User extends Api
      * Retrieves the email for an authenticated user.
      *
      * @access public
-     * @return MessageInterface
+     * @return ResponseInterface
      *
      * @throws \InvalidArgumentException
      */

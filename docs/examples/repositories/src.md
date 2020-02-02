@@ -11,19 +11,19 @@ Allows you to browse directories and view files, create branches and commit new 
 ### Prepare:
 {% include auth.md var_name="src" class_ns="Repositories\Src" %}
 
-### Get a list of the src in a repository.:
+### Get a list of the src in a repository.: (API 2.0)
 
 ```php
 $src->get($account_name, $repo_slug, '1e10ffe', 'app/models/');
 ```
 
-### Get raw content of an individual file:
+### Get raw content of an individual file: (API 2.0)
 
 ```php
 $src->get($account_name, $repo_slug, '1e10ffe', 'app/models/core.php');
 ```
 
-### Create file in repository
+### Create file in repository: (API 2.0)
 
 ```php
 $params = array();
@@ -35,7 +35,7 @@ $params['message'] = 'Commit message';
 $src->create($account_name, $repo_slug, $params);
 ```
 
-### Delete file in repository
+### Delete file in repository: (API 2.0)
 
 ```php
 $params = array();
@@ -47,7 +47,7 @@ $params['message'] = 'Commit message';
 $src->create($account_name, $repo_slug, $params);
 ```
 
-### Create new branch in repository
+### Create new branch in repository: (API 2.0)
 
 ```php
 $params = array();

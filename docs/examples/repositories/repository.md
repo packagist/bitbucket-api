@@ -17,7 +17,7 @@ Allows you to create a new repository or edit a specific one.
 $repo->get($account_name, $repo_slug);
 ```
 
-### Create a new repository
+### Create a new repository: (API 2.0)
 
 ```php
 $repo->create($account_name, $repo_slug, array(
@@ -29,7 +29,7 @@ $repo->create($account_name, $repo_slug, array(
 ));
 ```
 
-### Update an existing repository:
+### Update an existing repository: (API 2.0)
 
 ```php
 $repo->update($account_name, $repo_slug, array(
@@ -57,7 +57,7 @@ $repo->watchers($account_name, $repo_slug);
 $repo->forks($account_name, $repo_slug);
 ```
 
-### Fork a repository:
+### Fork a repository: (API 2.0)
 
 ```php
 $repo->fork($account_name, $repo_slug, $fork_slug, array(
@@ -65,19 +65,19 @@ $repo->fork($account_name, $repo_slug, $fork_slug, array(
 ));
 ```
 
-### Get a list of branches associated with a repository:
+### Get a list of branches associated with a repository: (API 2.0)
 
 ```php
 $repo->branches($account_name, $repo_slug);
 ```
 
-### Get a list of tags:
+### Get a list of tags: (API 2.0)
 
 ```php
 $repo->tags($account_name, $repo_slug);
 ```
 
-### Get the history of a file in a changeset
+### Get the history of a file in a changeset: (API 2.0)
 
 ```php
 $repo->filehistory($account_name, $repo_slug, '1bc8345', 'app/models/core.php')

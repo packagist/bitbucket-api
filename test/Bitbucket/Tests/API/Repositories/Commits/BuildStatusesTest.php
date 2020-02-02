@@ -1,63 +1,52 @@
 <?php
 
-namespace Bitbucket\Tests\API\Repositories\Commits\Statuses;
+namespace Bitbucket\Tests\API\Repositories\Commits;
 
-use Bitbucket\Tests\API as Tests;
-use Bitbucket\API;
+use Bitbucket\API\Repositories\Commits\BuildStatuses;
+use Bitbucket\Tests\API\TestCase;
 
-class BuildStatusesTest extends Tests\TestCase
+class BuildStatusesTest extends TestCase
 {
+    /** @var BuildStatuses */
+    private $buildStatuses;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->buildStatuses = $this->getApiMock(BuildStatuses::class);
+    }
+
     public function testGet()
     {
-        $endpoint = '/repositories/gentle/eof/commit/SHA1/statuses/build/KEY';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/repositories/gentle/eof/commit/SHA1/statuses/build/KEY';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->buildStatuses->get('gentle', 'eof', 'SHA1', 'KEY');
 
-        /** @var \Bitbucket\API\Repositories\Commits\BuildStatuses $buildStatus */
-        $buildStatus = $this->getClassMock('Bitbucket\API\Repositories\Commits\BuildStatuses', $client);
-        $actual = $buildStatus->get('gentle', 'eof', 'SHA1', 'KEY');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testCreate()
     {
-        $endpoint = '/repositories/gentle/eof/commit/SHA1/statuses/build';
-        $params = json_encode(array(
+        $endpoint = '/2.0/repositories/gentle/eof/commit/SHA1/statuses/build';
+        $params = [
             'state' => 'SUCCESSFUL'
-        ));
+        ];
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('post')
-            ->with($endpoint);
+        $this->buildStatuses->create('gentle', 'eof', 'SHA1', $params);
 
-        /** @var \Bitbucket\API\Repositories\Commits\BuildStatuses $buildStatus */
-        $buildStatus = $this->getClassMock('Bitbucket\API\Repositories\Commits\BuildStatuses', $client);
-
-        $buildStatus->create('gentle', 'eof', 'SHA1', $params);
+        $this->assertRequest('POST', $endpoint, json_encode($params));
     }
 
     public function testUpdate()
     {
-        $endpoint = '/repositories/gentle/eof/commit/SHA1/statuses/build/KEY';
-        $params = json_encode(array(
+        $endpoint = '/2.0/repositories/gentle/eof/commit/SHA1/statuses/build/KEY';
+        $params = [
             'state' => 'SUCCESSFUL'
-        ));
+        ];
+        $this->buildStatuses->update('gentle', 'eof', 'SHA1', 'KEY', $params);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('put')
-            ->with($endpoint);
-
-        /** @var \Bitbucket\API\Repositories\Commits\BuildStatuses $buildStatus */
-        $buildStatus = $this->getClassMock('Bitbucket\API\Repositories\Commits\BuildStatuses', $client);
-
-        $buildStatus->update('gentle', 'eof', 'SHA1', 'KEY', $params);
+        $this->assertRequest('PUT', $endpoint, json_encode($params));
     }
 }

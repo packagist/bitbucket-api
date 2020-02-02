@@ -12,7 +12,8 @@
 namespace Bitbucket\API\Repositories;
 
 use Bitbucket\API\Api;
-use Buzz\Message\MessageInterface;
+use Bitbucket\API\Repositories\Pipelines\Steps;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Manage the pipelines of a repository
@@ -27,7 +28,7 @@ class Pipelines extends Api
      * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
-     * @return MessageInterface
+     * @return ResponseInterface
      */
     public function all($account, $repo)
     {
@@ -43,7 +44,7 @@ class Pipelines extends Api
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  array|string     $params  Additional parameters as array or JSON string
-     * @return MessageInterface
+     * @return ResponseInterface
      */
     public function create($account, $repo, $params = array())
     {
@@ -70,7 +71,7 @@ class Pipelines extends Api
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  string           $uuid    The pipeline's identifier.
-     * @return MessageInterface
+     * @return ResponseInterface
      */
     public function get($account, $repo, $uuid)
     {
@@ -86,7 +87,7 @@ class Pipelines extends Api
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  string           $uuid    The pipeline's identifier.
-     * @return MessageInterface
+     * @return ResponseInterface
      */
     public function stopPipeline($account, $repo, $uuid)
     {
@@ -106,6 +107,6 @@ class Pipelines extends Api
      */
     public function steps()
     {
-        return $this->api('Repositories\\Pipelines\\Steps');
+        return $this->api(Steps::class);
     }
 }
