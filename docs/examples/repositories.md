@@ -15,7 +15,7 @@ repositories:
 ### Pagination:
 {% include pagination.md var_name="repositories" class_ns="Repositories" %}
 
-### Get a list of repositories for an account:
+### Get a list of repositories for an account: (API 2.0)
 
 If the caller is properly authenticated and authorized, this method returns a collection containing public and private repositories.
 
@@ -23,7 +23,7 @@ If the caller is properly authenticated and authorized, this method returns a co
   $repositories->all($account_name);
   ```
 
-### Get a list of all public repositories:
+### Get a list of all public repositories: (API 2.0)
 
 Only public repositories are returned.
 

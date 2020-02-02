@@ -2,104 +2,79 @@
 
 namespace Bitbucket\Tests\API\Users;
 
+use Bitbucket\API\Users\SshKeys;
 use Bitbucket\Tests\API as Tests;
 
 class SshKeysTest extends Tests\TestCase
 {
+    /** @var SshKeys */
+    private $sshKeys;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->sshKeys = $this->getApiMock(SshKeys::class);
+    }
+
     public function testGetAllSshKeys()
     {
-        $endpoint       = '/users/gentle/ssh-keys';
-        $expectedResult = json_encode('dummy');
+        $endpoint = '/2.0/users/gentle/ssh-keys';
+        $expectedResult = $this->fakeResponse('dummy');
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->sshKeys->all('gentle');
 
-        /** @var $keys \Bitbucket\API\Users\SshKeys */
-        $keys = $this->getClassMock('Bitbucket\API\Users\SshKeys', $client);
-        $actual = $keys->all('gentle');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testCreateSshKey()
     {
-        $endpoint       = '/users/gentle/ssh-keys';
-        $expectedResult = json_encode('dummy');
-        $params         = array(
+        $endpoint = '/2.0/users/gentle/ssh-keys';
+        $expectedResult = $this->fakeResponse('dummy');
+        $params = [
             'key'   => 'key content',
             'label' => 'dummy key'
-        );
+        ];
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('post')
-            ->with($endpoint, $params)
-            ->willReturn($expectedResult);
+        $actual = $this->sshKeys->create('gentle', $params['key'], $params['label']);
 
-        /** @var $keys \Bitbucket\API\Users\SshKeys */
-        $keys = $this->getClassMock('Bitbucket\API\Users\SshKeys', $client);
-        $actual = $keys->create('gentle', $params['key'], $params['label']);
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('POST', $endpoint, http_build_query($params));
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testUpdateSshKey()
     {
-        $endpoint       = '/users/gentle/ssh-keys/12';
-        $expectedResult = json_encode('dummy');
-        $params         = array(
+        $endpoint = '/2.0/users/gentle/ssh-keys/12';
+        $expectedResult = $this->fakeResponse('dummy');
+        $params = [
             'key'   => 'key content'
-        );
+        ];
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('put')
-            ->with($endpoint, $params)
-            ->willReturn($expectedResult);
+        $actual = $this->sshKeys->update('gentle', 12, $params['key']);
 
-        /** @var $keys \Bitbucket\API\Users\SshKeys */
-        $keys = $this->getClassMock('Bitbucket\API\Users\SshKeys', $client);
-        $actual = $keys->update('gentle', 12, $params['key']);
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('PUT', $endpoint, http_build_query($params));
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testGetSshKeyContent()
     {
-        $endpoint       = '/users/gentle/ssh-keys/2';
-        $expectedResult = json_encode('dummy');
+        $endpoint = '/2.0/users/gentle/ssh-keys/2';
+        $expectedResult = $this->fakeResponse('dummy');
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->sshKeys->get('gentle', 2);
 
-        /** @var $keys \Bitbucket\API\Users\SshKeys */
-        $keys = $this->getClassMock('Bitbucket\API\Users\SshKeys', $client);
-        $actual = $keys->get('gentle', 2);
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testDeleteSshKey()
     {
-        $endpoint       = '/users/gentle/ssh-keys/2';
-        $expectedResult = json_encode('dummy');
+        $endpoint = '/2.0/users/gentle/ssh-keys/2';
+        $expectedResult = $this->fakeResponse('dummy');
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('delete')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->sshKeys->delete('gentle', 2);
 
-        /** @var $keys \Bitbucket\API\Users\SshKeys */
-        $keys = $this->getClassMock('Bitbucket\API\Users\SshKeys', $client);
-        $actual = $keys->delete('gentle', 2);
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('DELETE', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 }

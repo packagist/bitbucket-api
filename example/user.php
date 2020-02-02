@@ -8,16 +8,10 @@ $user = new Bitbucket\API\User;
 $bb_user = 'username';
 $bb_pass = 'password';
 
-/**
- * $accountname The team or individual account owning the repository.
- * repo_slub    The repository identifier.
- */
-$accountname    = 'company';
-$repo_slug      = 'sandbox';
-
-
 // login
-$user->setCredentials( new Bitbucket\API\Authentication\Basic($bb_user, $bb_pass) );
+$user->setCredentials( new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
 
 # get user profile
-# print_r($user->get());
+#print_r($user->get()->getBody()->getContents());
+# get user emails
+#print_r($user->emails()->getBody()->getContents());

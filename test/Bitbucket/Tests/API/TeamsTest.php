@@ -2,21 +2,30 @@
 
 namespace Bitbucket\Tests\API;
 
-use Bitbucket\Tests\API as Tests;
+use Bitbucket\API\Teams;
 
-class TeamsTest extends Tests\TestCase
+class TeamsTest extends TestCase
 {
+    /** @var Teams */
+    private $teams;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->teams = $this->getApiMock(Teams::class);
+    }
+
     public function invalidRoleProvider()
     {
-        return array(
-            array('invalid'),
-            array(2),
-            array(array('invalid')),
-            array('2.0'),
-            array(true),
-            array(array('admin')),
-            array(array())
-        );
+        return [
+            ['invalid'],
+            [2],
+            [['invalid']],
+            ['2.0'],
+            [true],
+            [['admin']],
+            [[]]
+        ];
     }
 
     /**
@@ -25,118 +34,72 @@ class TeamsTest extends Tests\TestCase
      */
     public function testGetTeamsListWithInvalidRole($role)
     {
-        $client = $this->getHttpClientMock();
-
-        /** @var \Bitbucket\API\Teams $team */
-        $team = $this->getClassMock('Bitbucket\API\Teams', $client);
-        $team->all($role);
+        $this->teams->all($role);
     }
 
     public function testGetTeamsList()
     {
-        $endpoint       = '/teams';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/teams';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->any())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->teams->all('member');
 
-        /** @var \Bitbucket\API\Teams $team */
-        $team = $this->getClassMock('Bitbucket\API\Teams', $client);
-        $actual = $team->all('member');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint, '', 'role=member');
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testGetTeamProfile()
     {
-        $endpoint       = '/teams/gentle-web';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/teams/gentle-web';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->teams->profile('gentle-web');
 
-        /** @var \Bitbucket\API\Teams $team */
-        $team   = $this->getClassMock('Bitbucket\API\Teams', $client);
-        $actual = $team->profile('gentle-web');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testGetTeamMembers()
     {
-        $endpoint       = '/teams/gentle-web/members';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/teams/gentle-web/members';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
-
-        /** @var \Bitbucket\API\Teams $team */
-        $team   = $this->getClassMock('Bitbucket\API\Teams', $client);
-        $actual = $team->members('gentle-web');
+        $actual = $this->teams->members('gentle-web');
 
         $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
     }
 
     public function testGetTeamFollowers()
     {
-        $endpoint       = '/teams/gentle-web/followers';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/teams/gentle-web/followers';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
-
-        /** @var \Bitbucket\API\Teams $team */
-        $team   = $this->getClassMock('Bitbucket\API\Teams', $client);
-        $actual = $team->followers('gentle-web');
+        $actual = $this->teams->followers('gentle-web');
 
         $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
     }
 
     public function testGetTeamFollowing()
     {
-        $endpoint       = '/teams/gentle-web/following';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/teams/gentle-web/following';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
-
-        /** @var \Bitbucket\API\Teams $team */
-        $team   = $this->getClassMock('Bitbucket\API\Teams', $client);
-        $actual = $team->following('gentle-web');
+        $actual = $this->teams->following('gentle-web');
 
         $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
     }
 
     public function testGetTeamRepositories()
     {
-        $endpoint       = '/teams/gentle-web/repositories';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/teams/gentle-web/repositories';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
-
-        /** @var \Bitbucket\API\Teams $team */
-        $team   = $this->getClassMock('Bitbucket\API\Teams', $client);
-        $actual = $team->repositories('gentle-web');
+        $actual = $this->teams->repositories('gentle-web');
 
         $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
     }
 }

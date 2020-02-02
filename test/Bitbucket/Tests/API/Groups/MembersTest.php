@@ -2,53 +2,46 @@
 
 namespace Bitbucket\Tests\API\Groups;
 
-use Bitbucket\Tests\API as Tests;
+use Bitbucket\API\Groups\Members;
+use Bitbucket\Tests\API\TestCase;
 
-class MembersTest extends Tests\TestCase
+class MembersTest extends TestCase
 {
+    /** @var Members */
+    private $members;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->members = $this->getApiMock(Members::class);
+    }
+
     public function testGetAllGroupMembers()
     {
-        $endpoint       = '/groups/gentle/testers/members';
-        $expectedResult = json_encode('dummy');
+        $endpoint = '/1.0/groups/gentle/testers/members';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->members->all('gentle', 'testers');
 
-        /** @var $members \Bitbucket\API\Groups\Members */
-        $members = $this->getClassMock('Bitbucket\API\Groups\Members', $client);
-        $actual = $members->all('gentle', 'testers');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint, '', 'format=json');
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testAddMemberToGroupSuccess()
     {
-        $endpoint       = '/groups/gentle/testers/members/steve';
+        $endpoint = '/1.0/groups/gentle/testers/members/steve';
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('put')
-            ->with($endpoint);
+        $this->members->add('gentle', 'testers', 'steve');
 
-        /** @var $member \Bitbucket\API\Groups\Members */
-        $member = $this->getClassMock('Bitbucket\API\Groups\Members', $client);
-        $member->add('gentle', 'testers', 'steve');
+        $this->assertRequest('PUT', $endpoint, '', 'format=json');
     }
 
     public function testDeleteMemberFromGroupSuccess()
     {
-        $endpoint       = '/groups/gentle/testers/members/steve';
+        $endpoint = '/1.0/groups/gentle/testers/members/steve';
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('delete')
-            ->with($endpoint);
+        $this->members->delete('gentle', 'testers', 'steve');
 
-        /** @var $member \Bitbucket\API\Groups\Members */
-        $member = $this->getClassMock('Bitbucket\API\Groups\Members', $client);
-        $member->delete('gentle', 'testers', 'steve');
+        $this->assertRequest('DELETE', $endpoint, '', 'format=json');
     }
 }

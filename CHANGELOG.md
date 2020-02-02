@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [Unreleased]
+## 2.0.0 / [Unreleased]
 
 ### Added:
   - Create a file through API via `Src:create` (PR #40)
@@ -11,7 +11,25 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed:
   - Updated `Api:api` in order to support class name resolution via `::class` (PR #38)
   - Updated `BranchRestrictions` with newly available restriction types (PR #39)
+  - Minimum required PHP version has been bumped to 5.6 from 5.4
+  - All endpoints now automatically use the correct API version
+  - Endpoints for SSH Keys, Deploy Keys, Emails, Repository and Issues have been updated to use v2
+  - The library is powered by HTTP plug and can be used with any compatible HTTP client (#74) 
 
+### Removed:
+  - Removed all deprecated/removed Bitbucket API v1 Privileges endpoints (PR #58)
+  - Removed all deprecated/removed Bitbucket API v1 Emails endpoints (PR #56)
+  - Removed all deprecated/removed Bitbucket API v1 Wiki endpoints (PR #53)
+  - Removed all deprecated/removed Bitbucket API v1 Changeset endpoints (PR #61)
+  - Removed all deprecated/removed Bitbucket API v1 Followers endpoints (PR #62)
+  - Removed all deprecated/removed Bitbucket API v1 Services endpoints (PR #65)
+  - Removed all deprecated/removed Bitbucket API v1 Links endpoints (PR #64)
+  - Removed all deprecated/removed Bitbucket API v1 Events endpoints (PR #66)
+  - Removed all deprecated/removed Bitbucket API v1 OAuth endpoints (PR #54)
+  - Removed all deprecated/removed Bitbucket API v1 User endpoints(PR #57, PR #68, PR #69)
+  - Removed all deprecated/removed Bitbucket API v1 Repository endpoints (PR #67)
+  - Removed all deprecated/removed Bitbucket API v1 Issues endpoints (PR #63)
+  - Removed all deprecated/removed Bitbucket API v1 Invitations endpoints (PR #70)
 
 ## 1.1.2 / 2018-06-18
 

@@ -10,9 +10,7 @@ title: Examples
 
   ```php
   $bitbucket = new \Bitbucket\API\Api();
-  $bitbucket->getClient()->addListener(
-      new \Bitbucket\API\Http\Listener\BasicAuthListener('username', 'password')
-  );
+  $bitbucket->setCredentials(new Http\Message\Authentication\BasicAuth('username', 'password'));
 
   /** @var \Bitbucket\API\User $user */
   $user = $bitbucket->api('User');
@@ -49,8 +47,5 @@ title: Examples
   - [Teams](teams.html)
   - [User](user.html)
   - [Users](users.html)
-    - [Account](users/account.html)
-    - [Emails](users/emails.html)
     - [Invitations](users/invitations.html)
-    - [Privileges](users/privileges.html)
     - [SSH keys](users/ssh-keys.html)

@@ -12,19 +12,19 @@ to get more detailed information, to create and to update an issue.
 ### Prepare:
 {% include auth.md var_name="issue" class_ns="Repositories\Issues" %}
 
-### Fetch a list of issues:
+### Fetch a list of issues: (API 2.0)
 
 ```php
 $issue->all($account_name, $repo_slug);
 ```
 
-### Fetch a single issue:
+### Fetch a single issue: (API 2.0)
 
 ```php
 $issue->get($account_name, $repo_slug, 3);
 ```
 
-### Fetch 5 issues that contains word `bug` in title:
+### Fetch 5 issues that contains word `bug` in title: (API 2.0)
 
 ```php
 $issue->all($account_name, $repo_slug, array(
@@ -34,7 +34,7 @@ $issue->all($account_name, $repo_slug, array(
 ));
 ```
 
-### Add a new issue:
+### Add a new issue: (API 2.0)
 
 ```php
 $issue->create($account_name, $repo_slug, array(
@@ -45,7 +45,7 @@ $issue->create($account_name, $repo_slug, array(
 ));
 ```
 
-### Update an existing issue:
+### Update an existing issue: (API 2.0)
 
 ```php
 $issue->update($account_name, $repo_slug, 5, array(
@@ -53,7 +53,7 @@ $issue->update($account_name, $repo_slug, 5, array(
 ));
 ```
 
-### Delete issue:
+### Delete issue: (API 2.0)
 
 ```php
 $issue->delete($account_name, $repo_slug, 5);

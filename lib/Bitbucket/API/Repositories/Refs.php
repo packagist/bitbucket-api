@@ -10,7 +10,7 @@
 namespace Bitbucket\API\Repositories;
 
 use Bitbucket\API;
-use Buzz\Message\MessageInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @author  Kevin Howe    <kjhowe@gmail.com>
@@ -24,7 +24,7 @@ class Refs extends API\Api
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  string|array     $params  GET parameters
-     * @return MessageInterface
+     * @return ResponseInterface
      *
      * @throws \InvalidArgumentException
      */

@@ -11,17 +11,16 @@
 
 namespace Bitbucket\API\Exceptions;
 
-use Buzz\Message\MessageInterface;
-use Buzz\Message\RequestInterface;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @author  Alexandru G.    <alex@gentle.ro>
  */
 class HttpResponseException extends \Exception
 {
-    /** @var MessageInterface */
+    /** @var ResponseInterface */
     private $response;
-
     /** @var RequestInterface */
     private $request;
 
@@ -39,7 +38,7 @@ class HttpResponseException extends \Exception
      * @param  RequestInterface $request
      * @return $this
      */
-    public function setRequest($request)
+    public function setRequest(RequestInterface $request)
     {
         $this->request = $request;
 
@@ -48,7 +47,7 @@ class HttpResponseException extends \Exception
 
     /**
      * @access public
-     * @return MessageInterface
+     * @return ResponseInterface
      */
     public function getResponse()
     {
@@ -57,10 +56,10 @@ class HttpResponseException extends \Exception
 
     /**
      * @access public
-     * @param  MessageInterface $response
+     * @param  ResponseInterface $response
      * @return $this
      */
-    public function setResponse($response)
+    public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
 

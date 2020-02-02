@@ -12,7 +12,7 @@ Bitbucket provides Basic and OAuth authentication.
 
 ### OAuth2 authorization
 
-You can use `OAuth2Listener` in order to make authorized requests using version 2 of OAuth protocol.
+You can use `OAuth2Plugin` in order to make authorized requests using version 2 of OAuth protocol.
 
 #### OAuth2 client credentials (_2-legged flow_)
 
@@ -24,8 +24,8 @@ You can use `OAuth2Listener` in order to make authorized requests using version 
   );
 
   $bitbucket = new \Bitbucket\API\Api();
-  $bitbucket->getClient()->addListener(
-      new \Bitbucket\API\Http\Listener\OAuth2Listener($oauth_params)
+  $bitbucket->addPlugin(
+      new \Bitbucket\API\Http\Plugin\OAuth2Plugin($oauth_params)
   );
 
   $repositories = $bitbucket->api('Repositories');
@@ -34,7 +34,7 @@ You can use `OAuth2Listener` in order to make authorized requests using version 
 
 #### OAuth2 Authorization code (_3-legged flow_)
 
-You can use any 3rd party library to complete this [flow][3] and set `access_token` option when you instantiate `OAuth2Listener`.
+You can use any 3rd party library to complete this [flow][3] and set `access_token` option when you instantiate `OAuth2Plugin`.
 
 In the following example [PHP League's OAuth 2.0 Client][1] is used with [Bitbucket Provider][2].
 
@@ -68,8 +68,8 @@ In the following example [PHP League's OAuth 2.0 Client][1] is used with [Bitbuc
       ]);
 
       $bitbucket = new Bitbucket\API\Repositories();
-      $bitbucket->getClient()->addListener(
-          new \Bitbucket\API\Http\Listener\OAuth2Listener(
+      $bitbucket->setCredentials(
+          new \Bitbucket\API\Http\Plugin\OAuth2Plugin(
               array('access_token'  => $token->getToken())
           )
       );
@@ -79,7 +79,7 @@ In the following example [PHP League's OAuth 2.0 Client][1] is used with [Bitbuc
   ```
 
 ### OAuth1 authorization
-This library comes with a `OAuthListener` which will sign all requests for you. All you need to do is to attach the listener to
+This library comes with a `OAuthPlugin` which will sign all requests for you. All you need to do is to attach the listener to
 http client with oauth credentials before making a request.
 
 #### OAuth1 1-legged
@@ -92,8 +92,8 @@ http client with oauth credentials before making a request.
   );
 
   $user = new Bitbucket\API\User;
-  $user->getClient()->addListener(
-      new Bitbucket\API\Http\Listener\OAuthListener($oauth_params)
+  $user->addPlugin(
+      new \Bitbucket\API\Http\Plugin\OAuthPlugin($oauth_params)
   );
 
   // now you can access protected endpoints as consumer owner
@@ -102,7 +102,7 @@ http client with oauth credentials before making a request.
 
 #### OAuth1 3-legged
 
-You can use any 3rd party library to complete this [flow][3] and set OAuth credentials when you instantiate `OAuthListener`.
+You can use any 3rd party library to complete this [flow][3] and set OAuth credentials when you instantiate `OAuthPlugin`.
 
 In the following example [PHP League's OAuth 1.0 Client][4] is used.
 
@@ -132,8 +132,8 @@ In the following example [PHP League's OAuth 1.0 Client][4] is used.
 
 
       $bitbucket = new \Bitbucket\API\Api();
-      $bitbucket->getClient()->addListener(
-          new \Bitbucket\API\Http\Listener\OAuthListener($oauth_params)
+      $bitbucket->addPlugin(
+          new \Bitbucket\API\Http\Plugin\OAuthPlugin($oauth_params)
       );
 
       /** @var \Bitbucket\API\User $user */
@@ -194,15 +194,15 @@ In the following example [PHP League's OAuth 1.0 Client][4] is used.
   ```
 
 ### Basic authentication
-To use basic authentication, you need to attach `BasicAuthListener` to http client with your username and password.
+To use basic authentication, you need to attach `BasicAuth` to the Api instance with your username and password.
 
 _Please note that is not recommended from a security perspective to use your main account in automated tools and scripts
 and you should really consider switching to [OAuth2](#oauth2-authorization) or [OAuth1](#oauth1-authorization)._
 
   ```php
   $user = new Bitbucket\API\User();
-  $user->getClient()->addListener(
-      new Bitbucket\API\Http\Listener\BasicAuthListener($bb_user, $bb_pass)
+  $user->setCredentials(
+      new \Http\Message\Authentication\BasicAuth($bb_user, $bb_pass)  
   );
 
   // now you can access protected endpoints as $bb_user

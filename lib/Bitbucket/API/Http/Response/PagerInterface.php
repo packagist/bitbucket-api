@@ -9,7 +9,7 @@
  */
 namespace Bitbucket\API\Http\Response;
 
-use Buzz\Message\MessageInterface;
+use Psr\Http\Message\MessageInterface;
 
 /**
  * @author Alexandru Guzinschi <alex@gentle.ro>

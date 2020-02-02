@@ -6,12 +6,12 @@
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/b/gentlero/bitbucket-api.svg?style=flat-square)](https://scrutinizer-ci.com/b/gentlero/bitbucket-api/?branch=develop)
 [![Code quality](https://img.shields.io/scrutinizer/b/gentlero/bitbucket-api.svg?style=flat-square)](https://scrutinizer-ci.com/b/gentlero/bitbucket-api/?branch=develop)
 
-Simple Bitbucket API wrapper for PHP >= 5.4
+Simple Bitbucket API wrapper for PHP >= 5.6
 
 ## Requirements
 
-* PHP >= 5.4.0 with [cURL](http://php.net/manual/en/book.curl.php) extension.
-* [Buzz](https://github.com/kriswallsmith/Buzz) library,
+* PHP >= 5.6.0 with [cURL](http://php.net/manual/en/book.curl.php) extension.
+* [Buzz](https://github.com/kriswallsmith/Buzz) library or any [HTTPlug](http://httplug.io/) compatible http client,
 * PHPUnit to run tests. ( _optional_ )
 
 ## Getting started

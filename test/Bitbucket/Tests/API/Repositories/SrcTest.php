@@ -2,45 +2,40 @@
 
 namespace Bitbucket\Tests\API\Repositories;
 
-use Bitbucket\Tests\API as Tests;
-use Bitbucket\API;
+use Bitbucket\API\Repositories\Src;
+use Bitbucket\Tests\API\TestCase;
 
-class SrcTest extends Tests\TestCase
+class SrcTest extends TestCase
 {
+    /** @var Src */
+    private $src;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->src = $this->getApiMock(Src::class);
+    }
+
     public function testListRepoSrc()
     {
-        $endpoint       = '/repositories/gentle/eof/src/1e10ffe//lib';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/repositories/gentle/eof/src/1e10ffe//lib';
+        $expectedResult = $this->fakeResponse(json_encode(['dummy']));
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->src->get('gentle', 'eof', '1e10ffe', '/lib');
 
-        /** @var $src \Bitbucket\API\Repositories\Src */
-        $src    = $this->getClassMock('Bitbucket\API\Repositories\Src', $client);
-        $actual = $src->get('gentle', 'eof', '1e10ffe', '/lib');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testSrcGetRawContent()
     {
-        $endpoint       = '/repositories/gentle/eof/src/1e10ffe/lib/Gentle/Bitbucket/API/Repositories/Services.php';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/repositories/gentle/eof/src/1e10ffe/lib/Gentle/Bitbucket/API/Repositories/Services.php';
+        $expectedResult = $this->fakeResponse(json_encode(['dummy']));
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->src->get('gentle', 'eof', '1e10ffe', 'lib/Gentle/Bitbucket/API/Repositories/Services.php');
 
-        /** @var $src \Bitbucket\API\Repositories\Src */
-        $src    = $this->getClassMock('Bitbucket\API\Repositories\Src', $client);
-        $actual = $src->get('gentle', 'eof', '1e10ffe', 'lib/Gentle/Bitbucket/API/Repositories/Services.php');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 
     /**
@@ -49,10 +44,7 @@ class SrcTest extends Tests\TestCase
      */
     public function testSrcCreateWithInvalidParams($params)
     {
-        /** @var \Bitbucket\API\Repositories\Src $src */
-        $src   = $this->getApiMock('Bitbucket\API\Repositories\Src');
-
-        $src->create('gentle', 'eof', $params);
+        $this->src->create('gentle', 'eof', $params);
     }
 
     public function srcInvalidParamsProvider()
@@ -65,41 +57,29 @@ class SrcTest extends Tests\TestCase
 
     public function testSrcCreateFile()
     {
-        $endpoint       = '/repositories/gentle/eof/src';
-        $params         = array(
+        $endpoint = '/2.0/repositories/gentle/eof/src';
+        $params = [
             '/testfile' => 'dummy',
             'author' => 'Gentle <noreply@gentle.com>',
             'message' => 'Test commit'
-        );
+        ];
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('post')
-            ->with($endpoint, $params);
+        $this->src->create('gentle', 'eof', $params);
 
-        /** @var \Bitbucket\API\Repositories\Src $src */
-        $src   = $this->getClassMock('Bitbucket\API\Repositories\Src', $client);
-
-        $src->create('gentle', 'eof', $params);
+        $this->assertRequest('POST', $endpoint, http_build_query($params));
     }
 
     public function testSrcCreateBranch()
     {
-        $endpoint       = '/repositories/gentle/eof/src';
-        $params         = array(
+        $endpoint = '/2.0/repositories/gentle/eof/src';
+        $params = [
             'branch' => 'new-branch',
             'author' => 'Gentle <noreply@gentle.com>',
             'message' => 'Test create branch'
-        );
+        ];
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('post')
-            ->with($endpoint, $params);
+        $this->src->create('gentle', 'eof', $params);
 
-        /** @var \Bitbucket\API\Repositories\Src $src */
-        $src   = $this->getClassMock('Bitbucket\API\Repositories\Src', $client);
-
-        $src->create('gentle', 'eof', $params);
+        $this->assertRequest('POST', $endpoint, http_build_query($params));
     }
 }

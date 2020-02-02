@@ -2,62 +2,50 @@
 
 namespace Bitbucket\Tests\API\Repositories\Pipelines;
 
-use Bitbucket\Tests\API as Tests;
-use Bitbucket\API;
+use Bitbucket\API\Repositories\Pipelines\Steps;
+use Bitbucket\Tests\API\TestCase;
 
-class StepsTest extends Tests\TestCase
+class StepsTest extends TestCase
 {
+    /** @var Steps */
+    private $steps;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->steps = $this->getApiMock(Steps::class);
+    }
+
     public function testGetAllSteps()
     {
-        $endpoint = '/repositories/gentle/eof/pipelines/pipeline-uuid/steps/';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/repositories/gentle/eof/pipelines/pipeline-uuid/steps/';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->steps->all('gentle', 'eof', 'pipeline-uuid');
 
-        /** @var \Bitbucket\API\Repositories\Pipelines\Steps $steps */
-        $steps = $this->getClassMock('Bitbucket\API\Repositories\Pipelines\Steps', $client);
-        $actual = $steps->all('gentle', 'eof', 'pipeline-uuid');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testGetSpecificPipelineStep()
     {
-        $endpoint = '/repositories/gentle/eof/pipelines/pipeline-uuid/steps/step-uuid';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/repositories/gentle/eof/pipelines/pipeline-uuid/steps/step-uuid';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->steps->get('gentle', 'eof', 'pipeline-uuid', 'step-uuid');
 
-        /** @var \Bitbucket\API\Repositories\Pipelines\Steps $steps */
-        $steps = $this->getClassMock('Bitbucket\API\Repositories\Pipelines\Steps', $client);
-        $actual = $steps->get('gentle', 'eof', 'pipeline-uuid', 'step-uuid');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 
     public function testGetLogOfSpecificPipelineStep()
     {
-        $endpoint = '/repositories/gentle/eof/pipelines/pipeline-uuid/steps/step-uuid/log';
-        $expectedResult = $this->fakeResponse(array('dummy'));
+        $endpoint = '/2.0/repositories/gentle/eof/pipelines/pipeline-uuid/steps/step-uuid/log';
+        $expectedResult = $this->fakeResponse(['dummy']);
 
-        $client = $this->getHttpClientMock();
-        $client->expects($this->once())
-            ->method('get')
-            ->with($endpoint)
-            ->willReturn($expectedResult);
+        $actual = $this->steps->log('gentle', 'eof', 'pipeline-uuid', 'step-uuid');
 
-        /** @var \Bitbucket\API\Repositories\Pipelines\Steps $steps */
-        $steps = $this->getClassMock('Bitbucket\API\Repositories\Pipelines\Steps', $client);
-        $actual = $steps->log('gentle', 'eof', 'pipeline-uuid', 'step-uuid');
-
-        $this->assertEquals($expectedResult, $actual);
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
     }
 }

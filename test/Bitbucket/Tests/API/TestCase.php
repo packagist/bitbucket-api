@@ -2,75 +2,70 @@
 
 namespace Bitbucket\Tests\API;
 
-use Buzz\Message\Response;
+use Bitbucket\API\Api;
+use Bitbucket\API\Http\HttpPluginClientBuilder;
+use Http\Discovery\MessageFactoryDiscovery;
+use Http\Mock\Client;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
-abstract class TestCase extends \PHPUnit_Framework_TestCase
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
-    protected function getApiMock($class = null, $methods = array())
+    /** @var Client */
+    protected $mockClient;
+
+    protected function getApiMock($class = null)
     {
         $class = is_null($class) ? '\Bitbucket\API\Api' : $class;
-        $methods = array_merge(
-            array('requestGet', 'requestPost', 'requestPut', 'requestDelete'),
-            $methods
-        );
 
-        $client = $this->getHttpClientMock();
+        $bitbucketClient = new \Bitbucket\API\Http\Client(array(), $this->getHttpPluginClientBuilder());
+        /** @var Api $apiClient */
+        $apiClient = new $class([], $bitbucketClient);
 
-        return $this->getMockBuilder($class)
-            ->setMethods($methods)
-            ->setConstructorArgs(array(array(), $client))
-            ->getMock();
+        return $apiClient;
     }
 
-    protected function getBrowserMock()
+    private function getMockHttpClient()
     {
-        return $this->getMockBuilder('\Buzz\Client\ClientInterface')
-            ->setMethods(array('setTimeout', 'setVerifyPeer', 'send'))
-            ->getMock();
+        return $this->mockClient ? : $this->mockClient = new Client();
     }
 
-    protected function getTransportClientMock()
+    protected function getHttpPluginClientBuilder()
     {
-        $client = $this->getBrowserMock();
-
-        $client->expects($this->any())->method('setTimeout')->with(10);
-        $client->expects($this->any())->method('setVerifyPeer')->with(true);
-        $client->expects($this->any())->method('send');
-
-        return $client;
+        return new HttpPluginClientBuilder($this->getMockHttpClient());
     }
 
-    protected function getHttpClientMock()
+    protected function fakeResponse($data, $statusCode = 200, $encodeResponse = true)
     {
-        $transportClient = $this->getTransportClientMock();
+        $messageFactory = MessageFactoryDiscovery::find();
 
-        return $this->getMockBuilder('Bitbucket\API\HTTP\Client')
-            ->setMethods(array('get', 'post', 'put', 'delete'))
-            ->setConstructorArgs(array(array(), $transportClient))
-            ->getMock();
-    }
-
-    protected function getHttpClient()
-    {
-        return new \Bitbucket\API\Http\Client(array(), $this->getTransportClientMock());
-    }
-
-    protected function fakeResponse($data)
-    {
-        $response = new Response();
-
-        $response->setContent(json_encode($data));
+        $responseBody = $encodeResponse ? json_encode($data) : $data;
+        $response = $messageFactory->createResponse($statusCode, null, [], $responseBody);
+        $this->getMockHttpClient()->addResponse($response);
 
         return $response;
     }
 
-    protected function getClassMock($class, $httpClient)
+    protected function assertResponse(ResponseInterface $expected, ResponseInterface $actual)
     {
-        /** @var \Bitbucket\API\Api $obj */
-        $obj = new $class();
-        $obj->setClient($httpClient);
+        $this->assertSame($expected->getStatusCode(), $actual->getStatusCode());
+        $expected->getBody()->rewind();
+        $expectedContent = $expected->getBody()->getContents();
+        $actual->getBody()->rewind();
+        $actualContent = $actual->getBody()->getContents();
+        $this->assertSame($expectedContent, $actualContent);
+    }
 
-        return $obj;
+    protected function assertRequest($method, $endpoint, $requestBody = '', $query = '')
+    {
+        /** @var RequestInterface $request */
+        $request = $this->mockClient->getLastRequest();
+        $this->assertSame($endpoint, $request->getUri()->getPath());
+        $this->assertSame($method, $request->getMethod());
+
+        $request->getBody()->rewind();
+        $this->assertSame($requestBody, $request->getBody()->getContents());
+        $this->assertSame($query, $request->getUri()->getQuery());
     }
 
     protected function getMethod($class, $name)

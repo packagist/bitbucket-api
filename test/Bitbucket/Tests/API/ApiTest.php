@@ -2,57 +2,78 @@
 
 namespace Bitbucket\Tests\API;
 
-use Bitbucket\API;
+use Bitbucket\API\Api;
+use Http\Message\Authentication\BasicAuth;
 
 class ApiTest extends TestCase
 {
     public function testCredentials()
     {
-        $auth = new API\Authentication\Basic('api_username', 'api_password');
-        $this->assertInstanceOf('Bitbucket\API\Authentication\Basic', $auth);
-
-        $api = new API\Api;
-        $api->setCredentials($auth);
+        $api = new Api;
+        $api->setCredentials(new BasicAuth('api_username', 'api_password'));
     }
 
     public function testShouldDoGetRequest()
     {
-        $endpoint       = '/repositories/gentle/eof/issues/3';
-        $params         = array();
-        $headers        = array();
-        $api            = new API\Api(array(), $this->getHttpClientMock());
+        $endpoint = '/repositories/gentle/eof/issues/3';
+        $params = [];
+        $headers = [];
+        $api = $this->getApiMock(Api::class);
 
         $api->requestGet($endpoint, $params, $headers);
+
+        $request = $this->mockClient->getLastRequest();
+
+        $this->assertSame('/' . $api->getClient()->getApiVersion() . $endpoint, $request->getUri()->getPath());
+        $this->assertSame('GET', $request->getMethod());
     }
 
     public function testShouldDoPostRequest()
     {
-        $endpoint       = '/repositories/gentle/eof/issues/3';
-        $params         = array();
-        $headers        = array();
-        $api            = new API\Api(array(), $this->getHttpClientMock());
+        $endpoint = '/repositories/gentle/eof/issues/3';
+        $params = ['key' => 'value'];
+        $headers = [];
+        $api = $this->getApiMock(Api::class);
 
         $api->requestPost($endpoint, $params, $headers);
+
+        $request = $this->mockClient->getLastRequest();
+
+        $this->assertSame('/' . $api->getClient()->getApiVersion() . $endpoint, $request->getUri()->getPath());
+        $this->assertSame('POST', $request->getMethod());
+        $this->assertSame(http_build_query($params), $request->getBody()->getContents());
     }
 
     public function testShouldDoPutRequest()
     {
-        $endpoint       = '/repositories/gentle/eof/issues/3';
-        $params         = array();
-        $headers        = array();
-        $api            = new API\Api(array(), $this->getHttpClientMock());
+        $endpoint = '/repositories/gentle/eof/issues/3';
+        $params = ['key' => 'value'];
+        $headers = [];
+        $api = $this->getApiMock(Api::class);
 
         $api->requestPut($endpoint, $params, $headers);
+
+        $request = $this->mockClient->getLastRequest();
+
+        $this->assertSame('/' . $api->getClient()->getApiVersion() . $endpoint, $request->getUri()->getPath());
+        $this->assertSame('PUT', $request->getMethod());
+        $this->assertSame(http_build_query($params), $request->getBody()->getContents());
     }
 
     public function testShouldDoDeleteRequest()
     {
-        $endpoint       = '/repositories/gentle/eof/issues/3';
-        $params         = array();
-        $headers        = array();
-        $api            = new API\Api(array(), $this->getHttpClientMock());
+        $endpoint = '/repositories/gentle/eof/issues/3';
+        $params = [];
+        $headers = [];
+
+        $api = $this->getApiMock(Api::class);
 
         $api->requestDelete($endpoint, $params, $headers);
+
+        $request = $this->mockClient->getLastRequest();
+
+        $this->assertSame('/' . $api->getClient()->getApiVersion() . $endpoint, $request->getUri()->getPath());
+        $this->assertSame('DELETE', $request->getMethod());
     }
 
     /**
@@ -60,7 +81,7 @@ class ApiTest extends TestCase
      */
     public function testFormat()
     {
-        $api = new API\Api;
+        $api = new Api;
 
         // default format
         $this->assertEquals('json', $api->getFormat());
@@ -79,7 +100,7 @@ class ApiTest extends TestCase
      */
     public function testSPFShouldFailWithInvalidClassName($name)
     {
-        $bitbucket = new API\Api();
+        $bitbucket = new Api();
         $bitbucket->api($name);
     }
 
@@ -97,7 +118,7 @@ class ApiTest extends TestCase
     public function invalidChildNameProvider()
     {
         return [
-            [array()], [new \stdClass()], [21], ['32.4'], ['invalid']
+            [[]], [new \stdClass()], [21], ['32.4'], ['invalid']
         ];
     }
 }

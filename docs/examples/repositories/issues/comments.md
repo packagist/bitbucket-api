@@ -11,25 +11,25 @@ Manage issue comments.
 ### Prepare:
 {% include auth.md var_name="issue" class_ns="Repositories\Issues" %}
 
-### Fetch all comments:
+### Fetch all comments: (API 2.0)
 
 ```php
 $issue->comments()->all($accountname, $repo_slug, 4);
 ```
 
-### Fetch a single comment:
+### Fetch a single comment: (API 2.0)
 
 ```php
 $issue->comments()->get($accountname, $repo_slug, 4, 2967835);
 ```
 
-### Add a new comment to specified issue:
+### Add a new comment to specified issue: (API 2.0)
 
 ```php
 $issue->comments()->create($accountname, $repo_slug, 4, 'dummy comment.');
 ```
 
-### Update existing comment:
+### Update existing comment: (API 2.0)
 
 ```php
 $issue->comments()->update($accountname, $repo_slug, 4, 3454384, "dummy comment [edited]");

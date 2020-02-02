@@ -9,20 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Bitbucket\API\Http\Listener;
+namespace Bitbucket\API\Http\Plugin;
 
-use Buzz\Message\MessageInterface;
-use Buzz\Message\RequestInterface;
+use Http\Client\Common\Plugin;
 use JacobKiers\OAuth\SignatureMethod\SignatureMethodInterface;
 use JacobKiers\OAuth\Consumer\ConsumerInterface;
 use JacobKiers\OAuth\Token\TokenInterface;
 use JacobKiers\OAuth as OAuth1;
+use Psr\Http\Message\RequestInterface;
 
 /**
  * @author  Alexandru G.    <alex@gentle.ro>
  */
-class OAuthListener implements ListenerInterface
+class OAuthPlugin implements Plugin
 {
+    use Plugin\VersionBridgePlugin;
+
     const ENDPOINT_REQUEST_TOKEN    = 'oauth/request_token';
     const ENDPOINT_ACCESS_TOKEN     = 'oauth/access_token';
     const ENDPOINT_AUTHORIZE        = 'oauth/authenticate';
@@ -68,38 +70,22 @@ class OAuthListener implements ListenerInterface
         $this->consumer     = $this->initConsumer($consumer);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getName()
-    {
-        return 'oauth';
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function preSend(RequestInterface $request)
+    protected function doHandleRequest(RequestInterface $request, callable $next, callable $first)
     {
         $params = $this->getParametersToSign($request);
         $req    = OAuth1\Request\Request::fromConsumerAndToken(
             $this->consumer,
             $this->token,
             $request->getMethod(),
-            $request->getUrl(),
+            (string) $request->getUri(),
             $params
         );
 
         $req->signRequest($this->signature, $this->consumer, $this->token);
 
-        $request->addHeader($req->toHeader());
-    }
+        $header = explode(':', $req->toHeader(), 2);
 
-    /**
-     * {@inheritDoc}
-     */
-    public function postSend(RequestInterface $request, MessageInterface $response)
-    {
+        return $next($request->withHeader($header[0], $header[1]));
     }
 
     /**
@@ -113,9 +99,9 @@ class OAuthListener implements ListenerInterface
      */
     protected function getParametersToSign(RequestInterface $request)
     {
-        $params         = $this->getOAuthParameters($request);
+        $params = $this->getOAuthParameters($request);
 
-        if ($request->getHeader('Content-Type') === 'application/x-www-form-urlencoded') {
+        if (in_array('application/x-www-form-urlencoded', $request->getHeader('Content-Type'), true)) {
             $params = array_merge($params, $this->getContentAsParameters($request));
         }
 
@@ -173,7 +159,7 @@ class OAuthListener implements ListenerInterface
      */
     protected function getContentAsParameters(RequestInterface $request)
     {
-        parse_str($request->getContent(), $parts);
+        parse_str($request->getBody()->getContents(), $parts);
 
         return $parts;
     }
@@ -187,7 +173,7 @@ class OAuthListener implements ListenerInterface
      */
     protected function isEndpointRequested($endpoint, RequestInterface $request)
     {
-        return strpos($request->getResource(), $endpoint) !== false;
+        return strpos($request->getUri()->getPath(), $endpoint) !== false;
     }
 
     /**
