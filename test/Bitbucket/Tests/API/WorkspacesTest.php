@@ -9,10 +9,14 @@ class WorkspacesTest extends TestCase
     /** @var Workspaces */
     private $workspaces;
 
+    /** @var Workspaces\Workspace */
+    private $workspace;
+
     protected function setUp()
     {
         parent::setUp();
         $this->workspaces = $this->getApiMock(Workspaces::class);
+        $this->workspace = $this->getApiMock(Workspaces\Workspace::class);
     }
 
     public function testGetWorkspacesList()
@@ -31,7 +35,7 @@ class WorkspacesTest extends TestCase
         $endpoint = '/2.0/workspaces/gentle-web';
         $expectedResult = $this->fakeResponse(['dummy']);
 
-        $actual = $this->workspaces->profile('gentle-web');
+        $actual = $this->workspace->workspace('gentle-web');
 
         $this->assertRequest('GET', $endpoint);
         $this->assertResponse($expectedResult, $actual);
@@ -42,7 +46,7 @@ class WorkspacesTest extends TestCase
         $endpoint = '/2.0/workspaces/gentle-web/members';
         $expectedResult = $this->fakeResponse(['dummy']);
 
-        $actual = $this->workspaces->members('gentle-web');
+        $actual = $this->workspace->members('gentle-web');
 
         $this->assertEquals($expectedResult, $actual);
         $this->assertRequest('GET', $endpoint);
@@ -53,7 +57,7 @@ class WorkspacesTest extends TestCase
         $endpoint = '/2.0/workspaces/gentle-web/projects';
         $expectedResult = $this->fakeResponse(['dummy']);
 
-        $actual = $this->workspaces->projects('gentle-web');
+        $actual = $this->workspace->projects('gentle-web');
 
         $this->assertEquals($expectedResult, $actual);
         $this->assertRequest('GET', $endpoint);
@@ -61,6 +65,6 @@ class WorkspacesTest extends TestCase
 
     public function testHooks()
     {
-        $this->assertInstanceOf(Workspaces\Hooks::class, $this->workspaces->hooks());
+        $this->assertInstanceOf(Workspaces\Hooks::class, $this->workspace->hooks());
     }
 }
