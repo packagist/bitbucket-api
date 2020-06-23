@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Added manage team hooks endpoints (PR #75)
   - Added user permissions endpoints (PR #76)
   - Added team permissions endpoints (PR #77)
+  - Added workspaces endpoints (PR #78)
 
 ### Changed:
   - Updated `Api:api` in order to support class name resolution via `::class` (PR #38)
@@ -17,7 +18,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Minimum required PHP version has been bumped to 5.6 from 5.4
   - All endpoints now automatically use the correct API version
   - Endpoints for SSH Keys, Deploy Keys, Emails, Repository and Issues have been updated to use v2
-  - The library is powered by HTTP plug and can be used with any compatible HTTP client (PR #74) 
+  - The library is powered by HTTP plug and can be used with any compatible HTTP client (PR #74)
+  - Updated minimum supported PHP version to 7.1 
 
 ### Removed:
   - Removed all deprecated/removed Bitbucket API v1 Privileges endpoints (PR #58)

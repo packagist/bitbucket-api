@@ -2,15 +2,15 @@
 
 [![Latest Version](https://img.shields.io/packagist/v/gentle/bitbucket-api.svg?style=flat-square)](https://packagist.org/packages/gentle/bitbucket-api)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://bitbucket.org/gentlero/bitbucket-api/src/master/LICENSE)
-[![Build Status](https://img.shields.io/travis/gentlero/bitbucket-api/master.svg?style=flat-square)](https://travis-ci.org/gentlero/bitbucket-api)
+[![Build Status](https://img.shields.io/travis/com/gentlero/bitbucket-api?style=flat-square)](https://travis-ci.com/bitbucket/gentlero/bitbucket-api)
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/b/gentlero/bitbucket-api.svg?style=flat-square)](https://scrutinizer-ci.com/b/gentlero/bitbucket-api/?branch=develop)
 [![Code quality](https://img.shields.io/scrutinizer/b/gentlero/bitbucket-api.svg?style=flat-square)](https://scrutinizer-ci.com/b/gentlero/bitbucket-api/?branch=develop)
 
-Simple Bitbucket API wrapper for PHP >= 5.6
+Simple Bitbucket API wrapper for PHP
 
 ## Requirements
 
-* PHP >= 5.6.0 with [cURL](http://php.net/manual/en/book.curl.php) extension.
+* PHP >= 7.1 with [cURL](http://php.net/manual/en/book.curl.php) extension.
 * [Buzz](https://github.com/kriswallsmith/Buzz) library or any [HTTPlug](http://httplug.io/) compatible http client,
 * PHPUnit to run tests. ( _optional_ )
 
