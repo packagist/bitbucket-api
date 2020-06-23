@@ -204,9 +204,7 @@ class OAuthPlugin implements Plugin
      */
     protected function initToken($token)
     {
-        return (!is_null($token)) ?
-            $token :
-            empty($this->config['oauth_token']) ?
+        return $token ?? empty($this->config['oauth_token']) ?
                 new OAuth1\Token\NullToken() :
                 new OAuth1\Token\Token($this->config['oauth_token'], $this->config['oauth_token_secret'])
             ;
