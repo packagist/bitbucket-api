@@ -10,7 +10,7 @@ class BranchRestrictionsTest extends TestCase
     /** @var BranchRestrictions */
     private $branchRestrictions;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->branchRestrictions = $this->getApiMock(BranchRestrictions::class);
@@ -65,11 +65,12 @@ class BranchRestrictionsTest extends TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
      * @dataProvider restrictionsInvalidParamsProvider
      */
     public function testCreateRestrictionWithInvalidParams($params)
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->branchRestrictions->create('gentle', 'eof', $params);
     }
 
@@ -82,11 +83,10 @@ class BranchRestrictionsTest extends TestCase
         ];
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testCreateRestrictionFromArrayShouldFailWithInvalidRestrictionKind()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $params = [
             'kind' => 'invalid'
         ];
@@ -94,11 +94,10 @@ class BranchRestrictionsTest extends TestCase
         $this->branchRestrictions->create('gentle', 'eof', $params);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testCreateRestrictionFromJSONShouldFailWithInvalidRestrictionKind()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $params = json_encode([
             'kind' => 'invalid'
         ]);
@@ -148,19 +147,19 @@ class BranchRestrictionsTest extends TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
      * @dataProvider restrictionsInvalidParamsProvider
      */
     public function testUpdateRestrictionWithInvalidParams($params)
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->branchRestrictions->update('gentle', 'eof', 1, $params);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testCreateRestrictionShouldFailIfKindIsSpecified()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $params = [
             'kind' => 'invalid'
         ];

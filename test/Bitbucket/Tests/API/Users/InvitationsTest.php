@@ -10,7 +10,7 @@ class InvitationsTest extends Tests\TestCase
     /** @var Invitations */
     private $invitations;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->invitations = $this->getApiMock(Invitations::class);

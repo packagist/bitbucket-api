@@ -133,6 +133,6 @@ class Issues extends API\Api
      */
     public function comments()
     {
-        return $this->api(Issues\Comments::class);
+        return new Issues\Comments([], $this->getClient());
     }
 }

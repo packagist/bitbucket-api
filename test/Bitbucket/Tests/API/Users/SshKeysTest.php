@@ -10,7 +10,7 @@ class SshKeysTest extends Tests\TestCase
     /** @var SshKeys */
     private $sshKeys;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->sshKeys = $this->getApiMock(SshKeys::class);

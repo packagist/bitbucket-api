@@ -10,7 +10,7 @@ class PipelinesTest extends TestCase
     /** @var Pipelines */
     private $pipelines;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->pipelines = $this->getApiMock(Pipelines::class);

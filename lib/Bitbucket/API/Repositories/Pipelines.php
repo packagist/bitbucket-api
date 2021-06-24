@@ -107,6 +107,6 @@ class Pipelines extends Api
      */
     public function steps()
     {
-        return $this->api(Steps::class);
+        return new Steps([], $this->getClient());
     }
 }

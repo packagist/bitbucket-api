@@ -114,6 +114,6 @@ class Groups extends Api
      */
     public function members()
     {
-        return $this->api(Members::class);
+        return new Members([], $this->getClient());
     }
 }

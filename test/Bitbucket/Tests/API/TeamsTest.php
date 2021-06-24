@@ -9,7 +9,7 @@ class TeamsTest extends TestCase
     /** @var Teams */
     private $teams;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->teams = $this->getApiMock(Teams::class);
@@ -30,10 +30,11 @@ class TeamsTest extends TestCase
 
     /**
      * @dataProvider invalidRoleProvider
-     * @expectedException \InvalidArgumentException
      */
     public function testGetTeamsListWithInvalidRole($role)
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->teams->all($role);
     }
 

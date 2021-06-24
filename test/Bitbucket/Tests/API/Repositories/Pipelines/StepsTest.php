@@ -10,7 +10,7 @@ class StepsTest extends TestCase
     /** @var Steps */
     private $steps;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->steps = $this->getApiMock(Steps::class);

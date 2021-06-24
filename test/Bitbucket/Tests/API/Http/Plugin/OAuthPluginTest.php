@@ -84,8 +84,8 @@ class OAuthPluginTest extends Tests\TestCase
         $listener = new OAuthPlugin($oauth_params);
         $listener->handleRequest($request, function (RequestInterface $request) use ($oauth_params) {
             $authHeader = $request->getHeader('Authorization')[0];
-            $this->assertContains('OAuth', $authHeader);
-            $this->assertContains(
+            $this->assertStringContainsString('OAuth', $authHeader);
+            $this->assertStringContainsString(
                 sprintf('oauth_consumer_key="%s"', $oauth_params['oauth_consumer_key']),
                 $authHeader
             );

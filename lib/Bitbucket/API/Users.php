@@ -59,7 +59,7 @@ class Users extends Api
      */
     public function invitations()
     {
-        return $this->api(Users\Invitations::class);
+        return new Users\Invitations([], $this->getClient());
     }
 
     /**
@@ -72,6 +72,6 @@ class Users extends Api
      */
     public function sshKeys()
     {
-        return $this->api(Users\SshKeys::class);
+        return new Users\SshKeys([], $this->getClient());
     }
 }

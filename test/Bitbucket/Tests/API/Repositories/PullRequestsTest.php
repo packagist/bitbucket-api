@@ -10,7 +10,7 @@ class PullRequestsTest extends TestCase
     /** @var PullRequests */
     private $pullRequests;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->pullRequests = $this->getApiMock(PullRequests::class);
@@ -78,11 +78,12 @@ class PullRequestsTest extends TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
      * @dataProvider pullRequestWrongParamsTypeProvider
      */
     public function testCreateNewPullRequestWithWrongParamsType($params)
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->pullRequests->create('gentle', 'eof', $params);
     }
 
@@ -130,11 +131,12 @@ class PullRequestsTest extends TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
      * @dataProvider pullRequestWrongParamsTypeProvider
      */
     public function testUpdatePullRequestWithWrongParamsType($params)
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->pullRequests->update('gentle', 'eof', 1, $params);
     }
 

@@ -115,7 +115,7 @@ class Teams extends Api
      */
     public function hooks()
     {
-        return $this->api(Teams\Hooks::class);
+        return new Teams\Hooks([], $this->getClient());
     }
 
     /**
@@ -124,6 +124,6 @@ class Teams extends Api
      */
     public function permissions()
     {
-        return $this->api(Teams\Permissions::class);
+        return new Teams\Permissions([], $this->getClient());
     }
 }

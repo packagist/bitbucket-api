@@ -67,6 +67,6 @@ class Workspace extends API\Api
      */
     public function hooks()
     {
-        return $this->api(Hooks::class);
+        return new Hooks([], $this->getClient());
     }
 }

@@ -10,7 +10,7 @@ class TagsTest extends TestCase
     /** @var Tags */
     private $tags;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->tags = $this->getApiMock(Tags::class);

@@ -2,12 +2,14 @@
 
 namespace Bitbucket\Tests\API\Http\Plugin;
 
+use Bitbucket\API\Exceptions\ForbiddenAccessException;
 use Bitbucket\API\Http\ClientInterface;
 use Bitbucket\Tests\API as Tests;
 use Bitbucket\API\Http\Plugin\OAuth2Plugin;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Http\Client\Promise\HttpFulfilledPromise;
+use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\RequestInterface;
 
 /**
@@ -15,21 +17,20 @@ use Psr\Http\Message\RequestInterface;
  */
 class OAuth2PluginTest extends Tests\TestCase
 {
-    /** @var ClientInterface|\PHPUnit_Framework_MockObject_MockObject */
+    /** @var ClientInterface|MockObject */
     private $httpClient;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->httpClient = $this->getMockBuilder(ClientInterface::class)->getMock();
     }
 
-    /**
-     * @expectedException \Bitbucket\API\Exceptions\ForbiddenAccessException
-     */
     public function testGetAccessTokenShouldFailWithInvalidJson()
     {
+        $this->expectException(ForbiddenAccessException::class);
+
         $oauth_params = [
             'client_id' => 'aaa',
             'client_secret' => 'bbb'
@@ -61,11 +62,10 @@ class OAuth2PluginTest extends Tests\TestCase
         });
     }
 
-    /**
-     * @expectedException \Bitbucket\API\Exceptions\ForbiddenAccessException
-     */
     public function testGetAccessTokenFail()
     {
+        $this->expectException(ForbiddenAccessException::class);
+
         $responseBody = '{"error_description": "Invalid OAuth client credentials", "error": "unauthorized_client"}';
         $response = new Response(200, [], $responseBody);
 
@@ -111,8 +111,8 @@ class OAuth2PluginTest extends Tests\TestCase
         $plugin->handleRequest($request, function (RequestInterface $request) {
             $authHeader = $request->getHeader('Authorization')[0];
 
-            $this->assertContains('Bearer', $authHeader);
-            $this->assertContains('secret', $authHeader);
+            $this->assertStringContainsString('Bearer', $authHeader);
+            $this->assertStringContainsString('secret', $authHeader);
 
             return new HttpFulfilledPromise(new Response());
         }, function () {
@@ -148,8 +148,8 @@ class OAuth2PluginTest extends Tests\TestCase
         $plugin->handleRequest($request, function (RequestInterface $request) {
             $authHeader = $request->getHeader('Authorization')[0];
 
-            $this->assertContains('Bearer', $authHeader);
-            $this->assertContains('secret', $authHeader);
+            $this->assertStringContainsString('Bearer', $authHeader);
+            $this->assertStringContainsString('secret', $authHeader);
 
             return new HttpFulfilledPromise(new Response());
         }, function () {

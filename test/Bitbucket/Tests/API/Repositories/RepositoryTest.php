@@ -10,7 +10,7 @@ class RepositoryTest extends TestCase
     /** @var Repository */
     private $repository;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->repository = $this->getApiMock(Repository::class);
@@ -50,12 +50,13 @@ class RepositoryTest extends TestCase
 
     /**
      * @param mixed $check
-     * @expectedException \InvalidArgumentException
      * @dataProvider invalidCreateProvider
      * @ticket 27, 26
      */
     public function testInvalidCreate($check)
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->repository->create('gentle', 'new-repo', $check);
     }
 

@@ -10,7 +10,7 @@ class BuildStatusesTest extends TestCase
     /** @var BuildStatuses */
     private $buildStatuses;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->buildStatuses = $this->getApiMock(BuildStatuses::class);

@@ -10,7 +10,7 @@ class SrcTest extends TestCase
     /** @var Src */
     private $src;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->src = $this->getApiMock(Src::class);
@@ -39,11 +39,12 @@ class SrcTest extends TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
      * @dataProvider srcInvalidParamsProvider
      */
     public function testSrcCreateWithInvalidParams($params)
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->src->create('gentle', 'eof', $params);
     }
 

@@ -10,7 +10,7 @@ class MilestonesTest extends TestCase
     /** @var Milestones */
     private $milestones;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->milestones = $this->getApiMock(Milestones::class);

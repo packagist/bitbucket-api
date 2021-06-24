@@ -76,11 +76,10 @@ class ApiTest extends TestCase
         $this->assertSame('DELETE', $request->getMethod());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testFormat()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $api = new Api;
 
         // default format
@@ -96,10 +95,11 @@ class ApiTest extends TestCase
 
     /**
      * @dataProvider invalidChildNameProvider
-     * @expectedException \InvalidArgumentException
      */
     public function testSPFShouldFailWithInvalidClassName($name)
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $bitbucket = new Api();
         $bitbucket->api($name);
     }
