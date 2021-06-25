@@ -38,4 +38,4 @@ jobs:
               run: ./vendor/bin/phpunit
 
             - name: "Run PHPStan"
-              run: ./vendor/bin/phpstan analyze lib test --level=4
+              run: ./vendor/bin/phpstan analyze
