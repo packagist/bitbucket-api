@@ -9,7 +9,7 @@ class UsersTest extends TestCase
     /** @var Users */
     private $users;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->users = $this->getApiMock(Users::class);

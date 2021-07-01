@@ -52,6 +52,6 @@ class User extends Api
      */
     public function permissions()
     {
-        return $this->api(User\Permissions::class);
+        return new User\Permissions([], $this->getClient());
     }
 }

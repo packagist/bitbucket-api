@@ -15,7 +15,7 @@ class ClientTest extends Tests\TestCase
     /** @var Client */
     private $client;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->client = new Client(array(), $this->getHttpPluginClientBuilder());
     }
@@ -25,11 +25,10 @@ class ClientTest extends Tests\TestCase
         $this->assertInstanceOf(HttpMethodsClient::class, $this->client->getClient());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testSetResponseFormatInvalid()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->client->setResponseFormat('invalid');
     }
 
@@ -41,11 +40,12 @@ class ClientTest extends Tests\TestCase
 
     /**
      * @dataProvider invalidApiVersionsProvider
-     * @expectedException \InvalidArgumentException
      * @ticket 57
      */
     public function testSetApiVersionInvalid($version)
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->client->setApiVersion($version);
     }
 

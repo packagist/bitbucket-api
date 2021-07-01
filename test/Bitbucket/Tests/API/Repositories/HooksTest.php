@@ -20,7 +20,7 @@ class HooksTest extends TestCase
     /** @var Hooks */
     private $hooks;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->hooks = $this->getApiMock(Hooks::class);
@@ -64,11 +64,12 @@ class HooksTest extends TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
      * @dataProvider invalidCreateProvider
      */
     public function testInvalidCreate(array $check)
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->hooks->create('gentle', 'my-repo', $check);
     }
 
@@ -150,11 +151,12 @@ class HooksTest extends TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
      * @dataProvider invalidCreateProvider
      */
     public function testInvalidUpdate(array $check)
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->hooks->update('gentle', 'eof', '30b60aee-9cdf-407d-901c-2de106ee0c9d', $check);
     }
 

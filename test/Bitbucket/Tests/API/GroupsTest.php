@@ -10,7 +10,7 @@ class GroupsTest extends TestCase
     /** @var Groups */
     private $groups;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->groups = $this->getApiMock(Groups::class);

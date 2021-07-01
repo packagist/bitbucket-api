@@ -10,7 +10,7 @@ class BranchesTest extends TestCase
     /** @var Branches */
     private $branches;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->branches = $this->getApiMock(Branches::class);

@@ -10,7 +10,7 @@ class CommentsTest extends TestCase
     /** @var Comments */
     private $comments;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->comments = $this->getApiMock(Comments::class);

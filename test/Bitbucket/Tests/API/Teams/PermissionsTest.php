@@ -10,7 +10,7 @@ class PermissionsTest extends TestCase
     /** @var Permissions */
     private $permissions;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->permissions = $this->getApiMock(Permissions::class);

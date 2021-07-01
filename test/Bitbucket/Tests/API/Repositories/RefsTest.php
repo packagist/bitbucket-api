@@ -10,7 +10,7 @@ class RefsTest extends TestCase
     /** @var Refs */
     private $refs;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->refs = $this->getApiMock(Refs::class);

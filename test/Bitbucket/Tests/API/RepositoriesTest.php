@@ -9,7 +9,7 @@ class RepositoriesTest extends TestCase
     /** @var Repositories */
     private $repositories;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->repositories = $this->getApiMock(Repositories::class);

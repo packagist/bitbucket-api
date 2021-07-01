@@ -10,7 +10,7 @@ class HooksTest extends TestCase
     /** @var Hooks */
     private $hooks;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->hooks = $this->getApiMock(Hooks::class);
@@ -49,11 +49,12 @@ class HooksTest extends TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
      * @dataProvider invalidCreateProvider
      */
     public function testInvalidCreate(array $check)
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->hooks->create('gentle', $check);
     }
 }

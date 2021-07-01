@@ -32,7 +32,7 @@ class PullRequests extends API\Api
      */
     public function comments()
     {
-        return $this->api('Repositories\\PullRequests\\Comments');
+        return new PullRequests\Comments([], $this->getClient());
     }
 
     /**

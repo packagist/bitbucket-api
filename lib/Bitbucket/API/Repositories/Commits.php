@@ -105,6 +105,6 @@ class Commits extends Api
      */
     public function comments()
     {
-        return $this->api(Comments::class);
+        return new Comments([], $this->getClient());
     }
 }

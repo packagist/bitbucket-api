@@ -113,11 +113,10 @@ class PagerTest extends TestCase
         $this->assertEquals($expected, json_decode($response->getBody()->getContents(), true));
     }
 
-    /**
-     * @expectedException \UnexpectedValueException
-     */
     public function testFetchAllWithUnauthorizedHeaderShouldFail()
     {
+        $this->expectException(\UnexpectedValueException::class);
+
         $response = $this->fakeResponse([], 401);
 
         new Pager($this->getHttpPluginClientBuilder(), $response);

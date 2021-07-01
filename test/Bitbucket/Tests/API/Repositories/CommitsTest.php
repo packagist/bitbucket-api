@@ -10,7 +10,7 @@ class CommitsTest extends TestCase
     /** @var Commits */
     private $commits;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->commits = $this->getApiMock(Commits::class);

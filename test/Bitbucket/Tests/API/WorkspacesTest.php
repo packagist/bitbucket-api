@@ -9,7 +9,7 @@ class WorkspacesTest extends TestCase
     /** @var Workspaces */
     private $workspaces;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->workspaces = $this->getApiMock(Workspaces::class);

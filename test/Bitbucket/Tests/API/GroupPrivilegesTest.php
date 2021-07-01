@@ -9,7 +9,7 @@ class GroupPrivilegesTest extends TestCase
     /** @var GroupPrivileges */
     private $groupPrivileges;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->groupPrivileges = $this->getApiMock(GroupPrivileges::class);
@@ -51,11 +51,10 @@ class GroupPrivilegesTest extends TestCase
         $this->assertRequest('GET', $endpoint, '', 'format=json');
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testGrantGroupPrivilegesInvalidPrivilege()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->groupPrivileges->grant('gentle', 'repo', 'owner', 'sys-admins', 'invalid');
     }
 

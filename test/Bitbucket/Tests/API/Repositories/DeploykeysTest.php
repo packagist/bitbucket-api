@@ -10,7 +10,7 @@ class DeploykeysTest extends TestCase
     /** @var Deploykeys */
     private $deploykeys;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->deploykeys = $this->getApiMock(Deploykeys::class);

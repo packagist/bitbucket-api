@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Added user permissions endpoints (PR #76)
   - Added team permissions endpoints (PR #77)
   - Added workspaces endpoints (PR #78)
+  - Added support for PHP 8
 
 ### Changed:
   - Updated `Api:api` in order to support class name resolution via `::class` (PR #38)

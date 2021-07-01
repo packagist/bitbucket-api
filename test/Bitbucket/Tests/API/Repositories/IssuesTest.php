@@ -10,7 +10,7 @@ class IssuesTest extends TestCase
     /** @var Issues */
     private $issues;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->issues = $this->getApiMock(Issues::class);
@@ -56,11 +56,10 @@ class IssuesTest extends TestCase
         $this->assertRequest('POST', $endpoint, json_encode($params));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testShouldNotCreateIssueWithoutTitle()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $params = [
             'content' => ['raw' => 'dummy content'],
         ];
@@ -68,11 +67,10 @@ class IssuesTest extends TestCase
         $this->issues->create('gentle', 'eof', $params);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testShouldNotCreateIssueWithoutContent()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $params = [
             'title' => 'dummy title'
         ];
