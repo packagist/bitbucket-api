@@ -1,15 +1,12 @@
----
-layout: default
-permalink: /examples/groups.html
-title: Groups
----
-
 # Groups
 
 Provides functionality for querying information about groups, creating new ones, updating memberships, and deleting them.
 
 ### Prepare:
-{% include auth.md var_name="groups" class_ns="Groups" %}
+```php
+$groups = new Bitbucket\API\Groups();
+$groups->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get a list of groups:
 ```php
@@ -44,6 +41,6 @@ $groups->delete($account_name, 'testers');
 ----
 
 #### Related:
-  * [Authentication](authentication.html)
-  * [Group members](groups/members.html)
+  * [Authentication](authentication.md)
+  * [Group members](groups/members.md)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/groups+Endpoint)

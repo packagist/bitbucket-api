@@ -1,15 +1,12 @@
----
-layout: default
-permalink: /examples/repositories/commits/build-statuses.html
-title: Build Statuses
----
-
 # Build Statuses
 
 Manages build statuses on a commit.
 
 ### Prepare:
-{% include auth.md var_name="buildStatuses" class_ns="Repositories\Commits\BuildStatuses" %}
+```php
+$buildStatuses = new Bitbucket\API\Repositories\Commits\BuildStatuses();
+$buildStatuses->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get the build status for a commit: (API 2.0)
 
@@ -43,5 +40,5 @@ $buildStatuses->update($account, $repository, $revision, $key, array(
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
+  * [Authentication](../../../examples/authentication.md)
   * [BB Wiki](https://confluence.atlassian.com/bitbucket/buildstatus-resource-779295267.html)

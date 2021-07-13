@@ -28,6 +28,7 @@ class NormalizeArrayPluginTest extends Tests\TestCase
             return new HttpFulfilledPromise(new Response());
         };
         $plugin->handleRequest($request, $next, function () {
+            throw new \RuntimeException('Not expected to call first callable');
         });
     }
 }

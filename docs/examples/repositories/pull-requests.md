@@ -1,15 +1,12 @@
----
-layout: default
-permalink: /examples/repositories/pull-requests.html
-title: Pull requests
----
-
 # Pull requests
 
 Manage the comments on pull requests. Other users can reply to them. This allows for the construction of a thread of comments.
 
 ### Prepare:
-{% include auth.md var_name="pull" class_ns="Repositories\PullRequests" %}
+```php
+$pull = new Bitbucket\API\Repositories\PullRequests();
+$pull->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get all pull requests: (API 2.0)
 
@@ -120,6 +117,6 @@ $pull->accept($account_name, $repo_slug, 1, array(
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
-  * [Pull requests comments](pull-requests/comments.html)
+  * [Authentication](../../examples/authentication.md)
+  * [Pull requests comments](pull-requests/comments.md)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/pullrequests+Resource#pullrequestsResource-Overview)

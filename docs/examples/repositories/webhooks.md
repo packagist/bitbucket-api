@@ -1,9 +1,3 @@
----
-layout: default
-permalink: /examples/repositories/webhooks.html
-title: WebHooks
----
-
 # WebHooks
 
 This resource manages webhooks on a repository. The administrators of the repository are 
@@ -13,7 +7,11 @@ the only users who can create, access, update, or delete the webhook.
 ```php
 $uuid	= '30b60aee-9cdf-407d-901c-2de106ee0c9d'; // unique identifier of the webhook
 ```
-{% include auth.md var_name="hooks" class_ns="Repositories\Hooks" %}
+
+```php
+$hooks = new Bitbucket\API\Repositories\Hooks();
+$hooks->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get a webhook: (API 2.0)
 
@@ -75,5 +73,5 @@ $hook->delete($account_name, $repo_slug, $uuid);
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
+  * [Authentication](../../examples/authentication.md)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/webhooks+Resource)

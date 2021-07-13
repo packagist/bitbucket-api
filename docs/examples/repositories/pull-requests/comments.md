@@ -1,15 +1,12 @@
----
-layout: default
-permalink: /examples/repositories/pull-requests/comments.html
-title: Pull requests comments
----
-
 # Pull requests comments
 
 Manage pull requests comments.
 
 ### Prepare:
-{% include auth.md var_name="pull" class_ns="Repositories\PullRequests" %}
+```php
+$pull = new Bitbucket\API\Repositories\PullRequests();
+$pull->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get a list of a pull request comments: (API 2.0)
 

@@ -1,9 +1,3 @@
----
-layout: default
-permalink: /examples/
-title: Examples
----
-
 # Usage examples
 
 **TIP:** Although all examples from this documentation are instantiating each class, a single point of entry is also available:

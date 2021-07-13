@@ -1,15 +1,12 @@
----
-layout: default
-permalink: /examples/repositories/deploy-keys.html
-title: Deploy keys
----
-
 # Deploykeys
 
 Manage ssh keys used for deploying product builds.
 
 ### Prepare:
-{% include auth.md var_name="dk" class_ns="Repositories\Deploykeys" %}
+```php
+$dk = new Bitbucket\API\Repositories\Deploykeys();
+$dk->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get a list of keys: (API 2.0)
 
@@ -44,5 +41,5 @@ $dk->delete($account_name, $repo_slug, '508380');
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
+  * [Authentication](../../examples/authentication.md)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/deploy-keys+Resource#deploy-keysResource-Overview)

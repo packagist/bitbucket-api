@@ -32,6 +32,7 @@ class ApiOneCollectionPluginTest extends Tests\TestCase
             return new HttpFulfilledPromise($response);
         };
         $result = $plugin->handleRequest($request, $next, function () {
+            throw new \RuntimeException('Not expected to call first callable');
         })->wait(true);
 
         $this->assertInstanceOf(ResponseInterface::class, $result);
@@ -65,6 +66,7 @@ class ApiOneCollectionPluginTest extends Tests\TestCase
             return new HttpFulfilledPromise($response);
         };
         $result = $plugin->handleRequest($request, $next, function () {
+            throw new \RuntimeException('Not expected to call first callable');
         })->wait(true);
 
         $this->assertInstanceOf(ResponseInterface::class, $result);
@@ -90,6 +92,7 @@ class ApiOneCollectionPluginTest extends Tests\TestCase
             return new HttpFulfilledPromise($response);
         };
         $result = $plugin->handleRequest($request, $next, function () {
+            throw new \RuntimeException('Not expected to call first callable');
         })->wait(true);
 
         $this->assertInstanceOf(ResponseInterface::class, $result);
@@ -114,6 +117,7 @@ class ApiOneCollectionPluginTest extends Tests\TestCase
             return new HttpFulfilledPromise($response);
         };
         $result = $plugin->handleRequest($request, $next, function () {
+            throw new \RuntimeException('Not expected to call first callable');
         })->wait(true);
 
         $this->assertInstanceOf(ResponseInterface::class, $result);

@@ -1,8 +1,3 @@
----
-layout: default
-permalink: /examples/repositories/commits/comments.html
-title: Commits comments
----
 
 # Commits comments
 
@@ -10,6 +5,10 @@ Manage commits comments.
 
 ### Prepare:
 {% include auth.md var_name="commit" class_ns="Repositories\Commits" %}
+```php
+$commit = new Bitbucket\API\Repositories\Commits();
+$commit->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get a list of a commit comments: (API 2.0)
 

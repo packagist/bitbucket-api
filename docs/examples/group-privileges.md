@@ -1,15 +1,12 @@
----
-layout: default
-permalink: /examples/group-privileges.html
-title: Group Privileges
----
-
 # Group Privileges
 
 Manages a group's repository permissions.
 
 ### Prepare
-{% include auth.md var_name="privileges" class_ns="GroupPrivileges" %}
+```php
+$privileges = new Bitbucket\API\GroupPrivileges();
+$privileges->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get a list of privileged groups
 
@@ -50,5 +47,5 @@ $privileges->delete($account_name, $repo_slug, $group_owner, $group_slug);
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
+  * [Authentication](../examples/authentication.md)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/group-privileges+Endpoint#group-privilegesEndpoint-Overview)

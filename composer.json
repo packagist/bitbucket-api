@@ -18,7 +18,6 @@
     "require": {
         "php": "^7.1|^8.0",
         "ext-json": "*",
-        "jacobkiers/oauth":"~1.0",
         "psr/http-message": "^1.0",
         "php-http/httplug": "^2.0",
         "php-http/discovery": "^1.0",

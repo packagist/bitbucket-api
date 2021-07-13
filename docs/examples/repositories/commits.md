@@ -1,15 +1,12 @@
----
-layout: default
-permalink: /examples/repositories/commits.html
-title: Commits
----
-
 # Commits
 
 Retrieve and compare information about commits.
 
 ### Prepare:
-{% include auth.md var_name="commits" class_ns="Repositories\Commits" %}
+```php
+$commits = new Bitbucket\API\Repositories\Commits();
+$commits->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get all commits for a repository: (API 2.0)
 
@@ -46,6 +43,6 @@ $commits->deleteApproval($account_name, $repo_slug, $commitSHA1);
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
-  * [Commit(s) comments](commits/comments.html)
+  * [Authentication](../../examples/authentication.md)
+  * [Commit(s) comments](./commits/comments.md)
   * [BB Wiki](https://confluence.atlassian.com/x/doA7Fw)

@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 2.0.0 / [Unreleased]
 
+See the [Upgrade Guide](docs/upgrade-2.0.md) for more information.
+
 ### Added:
   - Create a file through API via `Src:create` (PR #40)
   - Added manage team hooks endpoints (PR #75)
@@ -36,6 +38,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Removed all deprecated/removed Bitbucket API v1 Repository endpoints (PR #67)
   - Removed all deprecated/removed Bitbucket API v1 Issues endpoints (PR #63)
   - Removed all deprecated/removed Bitbucket API v1 Invitations endpoints (PR #70)
+  - Removed OAuth1 plugin and dependency on deprecated jacobkiers/oauth library
+  - Removed OAuth2 plugin
 
 ## 1.1.2 / 2018-06-18
 

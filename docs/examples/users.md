@@ -1,15 +1,12 @@
----
-layout: default
-permalink: /examples/users.html
-title: Users
----
-
 # Users
 
 Get information related to an individual or team account.
 
 ### Prepare:
-{% include auth.md var_name="user" class_ns="Users" %}
+```php
+$user = new Bitbucket\API\Users();
+$user->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get the public information associated with a user: (API 2.0)
 
@@ -25,7 +22,7 @@ $user->repositories($username);
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
-  * [Users invitations](users/invitations.html)
-  * [Users ssh keys](users/ssh-keys.html)
+  * [Authentication](authentication.md)
+  * [Users invitations](users/invitations.md)
+  * [Users ssh keys](users/ssh-keys.md)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/users+Endpoint)

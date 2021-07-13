@@ -1,16 +1,13 @@
----
-layout: default
-permalink: /examples/repositories/issues.html
-title: Repository issues
----
-
 # Repository issues
 
 Provides functionality for interacting with an issue tracker. Authentication is necesary to access private issue tracker,
 to get more detailed information, to create and to update an issue.
 
 ### Prepare:
-{% include auth.md var_name="issue" class_ns="Repositories\Issues" %}
+```php
+$issue = new Bitbucket\API\Repositories\Issues();
+$issue->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Fetch a list of issues: (API 2.0)
 
@@ -62,6 +59,6 @@ $issue->delete($account_name, $repo_slug, 5);
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
-  * [Issues comments](issues/comments.html)
+  * [Authentication](../../examples/authentication.md)
+  * [Issues comments](issues/comments.md)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/issues+Resource#issuesResource-Overview)

@@ -16,7 +16,7 @@ $accountname    = 'company';
 $repo_slug      = 'sandbox';
 
 
-$invitation->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+$milestones->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
 # fetch all milestones
 print_r($milestones->all($accountname, $repo_slug));
 
