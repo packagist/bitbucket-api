@@ -1,9 +1,3 @@
----
-layout: default
-permalink: /examples/groups/members.html
-title: Group members
----
-
 # Group members
 
 Manage members of a group.
@@ -32,6 +26,6 @@ $group->members()->delete($account_name, 'developers', 'miriam');
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
-  * [Groups]({{ site.url }}/examples/groups.html)
+  * [Authentication](../../examples/authentication.md)
+  * [Groups](../../examples/groups.md)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/groups+Endpoint)

@@ -1,15 +1,12 @@
----
-layout: default
-permalink: /examples/repositories/branch-restrictions.html
-title: Branch restrictions
----
-
 # Branch restrictions
 
 Manage branch restrictions on a repository
 
 ### Prepare:
-{% include auth.md var_name="restrictions" class_ns="Repositories\BranchRestrictions" %}
+```php
+$restrictions = new Bitbucket\API\Repositories\BranchRestrictions();
+$restrictions->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get the information associated with a repository's branch restrictions: (API 2.0)
 
@@ -59,5 +56,5 @@ $restrictions->delete($account_name, $repo_slug, $restrictionID);
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
+  * [Authentication](../../examples/authentication.md)
   * [BB Wiki](https://confluence.atlassian.com/x/XQEYFw)

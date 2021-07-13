@@ -1,15 +1,12 @@
----
-layout: default
-permalink: /examples/repositories/issues/comments.html
-title: Issue comments
----
-
 # Issue comments
 
 Manage issue comments.
 
 ### Prepare:
-{% include auth.md var_name="issue" class_ns="Repositories\Issues" %}
+```php
+$issue = new Bitbucket\API\Repositories\Issues();
+$issue->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Fetch all comments: (API 2.0)
 
@@ -37,6 +34,6 @@ $issue->comments()->update($accountname, $repo_slug, 4, 3454384, "dummy comment 
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
-  * [Repository issues]({{ site.url }}/examples/repositories/issues.html)
+  * [Authentication](../../../examples/authentication.md)
+  * [Repository issues](../../../examples/repositories/issues.md)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/issues+Resource#issuesResource-Overview)

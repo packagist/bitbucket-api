@@ -1,15 +1,12 @@
----
-layout: default
-permalink: /examples/repositories/src.html
-title: Source
----
-
 # Source
 
 Allows you to browse directories and view files, create branches and commit new files.
 
 ### Prepare:
-{% include auth.md var_name="src" class_ns="Repositories\Src" %}
+```php
+$src = new Bitbucket\API\Repositories\Src();
+$src->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get a list of the src in a repository.: (API 2.0)
 
@@ -61,5 +58,5 @@ $src->create($account_name, $repo_slug, $params);
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
+  * [Authentication](../../examples/authentication.md)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/src+Resources)

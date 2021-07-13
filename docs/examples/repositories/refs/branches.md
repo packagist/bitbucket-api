@@ -1,15 +1,12 @@
----
-layout: default
-permalink: /examples/repositories/refs/branches.html
-title: Branches
----
-
 # Branches
 
 Allows you to get a list of branches.
 
 ### Prepare:
-{% include auth.md var_name="branches" class_ns="Repositories\Refs\Branches" %}
+```php
+$branches = new Bitbucket\API\Repositories\Refs\Branches();
+$branches->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get a list of branches: (API 2.0)
 
@@ -32,5 +29,5 @@ $branches->delete($account_name, $repo_slug, $branch_name);
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
+  * [Authentication](../../../examples/authentication.md)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/src+Resources)

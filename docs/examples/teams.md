@@ -1,15 +1,12 @@
----
-layout: default
-permalink: /examples/teams.html
-title: Teams
----
-
 # Teams
 
 Get Team related information.
 
 ### Prepare:
-{% include auth.md var_name="team" class_ns="Teams" %}
+```php
+$team = new Bitbucket\API\Teams();
+$team->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get a list of teams to which the caller has access: (API 2.0)
 
@@ -51,5 +48,5 @@ $team->repositories($team_name);
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
+  * [Authentication](authentication.md)
   * [BB Wiki](https://confluence.atlassian.com/x/XwZAGQ)

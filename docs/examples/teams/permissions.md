@@ -1,15 +1,12 @@
----
-layout: default
-permalink: /examples/teams/permissions.html
-title: Permissions
----
-
 # Team permissions
 
 Fetch permissions for members in a team.
 
 ### Prepare
-{% include auth.md var_name="permissions" class_ns="TEams\Permissions" %}
+```php
+$permissions = new Bitbucket\API\Teams\Permissions();
+$permissions->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get permissions for every member of a team: (API 2.0)
 
@@ -31,5 +28,5 @@ $permissions->repositories($team_name, $repo);
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
+  * [Authentication](../../examples/authentication.md)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/user+Endpoint#userEndpoint-Overview)

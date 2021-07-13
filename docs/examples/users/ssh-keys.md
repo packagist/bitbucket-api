@@ -1,15 +1,12 @@
----
-layout: default
-permalink: /examples/users/ssh-keys.html
-title: Users ssh keys
----
-
 # Users ssh keys
 
 Use the ssh-keys resource to manipulate the ssh-keys on an individual or team account.
 
 ### Prepare:
-{% include auth.md var_name="user" class_ns="Users" %}
+```php
+$users = new Bitbucket\API\Users();
+$users->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get a list of the keys associated with an account: (API 2.0)
 
@@ -44,6 +41,6 @@ $users->sshKeys()->delete($account_name, 12);
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
-  * [Users]({{ site.url }}/examples/users.html)
+  * [Authentication](../../examples/authentication.md)
+  * [Users](../../examples/users.md)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/ssh-keys+Resource#ssh-keysResource-Overview)

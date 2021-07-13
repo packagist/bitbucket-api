@@ -1,19 +1,13 @@
----
-layout: default
-permalink: /examples/repositories.html
-title: Repositories
----
-
 # Repositories
 
 The repositories namespace has a number of resources you can use to manage repository. The following resources are available on
 repositories:
 
 ### Prepare:
-{% include auth.md var_name="repositories" class_ns="Repositories" %}
-
-### Pagination:
-{% include pagination.md var_name="repositories" class_ns="Repositories" %}
+```php
+$repositories = new Bitbucket\API\Repositories();
+$repositories->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get a list of repositories for an account: (API 2.0)
 
@@ -34,5 +28,5 @@ Only public repositories are returned.
 ----
 
 #### Related:
-  * [Authentication](authentication.html)
+  * [Authentication](authentication.md)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/repositories+Endpoint)

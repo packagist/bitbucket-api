@@ -1,16 +1,13 @@
----
-layout: default
-permalink: /examples/users/invitations.html
-title: Users invitations
----
-
 # Users invitations
 
 An invitation is a request sent to an external email address to participate one or more of an account's groups.
 Any user with admin access to the account can invite someone to a group.
 
 ### Prepare:
-{% include auth.md var_name="users" class_ns="Users" %}
+```php
+$users = new Bitbucket\API\Users();
+$users->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get a list of pending invitations:
 
@@ -53,6 +50,6 @@ $users->invitations()->deleteByGroup($account_name, 'john', 'testers', 'dummy@ex
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
-  * [Users]({{ site.url }}/examples/users.html)
+  * [Authentication](../../examples/authentication.md)
+  * [Users](../../examples/users.md)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/invitations+Resource#invitationsResource-Overview)

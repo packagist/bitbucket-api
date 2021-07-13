@@ -1,15 +1,12 @@
----
-layout: default
-permalink: /examples/repositories/repository.html
-title: Repository
----
-
 # Repository
 
 Allows you to create a new repository or edit a specific one.
 
 ### Prepare:
-{% include auth.md var_name="repo" class_ns="Repositories\Repository" %}
+```php
+$repo = new Bitbucket\API\Repositories\Repository();
+$repo->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get information associated with an individual repository: (API 2.0)
 
@@ -86,5 +83,5 @@ $repo->filehistory($account_name, $repo_slug, '1bc8345', 'app/models/core.php')
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
+  * [Authentication](../../examples/authentication.md)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/repository+Resource#repositoryResource-Overview)

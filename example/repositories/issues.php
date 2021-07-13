@@ -17,7 +17,7 @@ $repo_slug      = 'sandbox';
 
 
 // login
-$invitation->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+$issue->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
 
 # Fetch a list of issues
 print_r($issue->all($accountname, $repo_slug));

@@ -1,15 +1,12 @@
----
-layout: default
-permalink: /examples/repositories/refs/tags.html
-title: Tags
----
-
 # Tags
 
 Allows you to get a list of tags.
 
 ### Prepare:
-{% include auth.md var_name="tags" class_ns="Repositories\Refs\Tags" %}
+```php
+$tags = new Bitbucket\API\Repositories\Refs\Tags();
+$tags->setCredentials(new Http\Message\Authentication\BasicAuth($bb_user, $bb_pass));
+```
 
 ### Get a list of tags: (API 2.0)
 
@@ -32,5 +29,5 @@ $tags->create($account_name, $repo_slug, $tag_name, $hash);
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
+  * [Authentication](../../../examples/authentication.md)
   * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/src+Resources)
