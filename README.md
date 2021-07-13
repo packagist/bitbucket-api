@@ -1,9 +1,6 @@
 # PHP Bitbucket API
 
-[![Latest Version](https://img.shields.io/packagist/v/gentle/bitbucket-api.svg?style=flat-square)](https://packagist.org/packages/gentle/bitbucket-api)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/packagist/bitbucket-api)
-
-Simple Bitbucket API wrapper for PHP
+Bitbucket API wrapper for PHP
 
 ## Requirements
 
@@ -11,13 +8,19 @@ Simple Bitbucket API wrapper for PHP
 * [Buzz](https://github.com/kriswallsmith/Buzz) library or any [HTTPlug](http://httplug.io/) compatible http client,
 * PHPUnit to run tests. ( _optional_ )
 
-## Getting started
+## Install
 
-Read [Introduction](https://gentlero.bitbucket.io/bitbucket-api/#introduction) and [Installation](https://gentlero.bitbucket.io/bitbucket-api/installation.html) from the documentation.
+Via Composer:
+
+```bash
+$ composer require private-packagist/bitbucket-api php-http/guzzle6-adapter
+```
+
+Why do you need to require `php-http/guzzle6-adapter`? We are decoupled from any HTTP messaging client with help by [HTTPlug](http://httplug.io/), so you can pick an HTTP client of your choice, guzzle is merely a recommendation.
 
 ## Documentation
 
-See [https://gentlero.bitbucket.io/bitbucket-api/](https://gentlero.bitbucket.io/bitbucket-api/) for more detailed documentation.
+See the [examples folder](docs/examples/index.md) for more detailed documentation.
 
 ## License
 
@@ -33,5 +36,5 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security
 
-For any security related issues, please send an email at [contact@packagist.com] instead of using the issue tracker.
+For any security related issues, please send an email at [contact@packagist.com](contact@packagist.com) instead of using the issue tracker.
 
