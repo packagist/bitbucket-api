@@ -58,7 +58,9 @@ class OAuth2PluginTest extends Tests\TestCase
         $request = new Request('GET', '/');
         $plugin = new OAuth2Plugin($oauth_params, $this->httpClient);
         $plugin->handleRequest($request, function () {
+            return new HttpFulfilledPromise(new Response());
         }, function () {
+            throw new \RuntimeException('Not expected to call first callable');
         });
     }
 
@@ -89,7 +91,9 @@ class OAuth2PluginTest extends Tests\TestCase
         $request = new Request('GET', '/');
         $plugin = new OAuth2Plugin($oauth_params, $this->httpClient);
         $plugin->handleRequest($request, function () {
+            return new HttpFulfilledPromise(new Response());
         }, function () {
+            throw new \RuntimeException('Not expected to call first callable');
         });
     }
 
@@ -116,6 +120,7 @@ class OAuth2PluginTest extends Tests\TestCase
 
             return new HttpFulfilledPromise(new Response());
         }, function () {
+            throw new \RuntimeException('Not expected to call first callable');
         });
     }
 
@@ -153,6 +158,7 @@ class OAuth2PluginTest extends Tests\TestCase
 
             return new HttpFulfilledPromise(new Response());
         }, function () {
+            throw new \RuntimeException('Not expected to call first callable');
         });
     }
 }
