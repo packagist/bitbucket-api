@@ -191,6 +191,17 @@ class PullRequestsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
+    public function testGetPullRequestDiffstat()
+    {
+        $endpoint = '/2.0/repositories/gentle/eof/pullrequests/1/diffstat';
+        $expectedResult = $this->fakeResponse(['dummy']);
+
+        $actual = $this->pullRequests->diffstat('gentle', 'eof', 1);
+
+        $this->assertRequest('GET', $endpoint);
+        $this->assertResponse($expectedResult, $actual);
+    }
+
     public function testGetPullRequestActivity()
     {
         $endpoint = '/2.0/repositories/gentle/eof/pullrequests/1/activity';
