@@ -256,6 +256,22 @@ class PullRequests extends API\Api
     }
 
     /**
+     * Get the diff stat for a pull request
+     *
+     * @access public
+     * @param  string           $account The team or individual account owning the repository.
+     * @param  string           $repo    The repository identifier.
+     * @param  int              $id      ID of the pull request
+     * @return ResponseInterface
+     */
+    public function diffstat($account, $repo, $id)
+    {
+        return $this->getClient()->setApiVersion('2.0')->get(
+            sprintf('/repositories/%s/%s/pullrequests/%d/diffstat', $account, $repo, $id)
+        );
+    }
+
+    /**
      * Get the log of all of a repository's pull request activity
      *
      * If `$id` is omitted the repository's pull request activity is returned.
