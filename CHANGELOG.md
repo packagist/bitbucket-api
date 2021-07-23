@@ -8,6 +8,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed:
 ### Removed:
 
+## 2.1.0 / 2021-07-23
+
+### Added:
+  - PullRequest: add diffstat endpoint
+
 ## 2.0.0 / 2021-07-13
 
 See the [Upgrade Guide](docs/upgrade-2.0.md) for more information.
