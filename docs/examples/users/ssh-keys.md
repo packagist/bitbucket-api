@@ -43,4 +43,4 @@ $users->sshKeys()->delete($account_name, 12);
 #### Related:
   * [Authentication](../../examples/authentication.md)
   * [Users](../../examples/users.md)
-  * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/ssh-keys+Resource#ssh-keysResource-Overview)
+  * [BB Wiki](https://developer.atlassian.com/cloud/bitbucket/rest/api-group-ssh/#api-group-ssh)

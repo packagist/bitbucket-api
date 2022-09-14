@@ -23,4 +23,4 @@ $user->emails();
 
 #### Related:
   * [Authentication](authentication.md)
-  * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/user+Endpoint#userEndpoint-Overview)
+  * [BB Wiki](https://developer.atlassian.com/cloud/bitbucket/rest/api-group-users/#api-group-users)

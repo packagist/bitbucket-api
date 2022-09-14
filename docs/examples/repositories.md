@@ -29,4 +29,4 @@ Only public repositories are returned.
 
 #### Related:
   * [Authentication](authentication.md)
-  * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/repositories+Endpoint)
+  * [BB Wiki](https://developer.atlassian.com/cloud/bitbucket/rest/api-group-repositories/#api-group-repositories)

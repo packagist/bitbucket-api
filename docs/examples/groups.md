@@ -43,4 +43,4 @@ $groups->delete($account_name, 'testers');
 #### Related:
   * [Authentication](authentication.md)
   * [Group members](groups/members.md)
-  * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/groups+Endpoint)
+  * [Atlassian Documentation](https://support.atlassian.com/bitbucket-cloud/docs/groups-endpoint/)

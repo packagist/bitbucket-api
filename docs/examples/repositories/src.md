@@ -59,4 +59,4 @@ $src->create($account_name, $repo_slug, $params);
 
 #### Related:
   * [Authentication](../../examples/authentication.md)
-  * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/src+Resources)
+  * [BB Wiki](https://developer.atlassian.com/cloud/bitbucket/rest/api-group-source/#api-repositories-workspace-repo-slug-src-commit-path-get)

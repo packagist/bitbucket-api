@@ -41,4 +41,4 @@ $buildStatuses->update($account, $repository, $revision, $key, array(
 
 #### Related:
   * [Authentication](../../../examples/authentication.md)
-  * [BB Wiki](https://confluence.atlassian.com/bitbucket/buildstatus-resource-779295267.html)
+  * [BB Wiki](https://developer.atlassian.com/cloud/bitbucket/rest/api-group-commit-statuses/#api-repositories-workspace-repo-slug-commit-commit-statuses-build-post)

@@ -49,4 +49,3 @@ $team->repositories($team_name);
 
 #### Related:
   * [Authentication](authentication.md)
-  * [BB Wiki](https://confluence.atlassian.com/x/XwZAGQ)

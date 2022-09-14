@@ -28,4 +28,4 @@ $group->members()->delete($account_name, 'developers', 'miriam');
 #### Related:
   * [Authentication](../../examples/authentication.md)
   * [Groups](../../examples/groups.md)
-  * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/groups+Endpoint)
+  * [Atlassian Documentation](https://support.atlassian.com/bitbucket-cloud/docs/groups-endpoint/)

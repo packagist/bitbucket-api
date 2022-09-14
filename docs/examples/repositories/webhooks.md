@@ -74,4 +74,4 @@ $hook->delete($account_name, $repo_slug, $uuid);
 
 #### Related:
   * [Authentication](../../examples/authentication.md)
-  * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/webhooks+Resource)
+  * [BB Wiki](https://developer.atlassian.com/cloud/bitbucket/rest/api-group-repositories/#api-repositories-workspace-repo-slug-hooks-get)

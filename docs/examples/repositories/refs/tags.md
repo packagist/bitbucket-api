@@ -30,4 +30,4 @@ $tags->create($account_name, $repo_slug, $tag_name, $hash);
 
 #### Related:
   * [Authentication](../../../examples/authentication.md)
-  * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/src+Resources)
+  * [BB Wiki](https://developer.atlassian.com/cloud/bitbucket/rest/api-group-refs/#api-repositories-workspace-repo-slug-refs-get)

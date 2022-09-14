@@ -18,4 +18,4 @@ $invitation->send($account_name, $repo_slug, 'user@example.com', 'read');
 
 #### Related:
   * [Authentication](authentication.md)
-  * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/invitations+Endpoint#invitationsEndpoint-Overview)
+  * [Atlassian Documentation](https://support.atlassian.com/bitbucket-cloud/docs/invitations-endpoint/)
