@@ -36,4 +36,4 @@ $issue->comments()->update($accountname, $repo_slug, 4, 3454384, "dummy comment 
 #### Related:
   * [Authentication](../../../examples/authentication.md)
   * [Repository issues](../../../examples/repositories/issues.md)
-  * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/issues+Resource#issuesResource-Overview)
+  * [BB Wiki](https://developer.atlassian.com/cloud/bitbucket/rest/api-group-issue-tracker/#api-repositories-workspace-repo-slug-issues-issue-id-comments-get)

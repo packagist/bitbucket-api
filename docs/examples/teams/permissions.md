@@ -29,4 +29,4 @@ $permissions->repositories($team_name, $repo);
 
 #### Related:
   * [Authentication](../../examples/authentication.md)
-  * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/user+Endpoint#userEndpoint-Overview)
+  * [BB Wiki](https://developer.atlassian.com/cloud/bitbucket/rest/api-group-workspaces/#api-workspaces-workspace-permissions-get)

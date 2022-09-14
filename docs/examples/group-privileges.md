@@ -48,4 +48,4 @@ $privileges->delete($account_name, $repo_slug, $group_owner, $group_slug);
 
 #### Related:
   * [Authentication](../examples/authentication.md)
-  * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/group-privileges+Endpoint#group-privilegesEndpoint-Overview)
+  * [Atlassian Documentation](https://support.atlassian.com/bitbucket-cloud/docs/group-privileges-endpoint/)

@@ -84,4 +84,4 @@ $repo->filehistory($account_name, $repo_slug, '1bc8345', 'app/models/core.php')
 
 #### Related:
   * [Authentication](../../examples/authentication.md)
-  * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/repository+Resource#repositoryResource-Overview)
+  * [BB Wiki](https://developer.atlassian.com/cloud/bitbucket/rest/api-group-repositories/#api-repositories-workspace-get)

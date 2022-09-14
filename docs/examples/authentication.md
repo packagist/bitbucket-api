@@ -49,7 +49,7 @@ http client with oauth credentials before making a request.
   ```
 
 ### Basic authentication
-To use basic authentication, you need to attach `BasicAuth` to the Api instance with your username and password.
+To use basic authentication, you need to attach `BasicAuth` to the Api instance with your username and a personal access token.
 
 _Please note that is not recommended from a security perspective to use your main account in automated tools and scripts
 and you should really consider switching to [OAuth2](#oauth2-authorization) or [OAuth1](#oauth1-authorization)._
@@ -67,5 +67,4 @@ and you should really consider switching to [OAuth2](#oauth2-authorization) or [
 ----
 
 #### Related:
-  * [Authentication @ BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/Use+the+Bitbucket+REST+APIs#UsetheBitbucketRESTAPIs-Authentication)
-  * [OAuth on Bitbucket @ BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/OAuth+on+Bitbucket)
+  * [Authentication on Bitbucket](https://developer.atlassian.com/cloud/bitbucket/rest/intro/#authentication)

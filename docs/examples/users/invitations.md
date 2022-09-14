@@ -52,4 +52,4 @@ $users->invitations()->deleteByGroup($account_name, 'john', 'testers', 'dummy@ex
 #### Related:
   * [Authentication](../../examples/authentication.md)
   * [Users](../../examples/users.md)
-  * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/invitations+Resource#invitationsResource-Overview)
+  * [Atlassian Documentation](https://support.atlassian.com/bitbucket-cloud/docs/invitations-endpoint/)

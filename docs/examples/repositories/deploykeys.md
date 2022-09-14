@@ -42,4 +42,4 @@ $dk->delete($account_name, $repo_slug, '508380');
 
 #### Related:
   * [Authentication](../../examples/authentication.md)
-  * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/deploy-keys+Resource#deploy-keysResource-Overview)
+  * [BB Wiki](https://developer.atlassian.com/cloud/bitbucket/rest/api-group-deployments/#api-repositories-workspace-repo-slug-deploy-keys-get)

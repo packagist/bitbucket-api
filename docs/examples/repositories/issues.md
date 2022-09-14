@@ -61,4 +61,4 @@ $issue->delete($account_name, $repo_slug, 5);
 #### Related:
   * [Authentication](../../examples/authentication.md)
   * [Issues comments](issues/comments.md)
-  * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/issues+Resource#issuesResource-Overview)
+  * [BB Wiki](https://developer.atlassian.com/cloud/bitbucket/rest/api-group-issue-tracker/#api-repositories-workspace-repo-slug-issues-get)

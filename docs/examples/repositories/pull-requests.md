@@ -119,4 +119,4 @@ $pull->accept($account_name, $repo_slug, 1, array(
 #### Related:
   * [Authentication](../../examples/authentication.md)
   * [Pull requests comments](pull-requests/comments.md)
-  * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/pullrequests+Resource#pullrequestsResource-Overview)
+  * [BB Wiki](https://developer.atlassian.com/cloud/bitbucket/rest/api-group-pullrequests/#api-repositories-workspace-repo-slug-pullrequests-get)

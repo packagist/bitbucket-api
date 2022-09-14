@@ -25,5 +25,5 @@ $commit->comments()->get($account_name, $repo_slug, $commitSHA1, $commentID)
 ----
 
 #### Related:
-  * [Authentication]({{ site.url }}/examples/authentication.html)
-  * [Commit(s)]({{ site.url }}/examples/repositories/commits.html)
+  * [Authentication](../../authentication.md)
+  * [Commit(s)](../commits.md)

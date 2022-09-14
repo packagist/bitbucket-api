@@ -25,4 +25,4 @@ $user->repositories($username);
   * [Authentication](authentication.md)
   * [Users invitations](users/invitations.md)
   * [Users ssh keys](users/ssh-keys.md)
-  * [BB Wiki](https://confluence.atlassian.com/display/BITBUCKET/users+Endpoint)
+  * [BB Wiki](https://developer.atlassian.com/cloud/bitbucket/rest/api-group-users/#api-group-users)

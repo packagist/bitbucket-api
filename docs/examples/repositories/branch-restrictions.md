@@ -57,4 +57,4 @@ $restrictions->delete($account_name, $repo_slug, $restrictionID);
 
 #### Related:
   * [Authentication](../../examples/authentication.md)
-  * [BB Wiki](https://confluence.atlassian.com/x/XQEYFw)
+  * [BB Wiki](https://developer.atlassian.com/cloud/bitbucket/rest/api-group-branch-restrictions/#api-repositories-workspace-repo-slug-branch-restrictions-get)

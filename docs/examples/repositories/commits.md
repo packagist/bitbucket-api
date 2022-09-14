@@ -45,4 +45,4 @@ $commits->deleteApproval($account_name, $repo_slug, $commitSHA1);
 #### Related:
   * [Authentication](../../examples/authentication.md)
   * [Commit(s) comments](./commits/comments.md)
-  * [BB Wiki](https://confluence.atlassian.com/x/doA7Fw)
+  * [BB Wiki](https://developer.atlassian.com/cloud/bitbucket/rest/api-group-commits/#api-repositories-workspace-repo-slug-commits-get)
