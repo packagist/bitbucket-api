@@ -13,7 +13,7 @@ Also, have a look at [http://httplug.io/](http://httplug.io/) for more info.
 #### Authentication
 Authentication can be configured with the `AuthenticationPlugin` which is provided by the [php-http/client-common](https://github.com/php-http/client-common) library. Additionally, this library also provides `OAuthPlugin` and `OAuth2Plugin` plugins that come with the same functionality as the previous `OauthListener` and `Oauth2Listener` listeners.
 
-Basic authentication can be configured like shown in the example below and more examples can be found on the [Authentication examples page](examples/authentication.html).
+Basic authentication can be configured like shown in the example below and more examples can be found on the [Authentication examples page](examples/authentication.md).
   ```php
   $user = new Bitbucket\API\User();
   $user->setCredentials(

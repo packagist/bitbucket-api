@@ -2,7 +2,7 @@
 
 First of all, thank you for taking time to contribute!
 
-Contributions are accepted via Pull Requests on [Bitbucket][repo]. Sometimes, our free time is very limited and could take a while until we review your pull request, so please be patient while you wait for code review.
+Contributions are accepted via Pull Requests on [GitHub][repo]. Sometimes, our time is very limited and could take a while until we review your pull request, so please be patient while you wait for code review.
 
 We don't mind getting questions, so if you have any, please open a new issue on our [tracker][repo].
 
@@ -31,7 +31,7 @@ To check against [PSR-2][PSR-2] coding standard:
 $ composer style
 ```
 
-[repo]: https://bitbucket.org/gentlero/bitbucket-api/overview
+[repo]: https://github.com/packagist/bitbucket-api
 [PSR-2]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md
 [squash]: http://www.git-scm.com/book/en/v2/Git-Tools-Rewriting-History#Changing-Multiple-Commit-Messages
 [semver]: http://semver.org/
