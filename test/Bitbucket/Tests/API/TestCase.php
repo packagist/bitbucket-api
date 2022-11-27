@@ -2,7 +2,6 @@
 
 namespace Bitbucket\Tests\API;
 
-use Bitbucket\API\Api;
 use Bitbucket\API\Http\HttpPluginClientBuilder;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Mock\Client;
@@ -11,18 +10,19 @@ use Psr\Http\Message\ResponseInterface;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
-    /** @var Client */
+    /** @var ?Client */
     protected $mockClient;
 
-    protected function getApiMock($class = null)
+    /**
+     * @template T of \Bitbucket\API\Api
+     * @param class-string<T> $class
+     * @return T
+     */
+    protected function getApiMock($class)
     {
-        $class = is_null($class) ? '\Bitbucket\API\Api' : $class;
-
         $bitbucketClient = new \Bitbucket\API\Http\Client(array(), $this->getHttpPluginClientBuilder());
-        /** @var Api $apiClient */
-        $apiClient = new $class([], $bitbucketClient);
 
-        return $apiClient;
+        return new $class([], $bitbucketClient);
     }
 
     private function getMockHttpClient()
