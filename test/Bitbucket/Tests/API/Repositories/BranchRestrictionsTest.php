@@ -16,7 +16,7 @@ class BranchRestrictionsTest extends TestCase
         $this->branchRestrictions = $this->getApiMock(BranchRestrictions::class);
     }
 
-    public function testGetAllRestrictions()
+    public function testGetAllRestrictions(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/branch-restrictions';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -27,7 +27,7 @@ class BranchRestrictionsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testAddRestrictionType()
+    public function testAddRestrictionType(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/branch-restrictions';
         $params = [
@@ -40,7 +40,7 @@ class BranchRestrictionsTest extends TestCase
         $this->assertRequest('POST', $endpoint, json_encode($params));
     }
 
-    public function testCreateRestrictionFromArray()
+    public function testCreateRestrictionFromArray(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/branch-restrictions';
         $params = [
@@ -52,7 +52,7 @@ class BranchRestrictionsTest extends TestCase
         $this->assertRequest('POST', $endpoint, json_encode($params));
     }
 
-    public function testCreateRestrictionFromJSON()
+    public function testCreateRestrictionFromJSON(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/branch-restrictions';
         $params = json_encode([
@@ -66,15 +66,16 @@ class BranchRestrictionsTest extends TestCase
 
     /**
      * @dataProvider restrictionsInvalidParamsProvider
+     * @param int|string $params
      */
-    public function testCreateRestrictionWithInvalidParams($params)
+    public function testCreateRestrictionWithInvalidParams($params): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         $this->branchRestrictions->create('gentle', 'eof', $params);
     }
 
-    public function restrictionsInvalidParamsProvider()
+    public function restrictionsInvalidParamsProvider(): array
     {
         return [
             [''],
@@ -83,7 +84,7 @@ class BranchRestrictionsTest extends TestCase
         ];
     }
 
-    public function testCreateRestrictionFromArrayShouldFailWithInvalidRestrictionKind()
+    public function testCreateRestrictionFromArrayShouldFailWithInvalidRestrictionKind(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -94,7 +95,7 @@ class BranchRestrictionsTest extends TestCase
         $this->branchRestrictions->create('gentle', 'eof', $params);
     }
 
-    public function testCreateRestrictionFromJSONShouldFailWithInvalidRestrictionKind()
+    public function testCreateRestrictionFromJSONShouldFailWithInvalidRestrictionKind(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -105,7 +106,7 @@ class BranchRestrictionsTest extends TestCase
         $this->branchRestrictions->create('gentle', 'eof', $params);
     }
 
-    public function testGetSpecificRestriction()
+    public function testGetSpecificRestriction(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/branch-restrictions/1';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -116,7 +117,7 @@ class BranchRestrictionsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testUpdateRestrictionFromArray()
+    public function testUpdateRestrictionFromArray(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/branch-restrictions/1';
         $params = [
@@ -131,7 +132,7 @@ class BranchRestrictionsTest extends TestCase
         $this->assertRequest('PUT', $endpoint, json_encode($params));
     }
 
-    public function testUpdateRestrictionFromJSON()
+    public function testUpdateRestrictionFromJSON(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/branch-restrictions/1';
         $params = json_encode([
@@ -148,15 +149,16 @@ class BranchRestrictionsTest extends TestCase
 
     /**
      * @dataProvider restrictionsInvalidParamsProvider
+     * @param int|string $params
      */
-    public function testUpdateRestrictionWithInvalidParams($params)
+    public function testUpdateRestrictionWithInvalidParams($params): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         $this->branchRestrictions->update('gentle', 'eof', 1, $params);
     }
 
-    public function testCreateRestrictionShouldFailIfKindIsSpecified()
+    public function testCreateRestrictionShouldFailIfKindIsSpecified(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -167,7 +169,7 @@ class BranchRestrictionsTest extends TestCase
         $this->branchRestrictions->update('gentle', 'eof', 1, $params);
     }
 
-    public function testDeleteRestriction()
+    public function testDeleteRestriction(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/branch-restrictions/1';
 

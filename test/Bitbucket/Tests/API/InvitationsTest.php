@@ -15,7 +15,7 @@ class InvitationsTest extends TestCase
         $this->invitations = $this->getApiMock(Invitations::class);
     }
 
-    public function testSendInvitationSuccess()
+    public function testSendInvitationSuccess(): void
     {
         $endpoint = '/1.0/invitations/gentle/eof';
         $params = http_build_query(['permission' => 'read', 'email' => 'john_doe@example.com']);

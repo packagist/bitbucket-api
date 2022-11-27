@@ -16,10 +16,10 @@ class BranchesTest extends TestCase
         $this->branches = $this->getApiMock(Branches::class);
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/refs/branches';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse(['dummy']);
 
         $actual = $this->branches->all('gentle', 'eof');
 
@@ -27,11 +27,11 @@ class BranchesTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testAllParams()
+    public function testAllParams(): void
     {
         $params = ['pagelen' => 36];
         $endpoint = '/2.0/repositories/gentle/eof/refs/branches';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse(['dummy']);
 
         $actual = $this->branches->all('gentle', 'eof', $params);
 
@@ -39,10 +39,10 @@ class BranchesTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGet()
+    public function testGet(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/refs/branches/abranch';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse(['dummy']);
 
         $actual = $this->branches->get('gentle', 'eof', 'abranch');
 
@@ -50,10 +50,10 @@ class BranchesTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testDelete()
+    public function testDelete(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/refs/branches/abranch';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse(['dummy']);
 
         $actual = $this->branches->delete('gentle', 'eof', 'abranch');
 

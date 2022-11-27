@@ -16,7 +16,7 @@ class BuildStatusesTest extends TestCase
         $this->buildStatuses = $this->getApiMock(BuildStatuses::class);
     }
 
-    public function testGet()
+    public function testGet(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/commit/SHA1/statuses/build/KEY';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -27,7 +27,7 @@ class BuildStatusesTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/commit/SHA1/statuses/build';
         $params = [
@@ -39,7 +39,7 @@ class BuildStatusesTest extends TestCase
         $this->assertRequest('POST', $endpoint, json_encode($params));
     }
 
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/commit/SHA1/statuses/build/KEY';
         $params = [

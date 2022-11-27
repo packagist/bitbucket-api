@@ -16,7 +16,7 @@ class PermissionsTest extends TestCase
         $this->permissions = $this->getApiMock(Permissions::class);
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $endpoint = '/2.0/teams/gentle/permissions';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -27,7 +27,7 @@ class PermissionsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testRepositories()
+    public function testRepositories(): void
     {
         $endpoint = '/2.0/teams/gentle/permissions/repositories';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -38,7 +38,7 @@ class PermissionsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testRepository()
+    public function testRepository(): void
     {
         $endpoint = '/2.0/teams/gentle/permissions/repositories/eof';
         $expectedResult = $this->fakeResponse(['dummy']);

@@ -1,5 +1,10 @@
 parameters:
-    level: 5
+    level: 6
     paths:
         - lib
         - test
+
+    ignoreErrors:
+        - '#Method Bitbucket\\[a-z\\]+(TestCase|Test)::[a-z0-9]*provider[a-z0-9]*\(\) return type has no value type specified in iterable type#i'
+        - '#Method Bitbucket\\[a-z\\]+Test::test[a-z0-9]*\(\) has parameter \$[a-z0-9]+ with no value type specified in iterable type#i'
+        - '#no value type specified in iterable type array#'

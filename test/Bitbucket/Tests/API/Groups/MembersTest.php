@@ -16,7 +16,7 @@ class MembersTest extends TestCase
         $this->members = $this->getApiMock(Members::class);
     }
 
-    public function testGetAllGroupMembers()
+    public function testGetAllGroupMembers(): void
     {
         $endpoint = '/1.0/groups/gentle/testers/members';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -27,7 +27,7 @@ class MembersTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testAddMemberToGroupSuccess()
+    public function testAddMemberToGroupSuccess(): void
     {
         $endpoint = '/1.0/groups/gentle/testers/members/steve';
 
@@ -36,7 +36,7 @@ class MembersTest extends TestCase
         $this->assertRequest('PUT', $endpoint, '', 'format=json');
     }
 
-    public function testDeleteMemberFromGroupSuccess()
+    public function testDeleteMemberFromGroupSuccess(): void
     {
         $endpoint = '/1.0/groups/gentle/testers/members/steve';
 

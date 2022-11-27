@@ -164,6 +164,7 @@ class BranchRestrictions extends Api
      * Add allowed permission types
      *
      * @param array $restrictions
+     * @return void
      */
     public function addAllowedRestrictionType($restrictions = array())
     {

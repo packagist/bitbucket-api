@@ -13,7 +13,7 @@ use Http\Client\Promise\HttpFulfilledPromise;
  */
 class NormalizeArrayPluginTest extends Tests\TestCase
 {
-    public function testPHPArrayToApiArrayConversionForQuery()
+    public function testPHPArrayToApiArrayConversionForQuery(): void
     {
         $plugin = new NormalizeArrayPlugin();
         $query = http_build_query(['state' => ['OPEN', 'MERGED']]);

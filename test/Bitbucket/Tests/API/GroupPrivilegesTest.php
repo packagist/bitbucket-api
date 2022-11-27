@@ -15,7 +15,7 @@ class GroupPrivilegesTest extends TestCase
         $this->groupPrivileges = $this->getApiMock(GroupPrivileges::class);
     }
 
-    public function testGetGroupsPrivilegesSuccess()
+    public function testGetGroupsPrivilegesSuccess(): void
     {
         $endpoint = '/1.0/group-privileges/gentle/';
 
@@ -24,7 +24,7 @@ class GroupPrivilegesTest extends TestCase
         $this->assertRequest('GET', $endpoint, '', 'format=json');
     }
 
-    public function testGetRepositoryPrivilegesSuccess()
+    public function testGetRepositoryPrivilegesSuccess(): void
     {
         $endpoint = '/1.0/group-privileges/gentle/dummy-repo';
 
@@ -33,7 +33,7 @@ class GroupPrivilegesTest extends TestCase
         $this->assertRequest('GET', $endpoint, '', 'format=json');
     }
 
-    public function testGetGroupPrivilegesSuccess()
+    public function testGetGroupPrivilegesSuccess(): void
     {
         $endpoint = '/1.0/group-privileges/gentle/dummy-repo/owner/testers';
 
@@ -42,7 +42,7 @@ class GroupPrivilegesTest extends TestCase
         $this->assertRequest('GET', $endpoint, '', 'format=json');
     }
 
-    public function testGetRepositoriesPrivilegeGroupSuccess()
+    public function testGetRepositoriesPrivilegeGroupSuccess(): void
     {
         $endpoint = '/1.0/group-privileges/gentle/owner/testers';
 
@@ -51,14 +51,14 @@ class GroupPrivilegesTest extends TestCase
         $this->assertRequest('GET', $endpoint, '', 'format=json');
     }
 
-    public function testGrantGroupPrivilegesInvalidPrivilege()
+    public function testGrantGroupPrivilegesInvalidPrivilege(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         $this->groupPrivileges->grant('gentle', 'repo', 'owner', 'sys-admins', 'invalid');
     }
 
-    public function testGrantGroupPrivilegesSuccess()
+    public function testGrantGroupPrivilegesSuccess(): void
     {
         $endpoint = '/1.0/group-privileges/gentle/repo/owner/sys-admins';
         $params = 'read';
@@ -68,7 +68,7 @@ class GroupPrivilegesTest extends TestCase
         $this->assertRequest('PUT', $endpoint, $params, 'format=json');
     }
 
-    public function testRemoveGroupPrivilegesFromRepositorySuccess()
+    public function testRemoveGroupPrivilegesFromRepositorySuccess(): void
     {
         $endpoint = '/1.0/group-privileges/gentle/repo/owner/sys-admins';
 

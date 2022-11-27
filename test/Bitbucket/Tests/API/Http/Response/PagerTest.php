@@ -4,6 +4,7 @@ namespace Bitbucket\Tests\API\Http\Response;
 
 use Bitbucket\API\Http\Response\Pager;
 use Bitbucket\Tests\API\TestCase;
+use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -11,7 +12,7 @@ use Psr\Http\Message\ResponseInterface;
  */
 class PagerTest extends TestCase
 {
-    public function testFetchNextSuccess()
+    public function testFetchNextSuccess(): void
     {
         $response = $this->fakeResponse([
             'values' => [],
@@ -24,7 +25,7 @@ class PagerTest extends TestCase
         $this->assertInstanceOf(ResponseInterface::class, $page->fetchNext());
     }
 
-    public function testFetchNextFail()
+    public function testFetchNextFail(): void
     {
         $response = $this->fakeResponse([
             'values' => [],
@@ -36,7 +37,7 @@ class PagerTest extends TestCase
         $this->assertNull($page->fetchNext());
     }
 
-    public function testFetchPreviousSuccess()
+    public function testFetchPreviousSuccess(): void
     {
         $response = $this->fakeResponse([
             'values' => [],
@@ -49,7 +50,7 @@ class PagerTest extends TestCase
         $this->assertInstanceOf(ResponseInterface::class, $page->fetchPrevious());
     }
 
-    public function testFetchPreviousFail()
+    public function testFetchPreviousFail(): void
     {
         $response = $this->fakeResponse([
             'values' => [],
@@ -61,7 +62,7 @@ class PagerTest extends TestCase
         $this->assertNull($page->fetchPrevious());
     }
 
-    public function testFetchAllSuccess()
+    public function testFetchAllSuccess(): void
     {
         $response = $this->fakeResponse([
             'values' => ['dummy_1' => 'value_1'],
@@ -88,7 +89,7 @@ class PagerTest extends TestCase
         $this->assertEquals($expected, json_decode($response->getBody()->getContents(), true));
     }
 
-    public function testFetchAllWithEmptyResponseShouldReturnEmptyValuesArray()
+    public function testFetchAllWithEmptyResponseShouldReturnEmptyValuesArray(): void
     {
         $response = $this->fakeResponse(['values' => []]);
         $this->fakeResponse(['values' => []]);
@@ -101,10 +102,11 @@ class PagerTest extends TestCase
         $this->assertEquals(['values' => []], json_decode($response->getBody()->getContents(), true));
     }
 
-    public function testFetchAllWithInvalidJsonShouldReturnEmptyValuesArray()
+    public function testFetchAllWithInvalidJsonShouldReturnEmptyValuesArray(): void
     {
         $expected = ['values' => []];
-        $response = $this->fakeResponse('{"something": "yes"', 200, false);
+        $response = new Response(200, [], '{"something": "yes"');
+        $this->getMockHttpClient()->addResponse($response);
 
         $page = new Pager($this->getHttpPluginClientBuilder(), $response);
         $response = $page->fetchAll();
@@ -113,7 +115,7 @@ class PagerTest extends TestCase
         $this->assertEquals($expected, json_decode($response->getBody()->getContents(), true));
     }
 
-    public function testFetchAllWithUnauthorizedHeaderShouldFail()
+    public function testFetchAllWithUnauthorizedHeaderShouldFail(): void
     {
         $this->expectException(\UnexpectedValueException::class);
 
@@ -122,12 +124,12 @@ class PagerTest extends TestCase
         new Pager($this->getHttpPluginClientBuilder(), $response);
     }
 
-    public function testGetCurrentResponseSuccess()
+    public function testGetCurrentResponseSuccess(): void
     {
-        $response = $this->fakeResponse(json_encode([
+        $response = $this->fakeResponse([
             'values' => [],
             'previous' => 'https://example.com/something?page=2'
-        ]));
+        ]);
 
         $page = new Pager($this->getHttpPluginClientBuilder(), $response);
         $response = $page->getCurrent();

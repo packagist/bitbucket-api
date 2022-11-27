@@ -16,10 +16,10 @@ class SshKeysTest extends Tests\TestCase
         $this->sshKeys = $this->getApiMock(SshKeys::class);
     }
 
-    public function testGetAllSshKeys()
+    public function testGetAllSshKeys(): void
     {
         $endpoint = '/2.0/users/gentle/ssh-keys';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse([]);
 
         $actual = $this->sshKeys->all('gentle');
 
@@ -27,10 +27,10 @@ class SshKeysTest extends Tests\TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testCreateSshKey()
+    public function testCreateSshKey(): void
     {
         $endpoint = '/2.0/users/gentle/ssh-keys';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse([]);
         $params = [
             'key'   => 'key content',
             'label' => 'dummy key'
@@ -42,10 +42,10 @@ class SshKeysTest extends Tests\TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testUpdateSshKey()
+    public function testUpdateSshKey(): void
     {
         $endpoint = '/2.0/users/gentle/ssh-keys/12';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse([]);
         $params = [
             'key'   => 'key content'
         ];
@@ -56,10 +56,10 @@ class SshKeysTest extends Tests\TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetSshKeyContent()
+    public function testGetSshKeyContent(): void
     {
         $endpoint = '/2.0/users/gentle/ssh-keys/2';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse([]);
 
         $actual = $this->sshKeys->get('gentle', 2);
 
@@ -67,10 +67,10 @@ class SshKeysTest extends Tests\TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testDeleteSshKey()
+    public function testDeleteSshKey(): void
     {
         $endpoint = '/2.0/users/gentle/ssh-keys/2';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse([]);
 
         $actual = $this->sshKeys->delete('gentle', 2);
 

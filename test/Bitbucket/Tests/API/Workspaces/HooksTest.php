@@ -16,7 +16,7 @@ class HooksTest extends TestCase
         $this->hooks = $this->getApiMock(Hooks::class);
     }
 
-    public function invalidCreateProvider()
+    public function invalidCreateProvider(): array
     {
         return [
             [[
@@ -51,7 +51,7 @@ class HooksTest extends TestCase
     /**
      * @dataProvider invalidCreateProvider
      */
-    public function testInvalidCreate(array $check)
+    public function testInvalidCreate(array $check): void
     {
         $this->expectException(\InvalidArgumentException::class);
 

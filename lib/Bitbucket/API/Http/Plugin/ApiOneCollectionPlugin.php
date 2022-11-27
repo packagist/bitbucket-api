@@ -45,6 +45,9 @@ class ApiOneCollectionPlugin implements Plugin
         $this->responseFactory = $responseFactory ?: MessageFactoryDiscovery::find();
     }
 
+    /**
+     * @return callable
+     */
     protected function doHandleRequest(RequestInterface $request, callable $next, callable $first)
     {
         return $next($request)->then(function (ResponseInterface $response) use ($request) {

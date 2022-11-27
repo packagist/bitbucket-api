@@ -32,6 +32,7 @@ class NormalizeArrayPlugin implements Plugin
 
     /**
      * {@inheritDoc}
+     * @return callable
      */
     protected function doHandleRequest(RequestInterface $request, callable $next, callable $first)
     {

@@ -7,13 +7,13 @@ use Http\Message\Authentication\BasicAuth;
 
 class ApiTest extends TestCase
 {
-    public function testCredentials()
+    public function testCredentials(): void
     {
         $api = new Api;
         $api->setCredentials(new BasicAuth('api_username', 'api_password'));
     }
 
-    public function testShouldDoGetRequest()
+    public function testShouldDoGetRequest(): void
     {
         $endpoint = '/repositories/gentle/eof/issues/3';
         $params = [];
@@ -28,7 +28,7 @@ class ApiTest extends TestCase
         $this->assertSame('GET', $request->getMethod());
     }
 
-    public function testShouldDoPostRequest()
+    public function testShouldDoPostRequest(): void
     {
         $endpoint = '/repositories/gentle/eof/issues/3';
         $params = ['key' => 'value'];
@@ -44,7 +44,7 @@ class ApiTest extends TestCase
         $this->assertSame(http_build_query($params), $request->getBody()->getContents());
     }
 
-    public function testShouldDoPutRequest()
+    public function testShouldDoPutRequest(): void
     {
         $endpoint = '/repositories/gentle/eof/issues/3';
         $params = ['key' => 'value'];
@@ -60,7 +60,7 @@ class ApiTest extends TestCase
         $this->assertSame(http_build_query($params), $request->getBody()->getContents());
     }
 
-    public function testShouldDoDeleteRequest()
+    public function testShouldDoDeleteRequest(): void
     {
         $endpoint = '/repositories/gentle/eof/issues/3';
         $params = [];
@@ -76,7 +76,7 @@ class ApiTest extends TestCase
         $this->assertSame('DELETE', $request->getMethod());
     }
 
-    public function testFormat()
+    public function testFormat(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -95,8 +95,9 @@ class ApiTest extends TestCase
 
     /**
      * @dataProvider invalidChildNameProvider
+     * @param mixed $name
      */
-    public function testSPFShouldFailWithInvalidClassName($name)
+    public function testSPFShouldFailWithInvalidClassName($name): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -104,7 +105,7 @@ class ApiTest extends TestCase
         $bitbucket->api($name);
     }
 
-    public function testDifferentHttpClientInstanceOnCloning()
+    public function testDifferentHttpClientInstanceOnCloning(): void
     {
         $repo1 = new \Bitbucket\API\Repositories();
         $repo2 = clone $repo1;
@@ -115,10 +116,14 @@ class ApiTest extends TestCase
         $this->assertNotSame($repo1, $repo2);
     }
 
-    public function invalidChildNameProvider()
+    public function invalidChildNameProvider(): array
     {
         return [
-            [[]], [new \stdClass()], [21], ['32.4'], ['invalid']
+            [[]],
+            [new \stdClass()],
+            [21],
+            ['32.4'],
+            ['invalid'],
         ];
     }
 }

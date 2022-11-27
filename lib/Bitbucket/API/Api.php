@@ -21,6 +21,7 @@ use Psr\Http\Message\MessageInterface;
 
 /**
  * @author Alexandru Guzinschi <alex@gentle.ro>
+ * @phpstan-import-type OptionalClientOption from Client
  */
 class Api
 {
@@ -41,7 +42,7 @@ class Api
     protected $httpClient;
 
     /**
-     * @param array           $options
+     * @param OptionalClientOption $options
      * @param ClientInterface $client
      */
     public function __construct(array $options = array(), ClientInterface $client = null)
@@ -84,6 +85,9 @@ class Api
         $this->addPlugin(new AuthenticationPlugin($authentication));
     }
 
+    /**
+     * @return void
+     */
     public function addPlugin(Plugin $plugin)
     {
         $this->httpClient->getClientBuilder()->removePlugin(get_class($plugin));

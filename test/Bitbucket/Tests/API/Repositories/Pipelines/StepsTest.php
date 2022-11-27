@@ -16,7 +16,7 @@ class StepsTest extends TestCase
         $this->steps = $this->getApiMock(Steps::class);
     }
 
-    public function testGetAllSteps()
+    public function testGetAllSteps(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pipelines/pipeline-uuid/steps/';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -27,7 +27,7 @@ class StepsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetSpecificPipelineStep()
+    public function testGetSpecificPipelineStep(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pipelines/pipeline-uuid/steps/step-uuid';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -38,7 +38,7 @@ class StepsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetLogOfSpecificPipelineStep()
+    public function testGetLogOfSpecificPipelineStep(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pipelines/pipeline-uuid/steps/step-uuid/log';
         $expectedResult = $this->fakeResponse(['dummy']);
