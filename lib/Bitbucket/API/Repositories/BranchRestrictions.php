@@ -41,7 +41,6 @@ class BranchRestrictions extends Api
     /**
      * Get the information associated with a repository's branch restrictions
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @return ResponseInterface
@@ -56,7 +55,6 @@ class BranchRestrictions extends Api
     /**
      * Creates restrictions for the specified repository.
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  array|string     $params  Additional parameters as array or JSON string
@@ -95,7 +93,6 @@ class BranchRestrictions extends Api
     /**
      * Get a specific restriction
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  int              $id      The restriction's identifier.
@@ -111,7 +108,6 @@ class BranchRestrictions extends Api
     /**
      * Updates a specific branch restriction.
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  int              $id      The restriction's identifier.
@@ -145,7 +141,6 @@ class BranchRestrictions extends Api
     /**
      * Delete a specific branch restriction.
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  int              $id      The restriction's identifier.

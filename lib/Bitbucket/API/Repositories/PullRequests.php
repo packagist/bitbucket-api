@@ -24,7 +24,6 @@ class PullRequests extends API\Api
     /**
      * Get comments
      *
-     * @access public
      * @return PullRequests\Comments
      *
      * @throws \InvalidArgumentException
@@ -38,7 +37,6 @@ class PullRequests extends API\Api
     /**
      * Get a list of pull requests
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  array            $params  Additional parameters
@@ -78,7 +76,6 @@ class PullRequests extends API\Api
     /**
      * Create a new pull request
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  array|string     $params  Additional parameters as array or JSON string
@@ -127,7 +124,6 @@ class PullRequests extends API\Api
     /**
      * Update a pull request
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  int              $id      ID of the pull request that will be updated
@@ -176,7 +172,6 @@ class PullRequests extends API\Api
     /**
      * Get a specific pull request
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  int              $id      ID of the pull request
@@ -192,7 +187,6 @@ class PullRequests extends API\Api
     /**
      * Get the commits for a pull request
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  int              $id      ID of the pull request
@@ -208,7 +202,6 @@ class PullRequests extends API\Api
     /**
      * Approve a pull request
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  int              $id      ID of the pull request
@@ -226,7 +219,6 @@ class PullRequests extends API\Api
      *
      * NOTE: On success returns `HTTP/1.1 204 NO CONTENT`
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  int              $id      ID of the pull request
@@ -242,7 +234,6 @@ class PullRequests extends API\Api
     /**
      * Get the diff for a pull request
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  int              $id      ID of the pull request
@@ -258,7 +249,6 @@ class PullRequests extends API\Api
     /**
      * Get the diff stat for a pull request
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  int              $id      ID of the pull request
@@ -277,7 +267,6 @@ class PullRequests extends API\Api
      * If `$id` is omitted the repository's pull request activity is returned.
      * If `$id` is not omitted the pull request activity is returned.
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  int              $id      (Optional) ID of the pull request
@@ -299,7 +288,6 @@ class PullRequests extends API\Api
     /**
      * Accept and merge a pull request
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  int              $id      (Optional) ID of the pull request
@@ -318,7 +306,6 @@ class PullRequests extends API\Api
     /**
      * Decline a pull request
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  int              $id      (Optional) ID of the pull request

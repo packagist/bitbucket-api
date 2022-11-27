@@ -26,7 +26,6 @@ class Src extends API\Api
     /**
      * Get raw content of an individual file, or the contents of a directory
      *
-     * @access public
      * @param  string           $account  The team or individual account owning the repository.
      * @param  string           $repo     The repository identifier.
      * @param  string           $revision A value representing the revision or branch to list.

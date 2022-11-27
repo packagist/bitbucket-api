@@ -20,7 +20,6 @@ class Teams extends Api
     /**
      * Get a list of teams to which the caller has access.
      *
-     * @access public
      * @param  string           $role Will only return teams on which the user has the specified role.
      * @return ResponseInterface
      *
@@ -42,7 +41,6 @@ class Teams extends Api
     /**
      * Get the public information associated with a team.
      *
-     * @access public
      * @param  string           $name The team's name.
      * @return ResponseInterface
      */
@@ -56,7 +54,6 @@ class Teams extends Api
     /**
      * Get the team members.
      *
-     * @access public
      * @param  string           $name The team's name.
      * @return ResponseInterface
      */
@@ -70,7 +67,6 @@ class Teams extends Api
     /**
      * Get the team followers list.
      *
-     * @access public
      * @param  string           $name The team's name.
      * @return ResponseInterface
      */
@@ -84,7 +80,6 @@ class Teams extends Api
     /**
      * Get a list of accounts the team is following.
      *
-     * @access public
      * @param  string           $name The team's name.
      * @return ResponseInterface
      */
@@ -98,7 +93,6 @@ class Teams extends Api
     /**
      * Get the team's repositories.
      *
-     * @access public
      * @param  string           $name The team's name.
      * @return ResponseInterface
      */

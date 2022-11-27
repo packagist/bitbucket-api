@@ -34,7 +34,6 @@ class Groups extends Api
      * );
      * </example>
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  array            $filters
      * @return ResponseInterface
@@ -58,7 +57,6 @@ class Groups extends Api
     /**
      * Create a new group
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $name    The name of the group.
      * @return ResponseInterface
@@ -74,7 +72,6 @@ class Groups extends Api
     /**
      * Update a group
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $name    The name of the group.
      * @param  array            $params
@@ -91,7 +88,6 @@ class Groups extends Api
     /**
      * Delete a group
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $name    The name of the group.
      * @return ResponseInterface
@@ -106,7 +102,6 @@ class Groups extends Api
     /**
      * Get members
      *
-     * @access public
      * @return Groups\Members
      *
      * @throws \InvalidArgumentException

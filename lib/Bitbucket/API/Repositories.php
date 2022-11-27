@@ -25,7 +25,6 @@ class Repositories extends Api
      *      the private repositories.
      * - If `$owner` is omitted, will return a list of all public repositories on Bitbucket.
      *
-     * @access public
      * @param  string           $owner  The account of the repo owner.
      * @param  array            $params Additional parameters
      * @return ResponseInterface

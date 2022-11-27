@@ -23,7 +23,6 @@ class User extends Api
     /**
      * Get user profile
      *
-     * @access public
      * @return ResponseInterface
      *
      * @throws \InvalidArgumentException
@@ -36,7 +35,6 @@ class User extends Api
     /**
      * Retrieves the email for an authenticated user.
      *
-     * @access public
      * @return ResponseInterface
      *
      * @throws \InvalidArgumentException

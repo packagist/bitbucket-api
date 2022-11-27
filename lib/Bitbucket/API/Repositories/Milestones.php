@@ -22,7 +22,6 @@ class Milestones extends API\Api
     /**
      * Get a list of milestones
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @return ResponseInterface
@@ -37,7 +36,6 @@ class Milestones extends API\Api
     /**
      * Get an individual milestone
      *
-     * @access public
      * @param  string           $account     The team or individual account owning the repository.
      * @param  string           $repo        The repository identifier.
      * @param  int              $milestoneID The milestone identifier.

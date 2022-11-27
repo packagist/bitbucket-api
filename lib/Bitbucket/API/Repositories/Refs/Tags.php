@@ -20,7 +20,6 @@ class Tags extends API\Api
     /**
      * Get a list of tags
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  array            $params  GET parameters
@@ -39,7 +38,6 @@ class Tags extends API\Api
     /**
      * Get an individual tag
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  string           $name    The tag identifier.
@@ -57,7 +55,6 @@ class Tags extends API\Api
     /**
      * Create a new tag
      *
-     * @access public
      * @param  string                    $account The team or individual account owning the repository.
      * @param  string                    $repo    The repository identifier.
      * @param  string                    $name    The name of the new tag.

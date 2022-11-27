@@ -24,7 +24,6 @@ class Users extends Api
     /**
      * Get the public information associated with a user
      *
-     * @access public
      * @param  string           $username
      * @return ResponseInterface
      */
@@ -38,7 +37,6 @@ class Users extends Api
     /**
      * Get the list of the user's repositories
      *
-     * @access public
      * @param  string           $username
      * @return ResponseInterface
      */
@@ -52,7 +50,6 @@ class Users extends Api
     /**
      * Get invitations
      *
-     * @access public
      * @return Users\Invitations
      *
      * @throws \InvalidArgumentException
@@ -65,7 +62,6 @@ class Users extends Api
     /**
      * Get sshKeys
      *
-     * @access public
      * @return Users\SshKeys
      *
      * @throws \InvalidArgumentException

@@ -20,7 +20,6 @@ class Refs extends API\Api
     /**
      * Get a list of refs
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  array            $params  GET parameters

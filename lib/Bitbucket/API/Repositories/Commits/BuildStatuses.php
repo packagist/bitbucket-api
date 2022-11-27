@@ -22,7 +22,6 @@ class BuildStatuses extends Api
     /**
      * Returns the status for specific build associated with a commit.
      *
-     * @access public
      * @param  string           $account    The team or individual account owning the repository.
      * @param  string           $repository The repository identifier.
      * @param  string           $revision   A SHA1 value for the commit.
@@ -42,7 +41,6 @@ class BuildStatuses extends Api
      * Adds a build status to a commit.
      * If the build is already associated with the commit, a POST also updates the status.
      *
-     * @access public
      * @param  string           $account    The team or individual account owning the repository.
      * @param  string           $repository The repository identifier.
      * @param  string           $revision   A SHA1 value for the commit.
@@ -63,7 +61,6 @@ class BuildStatuses extends Api
     /**
      * Updates the build status for a commit.
      *
-     * @access public
      * @param  string           $account    The team or individual account owning the repository.
      * @param  string           $repository The repository identifier.
      * @param  string           $revision   A SHA1 value for the commit.

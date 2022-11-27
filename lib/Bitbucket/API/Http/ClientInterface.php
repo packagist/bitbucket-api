@@ -22,7 +22,6 @@ interface ClientInterface
     /**
      * Make an HTTP GET request to API
      *
-     * @access public
      * @param  string           $endpoint API endpoint
      * @param  string|array     $params   GET parameters
      * @param  array            $headers  HTTP headers
@@ -33,7 +32,6 @@ interface ClientInterface
     /**
      * Make an HTTP POST request to API
      *
-     * @access public
      * @param  string           $endpoint API endpoint
      * @param  string|array     $params   POST parameters
      * @param  array            $headers  HTTP headers
@@ -44,7 +42,6 @@ interface ClientInterface
     /**
      * Make an HTTP PUT request to API
      *
-     * @access public
      * @param  string           $endpoint API endpoint
      * @param  string|array     $params   Put parameters
      * @param  array            $headers  HTTP headers
@@ -55,7 +52,6 @@ interface ClientInterface
     /**
      * Make a HTTP DELETE request to API
      *
-     * @access public
      * @param  string           $endpoint API endpoint
      * @param  string|array     $params   DELETE parameters
      * @param  array            $headers  HTTP headers
@@ -66,7 +62,6 @@ interface ClientInterface
     /**
      * Make a HTTP request
      *
-     * @access public
      * @param  string           $endpoint
      * @param  string|array     $params
      * @param  string           $method
@@ -78,7 +73,6 @@ interface ClientInterface
     /**
      * Get response format for next request
      *
-     * @access public
      * @return string
      */
     public function getResponseFormat();
@@ -88,7 +82,6 @@ interface ClientInterface
      *
      * Supported formats: xml, json
      *
-     * @access public
      * @param  string $format
      * @return $this
      *
@@ -99,7 +92,6 @@ interface ClientInterface
     /**
      * Get API version currently used
      *
-     * @access public
      * @return string
      */
     public function getApiVersion();
@@ -109,7 +101,6 @@ interface ClientInterface
      *
      * Supported versions: 1.0, 2.0
      *
-     * @access public
      * @param  string $version
      * @return $this
      *
@@ -118,7 +109,6 @@ interface ClientInterface
     public function setApiVersion($version);
 
     /**
-     * @access public
      * @return RequestInterface
      */
     public function getLastRequest();

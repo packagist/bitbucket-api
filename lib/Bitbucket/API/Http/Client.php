@@ -211,7 +211,6 @@ class Client implements ClientInterface
     /**
      * Check if specified API version is the one currently in use.
      *
-     * @access public
      * @param  string $version
      * @return bool
      */
@@ -229,7 +228,6 @@ class Client implements ClientInterface
     }
 
     /**
-     * @access public
      * @return RequestInterface
      */
     public function getLastRequest()
@@ -238,7 +236,6 @@ class Client implements ClientInterface
     }
 
     /**
-     * @access public
      * @return ResponseInterface
      */
     public function getLastResponse()

@@ -24,7 +24,6 @@ class Steps extends API\Api
     /**
      * Get a list of all pipeline steps
      *
-     * @access public
      * @param  string           $account         The team or individual account owning the repository.
      * @param  string           $repo            The repository identifier.
      * @param  string           $pipelineUuid    UUID of the pipeline.
@@ -40,7 +39,6 @@ class Steps extends API\Api
     /**
      * Get an individual pipeline step
      *
-     * @access public
      * @param  string           $account        The team or individual account owning the repository.
      * @param  string           $repo           The repository identifier.
      * @param  string           $pipelineUuid   UUID of the pipeline.
@@ -57,7 +55,6 @@ class Steps extends API\Api
     /**
      * Get the log of an individual pipeline step
      *
-     * @access public
      * @param  string           $account        The team or individual account owning the repository.
      * @param  string           $repo           The repository identifier.
      * @param  string           $pipelineUuid   UUID of the pipeline.

@@ -25,7 +25,6 @@ class Members extends API\Api
     /**
      * Get the group members
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @return ResponseInterface
@@ -40,7 +39,6 @@ class Members extends API\Api
     /**
      * Add new member into a group.
      *
-     * @access public
      * @param  string           $account    The team or individual account owning the repository.
      * @param  string           $groupSlug  The slug of the group.
      * @param  string           $memberUuid An individual account.
@@ -56,7 +54,6 @@ class Members extends API\Api
     /**
      * Delete a member from group.
      *
-     * @access public
      * @param  string           $account    The team or individual account owning the repository.
      * @param  string           $groupSlug  The slug of the group.
      * @param  string           $memberUuid An individual account.

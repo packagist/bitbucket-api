@@ -137,7 +137,6 @@ class Pager implements PagerInterface
     }
 
     /**
-     * @access private
      * @return array
      */
     private function getContent()

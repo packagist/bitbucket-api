@@ -17,13 +17,11 @@ use Psr\Http\Message\MessageInterface;
 interface PagerInterface
 {
     /**
-     * @access public
      * @return bool
      */
     public function hasNext();
 
     /**
-     * @access public
      * @return bool
      */
     public function hasPrevious();
@@ -31,7 +29,6 @@ interface PagerInterface
     /**
      * Fetch next page and return http response
      *
-     * @access public
      * @return MessageInterface|null
      */
     public function fetchNext();
@@ -39,7 +36,6 @@ interface PagerInterface
     /**
      * Fetch previous page and return http response
      *
-     * @access public
      * @return MessageInterface|null
      */
     public function fetchPrevious();
@@ -47,7 +43,6 @@ interface PagerInterface
     /**
      * Fetch all available pages.
      *
-     * @access public
      * @return MessageInterface
      */
     public function fetchAll();
@@ -55,7 +50,6 @@ interface PagerInterface
     /**
      * Get current http response.
      *
-     * @access public
      * @return MessageInterface
      */
     public function getCurrent();

@@ -54,7 +54,6 @@ class Api
     }
 
     /**
-     * @access public
      * @return ClientInterface
      */
     public function getClient()
@@ -63,7 +62,6 @@ class Api
     }
 
     /**
-     * @access public
      * @param  ClientInterface $client
      * @return $this
      */
@@ -97,7 +95,6 @@ class Api
     /**
      * Make an HTTP GET request to API
      *
-     * @access public
      * @param  string           $endpoint API endpoint
      * @param  string|array     $params   GET parameters
      * @param  array            $headers  HTTP headers
@@ -111,7 +108,6 @@ class Api
     /**
      * Make an HTTP POST request to API
      *
-     * @access public
      * @param  string           $endpoint API endpoint
      * @param  string|array     $params   POST parameters
      * @param  array            $headers  HTTP headers
@@ -125,7 +121,6 @@ class Api
     /**
      * Make an HTTP PUT request to API
      *
-     * @access public
      * @param  string           $endpoint API endpoint
      * @param  string|array     $params   POST parameters
      * @param  array            $headers  HTTP headers
@@ -139,7 +134,6 @@ class Api
     /**
      * Make a HTTP DELETE request to API
      *
-     * @access public
      * @param  string           $endpoint API endpoint
      * @param  string|array     $params   DELETE parameters
      * @param  array            $headers  HTTP headers
@@ -153,7 +147,6 @@ class Api
     /**
      * Create HTTP request
      *
-     * @access protected
      * @param  string           $method   HTTP method
      * @param  string           $endpoint Api endpoint
      * @param  string|array     $params   Request parameter(s)
@@ -170,7 +163,6 @@ class Api
     /**
      * Set the preferred format for response
      *
-     * @access public
      * @param  string $name Format name
      * @return self
      *
@@ -186,7 +178,6 @@ class Api
     /**
      * Get current format used for response
      *
-     * @access public
      * @return string
      */
     public function getFormat()
@@ -224,7 +215,6 @@ class Api
     }
 
     /**
-     * @access public
      * @return void
      */
     public function __clone()
@@ -236,7 +226,6 @@ class Api
     /**
      * Convert JSON to array with error check
      *
-     * @access protected
      * @param  string $body JSON data
      * @return array
      *

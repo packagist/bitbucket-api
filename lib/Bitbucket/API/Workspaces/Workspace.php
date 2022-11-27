@@ -22,7 +22,6 @@ class Workspace extends API\Api
     /**
      * Get the public information associated with a workspace.
      *
-     * @access public
      * @param  string           $workspace The workspace ID (slug) or workspace UUID in curly brackets.
      * @return ResponseInterface
      */
@@ -36,7 +35,6 @@ class Workspace extends API\Api
     /**
      * Get the workspace members.
      *
-     * @access public
      * @param  string           $workspace The workspace ID (slug) or workspace UUID in curly brackets.
      * @return ResponseInterface
      */
@@ -50,7 +48,6 @@ class Workspace extends API\Api
     /**
      * Get the list of projects in the workspace
      *
-     * @access public
      * @param  string           $workspace The workspace ID (slug) or workspace UUID in curly brackets.
      * @return ResponseInterface
      */

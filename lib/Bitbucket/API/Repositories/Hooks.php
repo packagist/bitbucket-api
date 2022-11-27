@@ -20,7 +20,6 @@ use Psr\Http\Message\ResponseInterface;
 class Hooks extends API\Api
 {
     /**
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  array            $params  Additional service parameters
@@ -55,7 +54,6 @@ class Hooks extends API\Api
     }
 
     /**
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  string           $uuid    The universally unique identifier of the webhook.
@@ -91,7 +89,6 @@ class Hooks extends API\Api
     }
 
     /**
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @return ResponseInterface
@@ -104,7 +101,6 @@ class Hooks extends API\Api
     }
 
     /**
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  string           $uuid    The universally unique identifier of the webhook.
@@ -118,7 +114,6 @@ class Hooks extends API\Api
     }
 
     /**
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  string           $uuid    The universally unique identifier of the webhook.

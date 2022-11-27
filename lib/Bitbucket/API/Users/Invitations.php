@@ -26,7 +26,6 @@ class Invitations extends Api
     /**
      * Get a list of pending invitations
      *
-     * @access public
      * @param  string           $account The name of an individual or team account.
      * @return ResponseInterface
      */
@@ -42,7 +41,6 @@ class Invitations extends Api
      *
      * An invitation is a request sent to an external email address to participate one or more of an account's groups.
      *
-     * @access public
      * @param  string           $account    The name of an individual or team account.
      * @param  string           $groupSlug  An identifier for the group.
      * @param  string           $email      Name of the email address
@@ -61,7 +59,6 @@ class Invitations extends Api
      *
      * Deletes any pending invitations on a team or individual account for a particular email address.
      *
-     * @access public
      * @param  string           $account The name of an individual or team account.
      * @param  string           $email   Name of the email address to delete.
      * @return ResponseInterface
@@ -79,7 +76,6 @@ class Invitations extends Api
      *
      * Deletes a pending invitation for a particular email on account's group.
      *
-     * @access public
      * @param  string           $account    The name of an individual or team account.
      * @param  string           $groupSlug  An identifier for the group.
      * @param  string           $email      Name of the email address to delete.

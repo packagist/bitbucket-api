@@ -20,7 +20,6 @@ class Workspaces extends Api
     /**
      * Get a list of workspaces to which the caller has access.
      *
-     * @access public
      * @return ResponseInterface
      *
      * @throws \InvalidArgumentException
