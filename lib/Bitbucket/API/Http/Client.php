@@ -21,12 +21,12 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * @author  Alexandru G.    <alex@gentle.ro>
+ * @phpstan-type ClientOption array{base_url: string, api_version: string, api_versions: string[], format: string, formats: string[], user_agent: string, timeout: int, verify_peer: bool}
+ * @phpstan-type OptionalClientOption array{base_url?: string, api_version?: string, api_versions?: string[], format?: string, formats?: string[], user_agent?: string, timeout?: int, verify_peer?: bool}
  */
 class Client implements ClientInterface
 {
-    /**
-     * @var array
-     */
+    /** @var ClientOption */
     protected $options = array(
         'base_url'      => 'https://api.bitbucket.org',
         'api_version'   => '2.0',
@@ -45,6 +45,9 @@ class Client implements ClientInterface
     /** @var HistoryPlugin */
     private $responseHistory;
 
+    /**
+     * @param OptionalClientOption $options
+     */
     public function __construct(array $options = array(), HttpPluginClientBuilder $httpClientBuilder = null)
     {
         $this->responseHistory = new HistoryPlugin();
@@ -208,17 +211,16 @@ class Client implements ClientInterface
     /**
      * Check if specified API version is the one currently in use.
      *
-     * @access public
      * @param  string $version
      * @return bool
      */
     public function isApiVersion($version)
     {
-        return abs($this->options['api_version'] - $version) < 0.00001;
+        return (float) $version === (float) $this->options['api_version'];
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function getApiBaseUrl()
     {
@@ -226,7 +228,6 @@ class Client implements ClientInterface
     }
 
     /**
-     * @access public
      * @return RequestInterface
      */
     public function getLastRequest()
@@ -235,7 +236,6 @@ class Client implements ClientInterface
     }
 
     /**
-     * @access public
      * @return ResponseInterface
      */
     public function getLastResponse()

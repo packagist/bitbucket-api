@@ -31,7 +31,7 @@ class HistoryPlugin implements Journal
         return $this->lastResponse;
     }
 
-    public function addSuccess(RequestInterface $request, ResponseInterface $response)
+    public function addSuccess(RequestInterface $request, ResponseInterface $response): void
     {
         $this->lastRequest = $request;
         $this->lastResponse = $response;

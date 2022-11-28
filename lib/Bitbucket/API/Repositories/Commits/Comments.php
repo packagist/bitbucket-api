@@ -22,7 +22,6 @@ class Comments extends Api
     /**
      * Get a list of a commit comments
      *
-     * @access public
      * @param  string           $account  The team or individual account owning the repository.
      * @param  string           $repo     The repository identifier.
      * @param  string           $revision A SHA1 value for the commit.
@@ -38,7 +37,6 @@ class Comments extends Api
     /**
      * Get an individual commit comment
      *
-     * @access public
      * @param  string           $account   The team or individual account owning the repository.
      * @param  string           $repo      The repository identifier.
      * @param  string           $revision  A SHA1 value for the commit.

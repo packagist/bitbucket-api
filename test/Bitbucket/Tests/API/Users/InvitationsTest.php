@@ -16,7 +16,7 @@ class InvitationsTest extends Tests\TestCase
         $this->invitations = $this->getApiMock(Invitations::class);
     }
 
-    public function testGetAllInvitations()
+    public function testGetAllInvitations(): void
     {
         $endpoint = '/1.0/users/gentle/invitations';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -27,7 +27,7 @@ class InvitationsTest extends Tests\TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testIssuesNewInvitationSuccess()
+    public function testIssuesNewInvitationSuccess(): void
     {
         $endpoint = '/1.0/users/gentle/invitations';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -39,7 +39,7 @@ class InvitationsTest extends Tests\TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testDeleteInvitationByEmailSuccess()
+    public function testDeleteInvitationByEmailSuccess(): void
     {
         $endpoint = '/1.0/users/gentle/invitations';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -51,7 +51,7 @@ class InvitationsTest extends Tests\TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testDeleteInvitationByGroupSuccess()
+    public function testDeleteInvitationByGroupSuccess(): void
     {
         $endpoint = '/1.0/users/gentle/invitations';
         $expectedResult = $this->fakeResponse(['dummy']);

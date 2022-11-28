@@ -20,19 +20,19 @@ class ClientTest extends Tests\TestCase
         $this->client = new Client(array(), $this->getHttpPluginClientBuilder());
     }
 
-    public function testGetSelfInstance()
+    public function testGetSelfInstance(): void
     {
         $this->assertInstanceOf(HttpMethodsClient::class, $this->client->getClient());
     }
 
-    public function testSetResponseFormatInvalid()
+    public function testSetResponseFormatInvalid(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         $this->client->setResponseFormat('invalid');
     }
 
-    public function testResponseFormatSuccess()
+    public function testResponseFormatSuccess(): void
     {
         $this->client->setResponseFormat('xml');
         $this->assertEquals('xml', $this->client->getResponseFormat());
@@ -40,16 +40,17 @@ class ClientTest extends Tests\TestCase
 
     /**
      * @dataProvider invalidApiVersionsProvider
+     * @param int|string $version
      * @ticket 57
      */
-    public function testSetApiVersionInvalid($version)
+    public function testSetApiVersionInvalid($version): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         $this->client->setApiVersion($version);
     }
 
-    public function testApiVersionSuccess()
+    public function testApiVersionSuccess(): void
     {
         $this->client->setApiVersion('2.0');
         $this->assertEquals('2.0', $this->client->getApiVersion());
@@ -60,13 +61,13 @@ class ClientTest extends Tests\TestCase
     /**
      * @dataProvider apiBaseUrlProvider
      */
-    public function testGetApiBaseUrl($apiVersion, $expected)
+    public function testGetApiBaseUrl(string $apiVersion, string $expected): void
     {
         $this->client->setApiVersion($apiVersion);
         $this->assertEquals($expected, $this->client->getApiBaseUrl());
     }
 
-    public function apiBaseUrlProvider()
+    public function apiBaseUrlProvider(): array
     {
         return [
             ['1.0', 'https://api.bitbucket.org/1.0'],
@@ -74,7 +75,7 @@ class ClientTest extends Tests\TestCase
         ];
     }
 
-    public function testShouldDoGetRequestAndReturnResponseInstance()
+    public function testShouldDoGetRequestAndReturnResponseInstance(): void
     {
         $endpoint = '/repositories/gentle/eof/issues/3';
         $params = ['format' => 'json'];
@@ -93,7 +94,7 @@ class ClientTest extends Tests\TestCase
         $this->assertInstanceOf(ResponseInterface::class, $client->getLastResponse());
     }
 
-    public function testShouldDoPostRequestWithContentAndReturnResponseInstance()
+    public function testShouldDoPostRequestWithContentAndReturnResponseInstance(): void
     {
         $endpoint = '/repositories/gentle/eof/issues/3';
         $params = ['1' => '2'];
@@ -115,7 +116,7 @@ class ClientTest extends Tests\TestCase
     /**
      * @ticket 74
      */
-    public function testShouldDoPostRequestWithJsonContentAndReturnResponseInstance()
+    public function testShouldDoPostRequestWithJsonContentAndReturnResponseInstance(): void
     {
         $endpoint = '/repositories/gentle/eof/pullrequests';
         $params = json_encode(['1' => '2', 'name' => 'john']);
@@ -133,7 +134,7 @@ class ClientTest extends Tests\TestCase
         ], $client->getLastRequest()->getHeaders());
     }
 
-    public function testShouldDoPutRequestAndReturnResponseInstance()
+    public function testShouldDoPutRequestAndReturnResponseInstance(): void
     {
         $endpoint = '/repositories/gentle/eof/issues/3';
         $params = ['1' => '2'];
@@ -145,7 +146,7 @@ class ClientTest extends Tests\TestCase
         $this->assertInstanceOf(ResponseInterface::class, $response);
     }
 
-    public function testShouldDoDeleteRequestAndReturnResponseInstance()
+    public function testShouldDoDeleteRequestAndReturnResponseInstance(): void
     {
         $endpoint = '/repositories/gentle/eof/issues/3';
         $params = ['1' => '2'];
@@ -157,7 +158,7 @@ class ClientTest extends Tests\TestCase
         $this->assertInstanceOf(ResponseInterface::class, $response);
     }
 
-    public function testShouldDoPatchRequestAndReturnResponseInstance()
+    public function testShouldDoPatchRequestAndReturnResponseInstance(): void
     {
         $endpoint = '/repositories/gentle/eof/issues/3';
         $params = ['1' => '2'];
@@ -169,7 +170,7 @@ class ClientTest extends Tests\TestCase
         $this->assertInstanceOf(ResponseInterface::class, $response);
     }
 
-    public function testClientIsKeptWhenInvokingChildFactory()
+    public function testClientIsKeptWhenInvokingChildFactory(): void
     {
         $options = [
             'base_url' => 'https://localhost'
@@ -184,13 +185,13 @@ class ClientTest extends Tests\TestCase
     /**
      * @dataProvider currentApiVersionProvider
      */
-    public function testCurrentApiVersion($currentApiVersion, $apiVersion, $expected)
+    public function testCurrentApiVersion(string $currentApiVersion, string $apiVersion, bool $expected): void
     {
         $this->client->setApiVersion($currentApiVersion);
         $this->assertSame($expected, $this->client->isApiVersion($apiVersion));
     }
 
-    public function currentApiVersionProvider()
+    public function currentApiVersionProvider(): array
     {
         return [
             ['1.0', '1.0', true],
@@ -204,7 +205,7 @@ class ClientTest extends Tests\TestCase
     /**
      * @ticket 64
      */
-    public function testIncludeFormatParamOnlyInV1()
+    public function testIncludeFormatParamOnlyInV1(): void
     {
         $endpoint = sprintf(
             '/repositories/gentlero/bitbucket-api/src/%s/%s',
@@ -227,7 +228,7 @@ class ClientTest extends Tests\TestCase
         $this->assertFalse(strpos($parts['query'], 'format'));
     }
 
-    public function invalidApiVersionsProvider()
+    public function invalidApiVersionsProvider(): array
     {
         return [
             ['3.1'], ['1,2'], ['1,0'], ['2.1'], ['4'], [2], ['string'], [2.0]

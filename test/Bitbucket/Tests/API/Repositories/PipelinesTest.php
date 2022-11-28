@@ -16,7 +16,7 @@ class PipelinesTest extends TestCase
         $this->pipelines = $this->getApiMock(Pipelines::class);
     }
 
-    public function testGetAllPipelines()
+    public function testGetAllPipelines(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pipelines/';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -27,7 +27,7 @@ class PipelinesTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testCreatePipelinesFromArray()
+    public function testCreatePipelinesFromArray(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pipelines/';
         $params = [
@@ -43,7 +43,7 @@ class PipelinesTest extends TestCase
         $this->assertRequest('POST', $endpoint, json_encode($params));
     }
 
-    public function testCreatePipelinesFromJson()
+    public function testCreatePipelinesFromJson(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pipelines/';
         $params = json_encode([
@@ -59,7 +59,7 @@ class PipelinesTest extends TestCase
         $this->assertRequest('POST', $endpoint, $params);
     }
 
-    public function testGetSpecificPipeline()
+    public function testGetSpecificPipeline(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pipelines/uuid';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -70,7 +70,7 @@ class PipelinesTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testStopSpecificPipeline()
+    public function testStopSpecificPipeline(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pipelines/uuid/stopPipeline';
 
@@ -79,7 +79,7 @@ class PipelinesTest extends TestCase
         $this->assertRequest('POST', $endpoint);
     }
 
-    public function testGetSteps()
+    public function testGetSteps(): void
     {
         $this->assertInstanceOf(Pipelines\Steps::class, $this->pipelines->steps());
     }

@@ -15,7 +15,7 @@ class UsersTest extends TestCase
         $this->users = $this->getApiMock(Users::class);
     }
 
-    public function testGetUserPublicInformation()
+    public function testGetUserPublicInformation(): void
     {
         $endpoint = '/2.0/users/john-doe';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -26,7 +26,7 @@ class UsersTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetUserRepositories()
+    public function testGetUserRepositories(): void
     {
         $endpoint = '/2.0/repositories/john-doe';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -37,12 +37,12 @@ class UsersTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetInvitationsInstance()
+    public function testGetInvitationsInstance(): void
     {
         $this->assertInstanceOf(Users\Invitations::class, $this->users->invitations());
     }
 
-    public function testGetSshKeysInstance()
+    public function testGetSshKeysInstance(): void
     {
         $this->assertInstanceOf(Users\SshKeys::class, $this->users->sshKeys());
     }

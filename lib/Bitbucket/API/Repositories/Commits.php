@@ -23,7 +23,6 @@ class Commits extends Api
     /**
      * Get a list of commits
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  array            $params  Additional parameters
@@ -47,7 +46,6 @@ class Commits extends Api
     /**
      * Get an individual commit
      *
-     * @access public
      * @param  string           $account  The team or individual account owning the repository.
      * @param  string           $repo     The repository identifier.
      * @param  string           $revision A SHA1 value for the commit.
@@ -63,7 +61,6 @@ class Commits extends Api
     /**
      * Approve a commit
      *
-     * @access public
      * @param  string           $account  The team or individual account owning the repository.
      * @param  string           $repo     The repository identifier.
      * @param  string           $revision A SHA1 value for the commit.
@@ -81,7 +78,6 @@ class Commits extends Api
      *
      * NOTE: On success returns `HTTP/1.1 204 NO CONTENT`
      *
-     * @access public
      * @param  string           $account  The team or individual account owning the repository.
      * @param  string           $repo     The repository identifier.
      * @param  string           $revision A SHA1 value for the commit.
@@ -97,7 +93,6 @@ class Commits extends Api
     /**
      * Get comments
      *
-     * @access public
      * @return Commits\Comments
      *
      * @throws \InvalidArgumentException

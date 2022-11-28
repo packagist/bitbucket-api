@@ -16,10 +16,10 @@ class CommentsTest extends TestCase
         $this->comments = $this->getApiMock(Comments::class);
     }
 
-    public function testGetSingleCommentSuccess()
+    public function testGetSingleCommentSuccess(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/issues/3/comments/2967835';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse(['dummy']);
 
         $actual = $this->comments->get('gentle', 'eof', 3, 2967835);
 
@@ -27,10 +27,10 @@ class CommentsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetAllCommentsSuccess()
+    public function testGetAllCommentsSuccess(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/issues/3/comments';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse(['dummy']);
 
         $actual = $this->comments->all('gentle', 'eof', 3);
 
@@ -38,7 +38,7 @@ class CommentsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testCreateCommentSuccess()
+    public function testCreateCommentSuccess(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/issues/2/comments';
         $params = ['content' => ['raw' => 'dummy']];
@@ -48,7 +48,7 @@ class CommentsTest extends TestCase
         $this->assertRequest('POST', $endpoint, json_encode($params));
     }
 
-    public function testUpdateCommentSuccess()
+    public function testUpdateCommentSuccess(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/issues/2/comments/3';
         $params = ['content' => ['raw' => 'dummy']];

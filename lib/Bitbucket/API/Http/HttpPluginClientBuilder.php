@@ -28,6 +28,9 @@ class HttpPluginClientBuilder
         $this->messageFactory = $messageFactory ?: MessageFactoryDiscovery::find();
     }
 
+    /**
+     * @return void
+     */
     public function addPlugin(Plugin $plugin)
     {
         if ($plugin instanceof ApiVersionPlugin) {
@@ -40,7 +43,8 @@ class HttpPluginClientBuilder
     }
 
     /**
-     * @param string $pluginClass
+     * @param class-string<Plugin> $pluginClass
+     * @return void
      */
     public function removePlugin($pluginClass)
     {
@@ -82,6 +86,9 @@ class HttpPluginClientBuilder
         return $this->pluginClient;
     }
 
+    /**
+     * @return MessageFactory
+     */
     public function getMessageFactory()
     {
         return $this->messageFactory;

@@ -16,7 +16,7 @@ class PullRequestsTest extends TestCase
         $this->pullRequests = $this->getApiMock(PullRequests::class);
     }
 
-    public function testGetAllPullRequests()
+    public function testGetAllPullRequests(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pullrequests';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -27,7 +27,7 @@ class PullRequestsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testCreateNewPullRequestFromJSON()
+    public function testCreateNewPullRequestFromJSON(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pullrequests';
         $params = json_encode([
@@ -52,7 +52,7 @@ class PullRequestsTest extends TestCase
         $this->assertRequest('POST', $endpoint, $params);
     }
 
-    public function testCreateNewPullRequestFromArray()
+    public function testCreateNewPullRequestFromArray(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pullrequests';
         $params = [
@@ -79,15 +79,16 @@ class PullRequestsTest extends TestCase
 
     /**
      * @dataProvider pullRequestWrongParamsTypeProvider
+     * @param string|int $params
      */
-    public function testCreateNewPullRequestWithWrongParamsType($params)
+    public function testCreateNewPullRequestWithWrongParamsType($params): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         $this->pullRequests->create('gentle', 'eof', $params);
     }
 
-    public function pullRequestWrongParamsTypeProvider()
+    public function pullRequestWrongParamsTypeProvider(): array
     {
         return [
             [''],
@@ -96,7 +97,7 @@ class PullRequestsTest extends TestCase
         ];
     }
 
-    public function testUpdatePullRequestFromJSON()
+    public function testUpdatePullRequestFromJSON(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pullrequests/1';
         $params = json_encode([
@@ -113,7 +114,7 @@ class PullRequestsTest extends TestCase
         $this->assertRequest('PUT', $endpoint, $params);
     }
 
-    public function testUpdatePullRequestFromArray()
+    public function testUpdatePullRequestFromArray(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pullrequests/1';
         $params = [
@@ -132,15 +133,16 @@ class PullRequestsTest extends TestCase
 
     /**
      * @dataProvider pullRequestWrongParamsTypeProvider
+     * @param string|int $params
      */
-    public function testUpdatePullRequestWithWrongParamsType($params)
+    public function testUpdatePullRequestWithWrongParamsType($params): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         $this->pullRequests->update('gentle', 'eof', 1, $params);
     }
 
-    public function testGetSpecificPullRequest()
+    public function testGetSpecificPullRequest(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pullrequests/1';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -151,7 +153,7 @@ class PullRequestsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetCommitsForSpecificPullRequest()
+    public function testGetCommitsForSpecificPullRequest(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pullrequests/1/commits';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -162,7 +164,7 @@ class PullRequestsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testApproveAPullRequest()
+    public function testApproveAPullRequest(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pullrequests/1/approve';
 
@@ -171,7 +173,7 @@ class PullRequestsTest extends TestCase
         $this->assertRequest('POST', $endpoint);
     }
 
-    public function testDeletePullRequestApproval()
+    public function testDeletePullRequestApproval(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pullrequests/1/approve';
 
@@ -180,7 +182,7 @@ class PullRequestsTest extends TestCase
         $this->assertRequest('DELETE', $endpoint);
     }
 
-    public function testGetPullRequestDiff()
+    public function testGetPullRequestDiff(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pullrequests/1/diff';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -191,7 +193,7 @@ class PullRequestsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetPullRequestDiffstat()
+    public function testGetPullRequestDiffstat(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pullrequests/1/diffstat';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -202,7 +204,7 @@ class PullRequestsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetPullRequestActivity()
+    public function testGetPullRequestActivity(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pullrequests/1/activity';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -213,7 +215,7 @@ class PullRequestsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetRepositoryPullRequestActivity()
+    public function testGetRepositoryPullRequestActivity(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pullrequests/activity';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -224,7 +226,7 @@ class PullRequestsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testAcceptAndMergeAPullRequest()
+    public function testAcceptAndMergeAPullRequest(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pullrequests/1/merge';
         $params = [
@@ -237,7 +239,7 @@ class PullRequestsTest extends TestCase
         $this->assertRequest('POST', $endpoint, json_encode($params));
     }
 
-    public function testDeclineAPullRequest()
+    public function testDeclineAPullRequest(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pullrequests/1/decline';
         $params = [
@@ -252,7 +254,7 @@ class PullRequestsTest extends TestCase
     /**
      * @ticket 43
      */
-    public function testDeclineAPullRequestWithoutAMessage()
+    public function testDeclineAPullRequestWithoutAMessage(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/pullrequests/1/decline';
         $params = [

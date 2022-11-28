@@ -16,7 +16,7 @@ class GroupsTest extends TestCase
         $this->groups = $this->getApiMock(Groups::class);
     }
 
-    public function testGetAllGroups()
+    public function testGetAllGroups(): void
     {
         $endpoint = '/1.0/groups/gentle/';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -27,7 +27,7 @@ class GroupsTest extends TestCase
         $this->assertRequest('GET', $endpoint, '', 'format=json');
     }
 
-    public function testGetAllGroupsWithFilters()
+    public function testGetAllGroupsWithFilters(): void
     {
         $endpoint = '/1.0/groups';
         $query = 'group=gentle%2Ftesters%26group%3Dgentle%2Fmaintainers&format=json';
@@ -39,7 +39,7 @@ class GroupsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testCreateGroupSuccess()
+    public function testCreateGroupSuccess(): void
     {
         $endpoint = '/1.0/groups/gentle/';
         $params = http_build_query([
@@ -51,7 +51,7 @@ class GroupsTest extends TestCase
         $this->assertRequest('POST', $endpoint, $params, 'format=json');
     }
 
-    public function testUpdateGroupSuccess()
+    public function testUpdateGroupSuccess(): void
     {
         $endpoint = '/1.0/groups/gentle/dummy/';
         $params = [
@@ -64,7 +64,7 @@ class GroupsTest extends TestCase
         $this->assertRequest('PUT', $endpoint, http_build_query($params), 'format=json');
     }
 
-    public function testDeleteGroupSuccess()
+    public function testDeleteGroupSuccess(): void
     {
         $endpoint = '/1.0/groups/gentle/dummy/';
 
@@ -73,7 +73,7 @@ class GroupsTest extends TestCase
         $this->assertRequest('DELETE', $endpoint, '', 'format=json');
     }
 
-    public function testGetMembers()
+    public function testGetMembers(): void
     {
         $this->assertInstanceOf(Members::class, $this->groups->members());
     }

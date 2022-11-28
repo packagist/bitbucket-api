@@ -24,7 +24,6 @@ class Repository extends API\Api
     /**
      * Get information associated with an individual repository.
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @return ResponseInterface
@@ -42,7 +41,6 @@ class Repository extends API\Api
      * If `$params` are omitted, a private git repository will be created,
      * with a "no forking" policy.
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  array|string     $params  Additional parameters as array or JSON string
@@ -83,7 +81,6 @@ class Repository extends API\Api
     /**
      * Update a repository
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  array            $params  Additional parameters
@@ -102,7 +99,6 @@ class Repository extends API\Api
     /**
      * Delete a repository
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @return ResponseInterface
@@ -117,7 +113,6 @@ class Repository extends API\Api
     /**
      * Gets the list of accounts watching a repository.
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @return ResponseInterface
@@ -132,7 +127,6 @@ class Repository extends API\Api
     /**
      * Gets the list of repository forks.
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @return ResponseInterface
@@ -147,7 +141,6 @@ class Repository extends API\Api
     /**
      * Fork a repository
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  string           $name    Fork name
@@ -172,7 +165,6 @@ class Repository extends API\Api
     /**
      * Get a list of branches associated with a repository.
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  string           $name    The name of the branch
@@ -188,7 +180,6 @@ class Repository extends API\Api
     /**
      * Get a pagination list of tags or tag object by name
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  string           $name    The name of the tag
@@ -206,7 +197,6 @@ class Repository extends API\Api
      *
      * Returns the history of a file starting from the provided changeset.
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  string           $node    The simple changeset node id.

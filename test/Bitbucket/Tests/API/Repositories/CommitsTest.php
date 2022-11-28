@@ -16,7 +16,7 @@ class CommitsTest extends TestCase
         $this->commits = $this->getApiMock(Commits::class);
     }
 
-    public function testGetAllRepositoryCommits()
+    public function testGetAllRepositoryCommits(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/commits';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -27,7 +27,7 @@ class CommitsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetAllRepositoryCommitsFromSpecificBranch()
+    public function testGetAllRepositoryCommitsFromSpecificBranch(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/commits/master';
         $expectedResult = $this->fakeResponse(['dummy', 'branch' => 'master']);
@@ -38,7 +38,7 @@ class CommitsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetSingleCommitInfo()
+    public function testGetSingleCommitInfo(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/commit/SHA';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -49,7 +49,7 @@ class CommitsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testApproveACommit()
+    public function testApproveACommit(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/commit/SHA1/approve';
 
@@ -58,7 +58,7 @@ class CommitsTest extends TestCase
         $this->assertRequest('POST', $endpoint);
     }
 
-    public function testDeleteCommitApproval()
+    public function testDeleteCommitApproval(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/commit/SHA1/approve';
 
@@ -67,7 +67,7 @@ class CommitsTest extends TestCase
         $this->assertRequest('DELETE', $endpoint);
     }
 
-    public function testGetMembers()
+    public function testGetMembers(): void
     {
         $this->assertInstanceOf(Commits\Comments::class, $this->commits->comments());
     }

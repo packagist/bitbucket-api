@@ -25,7 +25,6 @@ class HttpResponseException extends \Exception
     private $request;
 
     /**
-     * @access public
      * @return RequestInterface
      */
     public function getRequest()
@@ -34,7 +33,6 @@ class HttpResponseException extends \Exception
     }
 
     /**
-     * @access public
      * @param  RequestInterface $request
      * @return $this
      */
@@ -46,7 +44,6 @@ class HttpResponseException extends \Exception
     }
 
     /**
-     * @access public
      * @return ResponseInterface
      */
     public function getResponse()
@@ -55,7 +52,6 @@ class HttpResponseException extends \Exception
     }
 
     /**
-     * @access public
      * @param  ResponseInterface $response
      * @return $this
      */

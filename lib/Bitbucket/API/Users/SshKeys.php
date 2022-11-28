@@ -24,7 +24,6 @@ class SshKeys extends Api
     /**
      * Gets a list of the keys associated with an account.
      *
-     * @access public
      * @param  string           $account The name of an individual or team account.
      * @return ResponseInterface
      */
@@ -38,7 +37,6 @@ class SshKeys extends Api
     /**
      * Create a key on the specified account.
      *
-     * @access public
      * @param  string           $account The name of an individual or team account.
      * @param  string           $key     The key value.
      * @param  string           $label   A label for the key. (optional)
@@ -61,7 +59,6 @@ class SshKeys extends Api
     /**
      * Updates a key on the specified account.
      *
-     * @access public
      * @param  string           $account The name of an individual or team account.
      * @param  int              $keyId   Key identifier.
      * @param  string           $key     The key value.
@@ -78,7 +75,6 @@ class SshKeys extends Api
     /**
      * Gets the content of the specified keyId.
      *
-     * @access public
      * @param  string           $account The name of an individual or team account.
      * @param  int              $keyId   Key identifier.
      * @return ResponseInterface
@@ -93,7 +89,6 @@ class SshKeys extends Api
     /**
      * Deletes the key specified by the keyId value
      *
-     * @access public
      * @param  string           $account The name of an individual or team account.
      * @param  int              $keyId   Key identifier.
      * @return ResponseInterface

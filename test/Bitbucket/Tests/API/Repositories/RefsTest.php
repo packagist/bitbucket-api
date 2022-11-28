@@ -16,10 +16,10 @@ class RefsTest extends TestCase
         $this->refs = $this->getApiMock(Refs::class);
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $endpoint= '/2.0/repositories/gentle/eof/refs';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse(['dummy']);
 
         $actual = $this->refs->all('gentle', 'eof');
 
@@ -27,10 +27,10 @@ class RefsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testAllParams()
+    public function testAllParams(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/refs';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse(['dummy']);
 
         $actual = $this->refs->all('gentle', 'eof', ['pagelen' => 36]);
 

@@ -24,7 +24,6 @@ class Deploykeys extends API\Api
     /**
      * Get a list of keys
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @return ResponseInterface
@@ -41,7 +40,6 @@ class Deploykeys extends API\Api
      *
      * TIP: You can use `$this->all()` to obtain assigned `$keyId`.
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  string           $keyId   The key identifier assigned by Bitbucket.
@@ -57,7 +55,6 @@ class Deploykeys extends API\Api
     /**
      * Add a new key
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  string           $key     The content of the key.
@@ -88,7 +85,6 @@ class Deploykeys extends API\Api
      * 'key'    (string) = The content of the key.
      * </example>
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  string           $keyId   The key identifier assigned by Bitbucket.
@@ -108,7 +104,6 @@ class Deploykeys extends API\Api
      *
      * TIP: You can use `$this->all()` to obtain assigned `$keyId`.
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  string           $keyId   The key identifier assigned by Bitbucket.

@@ -14,7 +14,7 @@ use Psr\Http\Message\ResponseInterface;
  */
 class ApiOneCollectionPluginTest extends Tests\TestCase
 {
-    public function testMetadataExistsForApiV1()
+    public function testMetadataExistsForApiV1(): void
     {
         $content = [
             'count' => 5,
@@ -49,7 +49,7 @@ class ApiOneCollectionPluginTest extends Tests\TestCase
         $this->assertEquals('http://localhost/1.0/repositories/team/repo/issues?limit=2&start=0', $body['previous']);
     }
 
-    public function testNonExistentPageReturnsLastPage()
+    public function testNonExistentPageReturnsLastPage(): void
     {
         $content = [
             'count' => 5,
@@ -82,7 +82,7 @@ class ApiOneCollectionPluginTest extends Tests\TestCase
         $this->assertEquals('http://localhost/1.0/repositories/team/repo/issues?limit=2&start=4', $body['previous']);
     }
 
-    public function testInvalidJsonResponseShouldResultInANullBodyContent()
+    public function testInvalidJsonResponseShouldResultInANullBodyContent(): void
     {
         $plugin = new ApiOneCollectionPlugin();
         $request = new Request('GET', 'http://localhost/1.0/repositories/team/repo/issues?limit=2&start=2');
@@ -100,7 +100,7 @@ class ApiOneCollectionPluginTest extends Tests\TestCase
         $this->assertNull($body);
     }
 
-    public function testResponseWithoutCollection()
+    public function testResponseWithoutCollection(): void
     {
         $content = [
             'issues' => [

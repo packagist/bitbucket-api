@@ -24,7 +24,6 @@ class Comments extends API\Api
      *
      * Comments are returned in DESC order by posted date.
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  int              $issueID The issue identifier.
@@ -40,7 +39,6 @@ class Comments extends API\Api
     /**
      * Get an individual comment for specified issue
      *
-     * @access public
      * @param  string           $account   The team or individual account owning the repository.
      * @param  string           $repo      The repository identifier.
      * @param  int              $issueID   The issue identifier.
@@ -76,7 +74,6 @@ class Comments extends API\Api
     /**
      * Update an existing comment to specified issue
      *
-     * @access public
      * @param  string           $account   The team or individual account owning the repository.
      * @param  string           $repo      The repository identifier.
      * @param  int              $issueID   The issue identifier.

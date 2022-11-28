@@ -16,10 +16,10 @@ class TagsTest extends TestCase
         $this->tags = $this->getApiMock(Tags::class);
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/refs/tags';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse(['dummy']);
 
         $actual = $this->tags->all('gentle', 'eof');
 
@@ -27,11 +27,11 @@ class TagsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testAllParams()
+    public function testAllParams(): void
     {
         $params = ['pagelen'=>36];
         $endpoint = '/2.0/repositories/gentle/eof/refs/tags';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse(['dummy']);
 
         $actual = $this->tags->all('gentle', 'eof', $params);
 
@@ -39,10 +39,10 @@ class TagsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGet()
+    public function testGet(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/refs/tags/atag';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse(['dummy']);
 
         $actual = $this->tags->get('gentle', 'eof', 'atag');
 
@@ -50,10 +50,10 @@ class TagsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/refs/tags';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse(['dummy']);
 
         $actual = $this->tags->create('gentle', 'eof', 'atag', '2310abb944423ecf1a90be9888dafd096744b531');
 

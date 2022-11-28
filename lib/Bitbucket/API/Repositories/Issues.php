@@ -25,7 +25,6 @@ class Issues extends API\Api
     /**
      * GET a list of issues in a repository's tracker
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  array            $options Filtering parameters.
@@ -44,7 +43,6 @@ class Issues extends API\Api
     /**
      * GET an individual issue
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  int              $issueID The issue identifier.
@@ -60,7 +58,6 @@ class Issues extends API\Api
     /**
      * POST a new issue
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  array            $options Issue parameters
@@ -88,7 +85,6 @@ class Issues extends API\Api
     /**
      * Update existing issue
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  int              $issueID The issue identifier.
@@ -109,7 +105,6 @@ class Issues extends API\Api
     /**
      * Delete issue
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  int              $issueID The issue identifier.
@@ -125,7 +120,6 @@ class Issues extends API\Api
     /**
      * Get comments
      *
-     * @access public
      * @return Repositories\Issues\Comments
      *
      * @throws \InvalidArgumentException

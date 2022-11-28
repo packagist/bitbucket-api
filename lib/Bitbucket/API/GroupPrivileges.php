@@ -26,7 +26,6 @@ class GroupPrivileges extends Api
      *
      * Gets all the groups granted access to an account's repositories.
      *
-     * @access public
      * @param  string           $workspaceId The team or individual account owning the repository.
      * @return ResponseInterface
      */
@@ -42,7 +41,6 @@ class GroupPrivileges extends Api
      *
      * Get a list of the privilege groups for a specific repository.
      *
-     * @access public
      * @param  string           $workspaceId The team or individual account owning the repository.
      * @param  string           $repo        A repository belonging to the account.
      * @return ResponseInterface
@@ -59,7 +57,6 @@ class GroupPrivileges extends Api
      *
      * Gets the privileges of a group on a repository.
      *
-     * @access public
      * @param  string           $workspaceId The team or individual account owning the repository.
      * @param  string           $repo        A repository belonging to the account.
      * @param  string           $groupOwner  The account that owns the group.
@@ -78,7 +75,6 @@ class GroupPrivileges extends Api
      *
      * Get a list of the repositories on which a particular privilege group appears.
      *
-     * @access public
      * @param  string           $workspaceId The team or individual account owning the repository.
      * @param  string           $groupOwner  The account that owns the group.
      * @param  string           $groupSlug   The group slug.
@@ -95,7 +91,6 @@ class GroupPrivileges extends Api
      *
      * Grant group privileges on a repository.
      *
-     * @access public
      * @param  string           $workspaceId The team or individual account owning the repository.
      * @param  string           $repo        The repository to grant privileges on.
      * @param  string           $groupOwner  The account that owns the group.
@@ -120,7 +115,6 @@ class GroupPrivileges extends Api
     /**
      * Delete group privileges from a repository
      *
-     * @access public
      * @param  string           $workspaceId The team or individual account.
      * @param  string           $repo        The repository to remove privileges from.
      * @param  string           $groupOwner  The account that owns the group.

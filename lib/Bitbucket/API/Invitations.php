@@ -25,7 +25,6 @@ class Invitations extends Api
     /**
      * Sending an invite
      *
-     * @access public
      * @param  string           $account    The team or individual account.
      * @param  string           $repo       A repository belonging to the account.
      * @param  string           $email      The email recipient.

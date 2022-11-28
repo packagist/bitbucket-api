@@ -15,7 +15,7 @@ class WorkspacesTest extends TestCase
         $this->workspaces = $this->getApiMock(Workspaces::class);
     }
 
-    public function testGetWorkspacesList()
+    public function testGetWorkspacesList(): void
     {
         $endpoint = '/2.0/workspaces';
         $expectedResult = $this->fakeResponse(['dummy']);

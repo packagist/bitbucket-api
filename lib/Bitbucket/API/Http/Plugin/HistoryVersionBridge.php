@@ -10,7 +10,7 @@ if (\interface_exists(\Http\Client\Common\HttpMethodsClientInterface::class)) {
     trait HistoryVersionBridge
     {
         // History method for php-http/client-common 2
-        public function addFailure(RequestInterface $request, ClientExceptionInterface $exception)
+        public function addFailure(RequestInterface $request, ClientExceptionInterface $exception): void
         {
         }
     }
@@ -18,7 +18,7 @@ if (\interface_exists(\Http\Client\Common\HttpMethodsClientInterface::class)) {
     trait HistoryVersionBridge
     {
         // History method for php-http/client-common 1
-        public function addFailure(RequestInterface $request, Exception $exception)
+        public function addFailure(RequestInterface $request, Exception $exception): void
         {
         }
     }

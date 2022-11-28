@@ -15,7 +15,7 @@ class TeamsTest extends TestCase
         $this->teams = $this->getApiMock(Teams::class);
     }
 
-    public function invalidRoleProvider()
+    public function invalidRoleProvider(): array
     {
         return [
             ['invalid'],
@@ -30,15 +30,16 @@ class TeamsTest extends TestCase
 
     /**
      * @dataProvider invalidRoleProvider
+     * @param int|string|bool|array $role
      */
-    public function testGetTeamsListWithInvalidRole($role)
+    public function testGetTeamsListWithInvalidRole($role): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         $this->teams->all($role);
     }
 
-    public function testGetTeamsList()
+    public function testGetTeamsList(): void
     {
         $endpoint = '/2.0/teams';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -49,7 +50,7 @@ class TeamsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetTeamProfile()
+    public function testGetTeamProfile(): void
     {
         $endpoint = '/2.0/teams/gentle-web';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -60,7 +61,7 @@ class TeamsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetTeamMembers()
+    public function testGetTeamMembers(): void
     {
         $endpoint = '/2.0/teams/gentle-web/members';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -71,7 +72,7 @@ class TeamsTest extends TestCase
         $this->assertRequest('GET', $endpoint);
     }
 
-    public function testGetTeamFollowers()
+    public function testGetTeamFollowers(): void
     {
         $endpoint = '/2.0/teams/gentle-web/followers';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -82,7 +83,7 @@ class TeamsTest extends TestCase
         $this->assertRequest('GET', $endpoint);
     }
 
-    public function testGetTeamFollowing()
+    public function testGetTeamFollowing(): void
     {
         $endpoint = '/2.0/teams/gentle-web/following';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -93,7 +94,7 @@ class TeamsTest extends TestCase
         $this->assertRequest('GET', $endpoint);
     }
 
-    public function testGetTeamRepositories()
+    public function testGetTeamRepositories(): void
     {
         $endpoint = '/2.0/teams/gentle-web/repositories';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -104,12 +105,12 @@ class TeamsTest extends TestCase
         $this->assertRequest('GET', $endpoint);
     }
 
-    public function testHooks()
+    public function testHooks(): void
     {
         $this->assertInstanceOf(Teams\Hooks::class, $this->teams->hooks());
     }
 
-    public function testPermissions()
+    public function testPermissions(): void
     {
         $this->assertInstanceOf(Teams\Permissions::class, $this->teams->permissions());
     }

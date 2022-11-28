@@ -25,7 +25,6 @@ class Pipelines extends Api
     /**
      * Get the information associated with a repository's pipelines
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @return ResponseInterface
@@ -40,7 +39,6 @@ class Pipelines extends Api
     /**
      * Creates a pipeline for the specified repository.
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  array|string     $params  Additional parameters as array or JSON string
@@ -67,7 +65,6 @@ class Pipelines extends Api
     /**
      * Get a specific pipeline
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  string           $uuid    The pipeline's identifier.
@@ -83,7 +80,6 @@ class Pipelines extends Api
     /**
      * Stop a specific pipeline
      *
-     * @access public
      * @param  string           $account The team or individual account owning the repository.
      * @param  string           $repo    The repository identifier.
      * @param  string           $uuid    The pipeline's identifier.
@@ -99,7 +95,6 @@ class Pipelines extends Api
     /**
      * Get steps
      *
-     * @access public
      * @return Pipelines\Steps
      *
      * @throws \InvalidArgumentException

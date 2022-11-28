@@ -16,10 +16,10 @@ class SrcTest extends TestCase
         $this->src = $this->getApiMock(Src::class);
     }
 
-    public function testListRepoSrc()
+    public function testListRepoSrc(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/src/1e10ffe//lib';
-        $expectedResult = $this->fakeResponse(json_encode(['dummy']));
+        $expectedResult = $this->fakeResponse(['dummy']);
 
         $actual = $this->src->get('gentle', 'eof', '1e10ffe', '/lib');
 
@@ -27,10 +27,10 @@ class SrcTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testSrcGetRawContent()
+    public function testSrcGetRawContent(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/src/1e10ffe/lib/Gentle/Bitbucket/API/Repositories/Services.php';
-        $expectedResult = $this->fakeResponse(json_encode(['dummy']));
+        $expectedResult = $this->fakeResponse(['dummy']);
 
         $actual = $this->src->get('gentle', 'eof', '1e10ffe', 'lib/Gentle/Bitbucket/API/Repositories/Services.php');
 
@@ -41,14 +41,14 @@ class SrcTest extends TestCase
     /**
      * @dataProvider srcInvalidParamsProvider
      */
-    public function testSrcCreateWithInvalidParams($params)
+    public function testSrcCreateWithInvalidParams(array $params): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         $this->src->create('gentle', 'eof', $params);
     }
 
-    public function srcInvalidParamsProvider()
+    public function srcInvalidParamsProvider(): array
     {
         return [
             [[]],
@@ -56,7 +56,7 @@ class SrcTest extends TestCase
         ];
     }
 
-    public function testSrcCreateFile()
+    public function testSrcCreateFile(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/src';
         $params = [
@@ -70,7 +70,7 @@ class SrcTest extends TestCase
         $this->assertRequest('POST', $endpoint, http_build_query($params));
     }
 
-    public function testSrcCreateBranch()
+    public function testSrcCreateBranch(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/src';
         $params = [

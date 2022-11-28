@@ -15,7 +15,7 @@ class RepositoriesTest extends TestCase
         $this->repositories = $this->getApiMock(Repositories::class);
     }
 
-    public function testGetAllRepositories()
+    public function testGetAllRepositories(): void
     {
         $endpoint = '/2.0/repositories/gentle';
         $expectedResult = $this->fakeResponse(['dummy']);

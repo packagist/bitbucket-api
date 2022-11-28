@@ -45,6 +45,9 @@ class ApiOneCollectionPlugin implements Plugin
         $this->responseFactory = $responseFactory ?: MessageFactoryDiscovery::find();
     }
 
+    /**
+     * @return callable
+     */
     protected function doHandleRequest(RequestInterface $request, callable $next, callable $first)
     {
         return $next($request)->then(function (ResponseInterface $response) use ($request) {
@@ -73,7 +76,6 @@ class ApiOneCollectionPlugin implements Plugin
     }
 
     /**
-     * @access public
      * @param  RequestInterface $request
      * @return bool
      */
@@ -84,7 +86,6 @@ class ApiOneCollectionPlugin implements Plugin
     }
 
     /**
-     * @access public
      * @param  RequestInterface $request
      * @return void
      */
@@ -110,7 +111,6 @@ class ApiOneCollectionPlugin implements Plugin
     }
 
     /**
-     * @access public
      * @param  ResponseInterface $response
      * @return bool
      */
@@ -122,7 +122,6 @@ class ApiOneCollectionPlugin implements Plugin
     }
 
     /**
-     * @access private
      * @param  ResponseInterface $response
      * @return array
      */
@@ -143,7 +142,6 @@ class ApiOneCollectionPlugin implements Plugin
     }
 
     /**
-     * @access private
      * @param  array $content
      * @param  array $pagination
      * @return array
@@ -187,7 +185,6 @@ class ApiOneCollectionPlugin implements Plugin
     }
 
     /**
-     * @access private
      * @param  ResponseInterface $response
      * @return array
      */

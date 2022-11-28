@@ -16,7 +16,7 @@ class HooksTest extends TestCase
         $this->hooks = $this->getApiMock(Hooks::class);
     }
 
-    public function invalidCreateProvider()
+    public function invalidCreateProvider(): array
     {
         return [
             [[
@@ -51,14 +51,14 @@ class HooksTest extends TestCase
     /**
      * @dataProvider invalidCreateProvider
      */
-    public function testInvalidCreate(array $check)
+    public function testInvalidCreate(array $check): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         $this->hooks->create('gentle', $check);
     }
 
-    public function testCreateSuccess()
+    public function testCreateSuccess(): void
     {
         $endpoint = '/2.0/teams/gentle/hooks';
         $params = [
@@ -75,7 +75,7 @@ class HooksTest extends TestCase
         $this->assertRequest('POST', $endpoint, json_encode($params));
     }
 
-    public function testUpdateSuccess()
+    public function testUpdateSuccess(): void
     {
         $endpoint = '/2.0/teams/gentle/hooks/30b60aee-9cdf-407d-901c-2de106ee0c9d';
         $params = [
@@ -95,14 +95,14 @@ class HooksTest extends TestCase
     /**
      * @dataProvider invalidCreateProvider
      */
-    public function testInvalidUpdate(array $check)
+    public function testInvalidUpdate(array $check): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         $this->hooks->update('gentle', '30b60aee-9cdf-407d-901c-2de106ee0c9d', $check);
     }
 
-    public function testGetAllHooks()
+    public function testGetAllHooks(): void
     {
         $endpoint = '/2.0/teams/gentle/hooks';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -113,7 +113,7 @@ class HooksTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetSingleHook()
+    public function testGetSingleHook(): void
     {
         $endpoint = '/2.0/teams/gentle/hooks/30b60aee-9cdf-407d-901c-2de106ee0c9d';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -124,7 +124,7 @@ class HooksTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testDeleteSingleHook()
+    public function testDeleteSingleHook(): void
     {
         $endpoint = '/2.0/teams/gentle/hooks/30b60aee-9cdf-407d-901c-2de106ee0c9d';
 

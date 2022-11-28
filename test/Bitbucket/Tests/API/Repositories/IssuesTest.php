@@ -16,10 +16,10 @@ class IssuesTest extends TestCase
         $this->issues = $this->getApiMock(Issues::class);
     }
 
-    public function testGetIssuesWithAdditionalParams()
+    public function testGetIssuesWithAdditionalParams(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/issues';
-        $expectedResult = $this->fakeResponse(file_get_contents(__DIR__.'/../data/issue/multiple.json'));
+        $expectedResult = $this->fakeResponse(json_decode(file_get_contents(__DIR__.'/../data/issue/multiple.json'), true));
         $params = [
             'format'    => 'json',
             'limit'     => 5,
@@ -32,10 +32,10 @@ class IssuesTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGet()
+    public function testGet(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/issues/3';
-        $expectedResult = $this->fakeResponse(file_get_contents(__DIR__.'/../data/issue/single.json'));
+        $expectedResult = $this->fakeResponse(json_decode(file_get_contents(__DIR__.'/../data/issue/single.json'), true));
 
         $actual = $this->issues->get('gentle', 'eof', 3);
 
@@ -43,7 +43,7 @@ class IssuesTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testCreateIssue()
+    public function testCreateIssue(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/issues';
         $params = [
@@ -56,7 +56,7 @@ class IssuesTest extends TestCase
         $this->assertRequest('POST', $endpoint, json_encode($params));
     }
 
-    public function testShouldNotCreateIssueWithoutTitle()
+    public function testShouldNotCreateIssueWithoutTitle(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -67,7 +67,7 @@ class IssuesTest extends TestCase
         $this->issues->create('gentle', 'eof', $params);
     }
 
-    public function testShouldNotCreateIssueWithoutContent()
+    public function testShouldNotCreateIssueWithoutContent(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -78,7 +78,7 @@ class IssuesTest extends TestCase
         $this->issues->create('gentle', 'eof', $params);
     }
 
-    public function testUpdateIssue()
+    public function testUpdateIssue(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/issues/3';
         $params = [
@@ -92,7 +92,7 @@ class IssuesTest extends TestCase
     }
 
 
-    public function testDeleteIssue()
+    public function testDeleteIssue(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/issues/2';
         $expectedResult = $this->fakeResponse(['dummyOutput']);
@@ -103,7 +103,7 @@ class IssuesTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetComments()
+    public function testGetComments(): void
     {
         $this->assertInstanceOf(Issues\Comments::class, $this->issues->comments());
     }

@@ -16,10 +16,10 @@ class DeploykeysTest extends TestCase
         $this->deploykeys = $this->getApiMock(Deploykeys::class);
     }
 
-    public function testGetAllKeys()
+    public function testGetAllKeys(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/deploy-keys';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse(['dummy']);
 
         $actual = $this->deploykeys->all('gentle', 'eof');
 
@@ -27,10 +27,10 @@ class DeploykeysTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetSingleKey()
+    public function testGetSingleKey(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/deploy-keys/3';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse(['dummy']);
 
         $actual = $this->deploykeys->get('gentle', 'eof', '3');
 
@@ -38,7 +38,7 @@ class DeploykeysTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testAddNewKeySuccess()
+    public function testAddNewKeySuccess(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/deploy-keys';
         $params = [
@@ -51,7 +51,7 @@ class DeploykeysTest extends TestCase
         $this->assertRequest('POST', $endpoint, http_build_query($params));
     }
 
-    public function testUpdateKeySuccess()
+    public function testUpdateKeySuccess(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/deploy-keys/3';
         $params = ['label' => 'test key'];
@@ -61,7 +61,7 @@ class DeploykeysTest extends TestCase
         $this->assertRequest('PUT', $endpoint, http_build_query($params));
     }
 
-    public function testDeleteKeySuccess()
+    public function testDeleteKeySuccess(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/deploy-keys/3';
 

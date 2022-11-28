@@ -15,7 +15,7 @@ class UserTest extends TestCase
         $this->user = $this->getApiMock(User::class);
     }
 
-    public function testGetEmails()
+    public function testGetEmails(): void
     {
         $endpoint = '/2.0/user/emails';
         $expectedResult = $this->fakeResponse(['dummy']);
@@ -26,10 +26,10 @@ class UserTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetUserProfileSuccess()
+    public function testGetUserProfileSuccess(): void
     {
         $endpoint = '/2.0/user/';
-        $expectedResult = $this->fakeResponse(json_encode('dumy'));
+        $expectedResult = $this->fakeResponse([]);
 
         $actual = $this->user->get();
 
@@ -37,7 +37,7 @@ class UserTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testPermissions()
+    public function testPermissions(): void
     {
         $this->assertInstanceOf(User\Permissions::class, $this->user->permissions());
     }

@@ -16,10 +16,10 @@ class MilestonesTest extends TestCase
         $this->milestones = $this->getApiMock(Milestones::class);
     }
 
-    public function testGetAllMilestonesSuccess()
+    public function testGetAllMilestonesSuccess(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/milestones';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse(['dummy']);
 
         $actual = $this->milestones->all('gentle', 'eof');
 
@@ -27,10 +27,10 @@ class MilestonesTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetSingleMilestoneSuccess()
+    public function testGetSingleMilestoneSuccess(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/milestones/2';
-        $expectedResult = $this->fakeResponse('dummy');
+        $expectedResult = $this->fakeResponse(['dummy']);
 
         $actual = $this->milestones->get('gentle', 'eof', 2);
 

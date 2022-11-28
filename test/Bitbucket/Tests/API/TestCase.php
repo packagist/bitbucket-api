@@ -11,21 +11,22 @@ use Psr\Http\Message\ResponseInterface;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
-    /** @var Client */
+    /** @var ?Client */
     protected $mockClient;
 
-    protected function getApiMock($class = null)
+    /**
+     * @template T of \Bitbucket\API\Api
+     * @param class-string<T> $class
+     * @return T
+     */
+    protected function getApiMock(string $class): Api
     {
-        $class = is_null($class) ? '\Bitbucket\API\Api' : $class;
-
         $bitbucketClient = new \Bitbucket\API\Http\Client(array(), $this->getHttpPluginClientBuilder());
-        /** @var Api $apiClient */
-        $apiClient = new $class([], $bitbucketClient);
 
-        return $apiClient;
+        return new $class([], $bitbucketClient);
     }
 
-    private function getMockHttpClient()
+    protected function getMockHttpClient(): Client
     {
         if (!isset($this->mockClient)) {
             $this->mockClient = new Client();
@@ -34,23 +35,26 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         return $this->mockClient;
     }
 
-    protected function getHttpPluginClientBuilder()
+    protected function getHttpPluginClientBuilder(): HttpPluginClientBuilder
     {
         return new HttpPluginClientBuilder($this->getMockHttpClient());
     }
 
-    protected function fakeResponse($data, $statusCode = 200, $encodeResponse = true)
+    /**
+     * @param array<mixed> $data
+     */
+    protected function fakeResponse(array $data, int $statusCode = 200): ResponseInterface
     {
         $messageFactory = MessageFactoryDiscovery::find();
 
-        $responseBody = $encodeResponse ? json_encode($data) : $data;
+        $responseBody = json_encode($data);
         $response = $messageFactory->createResponse($statusCode, null, [], $responseBody);
         $this->getMockHttpClient()->addResponse($response);
 
         return $response;
     }
 
-    protected function assertResponse(ResponseInterface $expected, ResponseInterface $actual)
+    protected function assertResponse(ResponseInterface $expected, ResponseInterface $actual): void
     {
         $this->assertSame($expected->getStatusCode(), $actual->getStatusCode());
         $expected->getBody()->rewind();
@@ -60,7 +64,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         $this->assertSame($expectedContent, $actualContent);
     }
 
-    protected function assertRequest($method, $endpoint, $requestBody = '', $query = '')
+    protected function assertRequest(string $method, string $endpoint, string $requestBody = '', string $query = ''): void
     {
         /** @var RequestInterface $request */
         $request = $this->mockClient->getLastRequest();
@@ -72,7 +76,10 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         $this->assertSame($query, $request->getUri()->getQuery());
     }
 
-    protected function getMethod($class, $name)
+    /**
+     * @param class-string $class
+     */
+    protected function getMethod(string $class, string $name): \ReflectionMethod
     {
         $class = new \ReflectionClass($class);
         $method = $class->getMethod($name);

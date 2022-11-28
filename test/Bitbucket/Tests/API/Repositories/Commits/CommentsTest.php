@@ -16,7 +16,7 @@ class CommentsTest extends TestCase
         $this->comments = $this->getApiMock(Comments::class);
     }
 
-    public function testGetAllComments()
+    public function testGetAllComments(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/commit/SHA1/comments';
         $expectedResult = $this->fakeResponse(array('dummy'));
@@ -27,7 +27,7 @@ class CommentsTest extends TestCase
         $this->assertResponse($expectedResult, $actual);
     }
 
-    public function testGetSingleComment()
+    public function testGetSingleComment(): void
     {
         $endpoint = '/2.0/repositories/gentle/eof/commit/SHA1/comments/1';
         $expectedResult = $this->fakeResponse(array('dummy'));
