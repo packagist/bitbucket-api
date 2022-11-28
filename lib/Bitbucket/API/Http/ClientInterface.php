@@ -74,6 +74,7 @@ interface ClientInterface
      * Get response format for next request
      *
      * @return string
+     * @deprecated Usage of response format other than JSON will be removed with 3.0
      */
     public function getResponseFormat();
 
@@ -84,6 +85,7 @@ interface ClientInterface
      *
      * @param  string $format
      * @return $this
+     * @deprecated Usage of response format other than JSON will be removed with 3.0
      *
      * @throws \InvalidArgumentException If invalid response format is provided
      */

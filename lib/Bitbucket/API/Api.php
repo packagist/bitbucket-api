@@ -169,7 +169,8 @@ class Api
      *
      * @param  string $name Format name
      * @return self
-     *
+     * 
+     * @deprecated Usage of response format other than JSON will be removed with 3.0
      * @throws \InvalidArgumentException
      */
     public function setFormat($name)
@@ -181,7 +182,7 @@ class Api
 
     /**
      * Get current format used for response
-     *
+     * @deprecated Usage of response format other than JSON will be removed with 3.0
      * @return string
      */
     public function getFormat()
