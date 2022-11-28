@@ -21,8 +21,8 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * @author  Alexandru G.    <alex@gentle.ro>
- * @phpstan-type ClientOption array{base_url: string, api_version: string, api_versions: string[], format: string, formats: string[], user_agent: string, timeout: int, verify_peer: bool}
- * @phpstan-type OptionalClientOption array{base_url?: string, api_version?: string, api_versions?: string[], format?: string, formats?: string[], user_agent?: string, timeout?: int, verify_peer?: bool}
+ * @phpstan-type ClientOption array{base_url: string, api_version: string, api_versions: string[], user_agent: string, timeout: int, verify_peer: bool}
+ * @phpstan-type OptionalClientOption array{base_url?: string, api_version?: string, api_versions?: string[], user_agent?: string, timeout?: int, verify_peer?: bool}
  */
 class Client implements ClientInterface
 {
@@ -31,8 +31,6 @@ class Client implements ClientInterface
         'base_url'      => 'https://api.bitbucket.org',
         'api_version'   => '2.0',
         'api_versions'  => array('1.0', '2.0'),     // supported versions
-        'format'        => 'json',
-        'formats'       => array('json', 'xml'),    // supported response formats
         'user_agent'    => 'bitbucket-api-php/2.0.0 (https://bitbucket.org/gentlero/bitbucket-api)',
         'timeout'       => 10,
         'verify_peer'   => true
@@ -135,7 +133,7 @@ class Client implements ClientInterface
 
         // change the response format
         if ($this->getApiVersion() === '1.0' && strpos($endpoint, 'format=') === false) {
-            $endpoint .= (strpos($endpoint, '?') === false ? '?' : '&').'format='.$this->getResponseFormat();
+            $endpoint .= (strpos($endpoint, '?') === false ? '?' : '&').'format=json';
         }
 
         $request = $this->messageFactory->createRequest($method, $endpoint, $headers, $body);
@@ -157,28 +155,6 @@ class Client implements ClientInterface
     public function getClientBuilder()
     {
         return $this->httpClientBuilder;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getResponseFormat()
-    {
-        return $this->options['format'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setResponseFormat($format)
-    {
-        if (!in_array($format, $this->options['formats'], true)) {
-            throw new \InvalidArgumentException(sprintf('Unsupported response format %s', $format));
-        }
-
-        $this->options['format'] = $format;
-
-        return $this;
     }
 
     /**

@@ -75,32 +75,4 @@ class ApiTest extends TestCase
         $this->assertSame('/' . $api->getClient()->getApiVersion() . $endpoint, $request->getUri()->getPath());
         $this->assertSame('DELETE', $request->getMethod());
     }
-
-    public function testFormat(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        $api = new Api;
-
-        // default format
-        $this->assertEquals('json', $api->getFormat());
-
-        // set new format
-        $api->setFormat('xml');
-        $this->assertEquals('xml', $api->getFormat());
-
-        // invalid format
-        $api->setFormat('invalid format');
-    }
-
-    public function testDifferentHttpClientInstanceOnCloning(): void
-    {
-        $repo1 = new \Bitbucket\API\Repositories();
-        $repo2 = clone $repo1;
-        $repo1->setFormat('xml');
-
-        $this->assertEquals('xml', $repo1->getFormat());
-        $this->assertNotEquals('xml', $repo2->getFormat());
-        $this->assertNotSame($repo1, $repo2);
-    }
 }

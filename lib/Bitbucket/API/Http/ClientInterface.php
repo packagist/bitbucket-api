@@ -71,27 +71,6 @@ interface ClientInterface
     public function request($endpoint, $params = array(), $method = 'GET', array $headers = array());
 
     /**
-     * Get response format for next request
-     *
-     * @return string
-     * @deprecated Usage of response format other than JSON will be removed with 3.0
-     */
-    public function getResponseFormat();
-
-    /**
-     * Set response format for next request
-     *
-     * Supported formats: xml, json
-     *
-     * @param  string $format
-     * @return $this
-     * @deprecated Usage of response format other than JSON will be removed with 3.0
-     *
-     * @throws \InvalidArgumentException If invalid response format is provided
-     */
-    public function setResponseFormat($format);
-
-    /**
      * Get API version currently used
      *
      * @return string

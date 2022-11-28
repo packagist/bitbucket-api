@@ -25,19 +25,6 @@ class ClientTest extends Tests\TestCase
         $this->assertInstanceOf(HttpMethodsClient::class, $this->client->getClient());
     }
 
-    public function testSetResponseFormatInvalid(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        $this->client->setResponseFormat('invalid');
-    }
-
-    public function testResponseFormatSuccess(): void
-    {
-        $this->client->setResponseFormat('xml');
-        $this->assertEquals('xml', $this->client->getResponseFormat());
-    }
-
     /**
      * @dataProvider invalidApiVersionsProvider
      * @param int|string $version

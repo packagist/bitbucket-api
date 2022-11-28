@@ -150,32 +150,6 @@ class Api
     }
 
     /**
-     * Set the preferred format for response
-     *
-     * @param  string $name Format name
-     * @return self
-     *
-     * @deprecated Usage of response format other than JSON will be removed with 3.0
-     * @throws \InvalidArgumentException
-     */
-    public function setFormat($name)
-    {
-        $this->getClient()->setResponseFormat($name);
-
-        return $this;
-    }
-
-    /**
-     * Get current format used for response
-     * @deprecated Usage of response format other than JSON will be removed with 3.0
-     * @return string
-     */
-    public function getFormat()
-    {
-        return $this->getClient()->getResponseFormat();
-    }
-
-    /**
      * @template T of \Bitbucket\API\Api
      * @param class-string<T> $class
      * @return T
