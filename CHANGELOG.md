@@ -1,12 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.  
 This project adheres to [Semantic Versioning](http://semver.org/).
-
-
-## Unreleased
+ 
+## 2.2.0 / Unreleased
 ### Added:
 ### Changed:
-### Removed:
+### Deprecated:
+  - Usage of `Api:api` with not fully qualified class name
 
 ## 2.1.0 / 2021-07-23
 

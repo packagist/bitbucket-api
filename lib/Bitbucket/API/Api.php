@@ -200,6 +200,8 @@ class Api
         if (class_exists($name)) {
             $class = $name;
         } else {
+            trigger_deprecation('private-packagist/bitbucket-api', '2.2', 'Calling Api::api() with a string instead of a fully qualified class name is deprecated.');
+
             $class = '\\Bitbucket\\API\\'.$name;
 
             if (!class_exists($class)) {
