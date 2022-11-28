@@ -93,18 +93,6 @@ class ApiTest extends TestCase
         $api->setFormat('invalid format');
     }
 
-    /**
-     * @dataProvider invalidChildNameProvider
-     * @param mixed $name
-     */
-    public function testSPFShouldFailWithInvalidClassName($name): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        $bitbucket = new Api();
-        $bitbucket->api($name);
-    }
-
     public function testDifferentHttpClientInstanceOnCloning(): void
     {
         $repo1 = new \Bitbucket\API\Repositories();
@@ -114,16 +102,5 @@ class ApiTest extends TestCase
         $this->assertEquals('xml', $repo1->getFormat());
         $this->assertNotEquals('xml', $repo2->getFormat());
         $this->assertNotSame($repo1, $repo2);
-    }
-
-    public function invalidChildNameProvider(): array
-    {
-        return [
-            [[]],
-            [new \stdClass()],
-            [21],
-            ['32.4'],
-            ['invalid'],
-        ];
     }
 }

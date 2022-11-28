@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed:
   - Updated minimum supported PHP version to 7.4
 ### Removed:
+  - Usage of `Api:api` with not fully qualified class name
 
 ## 2.2.0 / Unreleased
 ### Added:

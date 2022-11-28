@@ -169,7 +169,7 @@ class Api
      *
      * @param  string $name Format name
      * @return self
-     * 
+     *
      * @deprecated Usage of response format other than JSON will be removed with 3.0
      * @throws \InvalidArgumentException
      */
@@ -191,30 +191,12 @@ class Api
     }
 
     /**
-     * @param  string $name
-     * @return Api
-     *
-     * @throws \InvalidArgumentException
+     * @template T of \Bitbucket\API\Api
+     * @param class-string<T> $class
+     * @return T
      */
-    public function api($name)
+    public function api(string $class): Api
     {
-        if (!is_string($name) || $name === '') {
-            throw new \InvalidArgumentException('No child specified.');
-        }
-
-        if (class_exists($name)) {
-            $class = $name;
-        } else {
-            trigger_deprecation('private-packagist/bitbucket-api', '2.2', 'Calling Api::api() with a string instead of a fully qualified class name is deprecated.');
-
-            $class = '\\Bitbucket\\API\\'.$name;
-
-            if (!class_exists($class)) {
-                throw new \InvalidArgumentException(sprintf('No such child class [%s].', $name));
-            }
-        }
-
-        /** @var Api $child */
         $child = new $class();
         $child->setClient($this->getClient());
 
