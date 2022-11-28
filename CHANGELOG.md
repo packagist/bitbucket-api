@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Usage of `Api:api` with not fully qualified class name
   - Usage of `Api::HTTP_RESPONSE_*` constants
   - Usage of response format other than `json`
+  - Passing a string as `$params` to the methods `create` and `update` of the `PullRequests` and `BranchRestrictions` API
 
 ## 2.1.0 / 2021-07-23
 

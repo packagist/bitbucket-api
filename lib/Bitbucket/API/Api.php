@@ -169,7 +169,7 @@ class Api
      *
      * @param  string $name Format name
      * @return self
-     * 
+     *
      * @deprecated Usage of response format other than JSON will be removed with 3.0
      * @throws \InvalidArgumentException
      */
