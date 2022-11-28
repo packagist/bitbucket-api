@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed:
 ### Deprecated:
   - Usage of `Api:api` with not fully qualified class name
+  - Usage of `Api::HTTP_RESPONSE_*` constants
 
 ## 2.1.0 / 2021-07-23
 

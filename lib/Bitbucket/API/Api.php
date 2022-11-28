@@ -25,15 +25,19 @@ use Psr\Http\Message\MessageInterface;
  */
 class Api
 {
-    /**
-     * Api response codes.
-     */
+    /** @deprecated */
     const HTTP_RESPONSE_OK              = 200;
+    /** @deprecated */
     const HTTP_RESPONSE_CREATED         = 201;
+    /** @deprecated */
     const HTTP_RESPONSE_NO_CONTENT      = 204;
+    /** @deprecated */
     const HTTP_RESPONSE_BAD_REQUEST     = 400;
+    /** @deprecated */
     const HTTP_RESPONSE_UNAUTHORIZED    = 401;
+    /** @deprecated */
     const HTTP_RESPONSE_FORBIDDEN       = 403;
+    /** @deprecated */
     const HTTP_RESPONSE_NOT_FOUND       = 404;
 
     /**
