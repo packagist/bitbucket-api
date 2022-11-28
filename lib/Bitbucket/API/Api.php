@@ -25,15 +25,19 @@ use Psr\Http\Message\MessageInterface;
  */
 class Api
 {
-    /**
-     * Api response codes.
-     */
+    /** @deprecated */
     const HTTP_RESPONSE_OK              = 200;
+    /** @deprecated */
     const HTTP_RESPONSE_CREATED         = 201;
+    /** @deprecated */
     const HTTP_RESPONSE_NO_CONTENT      = 204;
+    /** @deprecated */
     const HTTP_RESPONSE_BAD_REQUEST     = 400;
+    /** @deprecated */
     const HTTP_RESPONSE_UNAUTHORIZED    = 401;
+    /** @deprecated */
     const HTTP_RESPONSE_FORBIDDEN       = 403;
+    /** @deprecated */
     const HTTP_RESPONSE_NOT_FOUND       = 404;
 
     /**
@@ -165,7 +169,8 @@ class Api
      *
      * @param  string $name Format name
      * @return self
-     *
+     * 
+     * @deprecated Usage of response format other than JSON will be removed with 3.0
      * @throws \InvalidArgumentException
      */
     public function setFormat($name)
@@ -177,7 +182,7 @@ class Api
 
     /**
      * Get current format used for response
-     *
+     * @deprecated Usage of response format other than JSON will be removed with 3.0
      * @return string
      */
     public function getFormat()
@@ -200,6 +205,8 @@ class Api
         if (class_exists($name)) {
             $class = $name;
         } else {
+            trigger_deprecation('private-packagist/bitbucket-api', '2.2', 'Calling Api::api() with a string instead of a fully qualified class name is deprecated.');
+
             $class = '\\Bitbucket\\API\\'.$name;
 
             if (!class_exists($class)) {
