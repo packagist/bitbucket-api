@@ -4,7 +4,7 @@ Bitbucket API wrapper for PHP
 
 ## Requirements
 
-* PHP >= 7.1 with [cURL](http://php.net/manual/en/book.curl.php) extension.
+* PHP >= 7.4 with [cURL](http://php.net/manual/en/book.curl.php) extension.
 * [Buzz](https://github.com/kriswallsmith/Buzz) library or any [HTTPlug](http://httplug.io/) compatible http client,
 * PHPUnit to run tests. ( _optional_ )
 

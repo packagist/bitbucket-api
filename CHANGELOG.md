@@ -1,7 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.  
 This project adheres to [Semantic Versioning](http://semver.org/).
- 
+
+## 3.0.0 / Unreleased
+### Added:
+### Changed:
+  - Updated minimum supported PHP version to 7.4
+### Removed:
+
 ## 2.2.0 / Unreleased
 ### Added:
 ### Changed:
