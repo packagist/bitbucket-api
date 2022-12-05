@@ -61,7 +61,9 @@ class Repository extends API\Api
         );
 
         // allow developer to directly specify params as json if (s)he wants.
-        if ('array' !== gettype($params)) {
+        if (!is_array($params)) {
+            trigger_deprecation('private-packagist/bitbucket-api', '2.2', 'Calling Repository::create() with a string as params argument is deprecated. Pass an array instead.');
+
             if (empty($params)) {
                 throw new \InvalidArgumentException('Invalid JSON provided.');
             }
