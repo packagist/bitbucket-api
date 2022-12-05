@@ -16,6 +16,7 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * @author  Alexandru G.    <alex@gentle.ro>
+ * @deprecated The ClientInterface will be removed with 3.0, depend on client directly.
  */
 interface ClientInterface
 {

@@ -130,6 +130,8 @@ class Client implements ClientInterface
         }
 
         if (is_string($params) && $params !== null) {
+            trigger_deprecation('private-packagist/bitbucket-api', '2.2', 'Calling Client::request() with a string as params argument is deprecated. Pass an array instead.');
+
             $body = $params;
         }
 
