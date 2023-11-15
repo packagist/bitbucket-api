@@ -79,7 +79,7 @@ class ClientTest extends Tests\TestCase
     {
         $endpoint = '/repositories/gentle/eof/issues/3';
         $params = ['format' => 'json'];
-        $headers = ['2' => '4'];
+        $headers = ['Test-Header' => '4'];
         $baseClient = $this->getHttpPluginClientBuilder();
         $client = new Client(
             [
@@ -98,7 +98,7 @@ class ClientTest extends Tests\TestCase
     {
         $endpoint = '/repositories/gentle/eof/issues/3';
         $params = ['1' => '2'];
-        $headers = ['3' => '4'];
+        $headers = ['Test-Header' => '4'];
         $baseClient = $this->getHttpPluginClientBuilder();
         $client = new Client(['user_agent' => 'tests'], $baseClient);
         $response   = $client->post($endpoint, $params, $headers);
@@ -108,7 +108,7 @@ class ClientTest extends Tests\TestCase
         $this->assertEquals([
             'Content-Type' => ['application/x-www-form-urlencoded'],
             'User-Agent' => ['tests'],
-            '3' => ['4'],
+            'Test-Header' => ['4'],
             'Host' => ['api.bitbucket.org'],
         ], $client->getLastRequest()->getHeaders());
     }
@@ -138,7 +138,7 @@ class ClientTest extends Tests\TestCase
     {
         $endpoint = '/repositories/gentle/eof/issues/3';
         $params = ['1' => '2'];
-        $headers = ['3' => '4'];
+        $headers = ['Test-Header' => '4'];
         $baseClient = $this->getHttpPluginClientBuilder();
         $client = new Client([], $baseClient);
         $response = $client->put($endpoint, $params, $headers);
@@ -150,7 +150,7 @@ class ClientTest extends Tests\TestCase
     {
         $endpoint = '/repositories/gentle/eof/issues/3';
         $params = ['1' => '2'];
-        $headers = ['3' => '4'];
+        $headers = ['Test-Header' => '4'];
         $baseClient = $this->getHttpPluginClientBuilder();
         $client = new Client([], $baseClient);
         $response = $client->delete($endpoint, $params, $headers);
@@ -162,7 +162,7 @@ class ClientTest extends Tests\TestCase
     {
         $endpoint = '/repositories/gentle/eof/issues/3';
         $params = ['1' => '2'];
-        $headers = ['3' => '4'];
+        $headers = ['Test-Header' => '4'];
         $baseClient = $this->getHttpPluginClientBuilder();
         $client = new Client([], $baseClient);
         $response = $client->request($endpoint, $params, 'PATCH', $headers);

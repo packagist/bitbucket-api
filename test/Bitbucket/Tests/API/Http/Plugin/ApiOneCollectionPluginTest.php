@@ -4,9 +4,9 @@ namespace Bitbucket\Tests\API\Http\Plugin;
 
 use Bitbucket\Tests\API as Tests;
 use Bitbucket\API\Http\Plugin\ApiOneCollectionPlugin;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
 use Http\Client\Promise\HttpFulfilledPromise;
+use Nyholm\Psr7\Request;
+use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 
 /**
