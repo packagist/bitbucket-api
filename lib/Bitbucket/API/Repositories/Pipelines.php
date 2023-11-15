@@ -59,7 +59,7 @@ class Pipelines extends Api
 
         return $this->getClient()->setApiVersion('2.0')->post(
             sprintf('/repositories/%s/%s/pipelines/', $account, $repo),
-            json_encode($params),
+            $params,
             array('Content-Type' => 'application/json')
         );
     }

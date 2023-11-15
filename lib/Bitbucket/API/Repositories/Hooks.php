@@ -48,7 +48,7 @@ class Hooks extends API\Api
 
         return $this->getClient()->setApiVersion('2.0')->post(
             sprintf('/repositories/%s/%s/hooks', $account, $repo),
-            json_encode($params),
+            $params,
             array('Content-Type' => 'application/json')
         );
     }
@@ -83,7 +83,7 @@ class Hooks extends API\Api
 
         return $this->getClient()->setApiVersion('2.0')->put(
             sprintf('/repositories/%s/%s/hooks/%s', $account, $repo, $uuid),
-            json_encode($params),
+            $params,
             array('Content-Type' => 'application/json')
         );
     }
