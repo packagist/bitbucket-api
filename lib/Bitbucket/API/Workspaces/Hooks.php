@@ -33,7 +33,7 @@ class Hooks extends Api
 
         return $this->getClient()->setApiVersion('2.0')->post(
             sprintf('/workspaces/%s/hooks', $workspace),
-            json_encode($hookConfiguration),
+            $hookConfiguration,
             ['Content-Type' => 'application/json']
         );
     }
@@ -65,7 +65,7 @@ class Hooks extends Api
 
         return $this->getClient()->setApiVersion('2.0')->put(
             sprintf('/workspaces/%s/hooks/%s', $workspace, $uuid),
-            json_encode($hookConfiguration),
+            $hookConfiguration,
             ['Content-Type' => 'application/json']
         );
     }

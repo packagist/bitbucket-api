@@ -65,7 +65,7 @@ class Comments extends API\Api
     {
         return $this->getClient()->setApiVersion('2.0')->post(
             sprintf('/repositories/%s/%s/pullrequests/%d/comments', $account, $repo, $requestID),
-            json_encode(array('content' => array('raw' => $content))),
+            array('content' => array('raw' => $content)),
             array('Content-Type' => 'application/json')
         );
     }
@@ -84,7 +84,7 @@ class Comments extends API\Api
     {
         return $this->getClient()->setApiVersion('2.0')->put(
             sprintf('/repositories/%s/%s/pullrequests/%d/comments/%d', $account, $repo, $requestID, $commentID),
-            json_encode(array('content' => array('raw' => $content))),
+            array('content' => array('raw' => $content)),
             array('Content-Type' => 'application/json')
         );
     }

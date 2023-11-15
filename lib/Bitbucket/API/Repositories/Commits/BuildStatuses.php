@@ -53,7 +53,7 @@ class BuildStatuses extends Api
     {
         return $this->getClient()->setApiVersion('2.0')->post(
             sprintf('/repositories/%s/%s/commit/%s/statuses/build', $account, $repository, $revision),
-            json_encode($params),
+            $params,
             array('Content-Type' => 'application/json')
         );
     }
@@ -74,7 +74,7 @@ class BuildStatuses extends Api
     {
         return $this->getClient()->setApiVersion('2.0')->put(
             sprintf('/repositories/%s/%s/commit/%s/statuses/build/%s', $account, $repository, $revision, $key),
-            json_encode($params),
+            $params,
             array('Content-Type' => 'application/json')
         );
     }

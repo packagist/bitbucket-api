@@ -71,11 +71,9 @@ class Repository extends API\Api
             $params = $this->decodeJSON($params);
         }
 
-        $params = json_encode(array_merge($defaults, $params));
-
         return $this->getClient()->setApiVersion('2.0')->post(
             sprintf('/repositories/%s/%s', $account, $repo),
-            $params,
+            array_merge($defaults, $params),
             array('Content-Type' => 'application/json')
         );
     }
@@ -154,8 +152,6 @@ class Repository extends API\Api
     public function fork($account, $repo, $name, array $params = array())
     {
         $params['name'] = $name;
-
-        $params = json_encode($params);
 
         return $this->getClient()->setApiVersion('2.0')->post(
             sprintf('/repositories/%s/%s/forks', $account, $repo),

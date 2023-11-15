@@ -72,11 +72,9 @@ class Tags extends API\Api
             ],
         ];
 
-        $data = json_encode($params);
-
         return $this->getClient()->setApiVersion('2.0')->post(
             sprintf('/repositories/%s/%s/refs/tags', $account, $repo),
-            $data,
+            $params,
             array('Content-Type' => 'application/json')
         );
     }

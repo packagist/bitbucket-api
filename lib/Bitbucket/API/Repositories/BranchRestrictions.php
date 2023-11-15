@@ -86,7 +86,7 @@ class BranchRestrictions extends Api
 
         return $this->getClient()->setApiVersion('2.0')->post(
             sprintf('/repositories/%s/%s/branch-restrictions', $account, $repo),
-            json_encode($params),
+            $params,
             array('Content-Type' => 'application/json')
         );
     }
@@ -135,7 +135,7 @@ class BranchRestrictions extends Api
 
         return $this->getClient()->setApiVersion('2.0')->put(
             sprintf('/repositories/%s/%s/branch-restrictions/%d', $account, $repo, $id),
-            json_encode($params),
+            $params,
             array('Content-Type' => 'application/json')
         );
     }
