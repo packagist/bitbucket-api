@@ -1,8 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.  
 This project adheres to [Semantic Versioning](http://semver.org/).
- 
-## 2.2.0 / Unreleased
+
+## Unreleased
+### Added:
+### Changed:
+### Removed:
+
+## 2.2.0 / 2023-11-15
 ### Added:
 ### Changed:
   - Uses PSR-17 internally instead of the deprecated PHP-HTTP `MessageFactory`
