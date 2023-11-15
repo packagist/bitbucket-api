@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## 2.2.0 / Unreleased
 ### Added:
 ### Changed:
+  - Uses PSR-17 internally instead of the deprecated PHP-HTTP `MessageFactory`
 ### Deprecated:
   - Usage of `Api:api` with not fully qualified class name
   - Usage of `Api::HTTP_RESPONSE_*` constants
@@ -12,6 +13,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Passing a string as `$params` to the methods `create` and `update` of the `PullRequests`, `BranchRestrictions`, `Pipelines`, and `Repository` API
   - `ClientInterface`, use `Client` instead
   - Passing a string as `$params` to the `request` method of `Client`
+  - Usage of `Client::getMessageFactory` use `Client::getRequestFactory` instead
+  - Passing `Http\Message\MessageFactory` to `HttpPluginClientBuilder`
 
 ## 2.1.0 / 2021-07-23
 

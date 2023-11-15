@@ -10,10 +10,10 @@
 namespace Bitbucket\API\Http\Plugin;
 
 use Http\Client\Common\Plugin;
-use Http\Discovery\MessageFactoryDiscovery;
-use Http\Message\ResponseFactory;
+use Http\Discovery\Psr17FactoryDiscovery;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 
 /**
  * Helper for `Pager`
@@ -28,8 +28,8 @@ class ApiOneCollectionPlugin implements Plugin
 {
     use Plugin\VersionBridgePlugin;
 
-    /** @var ResponseFactory */
-    private $responseFactory;
+    /** @var StreamFactoryInterface */
+    private $streamFactory;
 
     /** @var array */
     private $urlQueryComponents;
@@ -40,9 +40,13 @@ class ApiOneCollectionPlugin implements Plugin
     /** @var array */
     private $content;
 
-    public function __construct(ResponseFactory $responseFactory = null)
+    /**
+     * @param object|null $responseFactory This argument is deprecated and will be removed in 3.0
+     */
+    public function __construct($responseFactory = null)
     {
-        $this->responseFactory = $responseFactory ?: MessageFactoryDiscovery::find();
+        $this->streamFactory = Psr17FactoryDiscovery::findStreamFactory();
+        unset($responseFactory);
     }
 
     /**
@@ -61,13 +65,8 @@ class ApiOneCollectionPlugin implements Plugin
                         $request
                     );
 
-                    return $this->responseFactory->createResponse(
-                        $response->getStatusCode(),
-                        $response->getReasonPhrase(),
-                        $response->getHeaders(),
-                        json_encode($content),
-                        $response->getProtocolVersion()
-                    );
+                    return $response
+                        ->withBody($this->streamFactory->createStream(json_encode($content)));
                 }
             }
 

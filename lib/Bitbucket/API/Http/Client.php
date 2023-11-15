@@ -14,10 +14,11 @@ use Bitbucket\API\Http\Plugin\ApiVersionPlugin;
 use Bitbucket\API\Http\Plugin\HistoryPlugin;
 use Http\Client\Common\HttpMethodsClient;
 use Http\Client\Common\Plugin;
-use Http\Discovery\UriFactoryDiscovery;
-use Http\Message\MessageFactory;
+use Http\Discovery\Psr17FactoryDiscovery;
+use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 
 /**
  * @author  Alexandru G.    <alex@gentle.ro>
@@ -40,8 +41,10 @@ class Client implements ClientInterface
 
     /** @var HttpPluginClientBuilder */
     private $httpClientBuilder;
-    /** @var MessageFactory */
-    private $messageFactory;
+    /** @var RequestFactoryInterface */
+    private $requestFactory;
+    /** @var StreamFactoryInterface */
+    private $streamFactory;
     /** @var HistoryPlugin */
     private $responseHistory;
 
@@ -55,7 +58,7 @@ class Client implements ClientInterface
         $this->httpClientBuilder = $httpClientBuilder ?: new HttpPluginClientBuilder();
 
         $this->httpClientBuilder->addPlugin(
-            new Plugin\AddHostPlugin(UriFactoryDiscovery::find()->createUri($this->options['base_url']))
+            new Plugin\AddHostPlugin(Psr17FactoryDiscovery::findUriFactory()->createUri($this->options['base_url']))
         );
         $this->httpClientBuilder->addPlugin(new Plugin\RedirectPlugin());
         $this->httpClientBuilder->addPlugin(new Plugin\HeaderDefaultsPlugin([
@@ -65,7 +68,8 @@ class Client implements ClientInterface
 
         $this->setApiVersion($this->options['api_version']);
 
-        $this->messageFactory = $this->httpClientBuilder->getMessageFactory();
+        $this->requestFactory = $this->httpClientBuilder->getRequestFactory();
+        $this->streamFactory = Psr17FactoryDiscovery::findStreamFactory();
     }
 
     /**
@@ -124,7 +128,7 @@ class Client implements ClientInterface
             }
         }
 
-        $body = null;
+        $body = '';
         if (is_string($paramsString) && $paramsString !== null) {
             $body = $paramsString;
         }
@@ -140,7 +144,13 @@ class Client implements ClientInterface
             $endpoint .= (strpos($endpoint, '?') === false ? '?' : '&').'format='.$this->getResponseFormat();
         }
 
-        $request = $this->messageFactory->createRequest($method, $endpoint, $headers, $body);
+        $request = $this->requestFactory
+            ->createRequest($method, $endpoint)
+            ->withBody($this->streamFactory->createStream($body));
+
+        foreach ($headers as $name => $value) {
+            $request = $request->withHeader($name, $value);
+        }
 
         return $this->getClient()->sendRequest($request);
     }

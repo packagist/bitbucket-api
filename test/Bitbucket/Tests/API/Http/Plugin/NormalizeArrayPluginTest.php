@@ -4,9 +4,9 @@ namespace Bitbucket\Tests\API\Http\Plugin;
 
 use Bitbucket\API\Http\Plugin\NormalizeArrayPlugin;
 use Bitbucket\Tests\API as Tests;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
 use Http\Client\Promise\HttpFulfilledPromise;
+use Nyholm\Psr7\Request;
+use Nyholm\Psr7\Response;
 
 /**
  * @author  Alexandru G.    <alex@gentle.ro>

@@ -4,7 +4,6 @@ namespace Bitbucket\Tests\API\Http\Response;
 
 use Bitbucket\API\Http\Response\Pager;
 use Bitbucket\Tests\API\TestCase;
-use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -105,9 +104,7 @@ class PagerTest extends TestCase
     public function testFetchAllWithInvalidJsonShouldReturnEmptyValuesArray(): void
     {
         $expected = ['values' => []];
-        $response = new Response(200, [], '{"something": "yes"');
-        $this->getMockHttpClient()->addResponse($response);
-
+        $response = $this->fakeResponse('{"something": "yes"');
         $page = new Pager($this->getHttpPluginClientBuilder(), $response);
         $response = $page->fetchAll();
 

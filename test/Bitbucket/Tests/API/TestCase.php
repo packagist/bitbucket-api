@@ -6,6 +6,7 @@ use Bitbucket\API\Api;
 use Bitbucket\API\Http\HttpPluginClientBuilder;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Mock\Client;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -13,6 +14,15 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     /** @var ?Client */
     protected $mockClient;
+    /** @var Psr17Factory */
+    private $psr17Factory;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->psr17Factory = new Psr17Factory();
+    }
 
     /**
      * @template T of \Bitbucket\API\Api
@@ -41,14 +51,13 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @param array<mixed> $data
+     * @param array<mixed>|string $data
      */
-    protected function fakeResponse(array $data, int $statusCode = 200): ResponseInterface
+    protected function fakeResponse($data, int $statusCode = 200): ResponseInterface
     {
-        $messageFactory = MessageFactoryDiscovery::find();
+        $response = $this->psr17Factory->createResponse($statusCode)
+            ->withBody($this->psr17Factory->createStream(is_array($data) ? json_encode($data) : (string) $data));
 
-        $responseBody = json_encode($data);
-        $response = $messageFactory->createResponse($statusCode, null, [], $responseBody);
         $this->getMockHttpClient()->addResponse($response);
 
         return $response;

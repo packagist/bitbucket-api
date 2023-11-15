@@ -10,9 +10,9 @@
 namespace Bitbucket\API\Http\Response;
 
 use Bitbucket\API\Http\HttpPluginClientBuilder;
-use Http\Discovery\MessageFactoryDiscovery;
-use Http\Message\MessageFactory;
+use Http\Discovery\Psr17FactoryDiscovery;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 
 /**
  * @author Alexandru Guzinschi <alex@gentle.ro>
@@ -21,22 +21,24 @@ class Pager implements PagerInterface
 {
     /** @var HttpPluginClientBuilder */
     private $httpPluginClientBuilder;
-    /** @var MessageFactory */
-    private $messageFactory;
+    /** @var StreamFactoryInterface */
+    private $streamFactory;
     /** @var ResponseInterface */
     private $response;
 
     /**
      * @param HttpPluginClientBuilder $httpPluginClientBuilder
      * @param ResponseInterface $response
-     * @param MessageFactory $messageFactory
+     * @param object|null $messageFactory This argument is deprecated and will be removed in 3.0.0
+     * @param StreamFactoryInterface|null $streamFactory
      *
      * @throws \UnexpectedValueException
      */
     public function __construct(
         HttpPluginClientBuilder $httpPluginClientBuilder,
         ResponseInterface $response,
-        MessageFactory $messageFactory = null
+        $messageFactory = null,
+        StreamFactoryInterface $streamFactory = null
     ) {
         /** @var ResponseInterface $response */
         if ($response->getStatusCode() >= 400) {
@@ -45,7 +47,9 @@ class Pager implements PagerInterface
 
         $this->httpPluginClientBuilder = $httpPluginClientBuilder;
         $this->response = $response;
-        $this->messageFactory = $messageFactory ? : MessageFactoryDiscovery::find();
+        $this->streamFactory = $streamFactory ?: Psr17FactoryDiscovery::findStreamFactory();
+
+        unset($messageFactory);
     }
 
     /**
@@ -117,13 +121,9 @@ class Pager implements PagerInterface
         }
 
         $content['values'] = $values;
-        $this->response = $this->messageFactory->createResponse(
-            $this->response->getStatusCode(),
-            $this->response->getReasonPhrase(),
-            $this->response->getHeaders(),
-            json_encode($content),
-            $this->response->getProtocolVersion()
-        );
+
+        $this->response = $this->response
+            ->withBody($this->streamFactory->createStream(json_encode($content)));
 
         return $this->response;
     }
