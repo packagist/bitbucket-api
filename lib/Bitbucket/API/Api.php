@@ -49,7 +49,7 @@ class Api
      * @param OptionalClientOption $options
      * @param ClientInterface $client
      */
-    public function __construct(array $options = array(), ClientInterface $client = null)
+    public function __construct(array $options = array(), ?ClientInterface $client = null)
     {
         $this->httpClient = (null !== $client) ? $client : new Client($options, null);
 
