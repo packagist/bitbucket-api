@@ -38,7 +38,7 @@ class Pager implements PagerInterface
         HttpPluginClientBuilder $httpPluginClientBuilder,
         ResponseInterface $response,
         $messageFactory = null,
-        StreamFactoryInterface $streamFactory = null
+        ?StreamFactoryInterface $streamFactory = null
     ) {
         /** @var ResponseInterface $response */
         if ($response->getStatusCode() >= 400) {

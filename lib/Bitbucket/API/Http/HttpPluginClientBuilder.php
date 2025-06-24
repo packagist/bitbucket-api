@@ -30,7 +30,7 @@ class HttpPluginClientBuilder
     /**
      * @param MessageFactory|RequestFactoryInterface|null $requestFactory
      */
-    public function __construct(ClientInterface $httpClient = null, $requestFactory = null, StreamFactoryInterface $streamFactory = null)
+    public function __construct(?ClientInterface $httpClient = null, $requestFactory = null, ?StreamFactoryInterface $streamFactory = null)
     {
         $requestFactory = $requestFactory ?? Psr17FactoryDiscovery::findRequestFactory();
         if ($requestFactory instanceof MessageFactory) {

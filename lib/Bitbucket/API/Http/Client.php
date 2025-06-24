@@ -51,7 +51,7 @@ class Client implements ClientInterface
     /**
      * @param OptionalClientOption $options
      */
-    public function __construct(array $options = array(), HttpPluginClientBuilder $httpClientBuilder = null)
+    public function __construct(array $options = array(), ?HttpPluginClientBuilder $httpClientBuilder = null)
     {
         $this->responseHistory = new HistoryPlugin();
         $this->options = array_merge(array_merge($this->options, $options));
