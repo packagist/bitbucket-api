@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed:
 ### Removed:
 
+## 2.3.0 / 2025-06-24
+### Added:
+  - Added support for PHP 8.4
+
 ## 2.2.0 / 2023-11-15
 ### Added:
 ### Changed:
