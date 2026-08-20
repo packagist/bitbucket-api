@@ -3,6 +3,8 @@ name: "Continuous Integration"
 on:
     pull_request:
     push:
+        branches:
+            - master
 
 permissions:
     contents: read
@@ -30,11 +32,11 @@ jobs:
                   ini-values: "memory_limit=-1, phar.readonly=0"
                   php-version: ${{ matrix.php }}
 
-            - name: Install dependencies
-              uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
-
             - name: "Install dependencies"
-              run: composer update --no-progress -o --prefer-dist
+              uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
+              with:
+                  dependency-versions: highest
+                  composer-options: "-o --prefer-dist"
 
             - name: "Run PHPUnit"
               run: ./vendor/bin/phpunit
