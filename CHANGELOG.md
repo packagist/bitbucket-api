@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 ### Added:
 ### Changed:
+  - Allow `psr/http-message` `^2.0` in addition to `^1.0`
 ### Removed:
 
 ## 2.3.0 / 2025-06-24
